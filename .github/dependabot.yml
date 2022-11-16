@@ -1,7 +1,15 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"directory: "/requirements"schedule:
-      interval: "daily"
+  - package-ecosystem: "pip" # See documentation for possible values
+    directory: "/requirements" # Location of package manifests
+    insecure-external-code-execution: allow
+    schedule:
+      interval: "weekly"
     labels:
       - "maintenance"
       - "dependencies"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
