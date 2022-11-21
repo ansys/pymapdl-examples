@@ -5,4 +5,4 @@ maintenance:
 - .flake8
 - pyproject.toml
 dependencies:
-- requirements/*
+- /
