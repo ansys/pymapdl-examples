@@ -359,7 +359,7 @@ During the simulation, the surfaces to be joined come into contact. A standard
 surface-to-surface contact pair using ``TARGE170`` and ``CONTA174``, as shown
 in the following figure:
 
-.. figure:: graphics/gtecfricstir_fig3.png
+.. figure:: images/gtecfricstir_fig3.png
     :align: center
     :alt: Contact Pair Between Plates
     :figclass: align-center
@@ -1252,7 +1252,7 @@ As shown in the following figure and table, the temperature plots indicate the
 temperature distribution at various locations on the weld line when the maximum
 temperature occurs at those locations:
 
-.. figure:: graphics/gtecfricstir_fig17.png
+.. figure:: images/gtecfricstir_fig17.png
     :align: center
     :alt: Various Locations on the Workpiece
     :figclass: align-center

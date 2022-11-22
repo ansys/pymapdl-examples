@@ -73,7 +73,7 @@ this model using various methods to determine the unstable modes. A parametric s
 then performed to examine the effect of the friction coefficient on the dynamic
 stability of the model.
 
-.. figure:: gtecbrakesqueal_fig1.gif
+.. figure:: images/gtecbrakesqueal_fig1.gif
     :align: center
     :alt: Brake Disc-Pad Assembly
     :figclass: align-center
@@ -258,7 +258,7 @@ contact with the brake disc and to include prestress effects. The displacement o
 brake pad surfaces where the pressure loading is applied is constrained in all
 directions except axial (along the Z-axis).
 
-.. figure:: gtecbrakesqueal_fig5.gif
+.. figure:: images/gtecbrakesqueal_fig5.gif
     :align: center
     :alt: Boundary Conditions (Displacement Constraints and Pressure Loading)
     :figclass: align-center
@@ -460,7 +460,7 @@ The following inputs show the solution steps involved with this method:
     mapdl.allsel("all")
     mapdl.finish()
 
-.. figure:: cont_slide.png
+.. figure:: images/cont_slide.png
     :align: center
     :alt: Contact Sliding Distance
     :figclass: align-center
