@@ -19,7 +19,9 @@ in Python files thanks to PyMAPDL.
     :hidden:
     :maxdepth: 3
 
-    technology_showcase_examples/index
+    technology_showcase_examples/techdemo-1/ex_0-tecbrakesqueal
+    technology_showcase_examples/techdemo-20/ex_20-tecPCB
+    technology_showcase_examples/techdemo-28/ex_28-tecfricstir
 
 .. include:: technology_showcase_examples/index.rst
    :start-line: 2

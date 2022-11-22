@@ -26,6 +26,7 @@ html_theme_options = {
 
 # Sphinx extensions
 extensions = [
+    "jupyter_sphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "numpydoc",

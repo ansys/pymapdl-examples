@@ -12,15 +12,6 @@ fields.
 These examples are a work-in-progress and will be extended during the life of
 this project.
 
-.. toctree::
-    :hidden:
-    :maxdepth: 3
-
-    techdemo-1/ex_0-tecbrakesqueal
-    techdemo-20/ex_20-tecPCB
-    techdemo-28/ex_28-tecfricstir
-
-
 +----------------------------+---------------------------------------------------------------------------------------------------------+
 | Name                       | Description                                                                                             |
 +----------------------------+---------------------------------------------------------------------------------------------------------+
