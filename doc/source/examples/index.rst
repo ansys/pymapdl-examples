@@ -1,12 +1,12 @@
-PyMAPDL documentation |version|
-===============================
+.. _ref_examples:
 
+Examples
+===============================
 
 The technology showcase examples for `PyMAPDL <https://mapdl.docs.pyansys.com/>`_
 are contained into this repository.
 
 Here are a series of examples using MAPDL with ``ansys-mapdl-core``.
-
 
 .. === TECHNOLOGY SHOWCASE EXAMPLES ===
 
@@ -14,8 +14,4 @@ Here are a series of examples using MAPDL with ``ansys-mapdl-core``.
     :hidden:
     :maxdepth: 3
 
-    examples/index
-
-.. include:: examples/technology_showcase_examples/index.rst
-   :start-line: 2
-
+    technology_showcase_examples/index
