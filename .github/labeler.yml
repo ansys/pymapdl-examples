@@ -4,5 +4,6 @@ maintenance:
 - .github/**/*
 - .flake8
 - pyproject.toml
+- .codespellrc
 dependencies:
 - requirements/*

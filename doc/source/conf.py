@@ -79,3 +79,9 @@ source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
+
+# make rst_epilog a variable, so you can add other epilog parts to it
+rst_epilog = ""
+# Read link all targets from file
+with open("links.rst") as f:
+    rst_epilog += f.read()
