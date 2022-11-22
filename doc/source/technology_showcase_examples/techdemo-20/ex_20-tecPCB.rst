@@ -78,11 +78,10 @@ Starting MAPDL as a service and importing an external model
 
 
 
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_001.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_001.png
-   :class: sphx-glr-single-img
-
+.. figure:: images/ex_20-tecPCB_001.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
 .. rst-class:: sphx-glr-script-out
 
@@ -169,15 +168,12 @@ that are binded together.
     mapdl.eplot(vtk=True)
 
 
+.. figure:: images/ex_20-tecPCB_002.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
-
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_002.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_002.png
-   :class: sphx-glr-single-img
-
-
-
+.. rst-class:: sphx-glr-script-out
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 118-128
@@ -2007,14 +2003,10 @@ It is recommended to use `DPF Post <dpf_post_docs_>`_.
     mapdl_result.plot_nodal_displacement(0)
 
 
-
-
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_003.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_003.png
-   :class: sphx-glr-single-img
-
-
+.. figure:: images/ex_20-tecPCB_003.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
 
 
@@ -2041,11 +2033,11 @@ Using DPF-Post
 
 
 
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_004.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_004.png
-   :class: sphx-glr-single-img
 
+.. figure:: images/ex_20-tecPCB_004.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
 .. rst-class:: sphx-glr-script-out
 
@@ -2121,12 +2113,10 @@ Using DPF-Core
 
 
 
-
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_005.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_005.png
-   :class: sphx-glr-single-img
-
+.. figure:: images/ex_20-tecPCB_005.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
 .. rst-class:: sphx-glr-script-out
 
@@ -2504,14 +2494,10 @@ Post-process PSD analysis in POST1
     mapdl.plnsol("u", "sum")
 
 
-
-
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_006.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_006.png
-   :class: sphx-glr-single-img
-
-
+.. figure:: images/ex_20-tecPCB_006.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
 
 
@@ -2591,13 +2577,10 @@ Post-process PSD analysis using Matplotlib
     ax.set_ylabel("Response power spectral density")
 
 
-
-
-.. image-sg:: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_007.png
-   :alt: 20 example technology showcase dynamic simulation PCB
-   :srcset: /examples/technology_showcase_examples/techdemo-20/images/sphx_glr_20-example-technology-showcase-dynamic-simulation-PCB_007.png
-   :class: sphx-glr-single-img
-
+.. figure:: images/ex_20-tecPCB_007.png
+    :align: center
+    :alt: 20 example technology showcase dynamic simulation PCB
+    :figclass: sphx-glr-single-img
 
 .. GENERATED FROM PYTHON SOURCE LINES 323-324
 
