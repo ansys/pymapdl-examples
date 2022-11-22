@@ -19,8 +19,8 @@ in Python files thanks to PyMAPDL.
     :hidden:
     :maxdepth: 3
 
-    examples/index
+    technology_showcase_examples/index
 
-.. include:: examples/technology_showcase_examples/index.rst
+.. include:: technology_showcase_examples/index.rst
    :start-line: 2
 
