@@ -12,7 +12,7 @@ release = version = "0.1.dev0"
 # Select desired logo, theme, and declare the html title
 html_logo = logo
 html_theme = "ansys_sphinx_theme"
-html_short_title = html_title = "pymapdl-techdemos"
+html_short_title = html_title = "PyMAPDL Techdemos"
 
 # specify the location of your github repo
 html_theme_options = {
