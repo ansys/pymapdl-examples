@@ -1,17 +1,33 @@
-PyMAPDL documentation |version|
-===============================
+PyMAPDL Techdemos
+=================
 
-The technology showcase examples for `PyMAPDL <pymapdl_docs_>`_
-are contained into this repository.
+The technology showcase examples for `PyMAPDL <pymapdl_docs_>`_ are contained
+into this repository.
 
-These are more complex examples that the ones presented in the 
-`APDL Verification Manual <mapdl_vm_>`_. 
-They are complete examples which necesitate more resources.
-Their purpose is to demonstrate the PyMAPDL's capabilities with concrete examples.
+Introduction and Purpose
+------------------------
 
-Here are a series of examples using MAPDL with ``ansys-mapdl-core``. 
-They initially come from the `APDL Technology Showcase Manual <mapdl_tech_show_>`_. They have been reproduced
-in Python files thanks to PyMAPDL.
+This documentation demonstrates the broad simulation capabilities of Ansys Mechanical
+APDL. The problems demonstrate how to use PyMAPDL to effectively and accurately
+solve interdisciplinary problems from a variety of industries and engineering
+fields.
+
+The exposed files are more complex examples that the ones presented in the `APDL
+Verification Manual <mapdl_vm_>`_. They are complete and concrete case studies
+which necesitate more resources. 
+
+Summary of the exposed Technology Showcase Manual Examples
+----------------------------------------------------------
+
++----------------------------+---------------------------------------------------------------------------------------------------------+
+| Name                       | Description                                                                                             |
++----------------------------+---------------------------------------------------------------------------------------------------------+
+| :ref:`tech_demo_01`        | Technology showcase demonstration example 01: Brake Squeal Analysis.                                    |
++----------------------------+---------------------------------------------------------------------------------------------------------+
+| :ref:`tech_demo_20`        | Technology showcase demonstration example 20: Dynamic simulation of a printed circuit board assembly    |
++----------------------------+---------------------------------------------------------------------------------------------------------+
+| :ref:`tech_demo_28`        | Technology showcase demonstration example 28: Friction Stir Welding (FSW) Simulation                    |
++----------------------------+---------------------------------------------------------------------------------------------------------+
 
 .. === TECHNOLOGY SHOWCASE EXAMPLES ===
 
