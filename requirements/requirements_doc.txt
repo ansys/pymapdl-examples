@@ -1,6 +1,6 @@
 #PyMAPDL dependencies
 ansys-mapdl-core==0.63.3
-numpy==1.21.6
+numpy==1.22.0
 pandas==1.5.1
 plotly==5.11.0
 pythreejs==2.4.1
