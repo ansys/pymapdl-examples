@@ -118,16 +118,11 @@ jobs:
         run: |
           xvfb-run make -C doc html SPHINXOPTS="-j auto -W --keep-going"
       
-      - name: Zip documentation
-        run: |
-          cd doc/_build/html
-          zip -r PyMAPDL_Techdemos_docs.zip *
-      
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
         with:
-          name: HTML-Documentation
-          path: doc/_build/html/PyMAPDL_Techdemos_docs.zip
+          name: documentation-html
+          path: doc/_build/html
           retention-days: 7
 
       - name: Deploy
@@ -147,7 +142,7 @@ jobs:
       - name: Upload PDF Documentation
         uses: actions/upload-artifact@v3
         with:
-          name: PDF-Documentation
+          name: documentation-pdf
           path: doc/_build/latex/pymapdl*.pdf
           retention-days: 7
 
@@ -212,9 +207,16 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
+      - name: Zip HTML documentation
+        uses: vimtor/action-zip@v1.1
+        with:
+          files: documentation-html
+          dest: documentation-html.zip
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
           files: |
-            ./*PDF*/*.pdf
+            ./documentation-html.zip
+            ./documentation-pdf/*.pdf
