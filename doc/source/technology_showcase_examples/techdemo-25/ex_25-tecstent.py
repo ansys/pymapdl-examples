@@ -3,8 +3,8 @@
 Cardiovascular Stent Simulation
 ===============================
 
-This example problem shows how to simulate stent-artery interaction during and after stent
-placement in an occluded artery.
+This example problem shows how to simulate stent-artery interaction during and
+after stent placement in an occluded artery.
 
 The analysis exposes advanced modeling techniques using PyMAPDL such as:
 
@@ -35,13 +35,16 @@ Additional Packages Used
 
 from ansys.mapdl.core import launch_mapdl
 
-# import numpy as np
-
 # start MAPDL as a service
 mapdl = launch_mapdl()
 print(mapdl)
 
-# define material properties of 316L Stainless steel
+
+###############################################################################
+# Defining material properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# define 316L Stainless steel
 mapdl.prep7()
 mapdl.mptemp()
 mapdl.mptemp(sloc="1", t1="0")
@@ -51,92 +54,258 @@ mapdl.mptemp()
 mapdl.mptemp(sloc="1", t1="0")
 mapdl.mpdata(lab="DENS", mat="1", c1="8000e-9")
 
-###############################################################################
-# Creating the complete layered model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# The original model will be duplicated to create a layered PCB of three layers
-# that are binded together.
-
-# duplicate single PCB to get three layers
-# get the maximum node number for the single layers PCB in the input file
-max_nodenum = mapdl.get("max_nodenum", "node", "", "num", "max")
-
-# generate additional PCBs offset by 20 mm in the -y direction
-mapdl.egen(3, max_nodenum, "all", dy=-20)
-
-
-# bind the three layers together
-# select components of interest
-mapdl.cmsel("s", "N_JOINT_BOARD")
-mapdl.cmsel("a", "N_JOINT_LEGS")
-mapdl.cmsel("a", "N_BASE")
-
-# get number of currently selected nodes
-nb_selected_nodes = mapdl.mesh.n_node
-current_node = 0
-queries = mapdl.queries
-
-# also select similar nodes for copies of the single PCB
-# and couple all dofs at the interface
-for node_id in range(1, nb_selected_nodes + 1):
-    current_node = queries.ndnext(current_node)
-    mapdl.nsel("a", "node", "", current_node + max_nodenum)
-    mapdl.nsel("a", "node", "", current_node + 2 * max_nodenum)
-mapdl.cpintf("all")
-
-# define fixed support boundary condition
-# get max coupled set number
-cp_max = mapdl.get("cp_max", "cp", 0, "max")
-
-# unselect nodes scoped in CP equations
-mapdl.nsel("u", "cp", "", 1, "cp_max")
-
-# create named selection for base excitation
-mapdl.cm("n_base_excite", "node")
-
-# fix displacement for base excitation nodes
-mapdl.d("all", "all")
-
-# select all and plot the model using MAPDL's plotter and VTK's
-mapdl.allsel("all")
-mapdl.cmsel("all")
-mapdl.graphics("power")
-mapdl.rgb("index", 100, 100, 100, 0)
-mapdl.rgb("index", 80, 80, 80, 13)
-mapdl.rgb("index", 60, 60, 60, 14)
-mapdl.rgb("index", 0, 0, 0, 15)
-mapdl.triad("rbot")
-mapdl.pnum("type", 1)
-mapdl.number(1)
-mapdl.hbc(1, "on")
-mapdl.pbc("all", "", 1)
-mapdl.view(1, 1, 1, 1)
-# mapdl.eplot(vtk=False)
-mapdl.eplot(vtk=True)
 
 ###############################################################################
-# Modal Analysis
+# Defining material properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# define 316L Stainless steel
+mapdl.prep7()
+mapdl.mptemp()
+mapdl.mptemp(sloc="1", t1="0")
+mapdl.mpdata(lab="EX", mat="1", c1="200e3")
+mapdl.mpdata(lab="PRXY", mat="1", c1="0.3")
+mapdl.mptemp()
+mapdl.mptemp(sloc="1", t1="0")
+mapdl.mpdata(lab="DENS", mat="1", c1="8000e-9")
+
+
+###############################################################################
+# Defining element types
+# ~~~~~~~~~~~~~~~~~~~~~~
+
+# for straight line segments
+mapdl.et(itype="1", ename="beam189")
+mapdl.sectype(secid="1", type_="beam", subtype="csolid")
+mapdl.secdata(val1=0.05)
+
+# for arcs
+mapdl.et(itype="2", ename="beam189")
+mapdl.sectype(secid="2", type_="beam", subtype="csolid")
+mapdl.secdata(val1=0.05)
+
+
+###############################################################################
+# Defining 5-parameter Mooney-Rivlin hyperelastic artery material model
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+c10 = 18.90e-3
+c01 = 2.75e-3
+c20 = 590.43e-3
+c11 = 857.2e-3
+nu1 = 0.49
+dd = 2 * (1 - 2 * nu1) / (c10 + c01)
+
+mapdl.tb(lab="hyper", mat="2", npts="5", tbopt="mooney")
+mapdl.tbdata(stloc="1", c1="c10", c2="c01", c3="c20", c4="c11", c6="dd")
+
+
+###############################################################################
+# Defining linear elastic material model for stiff calcified plaque
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mapdl.mp(lab="EX", mat="3", c0="00219e3")
+mapdl.mp(lab="NUXY", mat="3", c0="0.49")
+
+###############################################################################
+# Define Solid185 element type to mesh both the artery and plaque
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# For artery
+mapdl.et(itype="9", ename="SOLID185")
+mapdl.keyopt(
+    itype="9", knum="6", value="1"
+)  # Use mixed u-P formulation to avoid locking
+mapdl.keyopt(itype="9", knum="2", value="3")  # Use Simplified Enhanced Strain
+# method
+
+# For plaque
+mapdl.et(itype="16", ename="SOLID185")
+mapdl.keyopt(itype="16", knum="2", value="0")  # Use B-bar
+
+###############################################################################
+# Defining settings to model the stent, the artery and the plaque
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Use force-distributed boundary constraints on 2 sides of artery wall to allow
+# for radial expansion of tissue without rigid body motion.
+
+
+# Settings for MPC Surface-based, force-distributed contact on proximal plane
+# parallel to x-y plane
+
+mapdl.mat("2")
+mapdl.r(nset="3")
+mapdl.real(nset="3")
+mapdl.et(itype="3", ename="170")
+mapdl.et(itype="4", ename="174")
+mapdl.keyopt(itype="4", knum="12", value="5")
+mapdl.keyopt(itype="4", knum="4", value="1")
+mapdl.keyopt(itype="4", knum="2", value="2")
+mapdl.keyopt(itype="3", knum="2", value="1")
+mapdl.keyopt(itype="3", knum="4", value="111111")
+mapdl.type(itype="3")
+
+mapdl.mat("2")
+mapdl.r(nset="4")
+mapdl.real(nset="4")
+mapdl.et(itype="5", ename="170")
+mapdl.et(itype="6", ename="174")
+mapdl.keyopt(itype="6", knum="12", value="5")
+mapdl.keyopt(itype="6", knum="4", value="1")
+mapdl.keyopt(itype="6", knum="2", value="2")
+mapdl.keyopt(itype="5", knum="2", value="1")
+mapdl.keyopt(itype="5", knum="4", value="111111")
+mapdl.type(itype="5")
+
+
+# Settings for standard contact between stent and inner plaque wall contact
+# surface
+
+mapdl.mp(lab="MU", mat="1", c0="0")
+mapdl.mat("1")
+mapdl.mp(lab="EMIS", mat="1", c0="7.88860905221e-31")
+mapdl.r(nset="6")
+mapdl.real(nset="6")
+mapdl.et(itype="10", ename="170")
+mapdl.et(itype="11", ename="177")
+mapdl.r(nset="6", r3="1.0", r4="1.0", r5="0")
+mapdl.rmore(r9="1.0E20", r10="0.0", r11="1.0")
+mapdl.rmore(r7="0.0", r8="0", r9="1.0", r10="0.05", r11="1.0", r12="0.5")
+mapdl.rmore(r7="0", r8="1.0", r9="1.0", r10="0.0")
+mapdl.keyopt(itype="11", knum="5", value="0")
+mapdl.keyopt(itype="11", knum="7", value="1")
+mapdl.keyopt(itype="11", knum="8", value="0")
+mapdl.keyopt(itype="11", knum="9", value="0")
+mapdl.keyopt(itype="11", knum="10", value="2")
+mapdl.keyopt(itype="11", knum="11", value="0")
+mapdl.keyopt(itype="11", knum="12", value="0")
+mapdl.keyopt(itype="11", knum="2", value="3")
+mapdl.keyopt(itype="10", knum="5", value="0")
+
+# Settings for MPC based, force-distributed constraint on proximal stent nodes
+
+mapdl.mat("1")
+mapdl.r(nset="7")
+mapdl.real(nset="7")
+mapdl.et(itype="12", ename="170")
+mapdl.et(itype="13", ename="175")
+mapdl.keyopt(itype="13", knum="12", value="5")
+mapdl.keyopt(itype="13", knum="4", value="1")
+mapdl.keyopt(itype="13", knum="2", value="2")
+mapdl.keyopt(itype="12", knum="2", value="1")
+mapdl.keyopt(itype="12", knum="4", value="111111")
+mapdl.type(itype="12")
+
+# Settings for MPC based, force-distributed constraint on distal stent nodes
+
+mapdl.mat("1")
+mapdl.r(nset="8")
+mapdl.real(nset="8")
+mapdl.et(itype="14", ename="170")
+mapdl.et(itype="15", ename="175")
+mapdl.keyopt(itype="15", knum="12", value="5")
+mapdl.keyopt(itype="15", knum="4", value="1")
+mapdl.keyopt(itype="15", knum="2", value="2")
+mapdl.keyopt(itype="14", knum="2", value="1")
+mapdl.keyopt(itype="14", knum="4", value="111111")
+mapdl.type(itype="14")
+
+
+###############################################################################
+# Reading the geometry file
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mapdl.cdread(option="db", fname="stent", ext="cdb")
+mapdl.allsel(labt="all")
+mapdl.finish()
+
+
+###############################################################################
+# Static Analysis
 # --------------
 #
-# Run modal analysis
+# Run static analysis
 # ~~~~~~~~~~~~~~~~~~
-#
-# A modal analysis is run using Block Lanzos.
-# Only 10 modes are extracted for the sake of run times, but using a higher
-# number of nodes is recommended (suggestion: 300 modes).
-#
 
 # enter solution processor and define analysis settings
-mapdl.slashsolu()
-mapdl.antype("modal")
-# set number of modes to extract
-# using a higher number of modes is recommended
-nb_modes = 10
-# use Block Lanzos to extract specified number of modes
-mapdl.modopt("lanb", nb_modes)
-mapdl.mxpand(nb_modes)
-output = mapdl.solve()
-print(output)
+mapdl.run("/solu")
+mapdl.antype(antype="0")
+mapdl.nlgeom(key="on")
+
+###############################################################################
+# Apply Load Step 1: Balloon angioplasty of the artery to expand it past the
+# radius of the stent - IGNORE STENT
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mapdl.nsubst(nsbstp="20", nsbmx="20")
+mapdl.nropt(option1="full")
+mapdl.cncheck(option="auto")
+mapdl.esel(type_="s", item="type", vmin="11")
+mapdl.cm(cname="contact2", entity="elem")
+mapdl.ekill(elem="contact2")  # Kill contact elements in stent-plaque contact
+# pair so that the stent is ignored in the first
+# loadstep
+
+mapdl.nsel(type_="s", item="loc", comp="x", vmin="0", vmax="0.01e-3")
+mapdl.nsel(type_="r", item="loc", comp="y", vmin="0", vmax="0.01e-3")
+mapdl.d(node="all", lab="all")
+mapdl.allsel()
+
+mapdl.sf(
+    nlist="load", lab="pres", value="10e-2"
+)  # Apply 0.1 Pa/mm^2 pressure to inner plaque wall
+mapdl.allsel()
+mapdl.nldiag(label="cont", key="iter")
+mapdl.solve()
+mapdl.save()
+
+################################################################
+# Apply Load Step 2: Reactivate contact between stent and plaque
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mapdl.ealive(elem="contact2")
+mapdl.allsel()
+
+mapdl.nsubst(nsbstp="2", nsbmx="2")
+mapdl.save()
+mapdl.solve()
+
+
+###################
+# Apply Load Step 3
+# ~~~~~~~~~~~~~~~~~
+
+mapdl.nsubst(nsbstp="1", nsbmx="1", nsbmn="1")
+mapdl.solve()
+
+###############################################################################
+# Apply Load Step 4: Apply blood pressure (13.3 kPa) load to inner wall of
+# plaque and allow the stent to act as a scaffold
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mapdl.nsubst(nsbstp="300", nsbmx="3000", nsbmn="30")
+mapdl.sf(nlist="load", lab="pres", value="13", value2="3e-3")
+mapdl.allsel()
+
+########################################
+# Apply stabilization with energy option
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+mapdl.stabilize(key="const", method="energy", value="0.1")
+
+
+#################
+# Solve the model
+# ~~~~~~~~~~~~~~~
+
+mapdl.solve()
+mapdl.save()
+mapdl.finish()
+
+
+###############################################################################
+# Exit MAPDL
+mapdl.exit()
 
 
 ###############################################################################
@@ -206,7 +375,8 @@ mapdl.antype("spectr")
 # power spectral density
 mapdl.spopt("psd")
 
-# use input table 1 with acceleration spectrum in terms of acceleration due to gravity
+# use input table 1 with acceleration spectrum in terms of acceleration due to
+# gravity
 mapdl.psdunit(1, "accg", 9.81 * 1000)
 
 # define the frequency points in the input table 1
@@ -218,20 +388,23 @@ mapdl.psdval(1, 0.01, 0.01, 0.1, 1, 10, 10, 1)
 # set the damping ratio as 5%
 mapdl.dmprat(0.05)
 
-# apply base excitation on the set of nodes N_BASE_EXCITE in the y-direction from table 1
+# apply base excitation on the set of nodes N_BASE_EXCITE in the y-direction
+# from table 1
 mapdl.d("N_BASE_EXCITE", "uy", 1)
 
-# calculate the participation factor for PSD with base excitation from input table 1
+# calculate the participation factor for PSD with base excitation from input
+# table 1
 mapdl.pfact(1, "base")
 
-# write the displacent solution relative to the base excitation to the results file from the
-# PSD analysis
+# write the displacent solution relative to the base excitation to the results
+# file from the PSD analysis
 mapdl.psdres("disp", "rel")
 
 # write the absolute velocity solution to the results file from the PSD analysis
 mapdl.psdres("velo", "abs")
 
-# write the absolute acceleration solution to the results file from the PSD analysis
+# write the absolute acceleration solution to the results file from the PSD
+# analysis
 mapdl.psdres("acel", "abs")
 
 # combine only those modes whose significance level exceeds 0.0001
@@ -279,7 +452,8 @@ mapdl.store("psd")
 # store the psd analysis u_y data for the node MYMONITOR as the reference no 2
 mapdl.nsol(2, monitored_node, "u", "y")
 
-# compute the response power spectral density for displacement associated with variable 2
+# compute the response power spectral density for displacement associated with
+# variable 2
 mapdl.rpsd(3, 2)
 mapdl.show("png")
 

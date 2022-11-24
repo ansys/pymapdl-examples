@@ -2604,7 +2604,7 @@ Exit MAPDL
    **Total running time of the script:** ( 0 minutes  44.344 seconds)
 
 
-.. _sphx_glr_download_examples_gallery_examples_06-verif-manual_20-example-technology-showcase-dynamic-simulation-PCB.py:
+.. _sphx_glr_download_examples_gallery_examples_06-verif-ex_20-tecPCB.py:
 
 
 .. only :: html
