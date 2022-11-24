@@ -1,4 +1,4 @@
-pymapdl-techdemos
+PyMAPDL Techdemos
 =================
 
 Repository holding the techdemos for pymapdl
