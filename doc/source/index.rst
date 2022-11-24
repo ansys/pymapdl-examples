@@ -26,6 +26,8 @@ Summary of the exposed Technology Showcase Manual Examples
 +----------------------------+---------------------------------------------------------------------------------------------------------+
 | :ref:`tech_demo_20`        | Technology showcase demonstration example 20: Dynamic simulation of a printed circuit board assembly    |
 +----------------------------+---------------------------------------------------------------------------------------------------------+
+| :ref:`tech_demo_25`        | Technology showcase demonstration example 25: Cardiovascular Stent Simulation                           |
++----------------------------+---------------------------------------------------------------------------------------------------------+
 | :ref:`tech_demo_28`        | Technology showcase demonstration example 28: Friction Stir Welding (FSW) Simulation                    |
 +----------------------------+---------------------------------------------------------------------------------------------------------+
 

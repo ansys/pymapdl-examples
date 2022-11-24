@@ -16,4 +16,5 @@ this project.
 
     techdemo-1/ex_0-tecbrakesqueal
     techdemo-20/ex_20-tecPCB
+    techdemo-25/ex_25-tecstent
     techdemo-28/ex_28-tecfricstir
