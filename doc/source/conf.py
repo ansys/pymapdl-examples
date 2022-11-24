@@ -12,7 +12,7 @@ release = version = "0.1.dev0"
 # Select desired logo, theme, and declare the html title
 html_logo = logo
 html_theme = "ansys_sphinx_theme"
-html_short_title = html_title = "pymapdl-techdemos"
+html_short_title = html_title = "PyMAPDL Techdemos"
 
 # specify the location of your github repo
 html_theme_options = {
@@ -21,11 +21,13 @@ html_theme_options = {
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
+        ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
     ],
 }
 
 # Sphinx extensions
 extensions = [
+    "jupyter_sphinx",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "numpydoc",
@@ -79,3 +81,19 @@ source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
+
+# List of patterns, relative to source directory, that match files and
+# directories to ignore when looking for source files.
+# This pattern also affects html_static_path and html_extra_path.
+exclude_patterns = [
+    "_build",
+    "Thumbs.db",
+    ".DS_Store",
+    "links.rst",
+]
+
+# make rst_epilog a variable, so you can add other epilog parts to it
+rst_epilog = ""
+# Read link all targets from file
+with open("links.rst") as f:
+    rst_epilog += f.read()
