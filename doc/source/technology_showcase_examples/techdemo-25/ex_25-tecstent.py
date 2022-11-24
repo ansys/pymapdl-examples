@@ -309,6 +309,10 @@ mapdl.exit()
 
 
 ###############################################################################
+# Work in process after this section
+# ----------------------------------
+
+###############################################################################
 # Post-processing the modal results
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # This sections illustrates different methods to post-process the results of the
