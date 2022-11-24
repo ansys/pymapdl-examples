@@ -2,7 +2,7 @@ PyMAPDL Techdemos
 =================
 
 The technology showcase examples for `PyMAPDL <pymapdl_docs_>`_ are contained
-into this repository.
+in this repository.
 
 Introduction and Purpose
 ------------------------
@@ -12,7 +12,7 @@ APDL. The problems demonstrate how to use PyMAPDL to effectively and accurately
 solve interdisciplinary problems from a variety of industries and engineering
 fields.
 
-The exposed files are more complex examples that the ones presented in the `APDL
+The exposed files are more complex examples than the ones presented in the `APDL
 Verification Manual <mapdl_vm_>`_. They are complete and concrete case studies
 which necesitate more resources. 
 
