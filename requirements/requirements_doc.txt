@@ -1,5 +1,5 @@
 #PyMAPDL dependencies
-ansys-mapdl-core==0.63.3
+git+https://github.com/pyansys/pymapdl@main
 numpy==1.23.1
 pandas==1.5.1
 plotly==5.11.0
