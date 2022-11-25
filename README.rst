@@ -1,7 +1,7 @@
 PyMAPDL Techdemos
 =================
 
-Repository holding the techdemos for pymapdl
+Repository holding the techdemos for PyMAPDL
 
 
 How to install
