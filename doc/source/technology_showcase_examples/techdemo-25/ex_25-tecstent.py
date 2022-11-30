@@ -1,49 +1,38 @@
-""".. _ref_cardiovascular_stent_simulation:
-
-Cardiovascular Stent Simulation
-===============================
-
-This example problem shows how to simulate stent-artery interaction during and
-after stent placement in an occluded artery.
-
-The analysis exposes advanced modeling techniques using PyMAPDL such as:
-
-* Contact
-* Element birth and death
-* Mixed u-P formulation
-* Nonlinear stabilization
-
-This example is inspired from the model and analysis defined in Chapter 25 of
-the Mechanical APDL Technology Showcase Manual.
-
-Additional Packages Used
-------------------------
-
-* `Matplotlib <https://matplotlib.org>`_ is used for plotting purposes.
-
-"""
-
-###############################################################################
-# Setting up model
-# ----------------
+# %% [markdown]
 #
-# Test
-#
-# Starting MAPDL as a service and importing an external model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
+# # Cardiovascular Stent Simulation
 
+# %% [markdown]
+#
+# This example problem shows how to simulate stent-artery interaction during and
+# after stent placement in an occluded artery.
+# The analysis exposes advanced modeling techniques using PyMAPDL such as:
+# * Contact
+# * Element birth and death
+# * Mixed u-P formulation
+# * Nonlinear stabilization
+#
+# This example is inspired from the model and analysis defined in Chapter 25 of
+# the Mechanical APDL Technology Showcase Manual.
+
+# %% [markdown]
+# ## Starting MAPDL as a service
+
+# %%
+# starting MAPDL as a service and importing an external model
 from ansys.mapdl.core import launch_mapdl
 
 # start MAPDL as a service
 mapdl = launch_mapdl()
 print(mapdl)
 
+# %% [markdown]
+# # Setting up the model
 
-###############################################################################
-# Defining material properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ### Defining material properties<br>
 
+# %%
 # define 316L Stainless steel
 mapdl.prep7()
 mapdl.mptemp()
@@ -54,26 +43,10 @@ mapdl.mptemp()
 mapdl.mptemp(sloc="1", t1="0")
 mapdl.mpdata(lab="DENS", mat="1", c1="8000e-9")
 
+# %% [markdown]
+# ### Defining element types
 
-###############################################################################
-# Defining material properties
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# define 316L Stainless steel
-mapdl.prep7()
-mapdl.mptemp()
-mapdl.mptemp(sloc="1", t1="0")
-mapdl.mpdata(lab="EX", mat="1", c1="200e3")
-mapdl.mpdata(lab="PRXY", mat="1", c1="0.3")
-mapdl.mptemp()
-mapdl.mptemp(sloc="1", t1="0")
-mapdl.mpdata(lab="DENS", mat="1", c1="8000e-9")
-
-
-###############################################################################
-# Defining element types
-# ~~~~~~~~~~~~~~~~~~~~~~
-
+# %%
 # for straight line segments
 mapdl.et(itype="1", ename="beam189")
 mapdl.sectype(secid="1", type_="beam", subtype="csolid")
@@ -84,11 +57,10 @@ mapdl.et(itype="2", ename="beam189")
 mapdl.sectype(secid="2", type_="beam", subtype="csolid")
 mapdl.secdata(val1=0.05)
 
+# %% [markdown]
+# ### Defining 5-parameter Mooney-Rivlin hyperelastic artery material model
 
-###############################################################################
-# Defining 5-parameter Mooney-Rivlin hyperelastic artery material model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# %%
 c10 = 18.90e-3
 c01 = 2.75e-3
 c20 = 590.43e-3
@@ -96,43 +68,43 @@ c11 = 857.2e-3
 nu1 = 0.49
 dd = 2 * (1 - 2 * nu1) / (c10 + c01)
 
+# %%
 mapdl.tb(lab="hyper", mat="2", npts="5", tbopt="mooney")
 mapdl.tbdata(stloc="1", c1="c10", c2="c01", c3="c20", c4="c11", c6="dd")
 
+# %% [markdown]
+# ### Defining linear elastic material model for stiff calcified plaque
 
-###############################################################################
-# Defining linear elastic material model for stiff calcified plaque
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-mapdl.mp(lab="EX", mat="3", c0="00219e3")
+# %%
+mapdl.mp(lab="EX", mat="3", c0=".00219e3")
 mapdl.mp(lab="NUXY", mat="3", c0="0.49")
 
-###############################################################################
-# Define Solid185 element type to mesh both the artery and plaque
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ### Define Solid185 element type to mesh both the artery and plaque
 
-# For artery
+# %%
+# for artery
 mapdl.et(itype="9", ename="SOLID185")
 mapdl.keyopt(
     itype="9", knum="6", value="1"
 )  # Use mixed u-P formulation to avoid locking
-mapdl.keyopt(itype="9", knum="2", value="3")  # Use Simplified Enhanced Strain
-# method
+mapdl.keyopt(itype="9", knum="2", value="3")  # Use Simplified Enhanced Strain method
 
-# For plaque
+# for plaque
 mapdl.et(itype="16", ename="SOLID185")
 mapdl.keyopt(itype="16", knum="2", value="0")  # Use B-bar
 
-###############################################################################
-# Defining settings to model the stent, the artery and the plaque
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Use force-distributed boundary constraints on 2 sides of artery wall to allow
+# %% [markdown]
+# ### Defining settings to model the stent, the artery and the plaque
+#
+# Use force-distributed boundary constraints on 2 sides of artery wall to allow<br>
 # for radial expansion of tissue without rigid body motion.
 
-
-# Settings for MPC Surface-based, force-distributed contact on proximal plane
+# %% [markdown]
+# #### Settings for MPC Surface-based, force-distributed contact on proximal# plane
 # parallel to x-y plane
 
+# %%
 mapdl.mat("2")
 mapdl.r(nset="3")
 mapdl.real(nset="3")
@@ -157,10 +129,11 @@ mapdl.keyopt(itype="5", knum="2", value="1")
 mapdl.keyopt(itype="5", knum="4", value="111111")
 mapdl.type(itype="5")
 
+# %% [markdown]
+# #### Settings for standard contact between stent and inner plaque wall
+# contact surface
 
-# Settings for standard contact between stent and inner plaque wall contact
-# surface
-
+# %%
 mapdl.mp(lab="MU", mat="1", c0="0")
 mapdl.mat("1")
 mapdl.mp(lab="EMIS", mat="1", c0="7.88860905221e-31")
@@ -182,8 +155,10 @@ mapdl.keyopt(itype="11", knum="12", value="0")
 mapdl.keyopt(itype="11", knum="2", value="3")
 mapdl.keyopt(itype="10", knum="5", value="0")
 
-# Settings for MPC based, force-distributed constraint on proximal stent nodes
+# %% [markdown]
+# #### Settings for MPC based, force-distributed constraint on proximal stent nodes
 
+# %%
 mapdl.mat("1")
 mapdl.r(nset="7")
 mapdl.real(nset="7")
@@ -196,8 +171,10 @@ mapdl.keyopt(itype="12", knum="2", value="1")
 mapdl.keyopt(itype="12", knum="4", value="111111")
 mapdl.type(itype="12")
 
-# Settings for MPC based, force-distributed constraint on distal stent nodes
+# %% [markdown]
+# #### Settings for MPC based, force-distributed constraint on distal stent nodes
 
+# %%
 mapdl.mat("1")
 mapdl.r(nset="8")
 mapdl.real(nset="8")
@@ -210,59 +187,53 @@ mapdl.keyopt(itype="14", knum="2", value="1")
 mapdl.keyopt(itype="14", knum="4", value="111111")
 mapdl.type(itype="14")
 
+# %% [markdown]
+# ### Reading the geometry file
 
-###############################################################################
-# Reading the geometry file
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# %%
 mapdl.cdread(option="db", fname="stent", ext="cdb")
 mapdl.allsel(labt="all")
 mapdl.finish()
 
-
-###############################################################################
-# Static Analysis
-# --------------
+# %% [markdown]
+# ## Static Analysis
 #
 # Run static analysis
-# ~~~~~~~~~~~~~~~~~~
 
+# %%
 # enter solution processor and define analysis settings
 mapdl.run("/solu")
 mapdl.antype(antype="0")
 mapdl.nlgeom(key="on")
 
-###############################################################################
-# Apply Load Step 1: Balloon angioplasty of the artery to expand it past the
+# %% [markdown]
+# ### Apply Load Step 1: Balloon angioplasty of the artery to expand it past the
 # radius of the stent - IGNORE STENT
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# %%
 mapdl.nsubst(nsbstp="20", nsbmx="20")
 mapdl.nropt(option1="full")
 mapdl.cncheck(option="auto")
 mapdl.esel(type_="s", item="type", vmin="11")
 mapdl.cm(cname="contact2", entity="elem")
-mapdl.ekill(elem="contact2")  # Kill contact elements in stent-plaque contact
-# pair so that the stent is ignored in the first
-# loadstep
-
+mapdl.ekill(elem="contact2")  # Kill contact elements in stent-plaque contact pair
+# so that the stent is ignored in the first loadstep
 mapdl.nsel(type_="s", item="loc", comp="x", vmin="0", vmax="0.01e-3")
 mapdl.nsel(type_="r", item="loc", comp="y", vmin="0", vmax="0.01e-3")
 mapdl.d(node="all", lab="all")
 mapdl.allsel()
 
-mapdl.sf(
-    nlist="load", lab="pres", value="10e-2"
-)  # Apply 0.1 Pa/mm^2 pressure to inner plaque wall
+mapdl.sf(nlist="load", lab="pres", value="10e-2")  # apply 0.1 Pa/mm^2 pressure
+# to inner plaque wall
 mapdl.allsel()
 mapdl.nldiag(label="cont", key="iter")
 mapdl.solve()
 mapdl.save()
 
-################################################################
-# Apply Load Step 2: Reactivate contact between stent and plaque
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ### Apply Load Step 2: Reactivate contact between stent and plaque
 
+# %%
 mapdl.ealive(elem="contact2")
 mapdl.allsel()
 
@@ -270,234 +241,116 @@ mapdl.nsubst(nsbstp="2", nsbmx="2")
 mapdl.save()
 mapdl.solve()
 
+# %% [markdown]
+# ### Apply Load Step 3
 
-###################
-# Apply Load Step 3
-# ~~~~~~~~~~~~~~~~~
-
+# %%
 mapdl.nsubst(nsbstp="1", nsbmx="1", nsbmn="1")
 mapdl.solve()
 
-###############################################################################
-# Apply Load Step 4: Apply blood pressure (13.3 kPa) load to inner wall of
+# %% [markdown]
+# ### Apply Load Step 4: Apply blood pressure (13.3 kPa) load to inner wall of
 # plaque and allow the stent to act as a scaffold
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# %%
 mapdl.nsubst(nsbstp="300", nsbmx="3000", nsbmn="30")
-mapdl.sf(nlist="load", lab="pres", value="13", value2="3e-3")
+mapdl.sf(nlist="load", lab="pres", value="13.3e-3")
 mapdl.allsel()
 
-########################################
-# Apply stabilization with energy option
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# ### Apply stabilization with energy option
 
+# %%
 mapdl.stabilize(key="const", method="energy", value="0.1")
 
+# %% [markdown]
+# # Solve the model
 
-#################
-# Solve the model
-# ~~~~~~~~~~~~~~~
-
+# %%
 mapdl.solve()
 mapdl.save()
 mapdl.finish()
 
-
-###############################################################################
-# Exit MAPDL
-mapdl.exit()
-
-
-###############################################################################
-# Work in process after this section
-# ----------------------------------
-
-###############################################################################
-# Post-processing the modal results
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# %% [markdown]
+# # Post-processing the modal results
+#
 # This sections illustrates different methods to post-process the results of the
-# modal analysis : PyMAPDL method, PyMAPDL result reader, PyDPF-Post
-# and PyDPF-Core. All methods lead to the same result and are just given as an
-# example of how each module can be used.
+# modal analysis : PyMAPDL method, PyMAPDL result reader, PyDPF-Post and PyDPF-Core.
+# All methods lead to the same result and are just given as an example of how each
+# module can be used.
 
-# using MAPDL methods
-mapdl.post1()
-mapdl.set(1, 1)
-mapdl.plnsol("u", "sum")
+# %%
+from ansys.dpf import core as dpf
 
+# %% [markdown]
+# ## Mesh of the model
 
-###############################################################################
-# Using PyMAPDL result reader
-# ***************************
-#
-# *Not recommended* - PyMAPDL reader library is in process to being deprecated.
-# It is recommended to use `DPF Post <https://postdocs.pyansys.com/>`_.
-#
+# %%
+model = dpf.Model(mapdl.result_file)
+ds = dpf.DataSources(mapdl.result_file)
 
-mapdl_result = mapdl.result
-mapdl_result.plot_nodal_displacement(0)
-
-###############################################################################
-# Using DPF-Post
-# **************
-#
-
-from ansys.dpf import post
-
-solution_path = mapdl.result_file
-solution = post.load_solution(solution_path)
-print(solution)
-displacement = solution.displacement(time_scoping=1)
-total_deformation = displacement.norm
-total_deformation.plot_contour(show_edges=True, background="w")
-
-###############################################################################
-# Using DPF-Core
-# **************
-#
-
-from ansys.dpf import core
-
-model = core.Model(solution_path)
-results = model.results
-print(results)
-displacements = results.displacement()
-total_def = core.operators.math.norm_fc(displacements)
-total_def_container = total_def.outputs.fields_container()
+# %%
 mesh = model.metadata.meshed_region
-mesh.plot(total_def_container.get_field_by_time_id(1))
+mesh.plot()
 
-###############################################################################
-# Run PSD analysis
-# ----------------
-# The response spectrum analysis is defined, solved and post-processed.
+# %% [markdown]
+# ## Computed displacements of the model
 
-# define PSD analysis with input spectrum
-mapdl.slashsolu()
-mapdl.antype("spectr")
+# %%
+# Collecting the computed displacement
+u = model.results.displacement(time_scoping=[4]).eval()
+print(u[0])
 
-# power spectral density
-mapdl.spopt("psd")
+u[0].plot(deform_by=u[0])
 
-# use input table 1 with acceleration spectrum in terms of acceleration due to
-# gravity
-mapdl.psdunit(1, "accg", 9.81 * 1000)
+# %% [markdown]
+# ## Von Mises stress
 
-# define the frequency points in the input table 1
-mapdl.psdfrq(1, "", 1, 40, 50, 70.71678, 100, 700, 900)
+# %%
+# Collecting the computed stress
+s_op = model.results.stress(time_scoping=[3])
+s_op.inputs.requested_location.connect(dpf.locations.nodal)
+s = s_op.eval()
 
-# define the PSD values in the input table 1
-mapdl.psdval(1, 0.01, 0.01, 0.1, 1, 10, 10, 1)
+# Calculating Von Mises stress
+s_VM = dpf.operators.invariant.von_mises_eqv_fc(fields_container=s).eval()
 
-# set the damping ratio as 5%
-mapdl.dmprat(0.05)
+s_VM[0].plot(deform_by=u[0])
 
-# apply base excitation on the set of nodes N_BASE_EXCITE in the y-direction
-# from table 1
-mapdl.d("N_BASE_EXCITE", "uy", 1)
+# %% [markdown]
+# ## Computed displacements of the stent
 
-# calculate the participation factor for PSD with base excitation from input
-# table 1
-mapdl.pfact(1, "base")
+# %%
+# Creating the mesh associated to the stent
+esco = mesh.named_selection("STENT")
+print(esco)
 
-# write the displacent solution relative to the base excitation to the results
-# file from the PSD analysis
-mapdl.psdres("disp", "rel")
+# Transposing elemental location to nodal one
+op = dpf.operators.scoping.transpose()
+op.inputs.mesh_scoping.connect(esco)
+op.inputs.meshed_region.connect(mesh)
+op.inputs.inclusive.connect(1)
+nsco = op.eval()
+print(nsco)
 
-# write the absolute velocity solution to the results file from the PSD analysis
-mapdl.psdres("velo", "abs")
+# %%
+# Collecting the computed displacements of the stent
+u_stent = model.results.displacement(mesh_scoping=nsco, time_scoping=[4])
+u_stent = u_stent.outputs.fields_container()
+U = u_stent[0]
 
-# write the absolute acceleration solution to the results file from the PSD
-# analysis
-mapdl.psdres("acel", "abs")
+# Linking the stent mesh to the global one
+op = dpf.operators.mesh.from_scoping()  # operator instantiation
+op.inputs.scoping.connect(nsco)
+op.inputs.inclusive.connect(1)
+op.inputs.mesh.connect(mesh)
+mesh_sco = op.eval()
+u_stent[0].meshed_region = mesh_sco
 
-# combine only those modes whose significance level exceeds 0.0001
-mapdl.psdcom()
-output = mapdl.solve()
-print(output)
+u_stent[0].plot(deformed_by=u_stent[0])
 
-###############################################################################
-# Post-process PSD analysis
-# ~~~~~~~~~~~~~~~~~~~~~~~~~
-# The response spectrum analysis is post-processed. First, the standard
-# MAPDL POST1 postprocessor is used. Then, the MAPDL time-history
-# POST26 postprocessor is used to generate the response power spectral
-# density.
-#
-# .. note::
-#    The graph generated through POST26 is exported as a picture in the working
-#    directory. Finally, the results from POST26 are saved to Python variables
-#    to be plotted in the Python environment with the use of Matplotlib
-#    library.
+# %% [markdown]
+# ## Exit MAPDL
 
-
-###############################################################################
-# Post-process PSD analysis in POST1
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-mapdl.post1()
-mapdl.set(1, 1)
-mapdl.plnsol("u", "sum")
-mapdl.set("last")
-mapdl.plnsol("u", "sum")
-
-###############################################################################
-# Post-process PSD analysis in POST26 (time-history post-processing)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-mapdl.post26()
-
-# allow storage for 200 variables
-mapdl.numvar(200)
-mapdl.cmsel("s", "MY_MONITOR")
-monitored_node = mapdl.queries.ndnext(0)
-mapdl.store("psd")
-
-# store the psd analysis u_y data for the node MYMONITOR as the reference no 2
-mapdl.nsol(2, monitored_node, "u", "y")
-
-# compute the response power spectral density for displacement associated with
-# variable 2
-mapdl.rpsd(3, 2)
-mapdl.show("png")
-
-# plot the variable 3
-mapdl.plvar(3)
-
-# print the variable 3
-mapdl.prvar(3)
-
-# x-axis is set for Log X scale
-mapdl.gropt("logx", 1)
-
-# y-axis is set for Log X scale
-mapdl.gropt("logy", 1)
-
-# plot the variable 3
-mapdl.plvar(3)
-mapdl.show("close")
-
-###############################################################################
-# Post-process PSD analysis using Matplotlib
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# store MAPDL results to python variables
-mapdl.dim("frequencies", "array", 4000, 1)
-mapdl.dim("response", "array", 4000, 1)
-mapdl.vget("frequencies", 1)
-mapdl.vget("response", 3)
-frequencies = mapdl.parameters["frequencies"]
-response = mapdl.parameters["response"]
-
-# use Matplotlib to create graph
-fig = plt.figure()
-ax = fig.add_subplot(111)
-plt.xscale("log")
-plt.yscale("log")
-ax.plot(frequencies, response)
-ax.set_xlabel("Frequencies")
-ax.set_ylabel("Response power spectral density")
-
-###############################################################################
-# Exit MAPDL
+# %%
 mapdl.exit()

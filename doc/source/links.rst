@@ -13,5 +13,5 @@
 .. _pymapdl_github: https://github.com/pyansys/pymapdl
 .. _pymapdl_examples: https://mapdl.docs.pyansys.com/examples/index.html
 
-.. # techdemos
+.. #TechDemos
 .. _tech_demo_intro: https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html
