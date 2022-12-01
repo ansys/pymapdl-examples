@@ -271,7 +271,6 @@ mapdl.rescontrol("define", "all", 1)
 mapdl.outres("all", "all")
 mapdl.ncnv(2)  # Do not terminate the program execution if the solution diverges
 mapdl.ignore_errors = True # in order for PyMAPDL to not raise an error 
-                            # when an error is found in the MAPDL output
 output = mapdl.solve()
 print(output)
 mapdl.finish()
