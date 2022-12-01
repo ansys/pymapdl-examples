@@ -22,6 +22,7 @@ html_theme_options = {
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
         ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
+        ("Examples", "https://mapdl.docs.pyansys.com/examples/"),
     ],
 }
 
