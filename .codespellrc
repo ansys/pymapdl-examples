@@ -1,4 +1,4 @@
 [codespell]
 skip = *.pyc,*.xml,*.txt,*.gif,*.png,*.jpg,*.js,*.html,*.doctree,*.ttf,*.woff,*.woff2,*.eot,*.mp4,*.inv,*.pickle,*.ipynb,flycheck*,./.git/*,./.hypothesis/*,*.yml,./doc/build/*,./doc/images/*,./dist/*,*~,.hypothesis*,./doc/source/examples/*,*cover,*.dat,*.mac
 quiet-level = 3
-ignore-words-list = pres,nax,tickness,struc,parm
+ignore-words-list = pres,nax,tickness,struc,parm,filname
