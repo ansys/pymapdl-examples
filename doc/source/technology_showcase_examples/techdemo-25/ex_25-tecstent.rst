@@ -43,6 +43,7 @@ Starting MAPDL as a service
 
     # starting MAPDL as a service and importing an external model
     from ansys.mapdl.core import launch_mapdl
+    
     # start MAPDL as a service
     mapdl = launch_mapdl()
     print(mapdl)
@@ -94,7 +95,7 @@ model.
     dd = 2 * (1 - 2 * nu1) / (c10 + c01)
 
     mapdl.tb(lab="hyper", mat="2", npts="5", tbopt="mooney")
-mapdl.tbdata(stloc="1", c1="c10", c2="c01", c3="c20", c4="c11", c6="dd")
+    mapdl.tbdata(stloc="1", c1="c10", c2="c01", c3="c20", c4="c11", c6="dd")
 
 
 We define the linear elastic material model for stiff calcified plaque.
@@ -306,356 +307,150 @@ Finally, we apply stabilization with energy option.
 
 
 
-25.2. Problem Description
--------------------------
+Solving the model
+-----------------
 
-A `Medtronic <http://www.medtronic.com/>` Driver® (formerly S7) coronary stent
-and a severely occluded coronary artery are modeled.
+.. code:: ipython3
 
-The artery is simplified as a two-layered straight cylinder, with one layer
-representing the artery wall and the other representing the calcified plaque. 
+    mapdl.solve()
+    mapdl.save()
+    mapdl.finish()
 
-The following figure shows the general dimensions of the artery and stent:
 
-.. figure:: images/gtecstent2.png
-    :align: center
-    :alt: Cross-sectional View of Unloaded Artery and Stent
-> 
-> 
-> | Ra (inner artery radius) = 2.1 mm |
-> | Rs (stent radius) = 1.75 mm |
-> | Rp (inner plaque radius) = 1.6 mm |
-> | Ro (outer artery radius) = 2.6 mm |
-> 
->
-    :figclass: align-center
+
+Post-processing the results
+---------------------------
+
+This section illustrates the use of PyDPF-Core to post-process the results.
+
+.. code:: ipython3
+
+    from ansys.dpf import core as dpf
+
+
+Mesh of the model
+-----------------
+
+.. code:: ipython3
+
     
-    **Figure 25.2: Cross-sectional View of Unloaded Artery and Stent**
+    model = dpf.Model(mapdl.result_file)
+    ds = dpf.DataSources(mapdl.result_file)
 
-A nonlinear static analysis is performed to simulate the three-step stenting
-procedure:
+    mesh = model.metadata.meshed_region
+    mesh.plot()
 
-#. Expand the artery using elevated pressure (balloon angioplasty).
-#. Place the stent.
-#. Contract the artery using mean blood pressure and creating contact between
-   the stent and the artery wall.
+.. jupyter-execute::
+  :hide-code:
 
+    import pyvista
 
-25.3. Modeling
---------------
+    file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
+    rotor1 = pyvista.read(file)
+    pl = pyvista.Plotter()
+    pl.add_mesh(rotor1, cmap='jet', show_edges=True)
+    pl.show()
 
-Cardiovascular stent modeling involves three components:
+Computed displacements of the model
+-----------------------------------
 
+.. code:: ipython3
 
-* `25.3.1. Stent Modeling`_
+    # Collecting the computed displacement
+    u = model.results.displacement(time_scoping=[4]).eval()
+    print(u[0])
 
-* `25.3.2. Artery and Plaque Modeling`_
+    u[0].plot(deform_by = u[0])
 
-* `25.3.3. Stent-Plaque Contact Modeling`_
+.. jupyter-execute::
+  :hide-code:
 
+    file = "./source/technology_showcase_examples/techdemo-25/u.vtk"
+    rotor1 = pyvista.read(file)
+    pl = pyvista.Plotter()
+    pl.add_mesh(rotor1, cmap='jet', show_edges=True)
+    pl.show() 
 
-25.3.1. Stent Modeling
-----------------------
-
-A line model of the stent is created and then meshed with 1,760 BEAM189 beam
-elements, as shown in the following figure:
-
-.. figure:: images/gtecstent3.png
-    :align: center
-    :alt: Stent Model 3-D Expanded Solid Display
-    :figclass: align-center
-    
-    **Figure 25.3: Stent Model 3-D Expanded Solid Display**
-
-For modeling simplicity and computational efficiency, beam elements are preferred
-over solid elements. 
-
-The stent assembly has a 3.5 mm diameter, a 15 mm length, and 8 crowns. The wire
-for constructing the stent has a circular cross-section with an outer diameter of
-0.1 mm. 
-
-Although Nitinol material is commonly used for the stent, the nonlinear material
-behavior of Nitinol requires a separate discussion. For the purposes of this
-problem, therefore, the model uses linear elastic 316L steel instead.
-
-25.3.2. Artery and Plaque Modeling
-----------------------------------
-
-The simplified two-layer artery and plaque model is meshed with 3-D solid
-elements, as shown in this figure: 
-
-.. figure:: graphics/gtecstent4.png
-    :align: center
-    :alt: Simplified Atherosclerotic Artery Model
-    :figclass: align-center
-    
-    **Figure 25.4: Simplified Atherosclerotic Artery Model**
-
-The artery layer is meshed with 9,000 SOLID185 layered
-structural solid elements with the simplified enhanced strain formulation (KEYOPT(2)
-= 3). Mixed u-P formulation (KEYOPT(6) = 1) is used to overcome the volumetric
-locking typically associated with incompressible biological tissue. 
-
-The plaque layer is also meshed with 9,000 SOLID185
-elements. Full integration with the 
-
-.. image:: graphics/eq3396db3e-75fc-4169-9bdf-6efc626a19f3.svg
-    :align: center
-    :alt: 
-
- method is used for the plaque elements, as the material of the
-calcified plaque is considered to be linear elastic. 
-
-A coincident mesh is created at the artery-plaque interface to enforce a secure
-bond between the artery and the plaque.
-
-Based on St. Venant’s principle, both the artery and plaque are extended by
-3 mm to reduce end effects. Fine elements are used near the two ends to mitigate any
-convergence difficulty caused by large localized deformation.
-
-
-25.3.3. Stent-Plaque Contact Modeling
--------------------------------------
-
-Contact between the inner plaque wall and stent from arterial contraction is
-modeled as line-to-surface contact. 
-
-The stent lines are meshed with CONTA177 contact
-elements. 
-
-A Lagrangian multiplier method on contact normals and penalty tangent method on
-target normals is used (KEYOPT(2) = 3), along with automatic bisection (KEYOPT(7) =
-1) and standard contact behavior (KEYOPT(12) = 0). 
-
-The inner plaque wall surface is meshed with TARGE170
-target elements. Zero-friction behavior is assumed.(tecstentrefs.html#tecstent_cit1)]
-
-The following figure illustrates the stent-plaque contact:
-
-.. figure:: images/gtecstent5.png
-    :align: center
-    :alt: Standard Line-to-Surface Contact Between Stent and Inner Plaque Wall
-    :figclass: align-center
-    
-    **Figure 25.5: Standard Line-to-Surface Contact Between Stent and Inner Plaque Wall**
-
-
-25.4. Material Properties
--------------------------
-
-`Material properties <ref1_>`_ for the stent, artery, and plaque are as follows: 
-
-+----------+--------------------+----------------------------------------------------+
-|          | **Linear Elastic** |    **`Mooney-Rivlin <td_mr_>`_ Hyperelastic**      |
-+==========+====================+====================================================+
-|          |  **EX**   |**PRXY**|   **C10**   |  **C01**   |  **C20**   |  **C11**   |
-|          |**(N/mm2)**|        | **(N/mm2)** |**(N/mm2)** |**(N/mm2)** |**(N/mm2)** |
-+----------+-----------+--------+----------------------------------------------------+
-|**Stent** |  2.00E+05 |   0.3  |                                                    |
-+----------+-----------+--------+----------------------------------------------------+
-|**Artery**|                    |   1.89E-02  | 2.75E-03   |  5.90E-01  |  8.57E-01  |
-+----------+-----------+--------+----------------------------------------------------+                                                    |
-|**Plaque**|   2.19    | 0.49   |                                                    |
-+----------+-----------+--------+----------------------------------------------------+
-
-
-25.5. Boundary Conditions and Loading
--------------------------------------
-
-The following topics concerning boundary conditions and loading for the
-cardiovascular stent simulation are available:
-
-*  `25.5.1. Artery Boundary Conditions`_
-*  `25.5.2. Stent Boundary Conditions`_
-*  `25.5.3. Plaque Wall Loading`_
-
-25.5.1. Artery Boundary Conditions
-----------------------------------
-
-A multipoint constraint(MPC), force-distributed constraint is applied to the proximal and
-distal surfaces of the artery by specifying KEYOPT (2) = 2, KEYOPT(4) = 1 and
-KEYOPT(12) = 5 for the CONTA174 elements, as shown in the
-following figure:
-
-.. figure:: images/gtecstent6a.png
-    :align: center
-    :alt: Artery Boundary Conditions
-    :figclass: align-center
-    
-    **Figure 25.6: Artery Boundary Conditions**
-
-MPC pilot nodes (TARGE170) are fixed in all six degrees
-of freedom. The boundary conditions allow for radial arterial expansion, while
-adequately preventing rigid body motion of the artery.
-
-25.5.2. Stent Boundary Conditions
----------------------------------
-
-As with the artery, an MPC-based, force-distributed constraint is applied to
-selected nodes on the proximal and distal ends of the stent
-(CONTA175), as shown in this figure:
-
-.. figure:: images/gtecstent6b.png
-    :align: center
-    :alt: Stent Boundary Conditions
-    :figclass: align-center
-    
-    **Figure 25.7: Stent Boundary Conditions**
-
-MPC pilot nodes (TARGE170) are fixed in all six degrees
-of freedom. 
-
-25.5.3. Plaque Wall Loading
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Surface pressure loads are applied to all nodes on the inner plaque wall,
-representing the balloon expansion pressure in the first load step (0.1
-N/mm2) and blood pressure in the fourth load step
-(0.0133 N/mm2). 
-
-The following figure illustrates the load surface and load history:
-
-**Figure 25.8: Uniform Pressure Loading on the Inner Plaque Wall (a)**
-**and Load History (b)**
-
-.. image:: gtecstent7a.png
-    :width: 45 %
-.. image:: gtecstent7b.png
-    :width: 45 %
-
-
-
-25.6. Analysis and Solution Controls
-------------------------------------
-
-A nonlinear static analysis (ANTYPE,STATIC) with large-deflection
-effects (NLGEOM,ON) is specified. Contact parameters are optimized
-(CNCHECK,AUTO) to achieve better convergence based on overall
-contact-pair behaviors.
-
-**Load Step 1**
-
-During the first load step, an elevated blood pressure of 0.1
-N/mm2 is applied to the inner surface of the plaque wall
-to cause sufficient radial wall expansion for subsequent stent placement. 
-
-Stent contact elements (CONTA177) are killed (EKILL) to remove the effects
-of the stent.
-
-This load step uses a maximum of 20 substeps with 20 initial substeps
-(NSUBST,20,20). 
-
-The following figure shows the effects of the first load step:
-
-.. figure:: images/gtecstent8.png
-    :align: center
-    :alt: Cross-Sectional View of Artery and Stent After Balloon Angioplasty (Load Step 1)
-    :figclass: align-center
-    
-    **Figure 25.9: Cross-Sectional View of Artery and Stent After Balloon Angioplasty (Load Step 1)**
-
-**Load Steps 2 and 3**
-Load steps 2 and 3 use three total substeps to allow the Newton-Raphson residuals (from the nonlinear
-expansion in load step 1) to equilibrate after the stent contact elements are
-reactivated ([**EALIVE**]).
-**Load Step 4**
-In the fourth load step, blood pressure is ramped to a magnitude of 0.0133
-N/mm2, which represents the mean arterial blood pressure
-(100 mmHg). 
-
-Under this reduced load, the atherosclerotic artery collapses onto the stent scaffold. 
-
-This load step uses 200 initial substeps, 2000 maximum substeps, and 20 minimum
-substeps to obtain contact convergence ([**NSUBST**],200,2000,20). 
-Nonlinear stabilization
-([**STABILIZE**],CONST,ENERGY,0.1) helps to achieve solution
-convergence during this load step.
-
-
-25.7. Results and Discussion
-----------------------------
-
-Proper element technologies and solution options allow a successful nonlinear
-simulation of stent-artery interaction. The analysis generates detailed information
-about the post-insertion artery wall deformation, wall stresses, and stent
-retraction.
-
-The positive effect of stenting is evident in the following figure, which shows the
-artery wall configurations before and after stent placement:
-
-**Figure 25.10: Arterial Wall Deformation During Balloon Angioplasty (a) and**
-**After Stent Placement (b)**
-
-| Arterial Wall Deformation During Balloon Angioplasty (a) and After Stent Placement (b) | Arterial Wall Deformation During Balloon Angioplasty (a) and After Stent Placement (b) |
-| (a) | (b) |
-
-
-The following figure clearly shows the expected tissue prolapse (tissue extension into
-the gaps in the stent):
-
-.. figure:: images/gtecstent10.png
-    :align: center
-    :alt: Arterial Wall Displacement and Tissue Prolapse Results
-    :figclass: align-center
-    
-    **Figure 25.11: Arterial Wall Displacement and Tissue Prolapse Results**
-
-This figure shows the detailed stress distribution on the inner artery wall, with an
-expected pattern matching the stent geometry: 
-
-.. figure:: graphics/gtecstent11.png
-    :align: center
-    :alt: Arterial Wall von Mises Stress Results
-    :figclass: align-center
-    
-    **Figure 25.12: Arterial Wall von Mises Stress Results**
-
-Finally, the stent retraction under compressive load from the occluded artery wall is
-shown in this figure:
-
-.. figure:: images/gtecstent12.png
-    :align: center
-    :alt: Stent Retraction Resulting from Arterial Compression
-    :figclass: align-center
-    
-    **Figure 25.13: Stent Retraction Resulting from Arterial Compression**
-
-The simulation results agree well with those in the published literature.(tecstentrefs.html#tecstent_cit1)]
-
-FEA-based simulation is capable of quickly generating accurate and detailed
-information about stent-artery interaction. Finite element modeling is being used not
-only to develop state-of-the-art stent innovations, but also for pre-clinical
-patient-specific assessment and customization. 
-
-25.8. Recommendations
----------------------
-
-To perform a similar stent-artery interaction analysis, consider the following hints
-and recommendations:
-
-* Compared to surface-to-surface contact with a full solid model, line-to-surface contact can provide
-  similar results using significantly less solution time.
-* Multipoint constraints (MPCs) provide
-  biologically accurate boundary conditions.
-* The choice of units is critical for avoiding numerical difficulties. For
-  biological problems, millimeters-micron units are preferred.
-* To achieve faster solutions, coincident nodes and surfaces are preferred over
-  bonded contact.
-* Stabilization mitigates convergence
-  issues in unstable nonlinear problems.
-
-25.9. References
+Von Mises stress
 ----------------
 
-The following reference work is cited in this example problem:
+.. code:: ipython3
 
-.. _ref1: 
+    # Collecting the computed stress
+    s_op = model.results.stress(time_scoping=[3])
+    s_op.inputs.requested_location.connect(dpf.locations.nodal)
+    s = s_op.eval()
 
-Lally, C., Dolan, F, & Pendergrast, P. J. (2005). (http://www.jbiomech.com/article/S0021-9290(04)00375-6/abstract). *Journal of Biomechanics.* 38:
-1574-1581.
+    # Calculating Von Mises stress
+    s_VM = dpf.operators.invariant.von_mises_eqv_fc(fields_container=s).eval()
 
-25.10. Input Files
-------------------
+    s_VM[0].plot(deform_by = u[0])
+
+.. jupyter-execute::
+  :hide-code:
+
+    file = "./source/technology_showcase_examples/techdemo-25/s_VM.vtk"
+    rotor1 = pyvista.read(file)
+    pl = pyvista.Plotter()
+    pl.add_mesh(rotor1, cmap='jet', show_edges=True)
+    pl.show() 
+
+
+Computed displacements of the stent
+-----------------------------------
+
+
+.. code:: ipython3
+
+    # Creating the mesh associated to the stent
+    esco = mesh.named_selection("STENT")
+    print(esco)
+
+    # Transposing elemental location to nodal one
+    op = dpf.operators.scoping.transpose()
+    op.inputs.mesh_scoping.connect(esco)
+    op.inputs.meshed_region.connect(mesh)
+    op.inputs.inclusive.connect(1)
+    nsco = op.eval()
+    print(nsco)
+
+
+.. code:: ipython3
+
+    # Collecting the computed displacements of the stent
+    u_stent = model.results.displacement(mesh_scoping=nsco, time_scoping=[4])
+    u_stent = u_stent.outputs.fields_container()
+    U = u_stent[0]
+
+    # Linking the stent mesh to the global one
+    op = dpf.operators.mesh.from_scoping() # operator instantiation
+    op.inputs.scoping.connect(nsco)
+    op.inputs.inclusive.connect(1)
+    op.inputs.mesh.connect(mesh)
+    mesh_sco = op.eval()
+    u_stent[0].meshed_region = mesh_sco
+
+    u_stent[0].plot(deformed_by=u_stent[0])
+
+.. jupyter-execute::
+  :hide-code:
+
+    # file = "./source/technology_showcase_examples/techdemo-25/u_stent.vtk"
+    # rotor1 = pyvista.read(file)
+    # pl = pyvista.Plotter()
+    # pl.add_mesh(rotor1, cmap='jet', show_edges=True)
+    # pl.show() 
+
+Exit MAPDL
+----------
+
+.. code:: ipython3
+
+    mapdl.exit()
+
+
+Input Files
+-----------
 
 The following files were used in this problem:
 
@@ -665,7 +460,7 @@ The following files were used in this problem:
   information for this problem (called by **stent.dat**).
 
 +-----------------------------------------------------------------------------------------------------------------------------------+
-| [Download the zipped **td-25** file set for thisproblem](https://storage.ansys.com/doclinks/techdemos.html?code=td-25-DLU-N2a).   |
+| `Download the zipped **td-25** file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-25-DLU-N2a>`_ |
 +===================================================================================================================================+
-| For more information, see [Obtaining the Input  Files](tecintro.html "Obtaining the Input                     Files").            |
+| For more information, see `Obtaining the Input  Files`.                                                                           |
 +-----------------------------------------------------------------------------------------------------------------------------------+
