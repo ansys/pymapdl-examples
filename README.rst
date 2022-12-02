@@ -1,12 +1,11 @@
-PyMAPDL Techdemos
-=================
+PyMAPDL Examples
+================
 
-Repository holding the techdemos for PyMAPDL
+Repository holding examples for PyMAPDL.
 
 
 How to install
 --------------
-
 
 Code Style
 ----------
