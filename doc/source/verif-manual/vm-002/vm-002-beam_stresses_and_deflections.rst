@@ -10,12 +10,12 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_examples_gallery_examples_06-verif-manual_vm-002-beam_stresses_and_deflections.py>`
+        Click :ref:`here <sphx_glr_download_verif-manual_vm-002-beam_stresses_and_deflections.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
 
-.. _sphx_glr_examples_gallery_examples_06-verif-manual_vm-002-beam_stresses_and_deflections.py:
+.. _sphx_glr_verif-manual_vm-002-beam_stresses_and_deflections.py:
 
 
 .. _ref_vm2_example:
@@ -616,7 +616,7 @@ stop mapdl
    **Total running time of the script:** ( 0 minutes  0.960 seconds)
 
 
-.. _sphx_glr_download_examples_gallery_examples_06-verif-manual_vm-002-beam_stresses_and_deflections.py:
+.. _sphx_glr_download_verif-manual_vm-002-beam_stresses_and_deflections.py:
 
 .. only:: html
 
