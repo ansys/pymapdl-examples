@@ -1,19 +1,9 @@
-PyMAPDL Examples
-=================
 
-The Technology Showcase examples and the Verification Manual examples for
-`PyMAPDL <pymapdl_docs_>`_ are contained in this repository.
 
+.. _sphx_glr_examples_gallery_examples_06-verif-manual:
 
 Verification Manual Examples
-----------------------------
-
-Those examples present how to use PyMAPDL in an academic modeling context. 
-They ensure the PyMAPDL accuracy.
-
-Summary of the exposed Verification Manual Examples
----------------------------------------------------
-
+============================
 This section demonstrates a range of Mechanical APDL elements and
 capabilities in straightforward problems which have "classical" or
 readily-obtainable theoretical solutions using PyMAPDL.
@@ -35,7 +25,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-001-statically_indeterminate_reaction_force_analysis_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-001-statically_indeterminate_reaction_force_analysis_thumb.png
     :alt: Statically Indeterminate Reaction Force Analysis
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-001-statically_indeterminate_reaction_force_analysis.py`
@@ -52,7 +42,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-002-beam_stresses_and_deflections_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-002-beam_stresses_and_deflections_thumb.png
     :alt: Beam Stresses and Deflections
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-002-beam_stresses_and_deflections.py`
@@ -69,7 +59,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-003-thermally_loaded_support_structure_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-003-thermally_loaded_support_structure_thumb.png
     :alt: Thermally Loaded Support Structure
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-003-thermally_loaded_support_structure.py`
@@ -86,7 +76,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-004-deflection_of_a_hinged_support_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-004-deflection_of_a_hinged_support_thumb.png
     :alt: Deflection of a Hinged Support
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-004-deflection_of_a_hinged_support.py`
@@ -103,7 +93,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-005-laterally_loaded_tapered_support_structure_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-005-laterally_loaded_tapered_support_structure_thumb.png
     :alt: Statically Indeterminate Reaction Force Analysis
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-005-laterally_loaded_tapered_support_structure.py`
@@ -120,7 +110,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-006-pinched_cylinder_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-006-pinched_cylinder_thumb.png
     :alt: Pinched Cylinder
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-006-pinched_cylinder.py`
@@ -137,7 +127,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-007-plastic_compression_of_a_pipe_assembly_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-007-plastic_compression_of_a_pipe_assembly_thumb.png
     :alt: Plastic Compression of a Pipe Assembly
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-007-plastic_compression_of_a_pipe_assembly.py`
@@ -154,7 +144,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-008-parametric_calculation_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-008-parametric_calculation_thumb.png
     :alt: Parametric Calculation
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-008-parametric_calculation.py`
@@ -171,7 +161,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-009-large_lateral_deflection_of_unequal_stiffness_springs_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-009-large_lateral_deflection_of_unequal_stiffness_springs_thumb.png
     :alt: Large Lateral Deflection of Unequal Stiffness Springs
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-009-large_lateral_deflection_of_unequal_stiffness_springs.py`
@@ -188,7 +178,7 @@ applications that may be of interest.
 
 .. only:: html
 
-  .. image:: verif-manual/images/thumb/sphx_glr_vm-010-bending_of_a_t-shaped_beam_thumb.png
+  .. image:: images/thumb/sphx_glr_vm-010-bending_of_a_t-shaped_beam_thumb.png
     :alt: Bending of a Tee-Shaped Beam
 
   :ref:`sphx_glr_examples_gallery_examples_06-verif-manual_vm-010-bending_of_a_t-shaped_beam.py`
@@ -204,37 +194,16 @@ applications that may be of interest.
     </div>
 
 
-
-Technology Showcase Examples
-----------------------------
-
-This documentation demonstrates the broad simulation capabilities of Ansys Mechanical
-APDL. The problems demonstrate how to use PyMAPDL to effectively and accurately
-solve interdisciplinary problems from a variety of industries and engineering
-fields.
-
-The exposed files are more complex examples than the ones presented in the `APDL
-Verification Manual <mapdl_vm_>`_. They are complete and concrete case studies
-which necesitate more resources. 
-
-Summary of the exposed Technology Showcase Manual Examples
-----------------------------------------------------------
-
-+----------------------------+---------------------------------------------------------------------------------------------------------+
-| Name                       | Description                                                                                             |
-+----------------------------+---------------------------------------------------------------------------------------------------------+
-| :ref:`tech_demo_01`        | Technology showcase demonstration example 01: Brake Squeal Analysis.                                    |
-+----------------------------+---------------------------------------------------------------------------------------------------------+
-| :ref:`tech_demo_20`        | Technology showcase demonstration example 20: Dynamic simulation of a printed circuit board assembly    |
-+----------------------------+---------------------------------------------------------------------------------------------------------+
-| :ref:`tech_demo_28`        | Technology showcase demonstration example 28: Friction Stir Welding (FSW) Simulation                    |
-+----------------------------+---------------------------------------------------------------------------------------------------------+
-
-.. === TECHNOLOGY SHOWCASE EXAMPLES ===
-
 .. toctree::
-    :hidden:
-    :maxdepth: 3
+   :hidden:
 
-    technology_showcase_examples/index
-    verif-manual/index
+   vm-001/vm-001-statically_indeterminate_reaction_force_analysis
+   vm-002/vm-002-beam_stresses_and_deflections
+   vm-003/vm-003-thermally_loaded_support_structure
+   vm-004/vm-004-deflection_of_a_hinged_support
+   vm-005/vm-005-laterally_loaded_tapered_support_structure
+   vm-006/vm-006-pinched_cylinder
+   vm-007/vm-007-plastic_compression_of_a_pipe_assembly
+   vm-008/vm-008-parametric_calculation
+   vm-009/vm-009-large_lateral_deflection_of_unequal_stiffness_springs
+   vm-010/vm-010-bending_of_a_t-shaped_beam
