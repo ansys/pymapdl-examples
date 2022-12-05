@@ -10,12 +10,12 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_verif-manual_vm-008-parametric_calculation.py>`
+        Click :ref:`here <sphx_glr_download_vm-008-parametric_calculation.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
 
-.. _sphx_glr_verif-manual_vm-008-parametric_calculation.py:
+.. _sphx_glr_vm-008-parametric_calculation.py:
 
 
 .. _ref_vm8_example:
@@ -422,7 +422,7 @@ stop mapdl
    **Total running time of the script:** ( 0 minutes  1.098 seconds)
 
 
-.. _sphx_glr_download_verif-manual_vm-008-parametric_calculation.py:
+.. _sphx_glr_download_vm-008-parametric_calculation.py:
 
 .. only:: html
 

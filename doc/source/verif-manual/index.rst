@@ -28,7 +28,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-001-statically_indeterminate_reaction_force_analysis_thumb.png
     :alt: Statically Indeterminate Reaction Force Analysis
 
-  :ref:`sphx_glr_verif-manual_vm-001-statically_indeterminate_reaction_force_analysis.py`
+  :ref:`sphx_glr_vm-001-statically_indeterminate_reaction_force_analysis.py`
 
 .. raw:: html
 
@@ -45,7 +45,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-002-beam_stresses_and_deflections_thumb.png
     :alt: Beam Stresses and Deflections
 
-  :ref:`sphx_glr_verif-manual_vm-002-beam_stresses_and_deflections.py`
+  :ref:`sphx_glr_vm-002-beam_stresses_and_deflections.py`
 
 .. raw:: html
 
@@ -62,7 +62,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-003-thermally_loaded_support_structure_thumb.png
     :alt: Thermally Loaded Support Structure
 
-  :ref:`sphx_glr_verif-manual_vm-003-thermally_loaded_support_structure.py`
+  :ref:`sphx_glr_vm-003-thermally_loaded_support_structure.py`
 
 .. raw:: html
 
@@ -79,7 +79,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-004-deflection_of_a_hinged_support_thumb.png
     :alt: Deflection of a Hinged Support
 
-  :ref:`sphx_glr_verif-manual_vm-004-deflection_of_a_hinged_support.py`
+  :ref:`sphx_glr_vm-004-deflection_of_a_hinged_support.py`
 
 .. raw:: html
 
@@ -96,7 +96,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-005-laterally_loaded_tapered_support_structure_thumb.png
     :alt: Statically Indeterminate Reaction Force Analysis
 
-  :ref:`sphx_glr_verif-manual_vm-005-laterally_loaded_tapered_support_structure.py`
+  :ref:`sphx_glr_vm-005-laterally_loaded_tapered_support_structure.py`
 
 .. raw:: html
 
@@ -113,7 +113,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-006-pinched_cylinder_thumb.png
     :alt: Pinched Cylinder
 
-  :ref:`sphx_glr_verif-manual_vm-006-pinched_cylinder.py`
+  :ref:`sphx_glr_vm-006-pinched_cylinder.py`
 
 .. raw:: html
 
@@ -130,7 +130,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-007-plastic_compression_of_a_pipe_assembly_thumb.png
     :alt: Plastic Compression of a Pipe Assembly
 
-  :ref:`sphx_glr_verif-manual_vm-007-plastic_compression_of_a_pipe_assembly.py`
+  :ref:`sphx_glr_vm-007-plastic_compression_of_a_pipe_assembly.py`
 
 .. raw:: html
 
@@ -147,7 +147,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-008-parametric_calculation_thumb.png
     :alt: Parametric Calculation
 
-  :ref:`sphx_glr_verif-manual_vm-008-parametric_calculation.py`
+  :ref:`sphx_glr_vm-008-parametric_calculation.py`
 
 .. raw:: html
 
@@ -164,7 +164,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-009-large_lateral_deflection_of_unequal_stiffness_springs_thumb.png
     :alt: Large Lateral Deflection of Unequal Stiffness Springs
 
-  :ref:`sphx_glr_verif-manual_vm-009-large_lateral_deflection_of_unequal_stiffness_springs.py`
+  :ref:`sphx_glr_vm-009-large_lateral_deflection_of_unequal_stiffness_springs.py`
 
 .. raw:: html
 
@@ -181,7 +181,7 @@ applications that may be of interest.
   .. image:: images/thumb/sphx_glr_vm-010-bending_of_a_t-shaped_beam_thumb.png
     :alt: Bending of a Tee-Shaped Beam
 
-  :ref:`sphx_glr_verif-manual_vm-010-bending_of_a_t-shaped_beam.py`
+  :ref:`sphx_glr_vm-010-bending_of_a_t-shaped_beam.py`
 
 .. raw:: html
 

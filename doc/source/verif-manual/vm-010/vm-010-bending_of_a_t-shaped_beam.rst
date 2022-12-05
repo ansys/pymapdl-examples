@@ -10,12 +10,12 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_verif-manual_vm-010-bending_of_a_t-shaped_beam.py>`
+        Click :ref:`here <sphx_glr_download_vm-010-bending_of_a_t-shaped_beam.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
 
-.. _sphx_glr_verif-manual_vm-010-bending_of_a_t-shaped_beam.py:
+.. _sphx_glr_vm-010-bending_of_a_t-shaped_beam.py:
 
 
 .. _ref_vm10_example:
@@ -603,7 +603,7 @@ stop mapdl
    **Total running time of the script:** ( 0 minutes  0.939 seconds)
 
 
-.. _sphx_glr_download_verif-manual_vm-010-bending_of_a_t-shaped_beam.py:
+.. _sphx_glr_download_vm-010-bending_of_a_t-shaped_beam.py:
 
 .. only:: html
 
