@@ -24,6 +24,13 @@ html_theme_options = {
         ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
         ("Examples", "https://mapdl.docs.pyansys.com/examples/"),
     ],
+    "icon_links": [
+        {
+            "name": "Support",
+            "url": "https://github.com/pyansys/pymapdl-examples/discussions",
+            "icon": "fa fa-comment fa-fw",
+        },
+    ],
 }
 
 # Sphinx extensions
@@ -35,6 +42,27 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
 ]
+
+# -- Sphinx Gallery Options ---------------------------------------------------
+sphinx_gallery_conf = {
+    # convert rst to md for ipynb
+    "pypandoc": True,
+    # path to your examples scripts
+    "examples_dirs": ["../source/"],
+    # path where to save gallery generated examples
+    "gallery_dirs": ["verif-manual"],
+    # Pattern to search for example files
+    "filename_pattern": r"\.py",
+    # Remove the "Download all examples" button from the top level gallery
+    "download_all_examples": False,
+    # directory where function granular galleries are stored
+    "backreferences_dir": None,
+    # Modules for which function level galleries are created.  In
+    "doc_module": "ansys-mapdl-core",
+    "image_scrapers": ("pyvista", "matplotlib"),
+    "ignore_pattern": "flycheck*",
+    "thumbnail_size": (350, 350),
+}
 
 # Intersphinx mapping
 intersphinx_mapping = {
