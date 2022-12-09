@@ -1,3 +1,5 @@
+.. _sphx_glr_ex_0-tecbrakesqueal.py:
+
 .. _tech_demo_01:
 
 Brake Squeal Analysis
@@ -175,6 +177,8 @@ nodes and 11473 elements.
 Start this example by launching MAPDL and loading the model.
 
 .. code:: python
+
+    # sphinx_gallery_thumbnail_path = '_static/tse1_setup.png'
 
     import pyvista
     pyvista.set_plot_theme('document')

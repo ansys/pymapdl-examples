@@ -1,3 +1,5 @@
+.. _sphx_glr_ex_28-tecfricstir.py:
+
 .. _tech_demo_28:
 
 .. role:: red-text
@@ -238,6 +240,8 @@ The height of the tool is equal to the shoulder diameter. Both the workpiece
 
 .. code:: python
     
+    # sphinx_gallery_thumbnail_path = '_static/tse28_setup.png'
+
     import numpy as np
     import pyvista
 

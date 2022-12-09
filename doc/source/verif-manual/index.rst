@@ -1,9 +1,18 @@
+:orphan:
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+
+.. raw:: html
+
+    </div>
 
 .. _sphx_glr_verif-manual:
 
-Verification Manual Examples
-============================
+Verification Manual
+===================
 This section demonstrates a range of Mechanical APDL elements and
 capabilities in straightforward problems which have "classical" or
 readily-obtainable theoretical solutions using PyMAPDL.
