@@ -18,10 +18,8 @@ The  following examples initially come from the `APDL Technology Showcase Manual
 <mapdl_tech_show_>`_. They initially were MAPDL files. They have been reproduced
 in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
 
-
 These examples are a work-in-progress and will be extended during the life of
 this project.
-
 
 
 
@@ -29,10 +27,9 @@ this project.
 
     <div class="sphx-glr-thumbnails">
 
-
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer">
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 01: Brake Squeal Analysis">
 
 .. only:: html
 
@@ -41,16 +38,14 @@ this project.
 
   :ref:`sphx_glr_ex_0-tecbrakesqueal.py`
 
-
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Brake Squeal Analysis</div>
     </div>
 
-
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer">
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 20: Dynamic simulation of a printed circuit board assembly">
 
 .. only:: html
 
@@ -65,11 +60,9 @@ this project.
     </div>
 
 
-
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer">
-
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
 
 .. only:: html
 
@@ -83,11 +76,9 @@ this project.
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
     </div>
 
-
 .. raw:: html
 
     </div>
-
 
 .. toctree::
     :hidden:
@@ -96,7 +87,6 @@ this project.
     techdemo-1/ex_0-tecbrakesqueal
     techdemo-20/ex_20-tecPCB
     techdemo-28/ex_28-tecfricstir
-
 
 .. only:: html
 
