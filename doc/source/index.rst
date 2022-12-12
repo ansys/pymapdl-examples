@@ -1,15 +1,4 @@
-:orphan:
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    </div>
-
+.. _sphx_glr_pymapdl_examples:
 
 PyMAPDL Examples
 =================
