@@ -17,6 +17,7 @@
 
 .. _sphx_glr_download_examples_examples_technology_showcase_examples-ex_20-tecPCB.py:
 
+.. _sphx_glr_ex_20-tecPCB.py:
 .. _ref_dynamic_simulation_printed_circuit_board:
 .. _tech_demo_20:
 
@@ -54,6 +55,7 @@ Starting MAPDL as a service and importing an external model
 
 .. code-block:: default
 
+    # sphinx_gallery_thumbnail_path = '_static/tse20_setup.png'
 
     import _.pyplot as plt
 

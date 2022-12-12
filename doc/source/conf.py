@@ -4,7 +4,7 @@ from datetime import datetime
 from ansys_sphinx_theme import pyansys_logo_black as logo
 
 # Project information
-project = "pymapdl-techdemos"
+project = "pymapdl-examples"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = "0.1.dev0"
@@ -12,11 +12,11 @@ release = version = "0.1.dev0"
 # Select desired logo, theme, and declare the html title
 html_logo = logo
 html_theme = "ansys_sphinx_theme"
-html_short_title = html_title = "PyMAPDL Techdemos"
+html_short_title = html_title = "PyMAPDL Examples"
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pymapdl-techdemos",
+    "github_url": "https://github.com/pyansys/pymapdl-examples",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
@@ -24,17 +24,51 @@ html_theme_options = {
         ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
         ("Examples", "https://mapdl.docs.pyansys.com/examples/"),
     ],
+    "icon_links": [
+        {
+            "name": "Support",
+            "url": "https://github.com/pyansys/pymapdl-examples/discussions",
+            "icon": "fa fa-comment fa-fw",
+        },
+    ],
 }
 
 # Sphinx extensions
 extensions = [
     "jupyter_sphinx",
+    "notfound.extension",
+    "numpydoc",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    "numpydoc",
+    "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
+    "sphinx.ext.extlinks",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
+    "sphinx_gallery.gen_gallery",
+    "sphinxemoji.sphinxemoji",
 ]
+
+# -- Sphinx Gallery Options ---------------------------------------------------
+sphinx_gallery_conf = {
+    # convert rst to md for ipynb
+    "pypandoc": True,
+    # path to your examples scripts
+    "examples_dirs": [],
+    # path where to save gallery generated examples
+    "gallery_dirs": ["verif-manual", "technology_showcase_examples"],
+    # Pattern to search for example files
+    "filename_pattern": r"\.py",
+    # Remove the "Download all examples" button from the top level gallery
+    "download_all_examples": False,
+    # directory where function granular galleries are stored
+    "backreferences_dir": None,
+    # Modules for which function level galleries are created.  In
+    "doc_module": "ansys-mapdl-core",
+    "image_scrapers": ("pyvista", "matplotlib"),
+    "ignore_pattern": "flycheck*",
+    "thumbnail_size": (350, 350),
+}
 
 # Intersphinx mapping
 intersphinx_mapping = {
