@@ -1,14 +1,3 @@
-:orphan:
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbnails">
-
-
-.. raw:: html
-
-    </div>
-
 .. _sphx_glr_technology_showcase_examples:
 
 Technology Showcases
