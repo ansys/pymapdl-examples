@@ -85,11 +85,36 @@ this project.
 
     </div>
 
+
+.. ##########
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase Example 15: Calibrating and Validating a Hyperelastic Constitutive Model">
+
+.. only:: html
+
+  .. image:: images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
+    :alt: Calibrating and Validating a Hyperelastic Constitutive Model
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
+    </div>
+
+.. raw:: html
+
+    </div>
+
+.. #########
+
 .. toctree::
     :hidden:
     :includehidden:
 
     techdemo-1/ex_0-tecbrakesqueal
+    techdemo-15/ex-15-teccalvalhyper
     techdemo-20/ex_20-tecPCB
     techdemo-25/ex_25-tecstent
     techdemo-28/ex_28-tecfricstir
