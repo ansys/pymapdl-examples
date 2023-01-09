@@ -146,13 +146,13 @@ possible via command input, Ansys, Inc. recommends using the graphical user
 interface (GUI) to perform the curve-fitting, or at least visually validating
 the results using the GUI to ensure a sound fit.
 
-.. code:: apdl
+.. code:: python3
 
-    /PREP7
-    TBFT,FADD,1,HYPER,MOONEY,3
-    TBFT,EADD,1,UNIA,UNIAX.LOG
-    TBFT,SOLVE,1,HYPER,MOONEY,3
-    TBFT,FSET,1,HYPER,MOONEY,3
+    mapdl.prep7()
+    mapdl.tbft("fadd",1,"hyper","mooney",3)
+    mapdl.tbft("eadd",1,"unia","uniax".l)OG
+    mapdl.tbft("solve",1,"hyper","mooney",3)
+    mapdl.tbft("fset",1,"hyper","mooney",3)
     
     
 
@@ -192,11 +192,11 @@ material number 1.
 For this problem, the fitted parameters for the three-parameter Mooney-Rivlin
 model are:
 
-+----------------------------+
-| *`C`*10 =1.338856          |
-+============================+
-| *`C`*11 = - 1.648364 x10-2 |
-+----------------------------+
++-----------------------------------+
+| :math:`C_{10} = 1.338856`         |
++-----------------------------------+
+| :math:`C_{11} = - 1.648364 x10-2` |
++-----------------------------------+
 
 
 15.4.2. Validating Parameters
@@ -360,8 +360,8 @@ The constitutive model is specified via the following input:
     C20 =-5.876502e-02  
     C11 = 2.684331e-02  
     C02 =-5.112790e-03  
-    TB,HYPER,1,,5,MOONEY
-    TBDATA,1,C10,C01,C20,C11,C02 
+    mapdl.tb("HYPER",1,"",5,"MOONEY")
+    mapdl.tbdata(1,C10,C01,C20,C11,C02) 
 
 
 The following figure shows a contour plot of the strain energy density at the end
@@ -432,8 +432,8 @@ West Conshohocken.
 The following files were used in this problem:
 
 * **tension\_torsion.dat**  -- Tension-torsion simulation input file.
-* **tension\_torsion.cdb** -- The common database file containing the model information for this problem (called by
-**tension\_torsion.dat** ).
+* **tension\_torsion.cdb** -- The common database file containing the model information for this problem
+  (called by **tension\_torsion.dat** ).
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+
 | `Download file set <https://storage.ansys.com/doclinks/techdemos.html?code=td-15-DLU-N2a />`_                                             |
