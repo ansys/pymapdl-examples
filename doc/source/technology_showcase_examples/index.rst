@@ -82,8 +82,6 @@ this project.
   .. image:: images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
     :alt: Calibrating and Validating a Hyperelastic Constitutive Model
 
-  :ref:`sphx_glr_ex_15-teccalvalhyper.py`
-
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
