@@ -2,6 +2,7 @@
 from datetime import datetime
 import warnings
 
+from ansys.mapdl import core as pymapdl
 from ansys_sphinx_theme import pyansys_logo_black as logo
 import pyvista
 
@@ -94,7 +95,7 @@ intersphinx_mapping = {
 
 # necessary when building the sphinx gallery
 pyvista.BUILDING_GALLERY = True
-amath.BUILDING_GALLERY = True
+pymapdl.BUILDING_GALLERY = True
 
 # suppress annoying matplotlib bug
 warnings.filterwarnings("ignore", category=UserWarning)
