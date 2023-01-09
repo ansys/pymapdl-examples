@@ -346,6 +346,7 @@ Mesh of the model
 
 .. jupyter-execute::
   :hide-code:
+  :stderr:
 
     import pyvista
     import panel
@@ -372,6 +373,7 @@ Computed displacements of the model
 
 .. jupyter-execute::
   :hide-code:
+  :stderr:
 
     file = "./source/technology_showcase_examples/techdemo-25/u.vtk"
     u_file = pyvista.read(file)
@@ -400,6 +402,7 @@ Von Mises stress
 
 .. jupyter-execute::
   :hide-code:
+  :stderr:
 
     file = "./source/technology_showcase_examples/techdemo-25/s_VM.vtk"
     s_VM_file = pyvista.read(file)
@@ -445,10 +448,11 @@ Computed displacements of the stent
 
     # Plotting the meshes
     mesh.plot(color="w", show_edges=True, text='Mesh of the model', )
-    mesh_sco.plot(color="w", show_edges=True, text='Mesh of the stent')
+    mesh_sco.plot(color="black", show_edges=True, text='Mesh of the stent')
 
 .. jupyter-execute::
   :hide-code:
+  :stderr:
 
     file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
     mesh_file = pyvista.read(file)
@@ -474,6 +478,7 @@ Computed displacements of the stent
 
 .. jupyter-execute::
   :hide-code:
+  :stderr:
 
     file = "./source/technology_showcase_examples/techdemo-25/u_stent.vtk"
     u_stent_file = pyvista.read(file)
