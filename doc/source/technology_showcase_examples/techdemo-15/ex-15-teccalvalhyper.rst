@@ -353,7 +353,7 @@ The five-parameter Mooney-Rivlin model, fit to the experimental data up to 100
 percent strain, is selected as an adequate representation of the material response.
 The constitutive model is specified via the following input: 
 
-.. code:: apdl
+.. code:: python3
 
     C10 = 1.787381e+00  
     C01 = 5.722875e-02  
