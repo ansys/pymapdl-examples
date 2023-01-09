@@ -1,4 +1,4 @@
-.. _sphx_glr_ex_28-tecfricstir.py:
+.. _sphx_glr_ex_28-tecfricstir.rst:
 
 .. _tech_demo_28:
 

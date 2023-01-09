@@ -27,14 +27,29 @@ this project.
   .. image:: images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
     :alt: Brake Squeal Analysis
 
-  :ref:`sphx_glr_ex_0-tecbrakesqueal.py`
+  :ref:`sphx_glr_ex_0-tecbrakesqueal.rst`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Brake Squeal Analysis</div>
     </div>
 
+.. ##########
+
 .. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase Example 15: Calibrating and Validating a Hyperelastic Constitutive Model">
+
+.. only:: html
+
+  .. image:: images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
+    :alt: Calibrating and Validating a Hyperelastic Constitutive Model
+  
+  :ref:`sphx_glr_ex_15-teccalvalhyper.rst`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
     </div>
 
 .. #########
@@ -48,33 +63,11 @@ this project.
   .. image:: images/thumb/sphx_glr_tse-020-PCB_thumb.png
     :alt: Dynamic simulation of a printed circuit board assembly
 
-  :ref:`sphx_glr_ex_20-tecPCB.py`
+  :ref:`sphx_glr_ex_20-tecPCB.rst`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
-    </div>
-
-.. raw:: html
-    </div>
-
-.. ##########
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase Example 15: Calibrating and Validating a Hyperelastic Constitutive Model">
-
-.. only:: html
-
-  .. image:: images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
-    :alt: Calibrating and Validating a Hyperelastic Constitutive Model
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
-    </div>
-
-.. raw:: html
     </div>
 
 .. #########
@@ -88,14 +81,11 @@ this project.
   .. image:: images/thumb/sphx_glr_tse-025-stent_thumb.png
     :alt: Cardiovascular Stent Simulation
 
-  :ref:`sphx_glr_ex_25-tecstent.py`
+  :ref:`sphx_glr_ex_25-tecstent.rst`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
-    </div>
-
-.. raw:: html
     </div>
 
 .. #########
@@ -114,14 +104,6 @@ this project.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
-    </div>
-
-.. raw:: html
-    </div>
-
-.. #########
-
-.. raw:: html
     </div>
 
 

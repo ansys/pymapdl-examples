@@ -240,7 +240,7 @@ which necesitate more resources.
   .. image:: technology_showcase_examples/images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
     :alt: Brake Squeal Analysis
 
-  :ref:`sphx_glr_ex_0-tecbrakesqueal.py`
+  :ref:`sphx_glr_ex_0-tecbrakesqueal.rst`
 
 .. raw:: html
 
@@ -256,7 +256,7 @@ which necesitate more resources.
   .. image:: technology_showcase_examples/images/thumb/sphx_glr_tse-020-PCB_thumb.png
     :alt: Dynamic simulation of a printed circuit board assembly
 
-  :ref:`sphx_glr_ex_20-tecPCB.py`
+  :ref:`sphx_glr_ex_20-tecPCB.rst`
 
 .. raw:: html
 
@@ -272,7 +272,7 @@ which necesitate more resources.
   .. image:: technology_showcase_examples/images/thumb/sphx_glr_tse-028-fricstir_thumb.png
     :alt: Friction Stir Welding (FSW) Simulation
 
-  :ref:`sphx_glr_ex_28-tecfricstir.py`
+  :ref:`sphx_glr_ex_28-tecfricstir.rst`
 
 .. raw:: html
 

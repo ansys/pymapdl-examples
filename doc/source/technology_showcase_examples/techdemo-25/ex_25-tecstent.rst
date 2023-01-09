@@ -1,4 +1,4 @@
-.. _sphx_glr_ex_25-tecstent.py:
+.. _sphx_glr_ex_25-tecstent.rst:
 
 Cardiovascular Stent Simulation
 ===============================
