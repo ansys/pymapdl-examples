@@ -1,3 +1,5 @@
+.. _sphx_glr_ex_25-tecstent.py:
+
 Cardiovascular Stent Simulation
 ===============================
 
@@ -10,7 +12,7 @@ The analysis exposes advanced modeling techniques using PyMAPDL such as:
 * Nonlinear stabilization
 
 This example is inspired from the model and analysis defined in Chapter 25 of the `Mechanical
-APDL Technology Showcase Manual <tech_demo_intro_>`_.
+APDL Technology Showcase Manual <mapdl_tech_show_>`_.
 
 Introduction
 ------------
@@ -326,14 +328,16 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. code:: ipython3
 
     from ansys.dpf import core as dpf
+    from ansys.dpf.core import operators as ops
+    import pyvista
 
 
 Mesh of the model
 -----------------
 
 .. code:: ipython3
-
     
+    # Loading the result file
     model = dpf.Model(mapdl.result_file)
     ds = dpf.DataSources(mapdl.result_file)
 
@@ -344,11 +348,13 @@ Mesh of the model
   :hide-code:
 
     import pyvista
+    pyvista.set_jupyter_backend('pythreejs')
+    pyvista.global_theme.window_size = [600, 400]
 
     file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
-    rotor1 = pyvista.read(file)
+    mesh_file = pyvista.read(file)
     pl = pyvista.Plotter()
-    pl.add_mesh(rotor1, cmap='jet', show_edges=True)
+    pl.add_mesh(mesh_file, cmap='jet', show_scalar_bar=False, show_edges=True)
     pl.show()
 
 Computed displacements of the model
@@ -358,18 +364,19 @@ Computed displacements of the model
 
     # Collecting the computed displacement
     u = model.results.displacement(time_scoping=[4]).eval()
-    print(u[0])
-
+    
     u[0].plot(deform_by = u[0])
 
 .. jupyter-execute::
   :hide-code:
 
     file = "./source/technology_showcase_examples/techdemo-25/u.vtk"
-    rotor1 = pyvista.read(file)
-    pl = pyvista.Plotter()
-    pl.add_mesh(rotor1, cmap='jet', show_edges=True)
-    pl.show() 
+    u_file = pyvista.read(file)
+    u_file = u_file.warp_by_scalar('U')
+    pl = pyvista.Plotter(notebook=True)
+    pl.add_mesh(u_file, scalars = 'U', scalar_bar_args={'title':'Displacement'}, color='blue')
+    pl.show()
+
 
 Von Mises stress
 ----------------
@@ -382,18 +389,20 @@ Von Mises stress
     s = s_op.eval()
 
     # Calculating Von Mises stress
-    s_VM = dpf.operators.invariant.von_mises_eqv_fc(fields_container=s).eval()
+    s_VM = dpf.operators.invariant.von_mises_eqv_fc(fields_container=s)
+    s_VM_plot = s_VM.eval()
 
-    s_VM[0].plot(deform_by = u[0])
+    s_VM_plot[0].plot(deform_by = u[0])
 
 .. jupyter-execute::
   :hide-code:
 
     file = "./source/technology_showcase_examples/techdemo-25/s_VM.vtk"
-    rotor1 = pyvista.read(file)
-    pl = pyvista.Plotter()
-    pl.add_mesh(rotor1, cmap='jet', show_edges=True)
-    pl.show() 
+    s_VM_file = pyvista.read(file)
+    s_VM_file = s_VM_file.warp_by_scalar('S_VM')
+    pl = pyvista.Plotter(notebook=True)
+    pl.add_mesh(s_VM_file, scalars = "S_VM", scalar_bar_args={'title':'Displacement'}, color='blue')
+    pl.show()
 
 
 Computed displacements of the stent
@@ -420,7 +429,6 @@ Computed displacements of the stent
     # Collecting the computed displacements of the stent
     u_stent = model.results.displacement(mesh_scoping=nsco, time_scoping=[4])
     u_stent = u_stent.outputs.fields_container()
-    U = u_stent[0]
 
     # Linking the stent mesh to the global one
     op = dpf.operators.mesh.from_scoping() # operator instantiation
@@ -430,16 +438,46 @@ Computed displacements of the stent
     mesh_sco = op.eval()
     u_stent[0].meshed_region = mesh_sco
 
+    # Plotting the meshes
+    mesh.plot(color="w", show_edges=True, text='Mesh of the model', )
+    mesh_sco.plot(color="w", show_edges=True, text='Mesh of the stent')
+
+.. jupyter-execute::
+  :hide-code:
+
+    file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
+    mesh_file = pyvista.read(file)
+
+    file = "./source/technology_showcase_examples/techdemo-25/mesh_sco.vtk"
+    mesh_sco_file = pyvista.read(file)
+
+    pl = pyvista.Plotter(shape=(1, 2))
+    pl.subplot(0, 0)
+    pl.add_mesh(mesh_file, cmap="jet", show_scalar_bar=False, show_edges=True)
+    pl.add_text("Mesh", color='k')
+    pl.subplot(0, 1)
+    pl.add_mesh(mesh_sco_file, cmap="jet", show_scalar_bar=False, show_edges=True)
+    pl.add_text("Mesh of the stent", color='k')
+    pl.link_views()
+    pl.camera_position = 'iso'
+    pl.show()
+
+
+.. code:: ipython3
+
     u_stent[0].plot(deformed_by=u_stent[0])
 
 .. jupyter-execute::
   :hide-code:
 
-    # file = "./source/technology_showcase_examples/techdemo-25/u_stent.vtk"
-    # rotor1 = pyvista.read(file)
-    # pl = pyvista.Plotter()
-    # pl.add_mesh(rotor1, cmap='jet', show_edges=True)
-    # pl.show() 
+    file = "./source/technology_showcase_examples/techdemo-25/u_stent.vtk"
+    u_stent_file = pyvista.read(file)
+    u_stent_file.warp_by_scalar('U_STENT')
+    data = u_stent_file.get_array('U_STENT')
+    mesh_sco_file.point_data['U_STENT'] = data
+    mesh_sco_file = mesh_sco_file.point_data_to_cell_data()
+    mesh_sco_file.plot(scalars='U_STENT')
+
 
 Exit MAPDL
 ----------
@@ -447,7 +485,6 @@ Exit MAPDL
 .. code:: ipython3
 
     mapdl.exit()
-
 
 Input Files
 -----------

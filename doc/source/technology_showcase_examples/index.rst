@@ -48,6 +48,22 @@ this project.
       <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
     </div>
 
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 25: Cardiovascular Stent Simulation">
+
+.. only:: html
+
+  .. image:: images/thumb/sphx_glr_tse-025-stent_thumb.png
+    :alt: Cardiovascular Stent Simulation
+
+  :ref:`sphx_glr_ex_25-tecstent.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
+    </div>
+
 
 .. raw:: html
 

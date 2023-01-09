@@ -263,7 +263,6 @@ which necesitate more resources.
       <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
     </div>
 
-
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
@@ -281,6 +280,8 @@ which necesitate more resources.
     </div>
 
 .. raw:: html
+
+    </div>
 
 
 .. === TECHNOLOGY SHOWCASES ===

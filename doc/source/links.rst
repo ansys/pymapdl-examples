@@ -1,5 +1,5 @@
 .. #MAPDL related
-.. _mapdl_tech_show: https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v222/en/wb_wbtec/wb_wbtec.html
+.. _mapdl_tech_show: https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v222/en/ans_tec/ans_tec.html
 .. _mapdl_vm: https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v222/en/ai_rn/ansys_rn_verif.html
 
 .. #Other projects
