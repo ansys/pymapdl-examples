@@ -348,13 +348,16 @@ Mesh of the model
   :hide-code:
 
     import pyvista
-    pyvista.set_jupyter_backend('pythreejs')
+    import panel
+    pyvista.set_jupyter_backend('panel')
     pyvista.global_theme.window_size = [600, 400]
+    pyvista.global_theme.background = 'grey'
 
     file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
     mesh_file = pyvista.read(file)
     pl = pyvista.Plotter()
     pl.add_mesh(mesh_file, cmap='jet', show_scalar_bar=False, show_edges=True)
+    pl.add_text("Mesh of the model", color='w')
     pl.show()
 
 Computed displacements of the model
@@ -374,7 +377,8 @@ Computed displacements of the model
     u_file = pyvista.read(file)
     u_file = u_file.warp_by_scalar('U')
     pl = pyvista.Plotter(notebook=True)
-    pl.add_mesh(u_file, scalars = 'U', scalar_bar_args={'title':'Displacement'}, color='blue')
+    pl.add_mesh(u_file, scalars = 'U', show_scalar_bar=True, scalar_bar_args={'title':'Displacements'}, cmap='jet')
+    pl.add_text("Displacements of the model", color='w')
     pl.show()
 
 
@@ -401,7 +405,8 @@ Von Mises stress
     s_VM_file = pyvista.read(file)
     s_VM_file = s_VM_file.warp_by_scalar('S_VM')
     pl = pyvista.Plotter(notebook=True)
-    pl.add_mesh(s_VM_file, scalars = "S_VM", scalar_bar_args={'title':'Displacement'}, color='blue')
+    pl.add_mesh(s_VM_file, scalars = "S_VM", show_scalar_bar=True, scalar_bar_args={'title':'Von Mises Stress'}, cmap='jet')
+    pl.add_text("Von Mises Stress", color='w')
     pl.show()
 
 
@@ -454,10 +459,10 @@ Computed displacements of the stent
     pl = pyvista.Plotter(shape=(1, 2))
     pl.subplot(0, 0)
     pl.add_mesh(mesh_file, cmap="jet", show_scalar_bar=False, show_edges=True)
-    pl.add_text("Mesh", color='k')
+    pl.add_text("Mesh", color='w')
     pl.subplot(0, 1)
-    pl.add_mesh(mesh_sco_file, cmap="jet", show_scalar_bar=False, show_edges=True)
-    pl.add_text("Mesh of the stent", color='k')
+    pl.add_mesh(mesh_sco_file, color="black", show_scalar_bar=False, show_edges=True)
+    pl.add_text("Mesh of the stent", color='w')
     pl.link_views()
     pl.camera_position = 'iso'
     pl.show()
@@ -474,9 +479,11 @@ Computed displacements of the stent
     u_stent_file = pyvista.read(file)
     u_stent_file.warp_by_scalar('U_STENT')
     data = u_stent_file.get_array('U_STENT')
-    mesh_sco_file.point_data['U_STENT'] = data
-    mesh_sco_file = mesh_sco_file.point_data_to_cell_data()
-    mesh_sco_file.plot(scalars='U_STENT')
+    u_stent_mesh = mesh_sco_file
+    u_stent_mesh.point_data['U_STENT'] = data
+    u_stent_mesh = mesh_sco_file.point_data_to_cell_data()
+    u_stent_mesh.title = 'Displacements of the stent'
+    u_stent_mesh.plot(scalars='U_STENT', show_scalar_bar=True, scalar_bar_args={'title':'Displacements'}, cmap='jet', text='Displacements of the stent')
 
 
 Exit MAPDL
