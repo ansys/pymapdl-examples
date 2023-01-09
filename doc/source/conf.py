@@ -1,7 +1,15 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
+import warnings
 
 from ansys_sphinx_theme import pyansys_logo_black as logo
+import pyvista
+
+# Manage errors
+pyvista.set_error_output_file("errors.txt")
+
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True
 
 # Project information
 project = "pymapdl-examples"
@@ -19,6 +27,8 @@ html_theme_options = {
     "github_url": "https://github.com/pyansys/pymapdl-examples",
     "show_prev_next": False,
     "show_breadcrumbs": True,
+    "collapse_navigation": True,
+    "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
         ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
@@ -81,6 +91,16 @@ intersphinx_mapping = {
     # "pyvista": ("https://docs.pyvista.org/", None),
     # "grpc": ("https://grpc.github.io/grpc/python/", None),
 }
+
+# necessary when building the sphinx gallery
+pyvista.BUILDING_GALLERY = True
+amath.BUILDING_GALLERY = True
+
+# suppress annoying matplotlib bug
+warnings.filterwarnings("ignore", category=UserWarning)
+
+suppress_warnings = ["label.*"]
+# supress_warnings = ["ref.option"]
 
 # numpydoc configuration
 numpydoc_show_class_members = False
