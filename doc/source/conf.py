@@ -2,12 +2,8 @@
 from datetime import datetime
 import warnings
 
-from ansys.mapdl import core as pymapdl
 from ansys_sphinx_theme import pyansys_logo_black as logo
 import pyvista
-
-# Manage errors
-pyvista.set_error_output_file("errors.txt")
 
 # Ensure that offscreen rendering is used for docs generation
 pyvista.OFF_SCREEN = True
@@ -92,10 +88,6 @@ intersphinx_mapping = {
     # "pyvista": ("https://docs.pyvista.org/", None),
     # "grpc": ("https://grpc.github.io/grpc/python/", None),
 }
-
-# necessary when building the sphinx gallery
-pyvista.BUILDING_GALLERY = True
-pymapdl.BUILDING_GALLERY = True
 
 # suppress annoying matplotlib bug
 warnings.filterwarnings("ignore", category=UserWarning)
