@@ -16,6 +16,8 @@ this project.
 
     <div class="sphx-glr-thumbnails">
 
+.. #########
+
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 01: Brake Squeal Analysis">
@@ -31,6 +33,11 @@ this project.
 
       <div class="sphx-glr-thumbnail-title">Brake Squeal Analysis</div>
     </div>
+
+.. raw:: html
+    </div>
+
+.. #########
 
 .. raw:: html
 
@@ -49,45 +56,9 @@ this project.
     </div>
 
 .. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 25: Cardiovascular Stent Simulation">
-
-.. only:: html
-
-  .. image:: images/thumb/sphx_glr_tse-025-stent_thumb.png
-    :alt: Cardiovascular Stent Simulation
-
-  :ref:`sphx_glr_ex_25-tecstent.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
     </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
-
-.. only:: html
-
-  .. image:: images/thumb/sphx_glr_tse-028-fricstir_thumb.png
-    :alt: Friction Stir Welding (FSW) Simulation
-
-  :ref:`sphx_glr_ex_28-tecfricstir.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
-    </div>
-
-.. raw:: html
-
-    </div>
-
 
 .. ##########
-
 
 .. raw:: html
 
@@ -104,17 +75,62 @@ this project.
     </div>
 
 .. raw:: html
-
     </div>
 
 .. #########
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 25: Cardiovascular Stent Simulation">
+
+.. only:: html
+
+  .. image:: images/thumb/sphx_glr_tse-025-stent_thumb.png
+    :alt: Cardiovascular Stent Simulation
+
+  :ref:`sphx_glr_ex_25-tecstent.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
+    </div>
+
+.. raw:: html
+    </div>
+
+.. #########
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
+
+.. only:: html
+
+  .. image:: images/thumb/sphx_glr_tse-028-fricstir_thumb.png
+    :alt: Friction Stir Welding (FSW) Simulation
+
+  :ref:`sphx_glr_ex_28-tecfricstir.rst`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
+    </div>
+
+.. raw:: html
+    </div>
+
+.. #########
+
+.. raw:: html
+    </div>
+
 
 .. toctree::
     :hidden:
     :includehidden:
 
     techdemo-1/ex_0-tecbrakesqueal
-    techdemo-15/ex-15-teccalvalhyper
+    techdemo-15/ex_15-teccalvalhyper
     techdemo-20/ex_20-tecPCB
     techdemo-25/ex_25-tecstent
     techdemo-28/ex_28-tecfricstir
