@@ -85,7 +85,7 @@ this project.
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
+      <div class="sphx-glr-thumbnail-title">Cardiovascular Stent Simulation</div>
     </div>
 
 .. #########
@@ -105,7 +105,6 @@ this project.
 
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
     </div>
-
 
 .. toctree::
     :hidden:

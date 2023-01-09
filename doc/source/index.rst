@@ -231,6 +231,8 @@ which necesitate more resources.
 
     <div class="sphx-glr-thumbnails">
 
+.. #########
+
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 01: Brake Squeal Analysis">
@@ -246,6 +248,26 @@ which necesitate more resources.
 
       <div class="sphx-glr-thumbnail-title">Brake Squeal Analysis</div>
     </div>
+
+.. ##########
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase Example 15: Calibrating and Validating a Hyperelastic Constitutive Model">
+
+.. only:: html
+
+  .. image:: technology_showcase_examples/images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
+    :alt: Calibrating and Validating a Hyperelastic Constitutive Model
+  
+  :ref:`sphx_glr_ex_15-teccalvalhyper.rst`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
+    </div>
+
+.. #########
 
 .. raw:: html
 
@@ -263,6 +285,26 @@ which necesitate more resources.
       <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
     </div>
 
+.. #########
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 25: Cardiovascular Stent Simulation">
+
+.. only:: html
+
+  .. image:: technology_showcase_examples/images/thumb/sphx_glr_tse-025-stent_thumb.png
+    :alt: Cardiovascular Stent Simulation
+
+  :ref:`sphx_glr_ex_25-tecstent.rst`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cardiovascular Stent Simulation</div>
+    </div>
+
+.. #########
+
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
@@ -277,10 +319,6 @@ which necesitate more resources.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
-    </div>
-
-.. raw:: html
-
     </div>
 
 
