@@ -2,7 +2,6 @@
 #
 # # Cardiovascular Stent Simulation
 
-# %% [markdown]
 #
 # This example problem shows how to simulate stent-artery interaction during and after stent
 # placement in an occluded artery.
@@ -19,7 +18,6 @@
 # %% [markdown]
 # ## Starting MAPDL as a service
 
-# %%
 # starting MAPDL as a service and importing an external model
 from ansys.mapdl.core import launch_mapdl
 
