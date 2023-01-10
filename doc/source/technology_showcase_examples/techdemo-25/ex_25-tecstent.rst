@@ -14,8 +14,12 @@ The analysis exposes advanced modeling techniques using PyMAPDL such as:
 This example is inspired from the model and analysis defined in Chapter 25 of the `Mechanical
 APDL Technology Showcase Manual <mapdl_tech_show_>`_.
 
-Introduction
-------------
+25.1. Introduction
+------------------
+
+
+25.1.1. Problem Description
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A bare metal stent is an effective device for opening atherosclerotic arteries and
 other blockages:
@@ -38,8 +42,8 @@ of the phenomenon, such as the biological tissue properties, large arterial wall
 deformation, and the sliding contact between the stent and the artery wall.
 
 
-Starting MAPDL as a service
----------------------------
+25.1.2. Starting MAPDL as a service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
 
@@ -51,8 +55,11 @@ Starting MAPDL as a service
    print(mapdl)
 
 
-Setting up the model
---------------------
+25.2. Modeling
+--------------
+
+25.2.1. Setting up the model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 First, we define the material properties. 
 
@@ -220,8 +227,6 @@ nodes.
    mapdl.keyopt(itype="14", knum="4", value="111111")
    mapdl.type(itype="14")
 
-
-
 Once all the setups are ready, we read the geometry file.
 
 .. code:: ipython3
@@ -232,11 +237,13 @@ Once all the setups are ready, we read the geometry file.
 
 
 
-Static Analysis
----------------
+25.3. Analysis
+--------------
 
-We, then, the static analysis.
+25.3.1. Static Analysis
+^^^^^^^^^^^^^^^^^^^^^^^
 
+We, then, apply the static analysis.
 
 .. code:: ipython3
 
@@ -245,6 +252,9 @@ We, then, the static analysis.
    mapdl.antype(antype="0")
    mapdl.nlgeom(key="on")
 
+
+25.3.2. Loads
+^^^^^^^^^^^^^
 
 We apply the Load Step 1:
 Balloon angioplasty of the artery to expand it past the
@@ -309,8 +319,8 @@ Finally, we apply stabilization with energy option.
 
 
 
-Solving the model
------------------
+25.3. Solution of the model
+---------------------------
 
 .. code:: ipython3
 
@@ -320,8 +330,8 @@ Solving the model
 
 
 
-Post-processing the results
----------------------------
+25.4. Results
+-------------
 
 This section illustrates the use of PyDPF-Core to post-process the results.
 
@@ -332,8 +342,8 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    import pyvista
 
 
-Mesh of the model
------------------
+25.4.1. Mesh of the model
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
     
@@ -363,8 +373,9 @@ Mesh of the model
    pl.add_text("Mesh of the model", color='w')
    pl.show()
 
-Computed displacements of the model
------------------------------------
+
+25.4.2. Computed displacements of the model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
 
@@ -385,8 +396,8 @@ Computed displacements of the model
    pl.show()
 
 
-Von Mises stress
-----------------
+25.4.3. Von Mises stress
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
 
@@ -413,8 +424,8 @@ Von Mises stress
    pl.show()
 
 
-Computed displacements of the stent
------------------------------------
+25.4.4. Computed displacements of the stent
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. code:: ipython3
@@ -489,15 +500,16 @@ Computed displacements of the stent
    u_stent_mesh.plot(scalars='U_STENT', show_scalar_bar=True, scalar_bar_args={'title':'Displacements'}, cmap='jet', text='Displacements of the stent')
 
 
-Exit MAPDL
-----------
+25.5. Exit MAPDL
+----------------
 
 .. code:: ipython3
 
    mapdl.exit()
 
-Input Files
------------
+
+25.6. Input Files
+-----------------
 
 The following files were used in this problem:
 

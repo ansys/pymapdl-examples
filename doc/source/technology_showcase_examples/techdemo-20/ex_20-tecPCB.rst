@@ -5,14 +5,6 @@
 .. "technology_showcase_examples\techdemo-20\ex_20-tecPCB.py"
 .. LINE NUMBERS ARE GIVEN BELOW.
 
-.. only:: html
-
-    .. note::
-        :class: sphx-glr-download-link-note
-
-        Click :ref:`here <sphx_glr_download_examples_examples_technology_showcase_examples-ex_20-tecPCB.py>`
-        to download the full example code
-
 .. rst-class:: sphx-glr-example-title
 
 .. _sphx_glr_download_examples_examples_technology_showcase_examples-ex_20-tecPCB.py:
