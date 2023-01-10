@@ -101,7 +101,9 @@ intersphinx_mapping = {
 }
 
 # suppress annoying matplotlib bug
-warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings(
+    "ignore", category=UserWarning, message="Cell printed to stderr:"
+)
 
 suppress_warnings = ["label.*"]
 # supress_warnings = ["ref.option"]
