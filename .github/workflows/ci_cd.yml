@@ -119,7 +119,7 @@ jobs:
       
       - name: Build Documentation
         run: |
-          xvfb-run make -C doc html SPHINXOPTS="-j auto -M --keep-going"
+          xvfb-run make -C doc html SPHINXOPTS="-j auto --keep-going"
       
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
