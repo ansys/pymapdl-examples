@@ -53,7 +53,7 @@ Starting MAPDL as a service and importing an external model
 
 .. GENERATED FROM PYTHON SOURCE LINES 33-54
 
-.. code-block:: default
+.. code:: ipython3
 
     # sphinx_gallery_thumbnail_path = '_static/tse20_setup.png'
 
@@ -87,8 +87,6 @@ Starting MAPDL as a service and importing an external model
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     Product:             Ansys Mechanical Enterprise
@@ -109,7 +107,7 @@ that are binded together.
 
 .. GENERATED FROM PYTHON SOURCE LINES 59-117
 
-.. code-block:: default
+.. code:: ipython3
 
 
     # duplicate single PCB to get three layers
@@ -175,8 +173,6 @@ that are binded together.
     :alt: 20 example technology showcase dynamic simulation PCB
     :figclass: sphx-glr-single-img
 
-.. rst-class:: sphx-glr-script-out
-
 
 .. GENERATED FROM PYTHON SOURCE LINES 118-128
 
@@ -193,7 +189,7 @@ number of nodes is recommended (suggestion: 300 modes).
 
 .. GENERATED FROM PYTHON SOURCE LINES 128-142
 
-.. code-block:: default
+.. code:: ipython3
 
 
     # enter solution processor and define analysis settings
@@ -209,13 +205,7 @@ number of nodes is recommended (suggestion: 300 modes).
     print(output)
 
 
-
-
-
-
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -1971,7 +1961,7 @@ example of how each module can be used.
 
 .. GENERATED FROM PYTHON SOURCE LINES 149-156
 
-.. code-block:: default
+.. code:: ipython3
 
 
     # using MAPDL methods
@@ -1998,7 +1988,7 @@ It is recommended to use `DPF Post <dpf_post_docs_>`_.
 
 .. GENERATED FROM PYTHON SOURCE LINES 163-167
 
-.. code-block:: default
+.. code:: ipython3
 
 
     mapdl_result = mapdl.result
@@ -2020,7 +2010,7 @@ Using DPF-Post
 
 .. GENERATED FROM PYTHON SOURCE LINES 171-181
 
-.. code-block:: default
+.. code:: ipython3
 
 
     from ansys.dpf import post
@@ -2042,8 +2032,6 @@ Using DPF-Post
     :figclass: sphx-glr-single-img
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -2099,7 +2087,7 @@ Using DPF-Core
 
 .. GENERATED FROM PYTHON SOURCE LINES 185-197
 
-.. code-block:: default
+.. code:: ipython3
 
 
     from ansys.dpf import core
@@ -2122,8 +2110,6 @@ Using DPF-Core
 
 .. rst-class:: sphx-glr-script-out
 
- Out:
-
  .. code-block:: none
 
     Modal analysis
@@ -2144,7 +2130,7 @@ The response spectrum analysis is defined, solved and post-processed.
 
 .. GENERATED FROM PYTHON SOURCE LINES 201-241
 
-.. code-block:: default
+.. code:: ipython3
 
 
     # define PSD analysis with input spectrum
@@ -2191,8 +2177,6 @@ The response spectrum analysis is defined, solved and post-processed.
 
 
 .. rst-class:: sphx-glr-script-out
-
- Out:
 
  .. code-block:: none
 
@@ -2486,7 +2470,7 @@ Post-process PSD analysis in POST1
 
 .. GENERATED FROM PYTHON SOURCE LINES 259-266
 
-.. code-block:: default
+.. code:: ipython3
 
 
     mapdl.post1()
@@ -2510,7 +2494,7 @@ Post-process PSD analysis in POST26 (time-history post-processing)
 
 .. GENERATED FROM PYTHON SOURCE LINES 269-301
 
-.. code-block:: default
+.. code:: ipython3
 
 
     mapdl.post26()
@@ -2558,7 +2542,7 @@ Post-process PSD analysis using Matplotlib
 
 .. GENERATED FROM PYTHON SOURCE LINES 304-322
 
-.. code-block:: default
+.. code:: ipython3
 
 
     # store MAPDL results to python variables
@@ -2590,7 +2574,7 @@ Exit MAPDL
 
 .. GENERATED FROM PYTHON SOURCE LINES 324-325
 
-.. code-block:: default
+.. code:: ipython3
 
     mapdl.exit()
 
