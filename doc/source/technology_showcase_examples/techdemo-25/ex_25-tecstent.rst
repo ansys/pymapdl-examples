@@ -463,7 +463,7 @@ Computed displacements of the stent
     pl = pyvista.Plotter(shape=(1, 2))
     pl.subplot(0, 0)
     pl.add_mesh(mesh_file, cmap="jet", show_scalar_bar=False, show_edges=True)
-    pl.add_text("Mesh", color='w')
+    pl.add_text("Mesh of the model", color='w')
     pl.subplot(0, 1)
     pl.add_mesh(mesh_sco_file, color="black", show_scalar_bar=False, show_edges=True)
     pl.add_text("Mesh of the stent", color='w')
