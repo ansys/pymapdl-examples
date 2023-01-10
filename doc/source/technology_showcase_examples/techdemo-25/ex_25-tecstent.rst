@@ -353,6 +353,9 @@ Mesh of the model
    pyvista.global_theme.window_size = [600, 400]
    pyvista.global_theme.background = 'grey'
 
+   import warnings
+   warnings.filterwarnings('ignore')
+
    file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
    mesh_file = pyvista.read(file)
    pl = pyvista.Plotter()
