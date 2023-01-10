@@ -1,4 +1,3 @@
-# %% [markdown]
 #
 # # Cardiovascular Stent Simulation
 
@@ -15,7 +14,6 @@
 # APDL Technology Showcase Manual.
 
 
-# %% [markdown]
 # ## Starting MAPDL as a service
 
 # starting MAPDL as a service and importing an external model
@@ -25,13 +23,10 @@ from ansys.mapdl.core import launch_mapdl
 mapdl = launch_mapdl()
 print(mapdl)
 
-# %% [markdown]
 # # Setting up the model
 
-# %% [markdown]
 # ### Defining material properties<br>
 
-# %%
 # define 316L Stainless steel
 mapdl.prep7()
 mapdl.mptemp()
@@ -42,10 +37,8 @@ mapdl.mptemp()
 mapdl.mptemp(sloc="1", t1="0")
 mapdl.mpdata(lab="DENS", mat="1", c1="8000e-9")
 
-# %% [markdown]
 # ### Defining element types
 
-# %%
 # for straight line segments
 mapdl.et(itype="1", ename="beam189")
 mapdl.sectype(secid="1", type_="beam", subtype="csolid")
@@ -56,10 +49,8 @@ mapdl.et(itype="2", ename="beam189")
 mapdl.sectype(secid="2", type_="beam", subtype="csolid")
 mapdl.secdata(val1=0.05)
 
-# %% [markdown]
 # ### Defining 5-parameter Mooney-Rivlin hyperelastic artery material model
 
-# %%
 c10 = 18.90e-3
 c01 = 2.75e-3
 c20 = 590.43e-3
@@ -67,21 +58,16 @@ c11 = 857.2e-3
 nu1 = 0.49
 dd = 2 * (1 - 2 * nu1) / (c10 + c01)
 
-# %%
 mapdl.tb(lab="hyper", mat="2", npts="5", tbopt="mooney")
 mapdl.tbdata(stloc="1", c1="c10", c2="c01", c3="c20", c4="c11", c6="dd")
 
-# %% [markdown]
 # ### Defining linear elastic material model for stiff calcified plaque
 
-# %%
 mapdl.mp(lab="EX", mat="3", c0=".00219e3")
 mapdl.mp(lab="NUXY", mat="3", c0="0.49")
 
-# %% [markdown]
 # ### Define Solid185 element type to mesh both the artery and plaque
 
-# %%
 # for artery
 mapdl.et(itype="9", ename="SOLID185")
 mapdl.keyopt(
@@ -93,17 +79,14 @@ mapdl.keyopt(itype="9", knum="2", value="3")  # Use Simplified Enhanced Strain m
 mapdl.et(itype="16", ename="SOLID185")
 mapdl.keyopt(itype="16", knum="2", value="0")  # Use B-bar
 
-# %% [markdown]
 # ### Defining settings to model the stent, the artery and the plaque
 #
 # Use force-distributed boundary constraints on 2 sides of artery wall to allow
 # for radial expansion of tissue without rigid body motion.
 
-# %% [markdown]
 # #### Settings for MPC Surface-based, force-distributed contact on proximal plane
 # parallel to x-y plane
 
-# %%
 mapdl.mat("2")
 mapdl.r(nset="3")
 mapdl.real(nset="3")
@@ -128,10 +111,8 @@ mapdl.keyopt(itype="5", knum="2", value="1")
 mapdl.keyopt(itype="5", knum="4", value="111111")
 mapdl.type(itype="5")
 
-# %% [markdown]
 # #### Settings for standard contact between stent and inner plaque wall contact surface
 
-# %%
 mapdl.mp(lab="MU", mat="1", c0="0")
 mapdl.mat("1")
 mapdl.mp(lab="EMIS", mat="1", c0="7.88860905221e-31")
@@ -153,10 +134,8 @@ mapdl.keyopt(itype="11", knum="12", value="0")
 mapdl.keyopt(itype="11", knum="2", value="3")
 mapdl.keyopt(itype="10", knum="5", value="0")
 
-# %% [markdown]
 # #### Settings for MPC based, force-distributed constraint on proximal stent nodes
 
-# %%
 mapdl.mat("1")
 mapdl.r(nset="7")
 mapdl.real(nset="7")
@@ -169,10 +148,8 @@ mapdl.keyopt(itype="12", knum="2", value="1")
 mapdl.keyopt(itype="12", knum="4", value="111111")
 mapdl.type(itype="12")
 
-# %% [markdown]
 # #### Settings for MPC based, force-distributed constraint on distal stent nodes
 
-# %%
 mapdl.mat("1")
 mapdl.r(nset="8")
 mapdl.real(nset="8")
@@ -185,30 +162,24 @@ mapdl.keyopt(itype="14", knum="2", value="1")
 mapdl.keyopt(itype="14", knum="4", value="111111")
 mapdl.type(itype="14")
 
-# %% [markdown]
 # ### Reading the geometry file
 
-# %%
 mapdl.cdread(option="db", fname="stent", ext="cdb")
 mapdl.allsel(labt="all")
 mapdl.finish()
 
-# %% [markdown]
 # ## Static Analysis
 #
 # Run static analysis
 
-# %%
 # enter solution processor and define analysis settings
 mapdl.run("/solu")
 mapdl.antype(antype="0")
 mapdl.nlgeom(key="on")
 
-# %% [markdown]
 # ### Apply Load Step 1: Balloon angioplasty of the artery to expand it past the
 # radius of the stent - IGNORE STENT
 
-# %%
 mapdl.nsubst(nsbstp="20", nsbmx="20")
 mapdl.nropt(option1="full")
 mapdl.cncheck(option="auto")
@@ -229,10 +200,8 @@ mapdl.nldiag(label="cont", key="iter")
 mapdl.solve()
 mapdl.save()
 
-# %% [markdown]
 # ### Apply Load Step 2: Reactivate contact between stent and plaque
 
-# %%
 mapdl.ealive(elem="contact2")
 mapdl.allsel()
 
@@ -240,69 +209,52 @@ mapdl.nsubst(nsbstp="2", nsbmx="2")
 mapdl.save()
 mapdl.solve()
 
-# %% [markdown]
 # ### Apply Load Step 3
 
-# %%
 mapdl.nsubst(nsbstp="1", nsbmx="1", nsbmn="1")
 mapdl.solve()
 
-# %% [markdown]
 # ### Apply Load Step 4: Apply blood pressure (13.3 kPa) load to inner wall of plaque
 # and allow the stent to act as a scaffold
 
-# %%
 mapdl.nsubst(nsbstp="300", nsbmx="3000", nsbmn="30")
 mapdl.sf(nlist="load", lab="pres", value="13.3e-3")
 mapdl.allsel()
 
-# %% [markdown]
 # ### Apply stabilization with energy option
 
-# %%
 mapdl.stabilize(key="const", method="energy", value="0.1")
 
-# %% [markdown]
 # # Solve the model
 
-# %%
 mapdl.solve()
 mapdl.save()
 mapdl.finish()
 
-# %% [markdown]
 # # Post-processing the results
 #
 # This section illustrates the use of PyDPF-Core to post-process the results.
 
-# %%
 from ansys.dpf import core as dpf
 
-# %% [markdown]
 # ## Mesh of the model
 
-# %%
 # Loading the result file
 model = dpf.Model(mapdl.result_file)
 ds = dpf.DataSources(mapdl.result_file)
 
-# %%
 mesh = model.metadata.meshed_region
 mesh.plot(vtk_export=True)
 
-# %% [markdown]
 # ## Computed displacements of the model
 
-# %%
 # Collecting the computed displacement
 u = model.results.displacement(time_scoping=[4]).eval()
 
 u[0].plot(deform_by=u[0])
 
-# %% [markdown]
 # ## Von Mises stress
 
-# %%
 # Collecting the computed stress
 s_op = model.results.stress(time_scoping=[3])
 s_op.inputs.requested_location.connect(dpf.locations.nodal)
@@ -314,10 +266,8 @@ s_VM_plot = s_VM.eval()
 
 s_VM_plot[0].plot(deform_by=u[0])
 
-# %% [markdown]
 # ## Computed displacements of the stent
 
-# %%
 # Creating the mesh associated to the stent
 esco = mesh.named_selection("STENT")
 print(esco)
@@ -330,7 +280,6 @@ op.inputs.inclusive.connect(1)
 nsco = op.eval()
 print(nsco)
 
-# %%
 # Collecting the computed displacements of the stent
 u_stent = model.results.displacement(mesh_scoping=nsco, time_scoping=[4])
 u_stent = u_stent.outputs.fields_container()
@@ -343,11 +292,9 @@ op.inputs.mesh.connect(mesh)
 mesh_sco = op.eval()
 mesh_sco.plot(vtk_export=True)
 
-# %%
 u_stent[0].meshed_region = mesh_sco
 u_stent[0].plot(deformed_by=u_stent[0])
 
-# %%
 mesh.plot(
     color="w",
     show_edges=True,
@@ -355,8 +302,6 @@ mesh.plot(
 )
 mesh_sco.plot(color="black", show_edges=True, text="Mesh of the stent")
 
-# %% [markdown]
 # ## Exit MAPDL
 
-# %%
 mapdl.exit()
