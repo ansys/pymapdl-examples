@@ -4,16 +4,17 @@
 
 # %% [markdown]
 #
-# This example problem shows how to simulate stent-artery interaction during and
-# after stent placement in an occluded artery.
+# This example problem shows how to simulate stent-artery interaction during and after stent
+# placement in an occluded artery.
 # The analysis exposes advanced modeling techniques using PyMAPDL such as:
 # * Contact
 # * Element birth and death
 # * Mixed u-P formulation
 # * Nonlinear stabilization
 #
-# This example is inspired from the model and analysis defined in Chapter 25 of
-# the Mechanical APDL Technology Showcase Manual.
+# This example is inspired from the model and analysis defined in Chapter 25 of the Mechanical
+# APDL Technology Showcase Manual.
+
 
 # %% [markdown]
 # ## Starting MAPDL as a service
@@ -97,11 +98,11 @@ mapdl.keyopt(itype="16", knum="2", value="0")  # Use B-bar
 # %% [markdown]
 # ### Defining settings to model the stent, the artery and the plaque
 #
-# Use force-distributed boundary constraints on 2 sides of artery wall to allow<br>
+# Use force-distributed boundary constraints on 2 sides of artery wall to allow
 # for radial expansion of tissue without rigid body motion.
 
 # %% [markdown]
-# #### Settings for MPC Surface-based, force-distributed contact on proximal# plane
+# #### Settings for MPC Surface-based, force-distributed contact on proximal plane
 # parallel to x-y plane
 
 # %%
@@ -130,8 +131,7 @@ mapdl.keyopt(itype="5", knum="4", value="111111")
 mapdl.type(itype="5")
 
 # %% [markdown]
-# #### Settings for standard contact between stent and inner plaque wall
-# contact surface
+# #### Settings for standard contact between stent and inner plaque wall contact surface
 
 # %%
 mapdl.mp(lab="MU", mat="1", c0="0")
@@ -216,15 +216,16 @@ mapdl.nropt(option1="full")
 mapdl.cncheck(option="auto")
 mapdl.esel(type_="s", item="type", vmin="11")
 mapdl.cm(cname="contact2", entity="elem")
-mapdl.ekill(elem="contact2")  # Kill contact elements in stent-plaque contact pair
-# so that the stent is ignored in the first loadstep
+mapdl.ekill(elem="contact2")  # Kill contact elements in stent-plaque contact
+# pair so that the stent is ignored in the first loadstep
 mapdl.nsel(type_="s", item="loc", comp="x", vmin="0", vmax="0.01e-3")
 mapdl.nsel(type_="r", item="loc", comp="y", vmin="0", vmax="0.01e-3")
 mapdl.d(node="all", lab="all")
 mapdl.allsel()
 
-mapdl.sf(nlist="load", lab="pres", value="10e-2")  # apply 0.1 Pa/mm^2 pressure
-# to inner plaque wall
+mapdl.sf(
+    nlist="load", lab="pres", value="10e-2"
+)  # Apply 0.1 Pa/mm^2 pressure to inner plaque wall
 mapdl.allsel()
 mapdl.nldiag(label="cont", key="iter")
 mapdl.solve()
@@ -249,8 +250,8 @@ mapdl.nsubst(nsbstp="1", nsbmx="1", nsbmn="1")
 mapdl.solve()
 
 # %% [markdown]
-# ### Apply Load Step 4: Apply blood pressure (13.3 kPa) load to inner wall of
-# plaque and allow the stent to act as a scaffold
+# ### Apply Load Step 4: Apply blood pressure (13.3 kPa) load to inner wall of plaque
+# and allow the stent to act as a scaffold
 
 # %%
 mapdl.nsubst(nsbstp="300", nsbmx="3000", nsbmn="30")
@@ -272,12 +273,9 @@ mapdl.save()
 mapdl.finish()
 
 # %% [markdown]
-# # Post-processing the modal results
+# # Post-processing the results
 #
-# This sections illustrates different methods to post-process the results of the
-# modal analysis : PyMAPDL method, PyMAPDL result reader, PyDPF-Post and PyDPF-Core.
-# All methods lead to the same result and are just given as an example of how each
-# module can be used.
+# This section illustrates the use of PyDPF-Core to post-process the results.
 
 # %%
 from ansys.dpf import core as dpf
@@ -286,12 +284,13 @@ from ansys.dpf import core as dpf
 # ## Mesh of the model
 
 # %%
+# Loading the result file
 model = dpf.Model(mapdl.result_file)
 ds = dpf.DataSources(mapdl.result_file)
 
 # %%
 mesh = model.metadata.meshed_region
-mesh.plot()
+mesh.plot(vtk_export=True)
 
 # %% [markdown]
 # ## Computed displacements of the model
@@ -299,7 +298,6 @@ mesh.plot()
 # %%
 # Collecting the computed displacement
 u = model.results.displacement(time_scoping=[4]).eval()
-print(u[0])
 
 u[0].plot(deform_by=u[0])
 
@@ -313,9 +311,10 @@ s_op.inputs.requested_location.connect(dpf.locations.nodal)
 s = s_op.eval()
 
 # Calculating Von Mises stress
-s_VM = dpf.operators.invariant.von_mises_eqv_fc(fields_container=s).eval()
+s_VM = dpf.operators.invariant.von_mises_eqv_fc(fields_container=s)
+s_VM_plot = s_VM.eval()
 
-s_VM[0].plot(deform_by=u[0])
+s_VM_plot[0].plot(deform_by=u[0])
 
 # %% [markdown]
 # ## Computed displacements of the stent
@@ -337,7 +336,6 @@ print(nsco)
 # Collecting the computed displacements of the stent
 u_stent = model.results.displacement(mesh_scoping=nsco, time_scoping=[4])
 u_stent = u_stent.outputs.fields_container()
-U = u_stent[0]
 
 # Linking the stent mesh to the global one
 op = dpf.operators.mesh.from_scoping()  # operator instantiation
@@ -345,9 +343,19 @@ op.inputs.scoping.connect(nsco)
 op.inputs.inclusive.connect(1)
 op.inputs.mesh.connect(mesh)
 mesh_sco = op.eval()
-u_stent[0].meshed_region = mesh_sco
+mesh_sco.plot(vtk_export=True)
 
+# %%
+u_stent[0].meshed_region = mesh_sco
 u_stent[0].plot(deformed_by=u_stent[0])
+
+# %%
+mesh.plot(
+    color="w",
+    show_edges=True,
+    text="Mesh of the model",
+)
+mesh_sco.plot(color="black", show_edges=True, text="Mesh of the stent")
 
 # %% [markdown]
 # ## Exit MAPDL
