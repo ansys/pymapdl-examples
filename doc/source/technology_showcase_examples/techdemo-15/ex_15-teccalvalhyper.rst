@@ -1,7 +1,7 @@
 .. _sphx_glr_ex_15-teccalvalhyper.rst:
 
 Calibrating and Validating a Hyperelastic Constitutive Model
-----------------------------------------------------------------------------------------------
+------------------------------------------------------------
 
 This example problem demonstrates the hyperelastic curve-fitting capabilities used to select constitutive model
 parameters to fit experimental data. Several issues that influence the accuracy of the curve fit are discussed.
