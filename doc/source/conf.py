@@ -2,7 +2,7 @@
 from datetime import datetime
 import warnings
 
-from ansys_sphinx_theme import pyansys_logo_black as logo
+from ansys_sphinx_theme import ansys_favicon, pyansys_logo_black
 import pyvista
 
 # Ensure that offscreen rendering is used for docs generation
@@ -14,8 +14,11 @@ copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = "0.1.dev0"
 
+# Favicon
+html_favicon = ansys_favicon
+
 # Select desired logo, theme, and declare the html title
-html_logo = logo
+html_logo = pyansys_logo_black
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyMAPDL Examples"
 

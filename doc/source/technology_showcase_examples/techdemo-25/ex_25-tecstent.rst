@@ -348,6 +348,9 @@ Mesh of the model
   :hide-code:
   :stderr:
 
+    import vtk 
+    vtk.vtkObject.GlobalWarningDisplayOff()
+    
     import pyvista
     import panel
     pyvista.set_jupyter_backend('panel')
