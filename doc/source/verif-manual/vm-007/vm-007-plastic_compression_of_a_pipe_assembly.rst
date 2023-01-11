@@ -44,7 +44,7 @@ Element Type(s):
  - 3-D Structural Solid Elements (SOLID185)
 
 .. image:: _static/vm7_setup_2.png
-   :width: 400
+   :width: 600
    :alt: VM7 Finite Element Models
 
 Material Properties
@@ -55,7 +55,7 @@ Material Properties
  - :math:`\nu = 0.3`
 
 .. image:: _static/vm7_setup_1.png
-   :width: 300
+   :width: 500
    :alt: VM7 Material Model
 
 Geometric Properties:

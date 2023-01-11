@@ -360,7 +360,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    import pyvista
    import panel
    pyvista.set_jupyter_backend('panel')
-   pyvista.global_theme.window_size = [600, 400]
+   pyvista.global_theme.window_size = [1000, 800]
    pyvista.global_theme.background = 'grey'
 
    import warnings

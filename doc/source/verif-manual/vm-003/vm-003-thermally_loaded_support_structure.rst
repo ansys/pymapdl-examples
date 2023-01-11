@@ -40,7 +40,7 @@ Element Type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
 
 .. image:: _static/vm3_setup.png
-   :width: 400
+   :width: 600
    :alt: VM3 Problem Sketch
 
 Material Properties

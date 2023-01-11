@@ -40,7 +40,7 @@ Element Type(s):
  - Spring-Damper Elements (COMBIN40)
 
 .. image:: _static/vm9_setup_2.png
-   :width: 400
+   :width: 600
    :alt: Geometry of COMBIN14 and COMBIN40
 
 Material Properties
@@ -56,7 +56,7 @@ Loading:
  - :math:`\alpha = 45\,º`
 
 .. image:: _static/vm9_setup.png
-   :width: 400
+   :width: 600
    :alt: VM9 Problem Sketch
 
 Analysis Assumptions and Modeling Notes:

@@ -43,7 +43,7 @@ Element Type(s):
  - 8-Node Finite Strain Shell Elements (SHELL281)
 
 .. image:: _static/vm6_setup.png
-   :width: 400
+   :width: 600
    :alt: VM6 Pinched Cylinder Problem Sketch
 
 Material Properties
