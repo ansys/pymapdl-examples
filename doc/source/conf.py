@@ -1,7 +1,10 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
+import os
 
 from ansys_sphinx_theme import pyansys_logo_black as logo
+import numpy as np
+import pyvista
 
 # Project information
 project = "pymapdl-examples"
@@ -54,9 +57,9 @@ sphinx_gallery_conf = {
     # convert rst to md for ipynb
     "pypandoc": True,
     # path to your examples scripts
-    "examples_dirs": [],
+    "examples_dirs": ["../../examples/verif-manual"],
     # path where to save gallery generated examples
-    "gallery_dirs": ["verif-manual", "technology_showcase_examples"],
+    "gallery_dirs": ["verif-manual-2"],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # Remove the "Download all examples" button from the top level gallery
@@ -104,6 +107,22 @@ numpydoc_validation_checks = {
     # type, unless multiple values are being returned"
 }
 
+# Manage errors
+pyvista.set_error_output_file("errors.txt")
+
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True
+
+# must be less than or equal to the XVFB window size
+pyvista.rcParams["window_size"] = np.array([1024, 768])
+
+# Save figures in specified directory
+pyvista.FIGURE_PATH = os.path.join(os.path.abspath("./images/"), "auto-generated/")
+if not os.path.exists(pyvista.FIGURE_PATH):
+    os.makedirs(pyvista.FIGURE_PATH)
+
+
+pyvista.BUILDING_GALLERY = True
 
 # static path
 html_static_path = ["_static"]

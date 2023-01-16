@@ -291,4 +291,5 @@ which necesitate more resources.
     :maxdepth: 3
 
     verif-manual/index
+    verif-manual-2/index
     technology_showcase_examples/index
