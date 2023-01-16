@@ -90,7 +90,9 @@ intersphinx_mapping = {
 }
 
 # numpydoc configuration
+numpydoc_use_plots = True
 numpydoc_show_class_members = False
+numpydoc_class_members_toctree = False
 numpydoc_xref_param_type = True
 
 # Consider enabling numpydoc validation. See:
