@@ -2,9 +2,11 @@
 from datetime import datetime
 import os
 
+from ansys.mapdl import core as pymapdl
 from ansys_sphinx_theme import pyansys_logo_black as logo
 import numpy as np
 import pyvista
+from sphinx_gallery.sorting import FileNameSortKey
 
 # Project information
 project = "pymapdl-examples"
@@ -59,11 +61,13 @@ sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": ["../../examples/verif-manual"],
     # path where to save gallery generated examples
-    "gallery_dirs": ["verif-manual-2"],
+    "gallery_dirs": ["verif-manual"],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
+    # Sort gallery example by file name instead of number of lines (default)
+    "within_subsection_order": FileNameSortKey,
     # directory where function granular galleries are stored
     "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
@@ -122,7 +126,9 @@ if not os.path.exists(pyvista.FIGURE_PATH):
     os.makedirs(pyvista.FIGURE_PATH)
 
 
+# necessary when building the sphinx gallery
 pyvista.BUILDING_GALLERY = True
+pymapdl.BUILDING_GALLERY = True
 
 # static path
 html_static_path = ["_static"]
