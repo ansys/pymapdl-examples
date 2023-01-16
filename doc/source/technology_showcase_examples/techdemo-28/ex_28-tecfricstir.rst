@@ -143,8 +143,8 @@ cylindrical shape tool, as shown in the following figure:
    from ansys.mapdl.core import launch_mapdl
    mapdl = launch_mapdl()
    mapdl.clear()
-   mapdl.prep7()   
-   mapdl.cdread('db', cdbfile)   
+   mapdl.prep7()
+   mapdl.cdread('db', cdbfile)
    # ***** Problem parameters ********
    l = 76.2e-03     # Length of each plate,m
    w = 31.75e-03    # Width of each plate,m

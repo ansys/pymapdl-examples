@@ -74,7 +74,7 @@ instance/
 
 # Sphinx documentation
 doc/_build/
-doc/source/verif-manual/
+doc/source/verif-manual/*
 
 # PyBuilder
 .pybuilder/

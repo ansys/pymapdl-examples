@@ -8,8 +8,10 @@ Problem Description:
     - TO DO
 
 Reference:
-    - C***      USING PIPE16     STR. OF MATL., TIMOSHENKO,
-    PART 1, 3RD ED., PAGE 299, PROB. 2
+    - Timoshenko, Strength of Materials, Part I, Elementary Theory and
+   Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
+   pg. 299, problem 2.
+
 """
 
 from ansys.mapdl.core import launch_mapdl

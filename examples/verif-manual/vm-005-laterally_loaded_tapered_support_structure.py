@@ -22,7 +22,7 @@ Element Type(s):
  - 2-D 4-Node Sructural Solid Elements (PLANE182)
  - 2-D 8-Node Structural Solid Elements (PLANE183)
 
-.. image:: _static/vm5_setup.png
+.. image:: ../_static/vm5_setup.png
    :width: 400
    :alt: VM5 Problem Sketch
 
@@ -48,7 +48,7 @@ Notes:
    ratio is set to 0.0 to agree with beam theory.
 
 """
-# sphinx_gallery_thumbnail_path = '_static/vm5_setup.png'
+# sphinx_gallery_thumbnail_path = '../_static/vm5_setup.png'
 
 ###############################################################################
 # Start MAPDL

@@ -22,7 +22,7 @@ Analysis Type(s):
 Element Type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
 
-.. image:: _static/vm4_setup.png
+.. image:: ../_static/vm4_setup.png
    :width: 400
    :alt: VM4 Problem Sketch
 
@@ -54,7 +54,7 @@ Notes:
    - :math:`b = l sin \Theta`.
 
 """
-# sphinx_gallery_thumbnail_path = '_static/vm4_setup.png'
+# sphinx_gallery_thumbnail_path = '../_static/vm4_setup.png'
 
 ###############################################################################
 # Start MAPDL

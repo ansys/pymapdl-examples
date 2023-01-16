@@ -25,7 +25,7 @@ Geometric Properties(Coordinates):
  - :math:`K_{\mathrm{3(x,y,z)}} = 100, 0, 30`
  - :math:`K_{\mathrm{4(x,y,z)}} = -200,25,80`
 
-.. image:: _static/vm8_setup.png
+.. image:: ../_static/vm8_setup.png
    :width: 300
    :alt: VM8 Problem Sketch
 
@@ -55,7 +55,7 @@ Analysis Assumptions and Modeling Notes:
 # ~~~~~~~~~~~
 # Start MAPDL and import Numpy and Pandas libraries.
 
-# sphinx_gallery_thumbnail_path = '_static/vm8_setup.png'
+# sphinx_gallery_thumbnail_path = '../_static/vm8_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 import numpy as np

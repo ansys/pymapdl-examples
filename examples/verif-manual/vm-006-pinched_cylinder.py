@@ -23,7 +23,7 @@ Element Type(s):
  - 4-Node Finite Strain Shell Elements (SHELL181)
  - 8-Node Finite Strain Shell Elements (SHELL281)
 
-.. image:: _static/vm6_setup.png
+.. image:: ../_static/vm6_setup.png
    :width: 400
    :alt: VM6 Pinched Cylinder Problem Sketch
 
@@ -44,7 +44,7 @@ Analysis Assumptions and Modeling Notes:
    due to symmetry.
 
 """
-# sphinx_gallery_thumbnail_path = '_static/vm6_setup.png'
+# sphinx_gallery_thumbnail_path = '../_static/vm6_setup.png'
 
 ###############################################################################
 # Start MAPDL

@@ -19,7 +19,7 @@ Analysis Type(s):
 Element Type(s):
  - 3-D 2 Node Beam (``BEAM188``)
 
-.. figure:: _static/vm10_setup_1.png
+.. figure:: ../_static/vm10_setup_1.png
     :align: center
     :width: 400
     :alt:  VM10 Geometry of Beam188 and Element Model
@@ -39,7 +39,7 @@ Geometric Properties:
 Loading:
  - :math:`M_z = 100,000\,in\,lb`
 
-.. image:: _static/vm10_setup.png
+.. image:: ../_static/vm10_setup.png
    :width: 400
    :alt: VM10 Problem Sketch
 
@@ -56,7 +56,7 @@ Analysis Assumptions and Modeling Notes:
 # ~~~~~~~~~~~
 # Start MAPDL and import Numpy and Pandas libraries.
 
-# sphinx_gallery_thumbnail_path = '_static/vm10_setup.png'
+# sphinx_gallery_thumbnail_path = '../_static/vm10_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 import numpy as np
