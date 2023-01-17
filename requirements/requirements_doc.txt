@@ -1,14 +1,14 @@
 #PyMAPDL dependencies
 git+https://github.com/pyansys/pymapdl@main
-numpy==1.24.0
+numpy==1.24.1
 pandas==1.5.2
-plotly==5.11.0
+plotly==5.12.0
 pythreejs==2.4.1
 pyvista==0.37.0
 vtk==9.1.0
 
 # Documentation dependencies
-Sphinx==5.3.0
+Sphinx==6.1.2
 numpydoc==1.5.0
 ansys-sphinx-theme==0.8.0
 sphinx-copybutton==0.5.1
@@ -17,7 +17,7 @@ jupyterlab>=3.2.8
 sphinxemoji==0.2.0
 sphinx-gallery==0.11.1
 sphinx-autobuild==2021.3.14
-sphinx-autodoc-typehints==1.19.5
+sphinx-autodoc-typehints==1.20.1
 sphinx-notfound-page==0.8.3
 pypandoc==1.10
 vtk==9.1.0
