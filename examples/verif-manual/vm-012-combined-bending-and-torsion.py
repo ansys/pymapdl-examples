@@ -9,8 +9,8 @@ Problem Description:
 
 Reference:
     - Timoshenko, Strength of Materials, Part I, Elementary Theory and
-   Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
-   pg. 299, problem 2.
+      Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
+      pg. 299, problem 2.
 
 """
 

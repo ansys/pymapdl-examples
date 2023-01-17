@@ -39,15 +39,15 @@ Loading:
 
 Analytical Equations:
  - The compressive force :math:`X` is given by the following equation
- - :math:`X = \frac{\Delta T (\alpha_c - \alpha_s) (A_s - E_s) }{1 + \frac{1 E_s A_s}{2 E_c A_c}}
-    + \frac{Q}{1 + \frac{2 E_c A_c}{E_s A_s}}`
+ - :math:`X = \frac{\Delta T (\alpha_c - \alpha_s) (A_s - E_s) }{1 + \frac{1 E_s A_s}{2 E_c A_c}} + \frac{Q}{1 + \frac{2 E_c A_c}{E_s A_s}}`
 
 Notes:
  - Length of wires (20 in.), spacing between wires (10 in.), and the reference
    temperature (70°F) are arbitrarily selected. The rigid lower beam is modeled
    by nodal coupling.
 
-"""
+"""  # noqa:E501
+
 # sphinx_gallery_thumbnail_path = '../_static/vm3_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
