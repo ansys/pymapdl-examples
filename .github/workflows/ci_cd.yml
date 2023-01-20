@@ -143,6 +143,7 @@ jobs:
           checkout: false
           skip-install: true
           sphinxopts: -j auto
+          use-python-cache: False
       
       - name: Upload HTML Documentation
         uses: actions/upload-artifact@v3
