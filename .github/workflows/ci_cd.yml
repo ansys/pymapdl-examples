@@ -12,7 +12,9 @@ on:
       - main
 
 env:
-  MAIN_PYTHON_VERSION: '3.7'
+  MAIN_PYTHON_VERSION: '3.9'
+  RESET_EXAMPLES_CACHE: 0
+  RESET_DOC_BUILD_CACHE: 0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -108,14 +110,30 @@ jobs:
 
       - name: Retrieve PyMAPDL version
         run: |
-          echo "{PYMAPDL_VERSION}={$(python -c 'from ansys.mapdl.core import __version__; print(__version__)')}" >> $GITHUB_OUTPUT
+          echo "PYMAPDL_VERSION=$(python -c 'from ansys.mapdl.core import __version__; print(__version__)')" >> $GITHUB_OUTPUT
           echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
         id: version
-      
+
       - name: DPF Server Activation
         run: |
           docker pull ghcr.io/pyansys/dpf-core:22.2dev
           docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/pyansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
+      
+      - name: "Cache examples"
+        uses: actions/cache@v3
+        with:
+          path: doc/source/examples
+          key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
+          restore-keys: |
+            Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}
+
+      - name: "Cache docs build directory"
+        uses: actions/cache@v3
+        with:
+          path: doc/_build
+          key: doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
+          restore-keys: |
+            doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
       
       - name: Build Documentation
         run: |
