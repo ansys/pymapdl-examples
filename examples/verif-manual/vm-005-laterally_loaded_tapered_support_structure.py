@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm5_example:
+r""".. _ref_vm5_example:
 
 Statically Indeterminate Reaction Force Analysis
 ------------------------------------------------

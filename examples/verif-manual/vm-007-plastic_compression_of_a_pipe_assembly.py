@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm7_example:
+r""".. _ref_vm7_example:
 
 Plastic Compression of a Pipe Assembly
 --------------------------------------

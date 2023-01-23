@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm9_example:
+r""".. _ref_vm9_example:
 
 Large Lateral Deflection of Unequal Stiffness Springs
 -----------------------------------------------------

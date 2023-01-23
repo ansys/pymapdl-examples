@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm2_example:
+r""".. _ref_vm2_example:
 
 Beam Stresses and Deflections
 -----------------------------

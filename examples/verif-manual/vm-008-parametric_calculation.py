@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm8_example:
+r""".. _ref_vm8_example:
 
 Parametric Calculation
 ----------------------

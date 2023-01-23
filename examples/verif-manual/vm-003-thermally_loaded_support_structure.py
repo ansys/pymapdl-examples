@@ -1,5 +1,4 @@
-r"""
-.. _ref_thermally_loaded_support_structure:
+r""".. _ref_thermally_loaded_support_structure:
 
 Thermally Loaded Support Structure
 ----------------------------------

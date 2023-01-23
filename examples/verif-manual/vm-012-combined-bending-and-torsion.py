@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm12_example:
+r""".. _ref_vm12_example:
 
 Combined bending and torsion
 ----------------------------

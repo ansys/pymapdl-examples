@@ -1,3 +1,5 @@
+.. _sphx_glr_vm_examples:
+
 Verification Manual
 ===================
 

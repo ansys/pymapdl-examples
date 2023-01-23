@@ -136,12 +136,14 @@ cylindrical shape tool, as shown in the following figure:
    from ansys.mapdl.core import examples
    from ansys.mapdl.core.examples import download_vtk_rotor, download_tech_demo_data
 
-   cdbfile = download_tech_demo_data("td-28", "fsw.cdb")   
+   cdbfile = download_tech_demo_data("td-28", "fsw.cdb")
    # Generating geometry, just for plotting purposes.
    # The elements and nodes are going to be taken from the cdb file.
    
    from ansys.mapdl.core import launch_mapdl
    mapdl = launch_mapdl()
+   print(mapdl)
+
    mapdl.clear()
    mapdl.prep7()
    mapdl.cdread('db', cdbfile)

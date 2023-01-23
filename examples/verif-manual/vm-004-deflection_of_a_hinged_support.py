@@ -1,5 +1,4 @@
-r"""
-.. _ref_deflection_of_a_hinged_support:
+r""".. _ref_deflection_of_a_hinged_support:
 
 Deflection of a Hinged Support
 ------------------------------

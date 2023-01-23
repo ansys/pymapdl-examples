@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm10_example:
+r""".. _ref_vm10_example:
 
 Bending of a Tee-Shaped Beam
 ----------------------------

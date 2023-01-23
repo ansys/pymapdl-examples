@@ -1,5 +1,4 @@
-r"""
-.. _ref_vm6_example:
+r""".. _ref_vm6_example:
 
 Pinched Cylinder
 ----------------

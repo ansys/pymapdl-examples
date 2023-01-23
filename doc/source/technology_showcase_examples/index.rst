@@ -11,6 +11,7 @@ These examples are a work-in-progress and will be extended during the life of
 this project.
 
 
+.. ##########
 
 .. raw:: html
 
@@ -22,51 +23,14 @@ this project.
 
 .. only:: html
 
-  .. image:: images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
+  .. image:: ./images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
     :alt: Brake Squeal Analysis
 
-  :ref:`sphx_glr_ex_0-tecbrakesqueal.py`
+  :ref:`sphx_glr_ex_01-tecbrakesqueal.py`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Brake Squeal Analysis</div>
-    </div>
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 20: Dynamic simulation of a printed circuit board assembly">
-
-.. only:: html
-
-  .. image:: images/thumb/sphx_glr_tse-020-PCB_thumb.png
-    :alt: Dynamic simulation of a printed circuit board assembly
-
-  :ref:`sphx_glr_ex_20-tecPCB.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
-    </div>
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
-
-.. only:: html
-
-  .. image:: images/thumb/sphx_glr_tse-028-fricstir_thumb.png
-    :alt: Friction Stir Welding (FSW) Simulation
-
-  :ref:`sphx_glr_ex_28-tecfricstir.py`
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
-    </div>
-
-.. raw:: html
-
     </div>
 
 
@@ -79,7 +43,7 @@ this project.
 
 .. only:: html
 
-  .. image:: images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
+  .. image:: ./images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
     :alt: Calibrating and Validating a Hyperelastic Constitutive Model
 
 .. raw:: html
@@ -93,14 +57,54 @@ this project.
 
 .. #########
 
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 20: Dynamic simulation of a printed circuit board assembly">
+
+.. only:: html
+
+  .. image:: ./images/thumb/sphx_glr_tse-020-PCB_thumb.png
+    :alt: Dynamic simulation of a printed circuit board assembly
+
+  :ref:`sphx_glr_ex_20-tecPCB.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
+    </div>
+
+.. ##########
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
+
+.. only:: html
+
+  .. image:: ./images/thumb/sphx_glr_tse-028-brake_squeal_thumb.png
+    :alt: Friction Stir Welding (FSW) Simulation
+
+  :ref:`sphx_glr_ex_28-tecfricstir.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
+    </div>
+
+.. raw:: html
+
+    </div>
+
+.. ##########
+
 .. toctree::
     :hidden:
-    :includehidden:
 
-    techdemo-1/ex_0-tecbrakesqueal
-    techdemo-15/ex-15-teccalvalhyper
-    techdemo-20/ex_20-tecPCB
-    techdemo-28/ex_28-tecfricstir
+    techdemo-1/ex_01-tecbrakesqueal.rst
+    techdemo-15/ex_15-teccalvalhyper.rst
+    techdemo-20/ex_20-tecPCB.rst
+    techdemo-28/ex_28-tecfricstir.rst
 
 .. only:: html
 

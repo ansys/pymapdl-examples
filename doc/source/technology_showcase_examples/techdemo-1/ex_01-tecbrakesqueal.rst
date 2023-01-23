@@ -1,4 +1,4 @@
-.. _sphx_glr_ex_0-tecbrakesqueal.py:
+.. _sphx_glr_ex_01-tecbrakesqueal.py:
 
 .. _tech_demo_01:
 

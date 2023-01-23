@@ -1,5 +1,4 @@
-r"""
-.. _ref_statically_indeterminate_example:
+r""".. _ref_statically_indeterminate_example:
 
 Statically Indeterminate Reaction Force Analysis
 ------------------------------------------------
