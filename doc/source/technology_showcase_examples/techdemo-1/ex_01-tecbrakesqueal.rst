@@ -201,8 +201,6 @@ Start this example by launching MAPDL and loading the model.
     mapdl = launch_mapdl(nproc=8)
     mapdl.clear()
 
-
-    # mapdl = Mapdl()
     start(mapdl, 'linear_non_prestressed')
     mapdl.title("linear_non_prestressed, Solving brake squeal problem using linear non pre-stressed modal solve")
 

@@ -148,6 +148,9 @@ the results using the GUI to ensure a sound fit.
 
 .. code:: python3
 
+    from ansys.mapdl.core import launch_mapdl
+    mapdl = launch_mapdl()
+    
     mapdl.prep7()
     mapdl.tbft("fadd",1,"hyper","mooney",3)
     mapdl.tbft("eadd",1,"unia","uniax".l)OG
