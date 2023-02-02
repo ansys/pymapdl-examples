@@ -1,5 +1,5 @@
 #PyMAPDL dependencies
-git+https://github.com/pyansys/pymapdl@main
+git+https://github.com/pyansys/pymapdl@bug/launch_mapdl_grpc
 numpy==1.24.1
 pandas==1.5.3
 plotly==5.12.0
