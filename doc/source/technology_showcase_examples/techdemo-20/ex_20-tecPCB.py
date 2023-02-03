@@ -54,7 +54,7 @@ mapdl.cmsel("all")
 # Creating the complete layered model
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # The original model will be duplicated to create a layered PCB of three layers
-# that are binded together.
+# that are bound together.
 
 # duplicate single PCB to get three layers
 # get the maximum node number for the single layers PCB in the input file
@@ -120,7 +120,7 @@ mapdl.eplot(vtk=True)
 # Run modal analysis
 # ~~~~~~~~~~~~~~~~~~
 #
-# A modal analysis is run using Block Lanzos.
+# A modal analysis is run using Block Lanczos.
 # Only 10 modes are extracted for the sake of run times, but using a higher
 # number of nodes is recommended (suggestion: 300 modes).
 #
@@ -131,7 +131,7 @@ mapdl.antype("modal")
 # set number of modes to extract
 # using a higher number of modes is recommended
 nb_modes = 10
-# use Block Lanzos to extract specified number of modes
+# use Block Lanczos to extract specified number of modes
 mapdl.modopt("lanb", nb_modes)
 mapdl.mxpand(nb_modes)
 output = mapdl.solve()

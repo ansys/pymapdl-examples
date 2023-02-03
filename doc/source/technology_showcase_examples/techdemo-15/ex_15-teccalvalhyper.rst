@@ -29,14 +29,14 @@ Mechanical Application. For more information, see
 
 Several hyperelastic constitutive models can be used to model the large deformation
 behavior of elastic materials; however, it is sometimes difficult to select parameters
-to adequately match the behavior of the material. The curve-fitting process fits the hyperelastic
-constitutive model parameters to a set of experimental data using a least-squares
-minimization. 
+to adequately match the behavior of the material.
+The curve-fitting process fits the hyperelastic constitutive model parameters to a set
+of experimental data using a least-squares minimization. 
 
 Curve-fitting is relatively simple, but certain conditions can affect the accuracy of
-the resulting constitutive model. The constitutive model should therefore be compared
-with experimental data to ensure that it adequately reproduces the material behavior
-over the actual range of deformation.
+the resulting constitutive model.
+The constitutive model should therefore be compared with experimental data to ensure
+that it adequately reproduces the material behavior over the actual range of deformation.
 
 15.2. Problem Description
 -------------------------
@@ -66,8 +66,9 @@ Material properties for the calibration and validation experiments follow:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Experimental data was obtained via a simulation of a hyperelastic test suite with
-an Ogden hyperelastic material. The test suite specimens are shown here, with the
-dark areas indicating locations of the clamps:
+an Ogden hyperelastic material.
+The test suite specimens are shown here, with the dark areas indicating locations
+of the clamps:
 
 .. figure:: graphics/gtec_calvalhyper_fig1.gif
     :align: center

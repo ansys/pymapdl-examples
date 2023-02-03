@@ -8,7 +8,8 @@ Brake Squeal Analysis
 This example analysis shows how to solve a brake-squeal problem.
 `1.6. Analysis and Solution Controls`_ are highlighted: linear non-prestressed
 modal, partial nonlinear perturbed modal, and full nonlinear perturbed
-modal. The problem demonstrates sliding frictional contact and uses complex
+modal.
+The problem demonstrates sliding frictional contact and uses complex
 eigensolvers to predict unstable modes.
 
 The following topics are available:
@@ -255,7 +256,8 @@ system.
 ------------------------------------
 
 The inner diameter of the cylinder hub and bolt holes is constrained in all
-directions. Small pressure loading is applied on both ends of the pad to establish
+directions.
+Small pressure loading is applied on both ends of the pad to establish
 contact with the brake disc and to include prestress effects. The displacement on the
 brake pad surfaces where the pressure loading is applied is constrained in all
 directions except axial (along the Z-axis).
@@ -284,8 +286,9 @@ methods:
 
 A linear
 non-prestressed modal analysis is effective when the stress-stiffening
-effects are not critical. This method requires less run time than the other two
-methods, as Newton-Raphson iterations are not required. The contact-stiffness matrix
+effects are not critical.
+This method requires less run time than the other two methods, as
+Newton-Raphson iterations are not required. The contact-stiffness matrix
 is based on the initial contact status.
 
 Following is the process for solving a brake-squeal problem using this method:
@@ -926,7 +929,8 @@ The following works were consulted when creating this example problem:
    Mechanics*. 4, 35-47.
 3. Schroth, R., Hoffmann, N., Swift, R. (2004, January). Mechanism of brake
    squeal from theory to experimentally measured mode coupling. In
-   *Proceedings of the 22nd International Modal Analysis Conference (IMAC XXII).*
+   *Proceedings of the twenty second International Modal Analysis
+   Conference (IMAC XXII).*
 
 1.10. Input Files
 -----------------
