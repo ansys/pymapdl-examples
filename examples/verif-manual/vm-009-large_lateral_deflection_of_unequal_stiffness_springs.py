@@ -1,8 +1,8 @@
 r""".. _ref_vm9_example:
 
-Large Lateral Deflection of Unequal Stiffness Springs
+Large lateral deflection of unequal stiffness springs
 -----------------------------------------------------
-Problem Description:
+Problem description:
  - A two-spring system is subjected to a force :math:`F` as shown below.
    Determine the strain energy of the system and
    the displacements :math:`\delta_x` and :math:`\delta_y`.
@@ -12,12 +12,12 @@ Reference:
    Design with Applications*, McGraw-Hill Book Co., Inc., New York,
    NY,1984, pp. 72-73, ex. 3-1.
 
-Analysis Type(s):
+Analysis type(s):
  - Nonlinear Transient Dynamic Analysis (``ANTYPE = 4``)
 
-Element Type(s):
- - Spring-Damper Elements (COMBIN14)
- - Spring-Damper Elements (COMBIN40)
+Element type(s):
+ - Spring-damper elements (COMBIN14)
+ - Spring-damper elements (COMBIN40)
 
 .. image:: ../_static/vm9_setup_2.png
    :width: 400
@@ -28,7 +28,7 @@ Material Properties
  - :math:`k_2 = 1\,N/cm`
  - :math:`m = 1`
 
-Geometric Properties:
+Geometric properties:
  - :math:`l = 10\,cm`
 
 Loading:
@@ -39,7 +39,7 @@ Loading:
    :width: 400
    :alt: VM9 Problem Sketch
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The solution to this problem is best obtained by adding mass and using
    the "slow dynamics" technique with approximately critical damping.
    Combination elements ``COMBIN40`` are used to provide damping
@@ -76,7 +76,7 @@ mapdl = launch_mapdl()
 
 
 ###############################################################################
-# Pre-Processing
+# Pre-processing
 # ~~~~~~~~~~~~~~
 # Enter verification example mode and the pre-processing routine.
 
@@ -113,7 +113,7 @@ f_y = 5
 
 
 ###############################################################################
-# Define Element Type
+# Define element type
 # ~~~~~~~~~~~~~~~~~~~
 # Set up the element types.
 
@@ -129,7 +129,7 @@ mapdl.keyopt(1, 3, 2)
 # Element type COMBIN40.
 mapdl.et(3, "COMBIN40")
 
-# Special Features are defined by keyoptions of the element COMBIN40.
+# Special features are defined by keyoptions of the element COMBIN40.
 # KEYOPT(3)(1)
 # Element degrees of freedom:
 # UX (Displacement along nodal X axes)
@@ -143,7 +143,7 @@ mapdl.keyopt(3, 6, 2)
 # Element type COMBIN40.
 mapdl.et(4, "COMBIN40")
 
-# Special Features are defined by keyoptions of the element COMBIN40.
+# Special features are defined by keyoptions of the element COMBIN40.
 # KEYOPT(3)(2)
 # Element degrees of freedom:
 # UX (Displacement along nodal X axes)
@@ -159,7 +159,7 @@ print(mapdl.etlist())
 
 
 ###############################################################################
-# Define Real Constants
+# Define real constants
 # ~~~~~~~~~~~~~~~~~~~~~
 # Define damping coefficients :math:`c_x = 1.41`, :math:`c_y = 2.0` and
 # stiffness values :math:`k_1 = 8\,N/cm`, :math:`k_2 = 1\,N/cm` for the
@@ -182,7 +182,7 @@ print(mapdl.rlist())
 
 
 ###############################################################################
-# Define Nodes
+# Define nodes
 # ~~~~~~~~~~~~
 # Set up the nodes coordinates using python ``for`` loop.
 
@@ -199,7 +199,7 @@ print(mapdl.nlist())
 
 
 ###############################################################################
-# Create Elements
+# Create elements
 # ~~~~~~~~~~~~~~~
 # Create the elements through the nodes.
 
@@ -232,7 +232,7 @@ print(mapdl.elist())
 
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Application of boundary conditions (BC) for the spring model.
 
@@ -300,7 +300,7 @@ mapdl.post1(mute=True)
 
 
 ###############################################################################
-# Getting Displacements
+# Getting displacements
 # ~~~~~~~~~~~~~~~~~~~~~
 # Enter post-processing. To get results of the strain energy and displacements
 # in X and Y directions from the node where the force is applied using
@@ -330,7 +330,7 @@ disp_y = mapdl.get_value(entity="NODE", entnum=2, item1="U", it1num="Y")
 
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Finally we have the results of the strain energy and
 # displacements in :math:`X` and :math:`Y` directions, which can be compared with
@@ -369,5 +369,5 @@ df2 = pd.DataFrame(main_columns, index=row_names).round(2)
 df2.head()
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

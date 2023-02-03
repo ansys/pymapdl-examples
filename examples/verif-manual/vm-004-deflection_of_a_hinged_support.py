@@ -1,8 +1,8 @@
 r""".. _ref_deflection_of_a_hinged_support:
 
-Deflection of a Hinged Support
+Deflection of a hinged support
 ------------------------------
-Problem Description:
+Problem description:
  - A structure consisting of two equal steel bars, each of length :math:`l`
    and cross-sectional area :math:`A`, with hinged ends is subjected to
    the action of a load :math:`F`. Determine the stress, :math:`\sigma`,
@@ -15,20 +15,20 @@ Reference:
    Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
    pg. 10, problem 2.
 
-Analysis Type(s):
+Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
-Element Type(s):
+Element type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
 
 .. image:: ../_static/vm4_setup.png
    :width: 400
    :alt: VM4 Problem Sketch
 
-Material Properties
+Material properties
  - :math:`E = 30 \cdot 10^6 psi`
 
-Geometric Properties:
+Geometric properties:
  - :math:`l = 15 ft`
  - :math:`A = 0.5 in^2`
  - :math:`\Theta = 30 ^\circ`
@@ -36,7 +36,7 @@ Geometric Properties:
 Loading:
  - :math:`F = 5000 lb`
 
-Analytical Equations:
+Analytical equations:
  - The tensile force in the bars is :math:`S`
    - :math:`S = \frac{P}{2 sin \Theta}`
  - The necessary cross-sectional area :math:`A` is
@@ -72,7 +72,7 @@ mapdl.verify()
 mapdl.prep7()
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Create a simple hinge geometry.
 # We use the `LINK180` element type to model this and an elastic modulus
@@ -92,7 +92,7 @@ mapdl.secdata(0.5)
 mapdl.mp("EX", 1, 30e6)
 
 ###############################################################################
-# Define Geometry
+# Define geometry
 # ~~~~~~~~~~~~~~~
 # We create three nodes in an isosceles triangle shape, with elements
 # along the equal sides, forming a hinge.
@@ -106,7 +106,7 @@ mapdl.e(n2, n3)
 mapdl.eplot(show_node_numbering=True, line_width=5, cpos="xy")
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # - Fix nodes 1 and 3 in place
 # - Apply a force of -5000 in the negative y-direction to node 2
@@ -167,7 +167,7 @@ for i, nnum in enumerate(mapdl.mesh.nnum):
 # print(mapdl.prnsol('S', 'PRIN'))
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Now that we have the results we can compare the nodal displacement and
 # stress experienced by node 2 to the known quantities 10000 psi and
@@ -199,5 +199,5 @@ Displacement [in]     -0.12          {displacement:.2f}     {abs(displacement) /
 print(results)
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

@@ -1,8 +1,8 @@
 r""".. _ref_vm7_example:
 
-Plastic Compression of a Pipe Assembly
+Plastic compression of a pipe assembly
 --------------------------------------
-Problem Description:
+Problem description:
  - Two coaxial tubes, the inner one of 1020 CR steel and cross-sectional
    area :math:`A_{\mathrm{s}}`, and the outer one of 2024-T4 aluminum alloy
    and of area :math:`A_{\mathrm{a}}`, are compressed between heavy, flat end plates,
@@ -15,10 +15,10 @@ Reference:
  - S. H. Crandall, N. C. Dahl, An Introduction to the Mechanics of Solids,
    McGraw-Hill Book Co., Inc., New York, NY, 1959, pg. 180, ex. 5.1.
 
-Analysis Type(s):
+Analysis type(s):
  - Static, Plastic Analysis (``ANTYPE=0``)
 
-Element Type(s):
+Element type(s):
  - Plastic Straight Pipe Element (PIPE288)
  - 4-Node Finite Strain Shell (SHELL181)
  - 3-D Structural Solid Elements (SOLID185)
@@ -27,7 +27,7 @@ Element Type(s):
    :width: 400
    :alt: VM7 Finite Element Models
 
-Material Properties
+Material properties
  - :math:`E_{\mathrm{s}} = 26875000\,psi`
  - :math:`\sigma_{\mathrm{(yp)s}} = 86000\,psi`
  - :math:`E_{\mathrm{a}} = 11000000\,psi`
@@ -38,7 +38,7 @@ Material Properties
    :width: 300
    :alt: VM7 Material Model
 
-Geometric Properties:
+Geometric properties:
  - :math:`l = 10\,in`
  - :math:`A_{\mathrm{s}} = 7\,in^2`
  - :math:`A_{\mathrm{a}} = 12\,in^2`
@@ -52,7 +52,7 @@ Loading:
    :width: 300
    :alt: VM7 Problem Sketch
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The following tube dimensions, which provide the desired cross-sectional
    areas, are arbitrarily chosen:
 
@@ -91,7 +91,7 @@ mapdl = launch_mapdl()
 
 
 ###############################################################################
-# Pre-Processing
+# Pre-processing
 # ~~~~~~~~~~~~~~
 # Enter verification example mode and the pre-processing routine.
 
@@ -114,14 +114,14 @@ defl_ls3 = -0.1
 
 
 ###############################################################################
-# Define Element Type
+# Define element type
 # ~~~~~~~~~~~~~~~~~~~
 # Set up the element types .
 
 # Element type PIPE288.
 mapdl.et(1, "PIPE288")
 
-# Special Features are defined by keyoptions of pipe element.
+# Special features are defined by keyoptions of pipe element.
 # KEYOPT(4)(2)
 # Hoop strain treatment:
 # Thick pipe theory.
@@ -133,7 +133,7 @@ mapdl.et(2, "SOLID185")
 # Element type SHELL181.
 mapdl.et(3, "SHELL181")  # FULL INTEGRATION
 
-# Special Features are defined by keyoptions of shell element.
+# Special features are defined by keyoptions of shell element.
 # KEYOPT(3)(2)
 # Integration option:
 # Full integration with incompatible modes.
@@ -144,32 +144,32 @@ print(mapdl.etlist())
 
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material properties.
 #
-# * Young Modulus of steel is: :math:`E_{\mathrm{s}} = 26875000\,psi`,
+# * Young modulus of steel is: :math:`E_{\mathrm{s}} = 26875000\,psi`,
 # * Yield strength of steel is: :math:`\sigma_{\mathrm{(yp)s}} = 86000\, psi`,
-# * Young Modulus of aluminum is: :math:`E_{\mathrm{a}} = 11000000\,psi`,
+# * Young modulus of aluminum is: :math:`E_{\mathrm{a}} = 11000000\,psi`,
 # * Yield strength of aluminum is: :math:`\sigma_{\mathrm{(yp)a}} = 55000\,psi`,
 # * Poisson's ratio is: :math:`\nu = 0.3`
 
 # Steel material model.
-# Define Young's moulus and Poisson ratio for Steel.
+# Define Young's moulus and Poisson ratio for steel.
 mapdl.mp("EX", 1, 26.875e6)
 mapdl.mp("PRXY", 1, 0.3)
 
-# Define non-linear material properties for Steel.
+# Define non-linear material properties for steel.
 mapdl.tb("BKIN", 1, 1)
 mapdl.tbtemp(0)
 mapdl.tbdata(1, 86000, 0)
 
 # Aluminum material model.
-# Define Young's moulus and Poisson ratio for Aluminum.
+# Define Young's moulus and Poisson ratio for aluminum.
 mapdl.mp("EX", 2, 11e6)
 mapdl.mp("PRXY", 2, 0.3)
 
-# Define non-linear material properties for Aluminum.
+# Define non-linear material properties for aluminum.
 mapdl.tb("BKIN", 2, 1)
 mapdl.tbtemp(0)
 mapdl.tbdata(1, 55000, 0)
@@ -179,7 +179,7 @@ print(mapdl.mplist())
 
 
 ###############################################################################
-# Plot Stress - Strain Curve
+# Plot stress - strain curve
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Use Matplotlib library to plot material model curves of steel and aluminum.
 
@@ -214,7 +214,7 @@ plt.annotate(
 # Define stress - strain properties of the aluminum.
 aluminum = {"stress_a": [0, 55000, 55000, 55000], "strain_a": [0, 0.05, 0.1, 0.2]}
 
-# Define yielding strength point of the Aluminum on the curve.
+# Define yielding strength point of the aluminum on the curve.
 xp = aluminum["strain_a"][1]
 yp = aluminum["stress_a"][1]
 
@@ -246,7 +246,7 @@ plt.show()
 
 
 ###############################################################################
-# Define Section
+# Define section
 # ~~~~~~~~~~~~~~
 # Set up the cross-section properties for a shell and pipe elements.
 
@@ -262,7 +262,7 @@ mapdl.sectype(2, "SHELL")
 # Thickness (SHELL181)
 mapdl.secdata(0.5, 2, 0, 5)
 
-# Define Pipe cross-section for inside tube(steel).
+# Define pipe cross-section for inside tube(steel).
 mapdl.sectype(3, "PIPE")
 
 # Outside diameter and wall thickness settings for inside tube(PIPE288).
@@ -279,7 +279,7 @@ print(mapdl.slist())
 
 
 ###############################################################################
-# Define Geometry
+# Define geometry
 # ~~~~~~~~~~~~~~~
 # Set up the nodes and create the elements through the nodes.
 
@@ -317,12 +317,12 @@ mapdl.ngen(itime=2, inc=10, node1=101, node2=108, dy=theta)
 # Rotate nodal coordinate systems into the active system.
 mapdl.nrotat(node1=101, node2=118, ninc=1)
 
-# Create elements for Inside (Steel) tube.
+# Create elements for the inside (steel) tube.
 mapdl.type(2)
 mapdl.mat(1)
 mapdl.e(101, 102, 112, 111, 105, 106, 116, 115)
 
-# Create elements for Outside (Aluminum) tube
+# Create elements for the outside (aluminum) tube
 mapdl.mat(2)
 mapdl.e(103, 104, 114, 113, 107, 108, 118, 117)
 
@@ -335,12 +335,12 @@ mapdl.n(node=204, x=3.8197185, z=10)
 # Generate nodes to form a theta degree slice
 mapdl.ngen(itime=2, inc=4, node1=201, node2=204, dy=theta)
 
-# Create element for Steel(Inside) tube cross-section.
+# Create element for steel (inside) tube cross-section.
 mapdl.type(3)
 mapdl.secnum(1)
 mapdl.e(203, 201, 205, 207)
 
-# Create element for Aluminum(Outside) tube cross-section.
+# Create element for aluminum (outside) tube cross-section.
 mapdl.secnum(2)
 mapdl.e(204, 202, 206, 208)
 
@@ -354,7 +354,7 @@ mapdl.eplot(cpos=cpos)
 
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Application of boundary conditions (BC) for simplified  axisymmetric model.
 
@@ -366,15 +366,15 @@ mapdl.d(node=1, lab="ALL")
 mapdl.d(node=2, lab="UX", lab2="UY", lab3="ROTX", lab4="ROTY", lab5="ROTZ")
 
 # Apply constraints to SOLID185 and SHELL181 models"
-# Couple nodes at boundary in RADIAL direction for SOLID185.
+# Couple nodes at boundary in radial direction for SOLID185.
 mapdl.cp(nset=1, lab="UX", node1=101, node2=111, node3=105, node4=115)
 mapdl.cpsgen(itime=4, nset1=1)
 
-# Couple nodes at boundary in RADIAL direction for the SHELL181.
+# Couple nodes at boundary in radial direction for the SHELL181.
 mapdl.cp(5, lab="UX", node1=201, node2=205, node3=203, node4=20)
 mapdl.cpsgen(itime=2, nset1=5)
 
-# Couple nodes at boundary in ROTY dir for SHELL181.
+# Couple nodes at boundary in ROTY direction for SHELL181.
 mapdl.cp(7, lab="ROTY", node1=201, node2=205)
 mapdl.cpsgen(itime=4, nset1=7)
 
@@ -396,7 +396,7 @@ mapdl.nsel("R", "LOC", "Y", theta)
 # Apply symmetry boundary conditions.
 mapdl.dsym("SYMM", "Y", 1)
 
-# Select all nodes and RESELECT only nodes at Z = 0.
+# Select all nodes and reselect only nodes at Z = 0.
 mapdl.nsel("ALL")
 mapdl.nsel("R", "LOC", "Z", 0)
 
@@ -493,33 +493,33 @@ def getload():
 
 
 ###############################################################################
-# Getting Loads For Each Load Step
+# Getting loads for each load step
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Obtain the loads of the model using :func:`getload()` function.
 
-# Activate Load Step 1 and extract load data.
+# Activate load step 1 and extract load data.
 mapdl.set(1, 1)
 pipe288_ls1, solid185_ls1, shell181_ls1 = getload()
 
-# Activate Load Step 2 and extract load data.
+# Activate load step 2 and extract load data.
 mapdl.set(2, 1)
 pipe288_ls2, solid185_ls2, shell181_ls2 = getload()
 
-# Activate Load Step 3 and extract load data.
+# Activate load step 3 and extract load data.
 mapdl.set(3, 1)
 pipe288_ls3, solid185_ls3, shell181_ls3 = getload()
 
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Finally we have the results of the loads for the simplified axisymmetric model,
 # which can be compared with expected target values for models with ``PIPE288``,
 # ``SOLID185``, and ``SHELL181`` elements. Loads expected for each load step are:
 #
-# - 1st Load Step with deflection :math:`\delta = 0.032 (in)` has :math:`load_1 = 1024400\,(lb)`.
-# - 2nd Load Step with deflection :math:`\delta = 0.05 (in)` has :math:`load_2 = 1262000\,(lb)`.
-# - 3rd Load Step with deflection :math:`\delta = 0.1 (in)` has :math:`load_3 = 1262000\,(lb)`.
+# - 1st load step with deflection :math:`\delta = 0.032 (in)` has :math:`load_1 = 1024400\,(lb)`.
+# - 2nd load step with deflection :math:`\delta = 0.05 (in)` has :math:`load_2 = 1262000\,(lb)`.
+# - 3rd load step with deflection :math:`\delta = 0.1 (in)` has :math:`load_3 = 1262000\,(lb)`.
 
 target_res = np.asarray(
     [1024400, 1262000, 1262000, 1024400, 1262000, 1262000, 1024400, 1262000, 1262000]
@@ -610,5 +610,5 @@ df.style.set_caption("Results Comparison",).set_table_styles(
 )
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

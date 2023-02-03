@@ -42,18 +42,18 @@ jobs:
       - name: Test with tox
         run: tox -e style
 
-  # doc-style: #TO BE ADDED!!!
-  #   name: Documentation Style Check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: PyAnsys documentation style checks
-  #       uses: pyansys/actions/doc-style@v3
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
+  doc-style:
+    name: Documentation Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: PyAnsys documentation style checks
+        uses: pyansys/actions/doc-style@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   doc-build:
     name: Documentation building
-    needs: [style] # doc-style
+    needs: [style, doc-style]
     runs-on: ubuntu-latest
     env:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners

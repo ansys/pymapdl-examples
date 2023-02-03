@@ -7,9 +7,6 @@ The  following examples initially come from the `APDL Technology Showcase Manual
 <mapdl_tech_show_>`_. They initially were MAPDL files. They have been reproduced
 in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
 
-These examples are a work-in-progress and will be extended during the life of
-this project.
-
 
 
 .. raw:: html
@@ -38,18 +35,18 @@ this project.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Calibrating and Validating a Hyperelastic Constitutive Model">
+    <div class="sphx-glr-thumbcontainer" tooltip="Calibrating and validating a hyperelastic constitutive model">
 
 .. only:: html
 
   .. image:: ./images/thumb/sphx_glr_tse-015-calvalhyper_thumb.png
-    :alt: Calibrating and Validating a Hyperelastic Constitutive Model
+    :alt: Calibrating and validating a hyperelastic constitutive model
 
   :ref:`sphx_glr_ex_15-tecHyperConstlModel.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
+      <div class="sphx-glr-thumbnail-title">Calibrating and validating a hyperelastic constitutive Model</div>
     </div>
 
 

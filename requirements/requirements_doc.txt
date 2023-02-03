@@ -1,5 +1,5 @@
 #PyMAPDL dependencies
-git+https://github.com/pyansys/pymapdl@bug/launch_mapdl_grpc
+git+https://github.com/pyansys/pymapdl@main
 numpy==1.24.1
 pandas==1.5.3
 plotly==5.13.0
@@ -20,4 +20,3 @@ sphinx-autobuild==2021.3.14
 sphinx-autodoc-typehints==1.22
 sphinx-notfound-page==0.8.3
 pypandoc==1.10
-vtk==9.2.5

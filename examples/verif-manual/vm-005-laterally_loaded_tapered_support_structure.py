@@ -1,8 +1,8 @@
 r""".. _ref_vm5_example:
 
-Statically Indeterminate Reaction Force Analysis
+Statically indeterminate reaction force analysis
 ------------------------------------------------
-Problem Description:
+Problem description:
  - A cantilever beam of thickness :math:`t` and length :math:`l`
    has a depth which tapers uniformly from :math:`d` at the tip
    to :math:`3d` at the wall. It is loaded by a force :math:`F`
@@ -14,10 +14,10 @@ Reference:
    of Solids, McGraw-Hill Book Co., Inc., New York, NY, 1959,
    pg. 342, problem 7.18.
 
-Analysis Type(s):
+Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
-Element Type(s):
+Element type(s):
  - 2-D 4-Node Sructural Solid Elements (PLANE182)
  - 2-D 8-Node Structural Solid Elements (PLANE183)
 
@@ -25,13 +25,13 @@ Element Type(s):
    :width: 400
    :alt: VM5 Problem Sketch
 
-Material Properties
+Material properties
  - :math:`E = 30 \cdot 10^6 psi`
  - :math:`\nu = 0.0`
  - :math:`d = 3in`
  - :math:`t = 2in`
 
-Geometric Properties:
+Geometric properties:
  - :math:`l = 50 in`
  - :math:`d = 3 in`
  - :math:`t = 2 in`
@@ -64,7 +64,7 @@ mapdl.verify()
 mapdl.prep7()
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material using PLANE182 with a thickness of 2 (using real
 # constants), and create a material with a Young's modulus of 30e6,
@@ -78,7 +78,7 @@ mapdl.mp("NUXY", 1, 0.0)
 
 
 ###############################################################################
-# Define Geometry
+# Define geometry
 # ~~~~~~~~~~~~~~~
 # Set up the nodes and elements.  This creates a mesh just like in the
 # problem setup.
@@ -95,7 +95,7 @@ mapdl.eplot(show_node_numbering=True, cpos="xy")
 
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Fix the nodes at the larger end (the "wall" end) and apply a vertical force
 # to the whole structure.
@@ -191,7 +191,7 @@ result.plot_principal_nodal_stress(
 )
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Now that we have the stresses we can compare them to the expected values
 # of stress at the midpoint (8333) and the fixed end (7407) for both
@@ -218,5 +218,5 @@ print(results_183)
 
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

@@ -1,8 +1,8 @@
 r""".. _ref_thermally_loaded_support_structure:
 
-Thermally Loaded Support Structure
+Thermally loaded support structure
 ----------------------------------
-Problem Description:
+Problem description:
  - Find the stresses in the copper and steel wire structure shown below.
    The wires have a cross-sectional area of math:`A`. The structure is
    subjected to a load math:`Q` and a temperature rise of math:`\Delta T` after
@@ -13,30 +13,30 @@ Reference:
    Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
    pg. 30, problem 9.
 
-Analysis Type(s):
+Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
-Element Type(s):
+Element type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
 
 .. image:: ../_static/vm3_setup.png
    :width: 400
    :alt: VM3 Problem Sketch
 
-Material Properties
+Material properties
  - :math:`E_c = 16 \cdot 10^6 psi`
  - :math:`E_s = 30 \cdot 10^6 psi`
  - :math:`\alpha_c = 70 \cdot 10^{-7} in/in-^\circ F`
  - :math:`\alpha_s = 92 \cdot 10^{-7} in/in-^\circ F`
 
-Geometric Properties:
+Geometric properties:
  - :math:`A = 0.1 in^2`
 
 Loading:
  - :math:`Q = 4000 lb`
  - :math:`\Delta T = 10 ^\circ F`
 
-Analytical Equations:
+Analytical equations:
  - The compressive force :math:`X` is given by the following equation
  - :math:`X = \frac{\Delta T (\alpha_c - \alpha_s) (A_s - E_s) }{1 + \frac{1 E_s A_s}{2 E_c A_c}} + \frac{Q}{1 + \frac{2 E_c A_c}{E_s A_s}}`
 
@@ -60,7 +60,7 @@ mapdl.verify()
 mapdl.prep7()
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Set up the materials and their properties. We are using copper and
 # steel here.
@@ -80,7 +80,7 @@ mapdl.mp("ALPX", 2, 70e-7)
 mapdl.tref(70)
 
 ###############################################################################
-# Define Geometry: Nodes
+# Define geometry: nodes
 # ~~~~~~~~~~~~~~~~~~~~~~
 # Set up the nodes and elements.  This creates a mesh just like in the
 # problem setup. We create a square of nodes and use `fill` to add
@@ -95,7 +95,7 @@ mapdl.fill()
 mapdl.nplot(nnum=True, cpos="xy")
 
 ###############################################################################
-# Define Geometry: Elements
+# Define geometry: elements
 # ~~~~~~~~~~~~~~~~~~~~~~~~~
 # Create two elements (using material #1) that are two sides of our
 # square, as links. Then create a single element using material #2
@@ -108,7 +108,7 @@ mapdl.e(2, 5)
 mapdl.eplot(show_node_numbering=True, cpos="xy")
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # - Couple the degrees of freedom in y-displacement across nodes 5, 4,
 #   and 6.
@@ -158,7 +158,7 @@ stress_steel = mapdl.get("_", "ELEM", steel_e, "ETAB", "STRS_ST")
 stress_copper = mapdl.get("_", "ELEM", copper_e, "ETAB", "STRS_CO")
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Now that we have the response we can compare the values to the
 # expected stresses of 19695 and 10152 respectively.
@@ -184,5 +184,5 @@ print(message)
 
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

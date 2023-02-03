@@ -65,7 +65,7 @@ mapdl = launch_mapdl()
 
 
 ###############################################################################
-# Pre-Processing
+# Pre-processing
 # ~~~~~~~~~~~~~~
 # Enter verification example mode and the pre-processing routine.
 
@@ -75,7 +75,7 @@ mapdl.prep7(mute=True)
 
 
 ###############################################################################
-# Define Element Type
+# Define element type
 # ~~~~~~~~~~~~~~~~~~~
 # Set up the element type ``BEAM188``.
 
@@ -85,7 +85,7 @@ mapdl.antype("STATIC")
 # Element type: BEAM188.
 mapdl.et(1, "BEAM188")
 
-# Special Features are defined by keyoptions of BEAM188:
+# Special features are defined by keyoptions of BEAM188:
 
 # KEYOPT(3)
 # Shape functions along the length:
@@ -97,7 +97,7 @@ print(mapdl.etlist())
 
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material, where:
 #
@@ -105,7 +105,7 @@ print(mapdl.etlist())
 # * :math:`\nu = 0.3` - Poisson's ratio.
 
 # Steel material model.
-# Define Young's moulus and Poisson ratio for Steel.
+# Define Young's moulus and Poisson ratio for steel.
 mapdl.mp("EX", 1, 30e6)
 mapdl.mp("PRXY", 1, 0.3)
 
@@ -114,7 +114,7 @@ print(mapdl.mplist())
 
 
 ###############################################################################
-# Define Section
+# Define section
 # ~~~~~~~~~~~~~~
 # Set up the cross-section properties for a beam elements, where:
 #
@@ -138,7 +138,7 @@ mapdl.secdata(w1, w2, t1, t2)
 print(mapdl.slist())
 
 ###############################################################################
-# Define Geometry
+# Define geometry
 # ~~~~~~~~~~~~~~~
 # Set up the nodes and elements. Create nodes between elements.
 
@@ -174,7 +174,7 @@ mapdl.eplot(show_node_numbering=True, line_width=5, cpos=cpos, font_size=40)
 
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Application of boundary conditions (BC).
 
@@ -183,7 +183,7 @@ mapdl.d(node="ALL", lab="UZ", lab2="ROTX", lab3="ROTY", mute=True)
 
 
 ###############################################################################
-# Define Distributed Loads
+# Define distributed loads
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # Apply a bending moment :math:`\mathrm{M_{z}}= 100000\,in\,lb`.
 
@@ -218,7 +218,7 @@ mapdl.post1(mute=True)
 
 
 ###############################################################################
-# Getting Displacements
+# Getting displacements
 # ~~~~~~~~~~~~~~~~~~~~~
 # Using :meth:`Mapdl.etable <ansys.mapdl.core.Mapdl.etable>` get the results of
 # the the maximum tensile and compressive bending stresses in
@@ -238,7 +238,7 @@ strss_bot_tens = mapdl.get_value(entity="ELEM", entnum=1, item1="ETAB", it1num="
 
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Finally we have the results of the the maximum tensile and
 # compressive bending stresses, which can be compared with expected target
@@ -279,5 +279,5 @@ df2 = pd.DataFrame(main_columns, index=row_names).round(1)
 df2.head()
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

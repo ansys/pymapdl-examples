@@ -1,3 +1,11 @@
 ANSYS
 Ansys
 ansys
+MAPDL
+Technology Showcases
+Young
+Poisson
+Matplotlib
+DOF
+UZ
+ROTY

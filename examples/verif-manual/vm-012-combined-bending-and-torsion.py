@@ -3,7 +3,7 @@ r""".. _ref_vm12_example:
 Combined bending and torsion
 ----------------------------
 
-Problem Description:
+Problem description:
  - A vertical bar of length :math:`l` is subjected to the action of a
    horizontal force F acting at a distance d from the axis of the bar.
    Determine the maximum principal stress :math:`\sigma _{max}` and the
@@ -14,22 +14,22 @@ Reference:
    Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
    pg. 299, problem 2.
 
-Analysis Type(s):
- - Static Analysis ``ANTYPE=0``
+Analysis type(s):
+ - Static analysis ``ANTYPE=0``
 
-Element Type(s):
- - Elastic Straight pipe element (``PIPE16``)
+Element type(s):
+ - Elastic straight pipe element (``PIPE16``)
  - 3D 2 Node pipe element (``PIPE288``)
 
 .. image:: ../_static/vm12_setup.png
    :width: 400
    :alt: VM12 Problem Sketch
 
-Material Properties
+Material properties
  - :math:`E = 30 \cdot 10^6 psi`
  - :math:`u=0.3`
 
-Geometric Properties:
+Geometric properties:
  - :math:`l = 25 l`
  - :math:`d = 3 ft`
  - Section modulus :math:`(l/c) = 10 in^3`
@@ -40,7 +40,7 @@ Loading:
  - :math:`F = 250 lb`
  - :math:`M = Fd = 9000 in-lb`
 
-Analytical Equations:
+Analysis assumptions and modeling notes:
  - Use consistent length units of inches. Real constants for PIPE16 and
    section properties for PIPE288 are used to define the pipe Outer Diameter
    and Wall Thickness. These values are calculated for a solid cross-section
@@ -175,4 +175,6 @@ mapdl.run("/GOPR")
 mapdl.finish()
 mapdl.starlist("vm12", "vrt")
 
+###############################################################################
+# Stop MAPDL.
 mapdl.exit()

@@ -1,8 +1,8 @@
 r""".. _ref_vm2_example:
 
-Beam Stresses and Deflections
+Beam stresses and deflections
 -----------------------------
-Problem Description:
+Problem description:
 
  - A standard 30 inch WF beam, with a cross-sectional area :math:`A`,
    is supported as shown below and loaded on the overhangs by a
@@ -16,11 +16,11 @@ Reference:
    Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
    pg. 98, problem 4.
 
-Analysis Type(s):
+Analysis type(s):
 
  - Static Analysis ``ANTYPE=0``
 
-Element Type(s):
+Element type(s):
 
  - 3-D 2 Node Beam (BEAM188)
 
@@ -28,11 +28,11 @@ Element Type(s):
    :width: 400
    :alt: VM2 Problem Sketch
 
-Material Properties:
+Material properties:
 
  - :math:`E = 30 \cdot 10^6 psi`
 
-Geometric Properties:
+Geometric properties:
 
  - :math:`a = 120 in`
  - :math:`l = 240 in`
@@ -44,7 +44,7 @@ Loading:
 
  - :math:`w = (10000/12) lb/in`
 
-Analytical Equations:
+Analytical equations:
 
 - :math:`M` is the bending moment for the middle portion of the beam:
   :math:`M = 10000 \cdot 10 \cdot 60 = 6 \cdot 10^6 lb \cdot in`
@@ -73,11 +73,11 @@ mapdl.prep7()
 
 
 ###############################################################################
-# Define Element Type
+# Define element type
 # ~~~~~~~~~~~~~~~~~~~
 # Set up the element type (a beam-type).
 
-# Type of analysis: Static.
+# Type of analysis: static.
 mapdl.antype("STATIC")
 
 # Element type: BEAM188.
@@ -98,7 +98,7 @@ mapdl.keyopt(1, 9, 3, mute=True)
 
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material.
 
@@ -108,7 +108,7 @@ print(mapdl.mplist())
 
 
 ###############################################################################
-# Define Section
+# Define section
 # ~~~~~~~~~~~~~~
 # Set up the cross-section properties for a beam element.
 
@@ -120,7 +120,7 @@ mapdl.secdata(15, 15, 28 + (2 * w_f), w_f, w_f, w_w)
 
 
 ###############################################################################
-# Define Geometry
+# Define geometry
 # ~~~~~~~~~~~~~~~
 # Set up the nodes and elements. Create nodes then create elements
 # between nodes.
@@ -149,7 +149,7 @@ mapdl.eplot(show_node_numbering=True, line_width=5, cpos="xy", font_size=40)
 
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Application of boundary conditions (BC).
 
@@ -165,7 +165,7 @@ mapdl.d("ALL", "ROTY")
 mapdl.nsel("ALL")
 
 ###############################################################################
-# Define Distributed Loads
+# Define distributed loads
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # Apply a distributed force of :math:`w = (10000/12) lb/in`
 # in the y-direction.
@@ -209,7 +209,7 @@ mid_node_uy = mapdl.get_value(entity="NODE", entnum=3, item1="u", it1num="y")
 
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Now that we have the results we can compare the nodal displacement and stress
 # experienced by middle node of the beam to the known stresses -11,400 psi and
@@ -236,5 +236,5 @@ print(output)
 
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

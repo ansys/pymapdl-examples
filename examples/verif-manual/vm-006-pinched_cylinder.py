@@ -1,8 +1,8 @@
 r""".. _ref_vm6_example:
 
-Pinched Cylinder
+Pinched cylinder
 ----------------
-Problem Description:
+Problem description:
  - A thin-walled cylinder is pinched by a force :math:`F` at the middle
    of the cylinder length. Determine the radial displacement :math:`\delta`
    at the point where the force :math:`F` is applied.
@@ -15,10 +15,10 @@ Reference:
    Element", International Journal for Numerical Methods in Engineering, Vol.7
    No. 3, 1973.
 
-Analysis Type(s):
+Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
-Element Type(s):
+Element type(s):
  - 4-Node Finite Strain Shell Elements (SHELL181)
  - 8-Node Finite Strain Shell Elements (SHELL281)
 
@@ -26,11 +26,11 @@ Element Type(s):
    :width: 400
    :alt: VM6 Pinched Cylinder Problem Sketch
 
-Material Properties
+Material properties
  - :math:`E = 10.5 \cdot 10^6 psi`
  - :math:`\nu = 0.3125`
 
-Geometric Properties:
+Geometric properties:
  - :math:`l = 10.35  in`
  - :math:`r = 4.953  in`
  - :math:`t = 0.094  in`
@@ -38,7 +38,7 @@ Geometric Properties:
 Loading:
  - :math:`F = 100  lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - A one-eighth symmetry model is used. One-fourth of the load is applied
    due to symmetry.
 
@@ -56,7 +56,7 @@ mapdl = launch_mapdl()
 
 
 ###############################################################################
-# Initiate Pre-Processing
+# Initiate pre-processing
 # ~~~~~~~~~~~~~~~~~~~~~~~
 # Enter verification example mode and the pre-processing routine.
 
@@ -71,7 +71,7 @@ start_prep7()
 
 
 ###############################################################################
-# Define Element Type
+# Define element type
 # ~~~~~~~~~~~~~~~~~~~
 # Set up the element type (a shell-type).
 
@@ -112,7 +112,7 @@ print(
 
 
 ###############################################################################
-# Define Material
+# Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material properties, where:
 # Young Modulus is :math:`E = 10.5 \cdot 10^6 psi`,
@@ -134,7 +134,7 @@ print(material_list)
 
 
 ###############################################################################
-# Define Section
+# Define section
 # ~~~~~~~~~~~~~~
 # Set up the cross-section properties for a shell element.
 
@@ -155,7 +155,7 @@ print(section_list)
 
 
 ###############################################################################
-# Define Geometry
+# Define geometry
 # ~~~~~~~~~~~~~~~
 # Set up the keypoints and create the area through the keypoints.
 
@@ -249,7 +249,7 @@ meshing()
 
 
 ###############################################################################
-# Define Boundary Conditions
+# Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Application of symmetric boundary conditions for simplified model.
 
@@ -269,7 +269,7 @@ define_bc()
 
 
 ###############################################################################
-# Define Distributed Loads
+# Define distributed loads
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # Apply the force of :math:`F = (100/4) lb` in the y-direction.
 
@@ -373,7 +373,7 @@ print(
 
 
 ###############################################################################
-# Rerun Model with SHELL281
+# Rerun model with SHELL281
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Perform the simulation again using the element type SHELL281.
 
@@ -409,7 +409,7 @@ top_node_281, deflect_shell_281 = get_displacements()
 
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Now we have the deflections, we can compare them to the expected values
 # of radial deflection at the node where force :math:`F` was applied
@@ -440,5 +440,5 @@ output = f"""
 print(output)
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()

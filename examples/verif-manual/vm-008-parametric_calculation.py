@@ -1,8 +1,8 @@
 r""".. _ref_vm8_example:
 
-Parametric Calculation
+Parametric calculation
 ----------------------
-Problem Description:
+Problem description:
  - Write a user file macro to calculate the distance ``d`` between either nodes
    or keypoints in ``PREP7``. Define abbreviations for calling the macro and
    verify the parametric expressions by using the macro to calculate
@@ -12,13 +12,13 @@ Problem Description:
 Reference:
  - None.
 
-Analysis Type(s):
- - Parametric Arithmetic.
+Analysis type(s):
+ - Parametric arithmetic.
 
-Element Type:
+Element type:
  - None.
 
-Geometric Properties(Coordinates):
+Geometric properties (coordinates):
  - :math:`N_{\mathrm{1(x,y,z)}} = 1.5, 2.5, 3.5`
  - :math:`N_{\mathrm{2(x,y,z)}} = -3.7, 4.6, -3`
  - :math:`K_{\mathrm{3(x,y,z)}} = 100, 0, 30`
@@ -28,7 +28,7 @@ Geometric Properties(Coordinates):
    :width: 300
    :alt: VM8 Problem Sketch
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Instead of ``*CREATE``, ``*USE``, etc., we have created a class
    ``Create`` with methods that correspond to each type of simulation.
    This class gives a possibility to change coordinates and reuse it.
@@ -65,7 +65,7 @@ mapdl = launch_mapdl()
 
 
 ###############################################################################
-# Pre-Processing
+# Pre-processing
 # ~~~~~~~~~~~~~~
 # Enter verification example mode and the pre-processing routine.
 
@@ -75,7 +75,7 @@ mapdl.prep7(mute=True)
 
 
 ###############################################################################
-# Define Class
+# Define class
 # ~~~~~~~~~~~~
 # Identifying the class ``create`` with methods ``create_kp_method`` and
 # ``create_node_method`` to calculate and plot the distances between keypoints
@@ -193,7 +193,7 @@ print(mapdl.nlist())
 
 
 ###############################################################################
-# Check Results
+# Check results
 # ~~~~~~~~~~~~~
 # Finally we have the results of the distances for both simulations,
 # which can be compared with expected target values:
@@ -232,5 +232,5 @@ df2 = pd.DataFrame(main_columns, index=row_names).round(2)
 df2.head()
 
 ###############################################################################
-# stop mapdl
+# Stop MAPDL.
 mapdl.exit()
