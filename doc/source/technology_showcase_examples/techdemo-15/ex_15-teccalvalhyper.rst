@@ -1,10 +1,11 @@
 .. _sphx_glr_ex_15-tecHyperConstlModel.py:
 
-Calibrating and Validating a Hyperelastic Constitutive Model
+Calibrating and validating a hyperelastic constitutive model
 ------------------------------------------------------------
 
-This example problem demonstrates the hyperelastic curve-fitting capabilities used to select constitutive model
-parameters to fit experimental data. Several issues that influence the accuracy of the curve fit are discussed.
+This example problem demonstrates the hyperelastic curve-fitting capabilities used
+to select constitutive model parameters to fit experimental data. Several issues
+that influence the accuracy of the curve fit are discussed.
 Validation of the resulting constitutive model is demonstrated by comparison with a
 tension-torsion experiment.
 
@@ -53,7 +54,7 @@ After demonstrating the fitting procedure and selecting a suitable constitutive 
 a tension-torsion experiment is simulated and compared to the experimental data to
 validate the predictions for the model.
 
-15.3. Material Properties
+15.3. Material properties
 -------------------------
 
 Material properties for the calibration and validation experiments follow:
@@ -61,7 +62,7 @@ Material properties for the calibration and validation experiments follow:
 *  `15.3.1. Calibration Experiments`_
 *  `15.3.2. Validation Experiment`_
 
-15.3.1. Calibration Experiments
+15.3.1. Calibration experiments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Experimental data was obtained via a simulation of a hyperelastic test suite with
@@ -70,20 +71,20 @@ dark areas indicating locations of the clamps:
 
 .. figure:: graphics/gtec_calvalhyper_fig1.gif
     :align: center
-    :alt: Hyperelastic Test Suite: Test Specimens
+    :alt: Hyperelastic test suite: test specimens
     :figclass: align-center
     
-    **Figure 15.1: Hyperelastic Test Suite: Test Specimens**
+    **Figure 15.1: Hyperelastic test suite: test specimens**
 
 The engineering-stress vs. engineering-strain results are as follows:
 
 .. figure:: graphics/gtec_calvalhyper_fig2.gif
     :align: center
-    :alt: Hyperelastic Test Suite: Experimental Data
+    :alt: Hyperelastic test suite: experimental data
     :figclass: align-center
     :name: figure_experimental_data
 
-    **Figure 15.2: Hyperelastic Test Suite: Experimental Data**
+    **Figure 15.2: Hyperelastic test suite: experimental data**
 
 The uniaxial specimen is similar to ASTM D412-C (ASTM Standard D412, 2006). 
 
@@ -99,7 +100,7 @@ For the planar specimen, the crosshead is displaced by 191.6 mm, giving a
 calculated engineering strain of 639 percent and a calculated engineering stress of
 54.7 MPa. 
 
-15.3.2. Validation Experiment
+15.3.2. Validation experiment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A simulated tension-torsion experiment was performed on a thin strip. The specimen
@@ -108,10 +109,10 @@ here:
 
 .. figure:: graphics/gtec_calvalhyper_fig3.gif
     :align: center
-    :alt: Tension-Torsion Test Specimen
+    :alt: Tension-torsion test specimen
     :figclass: align-center
     
-    **Figure 15.3: Tension-Torsion Test Specimen**
+    **Figure 15.3: Tension-torsion test specimen**
 
 The experiment consists of clamping each end of the specimen into the test
 apparatus, then stretching the specimen by 50 percent of its original gage length
@@ -120,27 +121,27 @@ resulting moment-vs.-rotation data:
 
 .. figure:: graphics/gtec_calvalhyper_fig4.gif
     :align: center
-    :alt: Tension-Torsion Experimental Data
+    :alt: Tension-torsion experimental data
     :figclass: align-center
     
-    **Figure 15.4: Tension-Torsion Experimental Data**
+    **Figure 15.4: Tension-torsion experimental data**
 
-15.4. Analysis and Solution Controls
+15.4. Analysis and solution controls
 ------------------------------------
 
 Analysis and solution-control information for calibration and validation
 follow:
 
-*  `15.4.1. Calibrating Parameters`_
-*  `15.4.2. Validating Parameters`_
+*  `15.4.1. Calibrating parameters`_
+*  `15.4.2. Validating parameters`_
 
-15.4.1. Calibrating Parameters
+15.4.1. Calibrating parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Material parameter calibration occurs using the curve-fitting
 tool.
 
-**Example 15.1: Fitting a Hyperelastic Constitutive Model to a Set of Uniaxial Stress-Strain
+**Example 15.1: Fitting a hyperelastic constitutive model to a set of uniaxial stress-strain
 Data**
 
 The command input shown here is for illustration only. While curve-fitting is
@@ -204,7 +205,7 @@ model are:
 +-----------------------------------+
 
 
-15.4.2. Validating Parameters
+15.4.2. Validating parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following is a mesh developed to simulate the torsion experiment to validate the

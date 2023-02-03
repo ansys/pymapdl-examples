@@ -40,7 +40,7 @@ Summary of the exposed Technology Showcases
 
 The exposed files are more complex examples than the ones presented in the `APDL
 Verification Manual <mapdl_vm_>`_. They are complete and concrete case studies
-which necesitate more resources. 
+which necessitate more resources. 
 
 .. include:: ./technology_showcase_examples/index.rst
   :start-line: 9
