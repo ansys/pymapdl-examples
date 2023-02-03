@@ -128,7 +128,8 @@ with mapdl.non_interactive:
     mapdl.com("")
     mapdl.com("-----------------------------------------------------------------")
     mapdl.run("/OUT")
-    mapdl.run("/GOPR")
+
+mapdl.run("/GOPR")
 
 mapdl.finish()
 mapdl.starlist("vm12", "vrt")
