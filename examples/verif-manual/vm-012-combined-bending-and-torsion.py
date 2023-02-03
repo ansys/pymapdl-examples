@@ -4,12 +4,50 @@ Combined bending and torsion
 ----------------------------
 
 Problem Description:
-    - TO DO
+    - A vertical bar of length :math:`l` is subjected to the action of a
+    horizontal force F acting at a distance d from the axis of the bar.
+    Determine the maximum principal stress :math: `\sigma _{max}` and the
+    maximum shear stress τmax in the bar.
 
 Reference:
     - Timoshenko, Strength of Materials, Part I, Elementary Theory and
       Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
       pg. 299, problem 2.
+
+Analysis Type(s):
+ - Static Analysis ``ANTYPE=0``
+
+Element Type(s):
+ - Elastic Straight pipe element (PIPE16)
+ - 3D 2 Node pipe element (PIPE288)
+
+.. image:: ../_static/vm12_setup.png
+   :width: 400
+   :alt: VM12 Problem Sketch
+
+Material Properties
+ - :math:`E = 30 \cdot 10^6 psi`
+ - :math:`u=0.3`
+
+Geometric Properties:
+ - :math:`l = 25 l`
+ - :math:`d = 3 ft`
+ - Section modulus :math:`(l/c) = 10 in^3`
+ - Outer Diameter :math:` = 4.67017 in`
+ - Wall Thickness :math:` = 2.33508 in`
+
+Loading:
+ - :math:`F = 250 lb`
+ - :math:`M = Fd = 9000 in-lb`
+
+Analytical Equations:
+ - Use consistent length units of inches. Real constants for PIPE16 and
+   section properties for PIPE288 are used to define the pipe Outer Diameter
+   and Wall Thickness. These values are calculated for a solid cross-section
+   from the given section modulus. The offset load is applied as a centroidal
+   force and a moment.
+
+
 
 """
 # sphinx_gallery_thumbnail_path = '_static/vm12_setup.png'
