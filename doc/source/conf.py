@@ -70,7 +70,7 @@ sphinx_gallery_conf = {
     "within_subsection_order": FileNameSortKey,
     # directory where function granular galleries are stored
     "backreferences_dir": None,
-    # Modules for which function level galleries are created.  In
+    # Modules for which function level galleries are created. In
     "doc_module": "ansys-mapdl-core",
     "image_scrapers": ("pyvista", "matplotlib"),
     "ignore_pattern": "flycheck*",

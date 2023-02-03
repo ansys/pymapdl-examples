@@ -21,7 +21,7 @@ Additional Packages Used
 # ----------------
 #
 # The original FE model is given in the Ansys Mechanical APDL Technology
-# Showcase Manual.  The .cdb contains a FE model of a single circuit board. The
+# Showcase Manual. The .cdb contains a FE model of a single circuit board. The
 # model is meshed with SOLID186, SHELL181 and BEAM188 elements. All components
 # of the PCB model is assigned with linear elastic isotropic materials. Bonded
 # and flexible surface-to-surface contact pairs are used to define the contact

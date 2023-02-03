@@ -80,7 +80,7 @@ mapdl.mp("NUXY", 1, 0.0)
 ###############################################################################
 # Define geometry
 # ~~~~~~~~~~~~~~~
-# Set up the nodes and elements.  This creates a mesh just like in the
+# Set up the nodes and elements. This creates a mesh just like in the
 # problem setup.
 
 mapdl.n(1, 25)

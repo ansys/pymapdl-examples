@@ -41,7 +41,8 @@ midside
 nonlinearities
 GPa
 unconverged
-Von Misese
+Von
+Mises
 Ozel
 Karpat
 Srivastava
@@ -55,3 +56,5 @@ Willner
 Schroth
 Hoffmann
 Lanczos
+Jobname.RST
+Gerges

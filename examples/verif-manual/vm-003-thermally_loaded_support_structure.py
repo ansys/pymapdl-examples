@@ -82,7 +82,7 @@ mapdl.tref(70)
 ###############################################################################
 # Define geometry: nodes
 # ~~~~~~~~~~~~~~~~~~~~~~
-# Set up the nodes and elements.  This creates a mesh just like in the
+# Set up the nodes and elements. This creates a mesh just like in the
 # problem setup. We create a square of nodes and use `fill` to add
 # mid-point nodes to two opposite sides.
 

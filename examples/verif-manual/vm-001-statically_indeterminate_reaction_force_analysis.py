@@ -4,7 +4,7 @@ Statically indeterminate reaction force analysis
 ------------------------------------------------
 Problem description:
  - A prismatical bar with built-in ends is loaded axially at two
-   intermediate cross sections.  Determine the reactions :math:`R_1`
+   intermediate cross sections. Determine the reactions :math:`R_1`
    and :math:`R_2`.
 
 Reference:
@@ -66,7 +66,7 @@ mapdl.mp("EX", 1, 30e6)
 ###############################################################################
 # Define geometry
 # ~~~~~~~~~~~~~~~
-# Set up the nodes and elements.  This creates a mesh just like in the
+# Set up the nodes and elements. This creates a mesh just like in the
 # problem setup.
 
 mapdl.n(1, 0, 0)
