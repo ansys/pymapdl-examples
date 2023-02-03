@@ -74,13 +74,12 @@ Analysis Assumptions and Modeling Notes:
    the ``ROTY`` degree of freedom coupled.
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm7_setup.png'
 
 ###############################################################################
 # Start MAPDL
 # ~~~~~~~~~~~
 # Start MAPDL and import Numpy and Pandas libraries.
-
-# sphinx_gallery_thumbnail_path = '../_static/vm7_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 import matplotlib.pyplot as plt

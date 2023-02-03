@@ -53,7 +53,7 @@ Notes:
    - :math:`b = l sin \Theta`.
 
 """
-# sphinx_gallery_thumbnail_path = '../_static/vm4_setup.png'
+# sphinx_gallery_thumbnail_path = '_static/vm4_setup.png'
 
 ###############################################################################
 # Start MAPDL

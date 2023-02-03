@@ -60,13 +60,12 @@ Analysis Assumptions and Modeling Notes:
    the solution phase.
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm9_setup.png'
 
 ###############################################################################
 # Start MAPDL
 # ~~~~~~~~~~~
 # Start MAPDL and import Numpy and Pandas libraries.
-
-# sphinx_gallery_thumbnail_path = '../_static/vm9_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 import numpy as np

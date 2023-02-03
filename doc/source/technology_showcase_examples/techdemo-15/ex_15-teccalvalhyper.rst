@@ -1,5 +1,7 @@
-Technology Showcase Example 15: Calibrating and Validating a Hyperelastic Constitutive Model
-----------------------------------------------------------------------------------------------
+.. _sphx_glr_ex_15-tecHyperConstlModel.py:
+
+Calibrating and Validating a Hyperelastic Constitutive Model
+------------------------------------------------------------
 
 This example problem demonstrates the hyperelastic curve-fitting capabilities used to select constitutive model
 parameters to fit experimental data. Several issues that influence the accuracy of the curve fit are discussed.

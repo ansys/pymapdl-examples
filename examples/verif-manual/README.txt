@@ -1,8 +1,7 @@
-.. _sphx_glr_vm_examples:
+.. _ref_vm_examples:
 
 Verification Manual
 ===================
-
 This section demonstrates a range of Mechanical APDL elements and capabilities
 in straightforward problems which have “classical” or readily-obtainable
 theoretical solutions using PyMAPDL.

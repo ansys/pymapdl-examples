@@ -12,6 +12,7 @@ Reference:
       pg. 299, problem 2.
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm12_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 

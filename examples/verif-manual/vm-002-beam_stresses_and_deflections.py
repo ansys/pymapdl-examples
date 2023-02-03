@@ -55,12 +55,11 @@ Static Analysis ``ANTYPE=0``
   :math:`\delta = 0.182 in`
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm2_setup.png'
 
 ###############################################################################
 # Start MAPDL
 # ~~~~~~~~~~~
-
-# sphinx_gallery_thumbnail_path = '../_static/vm2_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 

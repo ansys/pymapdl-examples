@@ -47,7 +47,7 @@ Notes:
    ratio is set to 0.0 to agree with beam theory.
 
 """
-# sphinx_gallery_thumbnail_path = '../_static/vm5_setup.png'
+# sphinx_gallery_thumbnail_path = '_static/vm5_setup.png'
 
 ###############################################################################
 # Start MAPDL

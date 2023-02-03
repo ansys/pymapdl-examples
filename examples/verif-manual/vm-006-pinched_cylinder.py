@@ -43,7 +43,7 @@ Analysis Assumptions and Modeling Notes:
    due to symmetry.
 
 """
-# sphinx_gallery_thumbnail_path = '../_static/vm6_setup.png'
+# sphinx_gallery_thumbnail_path = '_static/vm6_setup.png'
 
 ###############################################################################
 # Start MAPDL

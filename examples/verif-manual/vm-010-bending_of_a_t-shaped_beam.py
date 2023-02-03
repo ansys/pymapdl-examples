@@ -49,13 +49,12 @@ Analysis Assumptions and Modeling Notes:
    stem thickness :math:`(b)`, input using :meth:`Mapdl.secdata <ansys.mapdl.core.Mapdl.secdata>`.
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm10_setup.png'
 
 ###############################################################################
 # Start MAPDL
 # ~~~~~~~~~~~
 # Start MAPDL and import Numpy and Pandas libraries.
-
-# sphinx_gallery_thumbnail_path = '../_static/vm10_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 import numpy as np

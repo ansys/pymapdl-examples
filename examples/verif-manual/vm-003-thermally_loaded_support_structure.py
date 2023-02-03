@@ -47,7 +47,7 @@ Notes:
 
 """  # noqa:E501
 
-# sphinx_gallery_thumbnail_path = '../_static/vm3_setup.png'
+# sphinx_gallery_thumbnail_path = '_static/vm3_setup.png'
 
 from ansys.mapdl.core import launch_mapdl
 
