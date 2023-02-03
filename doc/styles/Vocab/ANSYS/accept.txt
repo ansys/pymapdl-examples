@@ -56,5 +56,4 @@ Willner
 Schroth
 Hoffmann
 Lanczos
-Jobname.RST
 Gerges

@@ -642,7 +642,7 @@ plates such as Young's modulus and the coefficient of thermal expansion are
 considered to be constant due to the limitations of data available in the
 literature.
 
-It is assumed that the plastic deformation of the material uses the von Misses
+It is assumed that the plastic deformation of the material uses the Von Misses
 yield criterion, as well as the associated flow rule and the work-hardening
 rule. Therefore, a bilinear isotropic hardening model (``TB,PLASTIC,,,,BISO``)
 is selected.

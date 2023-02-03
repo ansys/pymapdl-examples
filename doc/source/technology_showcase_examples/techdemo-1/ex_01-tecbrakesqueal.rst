@@ -305,7 +305,7 @@ Following is the process for solving a brake-squeal problem using this method:
    sensitive/parametric analysis, as it saves time by not recalculating the
    real symmetric modes after the first solve operation.
 
-5. Expand the modes and postprocess the results from **Jobname.RST**.
+5. Expand the modes and postprocess the results from `Jobname.RST`.
 
    For this analysis, the UNSYM solver is selected to solve the problem.
    (Guidelines for selecting the eigensolver for brake-squeal problems appear
@@ -410,7 +410,7 @@ Following is the process for solving a brake-squeal problem using this method:
    recalculating the real symmetric modes after the first solve
    operation.
 
-4. Expand the modes and postprocess the results (from the **Jobname.RSTP** file).
+4. Expand the modes and postprocess the results (from the `Jobname.RSTP` file).
 
 The following inputs show the solution steps involved with this method:
 
@@ -565,7 +565,7 @@ Following is the process for solving a brake-squeal problem using this method:
 5. Obtain the linear perturbation modal solution using the QRDAMP or UNSYM eigensolver
    (:meth:`Mapdl.modopt() <ansys.mapdl.core.Mapdl.modopt>`).
 
-6. Expand the modes and postprocess the results (from the **Jobname.RSTP** file).
+6. Expand the modes and postprocess the results (from the `Jobname.RSTP` file).
    The following inputs show the solution steps involved with this method:
 
 **First Static Solution**
