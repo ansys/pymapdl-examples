@@ -78,7 +78,7 @@ First, we define the material properties.
    mapdl.mpdata(lab="DENS", mat="1", c1="8000e-9")
 
 
-Then, we can define the element technology_showcase_examples.
+Then, we can define the elements.
 
 .. code:: ipython3
 

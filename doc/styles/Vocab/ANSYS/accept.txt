@@ -24,6 +24,9 @@ Jordon
 Karpat
 Keiper
 keypoints
+kPa
+Lakeview
+LakeviewCenter
 Lanczos
 Mahoney
 MAPDL
@@ -44,6 +47,7 @@ Rao
 ROTY
 Schroth
 Srivastava
+stenting
 substep
 Technology Showcases
 thermomechanical
