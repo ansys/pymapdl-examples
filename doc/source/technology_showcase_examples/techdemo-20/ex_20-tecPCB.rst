@@ -41,7 +41,7 @@ Setting up model
 ----------------
 
 The original FE model is given in the Ansys Mechanical APDL Technology
-Showcase Manual.  The .cdb contains a FE model of a single circuit board. The
+Showcase Manual. The .cdb contains a FE model of a single circuit board. The
 model is meshed with SOLID186, SHELL181 and BEAM188 elements. All components
 of the PCB model is assigned with linear elastic isotropic materials. Bonded
 and flexible surface-to-surface contact pairs are used to define the contact
@@ -105,7 +105,7 @@ Starting MAPDL as a service and importing an external model
 Creating the complete layered model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The original model will be duplicated to create a layered PCB of three layers
-that are binded together.
+that are bound together.
 
 .. GENERATED FROM PYTHON SOURCE LINES 59-117
 
@@ -186,7 +186,7 @@ Modal Analysis
 Run modal analysis
 ~~~~~~~~~~~~~~~~~~
 
-A modal analysis is run using Block Lanzos.
+A modal analysis is run using Block Lanczos.
 Only 10 modes are extracted for the sake of run times, but using a higher
 number of nodes is recommended (suggestion: 300 modes).
 
@@ -202,7 +202,7 @@ number of nodes is recommended (suggestion: 300 modes).
     # set number of modes to extract
     # using a higher number of modes is recommended
     nb_modes = 10
-    # use Block Lanzos to extract specified number of modes
+    # use Block Lanczos to extract specified number of modes
     mapdl.modopt("lanb", nb_modes)
     mapdl.mxpand(nb_modes)
     output = mapdl.solve()
@@ -221,28 +221,28 @@ number of nodes is recommended (suggestion: 300 modes).
 
     *** NOTE ***                            CP =       0.781   TIME= 06:52:51
      The automatic domain decomposition logic has selected the MESH domain   
-     decomposition method with 2 processes per solution.                     
+     decomposition method with 2 processes per solution.                    
 
      *****  ANSYS SOLVE    COMMAND  *****
 
      *** NOTE ***                            CP =       0.812   TIME= 06:52:51
-     There is no title defined for this analysis.                            
+     There is no title defined for this analysis.                           
 
      *** NOTE ***                            CP =       0.828   TIME= 06:52:51
      To view 3-D mode shapes of beam or pipe elements, expand the modes with 
      element results calculation active via the MXPAND command's             
-     Elcalc=YES.                                                             
+     Elcalc=YES.                                                            
 
      *** WARNING ***                         CP =       0.844   TIME= 06:52:51
      Previous testing revealed that 3 of the 26046 selected elements violate 
-     shape warning limits.  To review warning messages, please see the       
-     output or error file, or issue the CHECK command.                       
+     shape warning limits. To review warning messages, please see the       
+     output or error file, or issue the CHECK command.                      
 
      *** NOTE ***                            CP =       0.844   TIME= 06:52:51
-     The model data was checked and warning messages were found.             
+     The model data was checked and warning messages were found.            
       Please review output or errors file (                                  
      C:\Users\gayuso\AppData\Local\Temp\ansys_pasiuwhdkb\file0.err ) for     
-     these warning messages.                                                 
+     these warning messages.                                                
 
      *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
                     ---GIVE SUGGESTIONS ONLY---
@@ -321,37 +321,37 @@ number of nodes is recommended (suggestion: 300 modes).
        DEGREES OF FREEDOM. . . . . . UX   UY   UZ   ROTX ROTY ROTZ
        ANALYSIS TYPE . . . . . . . . . . . . . . . . .MODAL                
           EXTRACTION METHOD. . . . . . . . . . . . . .BLOCK LANCZOS
-       NUMBER OF MODES TO EXTRACT. . . . . . . . . . .    10
+       NUMBER OF MODES TO EXTRACT. . . . . . . . . . .   10
        GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC  
-       NUMBER OF MODES TO EXPAND . . . . . . . . . . .    10
+       NUMBER OF MODES TO EXPAND . . . . . . . . . . .   10
        ELEMENT RESULTS CALCULATION . . . . . . . . . .OFF
 
      *** NOTE ***                            CP =       0.844   TIME= 06:52:51
      SHELL181 and SHELL281 will not support real constant input at a future  
-     release.  Please move to section input.                                 
+     release. Please move to section input.                                
 
      *** NOTE ***                            CP =       0.891   TIME= 06:52:51
-     The conditions for direct assembly have been met.  No .emat or .erot    
-     files will be produced.                                                 
+     The conditions for direct assembly have been met. No .emat or .erot    
+     files will be produced.                                                
 
      *** NOTE ***                            CP =       0.922   TIME= 06:52:51
-     Internal nodes from 43998 to 44297 are created.                         
+     Internal nodes from 43998 to 44297 are created.                        
      300 internal nodes are used for quadratic and/or cubic options of       
-     BEAM188, PIPE288, and/or SHELL208.                                      
+     BEAM188, PIPE288, and/or SHELL208.                                     
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 22 and contact element type 22 has been set up.  The       
-     companion pair has real constant set ID 23.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 22 and contact element type 22 has been set up. The       
+     companion pair has real constant set ID 23. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -363,24 +363,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 23362 and target element 23450.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 23362 and target element 23450.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 23 and contact element type 22 has been set up.  The       
-     companion pair has real constant set ID 22.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 23 and contact element type 22 has been set up. The       
+     companion pair has real constant set ID 22. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.6035    
@@ -391,24 +391,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 23389 and target element 23348.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 23389 and target element 23348.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 24 and contact element type 24 has been set up.  The       
-     companion pair has real constant set ID 25.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 24 and contact element type 24 has been set up. The       
+     companion pair has real constant set ID 25. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -420,24 +420,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
-     element 23534 and target element 23703.                                 
-     ****************************************
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
+     element 23534 and target element 23703.                                
+     ***************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 25 and contact element type 24 has been set up.  The       
-     companion pair has real constant set ID 24.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 25 and contact element type 24 has been set up. The       
+     companion pair has real constant set ID 24. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.6670    
@@ -448,15 +448,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 23619 and target element 23500.                                 
-     ****************************************
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 23619 and target element 23500.                                
+     ***************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 26 and contact element type 26 has been set up.  The       
-     companion pair has real constant set ID 27.  Both pairs should have     
+     constant set 26 and contact element type 26 has been set up. The       
+     companion pair has real constant set ID 27. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -477,15 +477,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
      element 23799 and target element 23840.                                 
-     ****************************************
+     ***************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 27 and contact element type 26 has been set up.  The       
-     companion pair has real constant set ID 26.  Both pairs should have     
+     constant set 27 and contact element type 26 has been set up. The       
+     companion pair has real constant set ID 26. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -505,15 +505,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 8.437694987E-15 was detected between contact  
+     Max. Initial penetration 8.437694987E-15 was detected between contact  
      element 23816 and target element 23774.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 28 and contact element type 28 has been set up.  The       
-     companion pair has real constant set ID 29.  Both pairs should have     
+     constant set 28 and contact element type 28 has been set up. The       
+     companion pair has real constant set ID 29. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -541,7 +541,7 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 29 and contact element type 28 has been set up.  The       
+     constant set 29 and contact element type 28 has been set up. The       
      companion pair has real constant set ID 28.  Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
@@ -562,15 +562,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.993605777E-15 was detected between contact  
+     Max. Initial penetration 7.993605777E-15 was detected between contact  
      element 24004 and target element 23917.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 30 and contact element type 30 has been set up.  The       
-     companion pair has real constant set ID 31.  Both pairs should have     
+     constant set 30 and contact element type 30 has been set up. The       
+     companion pair has real constant set ID 31. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -598,8 +598,8 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 31 and contact element type 30 has been set up.  The       
-     companion pair has real constant set ID 30.  Both pairs should have     
+     constant set 31 and contact element type 30 has been set up. The       
+     companion pair has real constant set ID 30. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -619,15 +619,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
      element 24143 and target element 24111.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 32 and contact element type 32 has been set up.  The       
-     companion pair has real constant set ID 33.  Both pairs should have     
+     constant set 32 and contact element type 32 has been set up. The       
+     companion pair has real constant set ID 33. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -655,8 +655,8 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 33 and contact element type 32 has been set up.  The       
-     companion pair has real constant set ID 32.  Both pairs should have     
+     constant set 33 and contact element type 32 has been set up. The       
+     companion pair has real constant set ID 32. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -676,15 +676,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
      element 24279 and target element 24217.                                 
-     ****************************************
+     ***************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 34 and contact element type 34 has been set up.  The       
-     companion pair has real constant set ID 35.  Both pairs should have     
+     constant set 34 and contact element type 34 has been set up. The       
+     companion pair has real constant set ID 35. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -705,15 +705,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
      element 24457 and target element 24613.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 35 and contact element type 34 has been set up.  The       
-     companion pair has real constant set ID 34.  Both pairs should have     
+     constant set 35 and contact element type 34 has been set up. The       
+     companion pair has real constant set ID 34. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -733,15 +733,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
      element 24514 and target element 24456.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 36 and contact element type 36 has been set up.  The       
-     companion pair has real constant set ID 37.  Both pairs should have     
+     constant set 36 and contact element type 36 has been set up. The       
+     companion pair has real constant set ID 37. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -762,15 +762,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
      element 24670 and target element 24765.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 37 and contact element type 36 has been set up.  The       
-     companion pair has real constant set ID 36.  Both pairs should have     
+     constant set 37 and contact element type 36 has been set up. The       
+     companion pair has real constant set ID 36. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -790,15 +790,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
      element 24705 and target element 24663.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 38 and contact element type 38 has been set up.  The       
-     companion pair has real constant set ID 39.  Both pairs should have     
+     constant set 38 and contact element type 38 has been set up. The       
+     companion pair has real constant set ID 39. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -819,15 +819,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 9.769962617E-15 was detected between contact  
+     Max. Initial penetration 9.769962617E-15 was detected between contact  
      element 24836 and target element 24926.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 39 and contact element type 38 has been set up.  The       
-     companion pair has real constant set ID 38.  Both pairs should have     
+     constant set 39 and contact element type 38 has been set up. The       
+     companion pair has real constant set ID 38. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -847,15 +847,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 8.881784197E-15 was detected between contact  
+     Max. Initial penetration 8.881784197E-15 was detected between contact  
      element 24879 and target element 24787.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 40 and contact element type 40 has been set up.  The       
-     companion pair has real constant set ID 41.  Both pairs should have     
+     constant set 40 and contact element type 40 has been set up. The       
+     companion pair has real constant set ID 41. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -875,21 +875,21 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      One of the contact searching regions contains at least 63 target        
-     elements.  You may reduce the pinball radius.                           
+     elements. You may reduce the pinball radius.                           
      Default target edge extension factor TOLS     10.000    
      Initial penetration/gap is excluded.
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
      element 24979 and target element 25077.                                 
-     ****************************************
+     ***************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 41 and contact element type 40 has been set up.  The       
-     companion pair has real constant set ID 40.  Both pairs should have     
+     constant set 41 and contact element type 40 has been set up. The       
+     companion pair has real constant set ID 40. Both pairs should have     
      the same behavior.                                                      
      ANSYS will deactivate the current pair and keep its companion pair,     
      resulting in asymmetric contact.                                        
@@ -910,15 +910,15 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
      element 25011 and target element 24931.                                 
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 42 and contact element type 42 has been set up.  The       
-     companion pair has real constant set ID 43.  Both pairs should have     
+     constant set 42 and contact element type 42 has been set up. The       
+     companion pair has real constant set ID 43. Both pairs should have     
      the same behavior.                                                      
      ANSYS will keep the current pair and deactivate its companion pair,     
      resulting in asymmetric contact.                                        
@@ -940,24 +940,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 8.881784197E-15 was detected between contact  
+     Max. Initial penetration 8.881784197E-15 was detected between contact  
      element 25172 and target element 25232.                                 
-     ****************************************
+     ***************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 43 and contact element type 42 has been set up.  The       
-     companion pair has real constant set ID 42.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 43 and contact element type 42 has been set up. The       
+     companion pair has real constant set ID 42. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.4761    
@@ -969,24 +969,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 25184 and target element 25127.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 25184 and target element 25127.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 44 and contact element type 44 has been set up.  The       
-     companion pair has real constant set ID 45.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 44 and contact element type 44 has been set up. The       
+     companion pair has real constant set ID 45. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -998,24 +998,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 25356 and target element 25570.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 25356 and target element 25570.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 45 and contact element type 44 has been set up.  The       
-     companion pair has real constant set ID 44.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 45 and contact element type 44 has been set up. The       
+     companion pair has real constant set ID 44. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.7967    
@@ -1026,24 +1026,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
-     element 25446 and target element 25239.                                 
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
+     element 25446 and target element 25239.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 46 and contact element type 46 has been set up.  The       
-     companion pair has real constant set ID 47.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 46 and contact element type 46 has been set up. The       
+     companion pair has real constant set ID 47. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1055,24 +1055,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 25628 and target element 25709.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 25628 and target element 25709.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 47 and contact element type 46 has been set up.  The       
-     companion pair has real constant set ID 46.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 47 and contact element type 46 has been set up. The       
+     companion pair has real constant set ID 46. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.5685    
@@ -1083,24 +1083,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 25639 and target element 25608.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 25639 and target element 25608.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 48 and contact element type 48 has been set up.  The       
-     companion pair has real constant set ID 49.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 48 and contact element type 48 has been set up. The       
+     companion pair has real constant set ID 49. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1112,24 +1112,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 25779 and target element 25820.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 25779 and target element 25820.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 49 and contact element type 48 has been set up.  The       
-     companion pair has real constant set ID 48.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 49 and contact element type 48 has been set up. The       
+     companion pair has real constant set ID 48. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.8027    
@@ -1140,24 +1140,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 25787 and target element 25736.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 25787 and target element 25736.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 50 and contact element type 50 has been set up.  The       
-     companion pair has real constant set ID 51.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 50 and contact element type 50 has been set up. The       
+     companion pair has real constant set ID 51. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1169,24 +1169,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 1.33226763E-14 was detected between contact   
-     element 25924 and target element 26035.                                 
+     Max. Initial penetration 1.33226763E-14 was detected between contact   
+     element 25924 and target element 26035.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 51 and contact element type 50 has been set up.  The       
-     companion pair has real constant set ID 50.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 51 and contact element type 50 has been set up. The       
+     companion pair has real constant set ID 50. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.6964    
@@ -1197,17 +1197,17 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       1.953   TIME= 06:52:52
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 25939 and target element 25890.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 25939 and target element 25890.                                
      ****************************************
   
   
   
 
      *** NOTE ***                            CP =       2.016   TIME= 06:52:52
-     Internal nodes from 43998 to 44297 are created.                         
+     Internal nodes from 43998 to 44297 are created.                        
      300 internal nodes are used for quadratic and/or cubic options of       
-     BEAM188, PIPE288, and/or SHELL208.                                      
+     BEAM188, PIPE288, and/or SHELL208.                                     
 
   
   
@@ -1229,17 +1229,17 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 22 and contact element type 22 has been set up.  The       
-     companion pair has real constant set ID 23.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 22 and contact element type 22 has been set up. The       
+     companion pair has real constant set ID 23. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1251,24 +1251,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 23362 and target element 23450.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 23362 and target element 23450.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 23 and contact element type 22 has been set up.  The       
-     companion pair has real constant set ID 22.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 23 and contact element type 22 has been set up. The       
+     companion pair has real constant set ID 22. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.6035    
@@ -1279,24 +1279,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 23389 and target element 23348.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 23389 and target element 23348.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 24 and contact element type 24 has been set up.  The       
-     companion pair has real constant set ID 25.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 24 and contact element type 24 has been set up. The       
+     companion pair has real constant set ID 25. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1308,24 +1308,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
-     element 23534 and target element 23703.                                 
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
+     element 23534 and target element 23703.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 25 and contact element type 24 has been set up.  The       
-     companion pair has real constant set ID 24.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 25 and contact element type 24 has been set up. The       
+     companion pair has real constant set ID 24. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.6670    
@@ -1336,24 +1336,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 23619 and target element 23500.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 23619 and target element 23500.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 32 and contact element type 32 has been set up.  The       
-     companion pair has real constant set ID 33.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 32 and contact element type 32 has been set up. The       
+     companion pair has real constant set ID 33. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1365,24 +1365,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 2.131628207E-14 was detected between contact  
-     element 24242 and target element 24365.                                 
+     Max. Initial penetration 2.131628207E-14 was detected between contact  
+     element 24242 and target element 24365.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 33 and contact element type 32 has been set up.  The       
-     companion pair has real constant set ID 32.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 33 and contact element type 32 has been set up. The       
+     companion pair has real constant set ID 32. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.7511    
@@ -1393,24 +1393,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 24279 and target element 24217.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 24279 and target element 24217.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 38 and contact element type 38 has been set up.  The       
-     companion pair has real constant set ID 39.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 38 and contact element type 38 has been set up. The       
+     companion pair has real constant set ID 39. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1422,24 +1422,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 9.769962617E-15 was detected between contact  
-     element 24836 and target element 24926.                                 
+     Max. Initial penetration 9.769962617E-15 was detected between contact  
+     element 24836 and target element 24926.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 39 and contact element type 38 has been set up.  The       
-     companion pair has real constant set ID 38.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 39 and contact element type 38 has been set up. The       
+     companion pair has real constant set ID 38. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.8514    
@@ -1450,24 +1450,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 8.881784197E-15 was detected between contact  
-     element 24879 and target element 24787.                                 
+     Max. Initial penetration 8.881784197E-15 was detected between contact  
+     element 24879 and target element 24787.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 40 and contact element type 40 has been set up.  The       
-     companion pair has real constant set ID 41.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 40 and contact element type 40 has been set up. The       
+     companion pair has real constant set ID 41. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1478,30 +1478,30 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      One of the contact searching regions contains at least 63 target        
-     elements.  You may reduce the pinball radius.                           
+     elements. You may reduce the pinball radius.                          
      Default target edge extension factor TOLS     10.000    
      Initial penetration/gap is excluded.
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 24979 and target element 25077.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 24979 and target element 25077.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 41 and contact element type 40 has been set up.  The       
-     companion pair has real constant set ID 40.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 41 and contact element type 40 has been set up. The       
+     companion pair has real constant set ID 40. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                1.8845    
@@ -1513,24 +1513,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 1.065814104E-14 was detected between contact  
-     element 25011 and target element 24931.                                 
+     Max. Initial penetration 1.065814104E-14 was detected between contact  
+     element 25011 and target element 24931.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 48 and contact element type 48 has been set up.  The       
-     companion pair has real constant set ID 49.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 48 and contact element type 48 has been set up. The       
+     companion pair has real constant set ID 49. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1542,24 +1542,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 25779 and target element 25820.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 25779 and target element 25820.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 49 and contact element type 48 has been set up.  The       
-     companion pair has real constant set ID 48.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 49 and contact element type 48 has been set up. The       
+     companion pair has real constant set ID 48. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.8027    
@@ -1570,24 +1570,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 1.421085472E-14 was detected between contact  
-     element 25787 and target element 25736.                                 
+     Max. Initial penetration 1.421085472E-14 was detected between contact  
+     element 25787 and target element 25736.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 50 and contact element type 50 has been set up.  The       
-     companion pair has real constant set ID 51.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 50 and contact element type 50 has been set up. The       
+     companion pair has real constant set ID 51. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will keep the current pair and deactivate its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Shell edge - solid surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Default influence distance FTOLN will be used.
@@ -1599,24 +1599,24 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 1.33226763E-14 was detected between contact   
-     element 25924 and target element 26035.                                 
+     Max. Initial penetration 1.33226763E-14 was detected between contact   
+     element 25924 and target element 26035.                                
      ****************************************
   
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Symmetric Deformable- deformable contact pair identified by real        
-     constant set 51 and contact element type 50 has been set up.  The       
-     companion pair has real constant set ID 50.  Both pairs should have     
-     the same behavior.                                                      
+     constant set 51 and contact element type 50 has been set up. The       
+     companion pair has real constant set ID 50. Both pairs should have     
+     the same behavior.                                                     
      ANSYS will deactivate the current pair and keep its companion pair,     
-     resulting in asymmetric contact.                                        
+     resulting in asymmetric contact.                                       
      Auto surface constraint is built
      Contact algorithm: MPC based approach
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
      Contact related postprocess items (ETABLE, pressure ...) are not        
-     available.                                                              
+     available.                                                             
      Contact detection at: nodal point (normal to target surface)
      MPC will be built internally to handle bonded contact.
      Average contact surface length                2.6964    
@@ -1627,8 +1627,8 @@ number of nodes is recommended (suggestion: 300 modes).
      Bonded contact (always) is defined.
 
      *** NOTE ***                            CP =       2.891   TIME= 06:52:53
-     Max.  Initial penetration 7.105427358E-15 was detected between contact  
-     element 25939 and target element 25890.                                 
+     Max. Initial penetration 7.105427358E-15 was detected between contact  
+     element 25939 and target element 25890.                                
      ****************************************
   
 
@@ -1687,8 +1687,8 @@ number of nodes is recommended (suggestion: 300 modes).
         21  0.568872E-05
 
      Range of element maximum matrix coefficients in global coordinates
-     Maximum = 11792803.9 at element 17387.                                  
-     Minimum = 528.07874 at element 3660.                                    
+     Maximum = 11792803.9 at element 17387.                                 
+     Minimum = 528.07874 at element 3660.                                   
 
        *** ELEMENT MATRIX FORMULATION TIMES
          TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
@@ -1744,7 +1744,7 @@ number of nodes is recommended (suggestion: 300 modes).
            49       204  TARGE170      0.000   0.000000
            50       288  CONTA174      0.000   0.000000
            51       288  TARGE170      0.000   0.000000
-     Time at end of element matrix formulation CP = 4.40625.                 
+     Time at end of element matrix formulation CP = 4.40625.                
 
       BLOCK LANCZOS CALCULATION OF UP TO    10 EIGENVECTORS.
       NUMBER OF EQUATIONS              =       159678
@@ -1755,8 +1755,8 @@ number of nodes is recommended (suggestion: 300 modes).
 
 
      *** NOTE ***                            CP =       7.078   TIME= 06:52:58
-     The initial memory allocation (-m) has been exceeded.                   
-      Supplemental memory allocations are being used.                        
+     The initial memory allocation (-m) has been exceeded.                  
+      Supplemental memory allocations are being used.                       
 
       Local memory allocated for solver              =    470.292 MB
       Local memory required for in-core solution     =    448.291 MB
@@ -1768,11 +1768,11 @@ number of nodes is recommended (suggestion: 300 modes).
 
      *** NOTE ***                            CP =       8.641   TIME= 06:53:00
      The Distributed Sparse Matrix Solver used by the Block Lanczos          
-     eigensolver is currently running in the in-core memory mode.  This      
+     eigensolver is currently running in the in-core memory mode. This      
      memory mode uses the most amount of memory in order to avoid using the  
      hard drive as much as possible, which most often results in the         
-     fastest solution time.  This mode is recommended if enough physical     
-     memory is present to accommodate all of the solver data.                
+     fastest solution time. This mode is recommended if enough physical     
+     memory is present to accommodate all of the solver data.               
 
      *** ANSYS - ENGINEERING ANALYSIS SYSTEM  RELEASE 2021 R2          21.2     ***
      DISTRIBUTED Ansys Mechanical Enterprise                       
@@ -1927,9 +1927,9 @@ number of nodes is recommended (suggestion: 300 modes).
 
 
      *** NOTE ***                            CP =      10.875   TIME= 06:53:03
-     The modes requested are mass normalized (Nrmkey on MODOPT).  However,   
+     The modes requested are mass normalized (Nrmkey on MODOPT). However,   
      the modal masses and kinetic energies below are calculated with unit    
-     normalized modes.                                                       
+     normalized modes.                                                      
 
             ***** MODAL MASSES, KINETIC ENERGIES, AND TRANSLATIONAL EFFECTIVE MASSES SUMMARY *****
 
@@ -2198,11 +2198,11 @@ The response spectrum analysis is defined, solved and post-processed.
 
     *** NOTE ***                            CP =      16.328   TIME= 06:53:12
      The automatic domain decomposition logic has selected the MESH domain   
-     decomposition method with 2 processes per solution.                     
+     decomposition method with 2 processes per solution.                    
 
      *****  ANSYS SOLVE    COMMAND  *****
                                                                          
-     Time at start of random vibration closed-form solution CP= 16.328125.   
+     Time at start of random vibration closed-form solution CP= 16.328125.  
 
 
      FREQUENCIES USED FOR RANDOM VIBRATION SOLUTION
@@ -2226,15 +2226,15 @@ The response spectrum analysis is defined, solved and post-processed.
 
      PERFORM INTEGRATION FOR ACCELERATION-TYPE QUANTITIES
                                                                          
-     Modal covariance matrix computed CP= 16.328125.                         
+     Modal covariance matrix computed CP= 16.328125.                        
                                                                          
-     Quasi-static modal covariance matrix computed CP= 16.328125.            
+     Quasi-static modal covariance matrix computed CP= 16.328125.           
                                                                          
-     Covariant-modal covariance matrix computed CP= 16.328125.               
+     Covariant-modal covariance matrix computed CP= 16.328125.              
                                                                          
-     Psd file file0.psd created.  CP= 16.328125.                             
+     Psd file file0.psd created. CP= 16.328125.                            
                                                                          
-     Time at start of random vibration mode combinations CP= 16.328125.      
+     Time at start of random vibration mode combinations CP= 16.328125.     
 
       BASE EXCITATION PROBLEM
 

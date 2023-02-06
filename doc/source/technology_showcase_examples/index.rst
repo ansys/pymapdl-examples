@@ -7,14 +7,13 @@ The  following examples initially come from the `APDL Technology Showcase Manual
 <mapdl_tech_show_>`_. They initially were MAPDL files. They have been reproduced
 in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
 
-These examples are a work-in-progress and will be extended during the life of
-this project.
-
 
 
 .. raw:: html
 
     <div class="sphx-glr-thumbnails">
+
+
 
 .. raw:: html
 
@@ -22,15 +21,35 @@ this project.
 
 .. only:: html
 
-  .. image:: images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
+  .. image:: ./images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
     :alt: Brake Squeal Analysis
 
-  :ref:`sphx_glr_ex_0-tecbrakesqueal.py`
+  :ref:`sphx_glr_ex_01-tecbrakesqueal.py`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Brake Squeal Analysis</div>
     </div>
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Calibrating and validating a hyperelastic constitutive model">
+
+.. only:: html
+
+  .. image:: ./images/thumb/sphx_glr_tse-015-calvalhyper_thumb.png
+    :alt: Calibrating and validating a hyperelastic constitutive model
+
+  :ref:`sphx_glr_ex_15-tecHyperConstlModel.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Calibrating and validating a hyperelastic constitutive Model</div>
+    </div>
+
+
 
 .. raw:: html
 
@@ -38,7 +57,7 @@ this project.
 
 .. only:: html
 
-  .. image:: images/thumb/sphx_glr_tse-020-PCB_thumb.png
+  .. image:: ./images/thumb/sphx_glr_tse-020-PCB_thumb.png
     :alt: Dynamic simulation of a printed circuit board assembly
 
   :ref:`sphx_glr_ex_20-tecPCB.py`
@@ -49,13 +68,14 @@ this project.
     </div>
 
 
+
 .. raw:: html
 
     <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 28: Friction Stir Welding (FSW) Simulation">
 
 .. only:: html
 
-  .. image:: images/thumb/sphx_glr_tse-028-fricstir_thumb.png
+  .. image:: ./images/thumb/sphx_glr_tse-028-fricstir_thumb.png
     :alt: Friction Stir Welding (FSW) Simulation
 
   :ref:`sphx_glr_ex_28-tecfricstir.py`
@@ -65,42 +85,21 @@ this project.
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
     </div>
 
+
+
 .. raw:: html
 
     </div>
 
 
-.. ##########
-
-
-.. raw:: html
-
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase Example 15: Calibrating and Validating a Hyperelastic Constitutive Model">
-
-.. only:: html
-
-  .. image:: images/thumb/sphx_glr_tse-015-calvalhyper_thumb.gif
-    :alt: Calibrating and Validating a Hyperelastic Constitutive Model
-
-.. raw:: html
-
-      <div class="sphx-glr-thumbnail-title">Calibrating and Validating a Hyperelastic Constitutive Model</div>
-    </div>
-
-.. raw:: html
-
-    </div>
-
-.. #########
 
 .. toctree::
     :hidden:
-    :includehidden:
 
-    techdemo-1/ex_0-tecbrakesqueal
-    techdemo-15/ex-15-teccalvalhyper
-    techdemo-20/ex_20-tecPCB
-    techdemo-28/ex_28-tecfricstir
+    techdemo-1/ex_01-tecbrakesqueal.rst
+    techdemo-15/ex_15-teccalvalhyper.rst
+    techdemo-20/ex_20-tecPCB.rst
+    techdemo-28/ex_28-tecfricstir.rst
 
 .. only:: html
 

@@ -1,7 +1,7 @@
 PyMAPDL Examples
 ================
 
-Repository holding examples for PyMAPDL.
+This repository holds examples for PyMAPDL.
 
 
 How to install

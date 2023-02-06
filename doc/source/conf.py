@@ -1,7 +1,12 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
+import os
 
+from ansys.mapdl import core as pymapdl
 from ansys_sphinx_theme import pyansys_logo_black as logo
+import numpy as np
+import pyvista
+from sphinx_gallery.sorting import FileNameSortKey
 
 # Project information
 project = "pymapdl-examples"
@@ -22,7 +27,7 @@ html_theme_options = {
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
         ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
-        ("Examples", "https://mapdl.docs.pyansys.com/examples/"),
+        ("Examples", "https://mapdl.docs.pyansys.com/dev/examples/index.html"),
     ],
     "icon_links": [
         {
@@ -54,16 +59,18 @@ sphinx_gallery_conf = {
     # convert rst to md for ipynb
     "pypandoc": True,
     # path to your examples scripts
-    "examples_dirs": [],
+    "examples_dirs": ["../../examples/verif-manual"],
     # path where to save gallery generated examples
     "gallery_dirs": ["verif-manual", "technology_showcase_examples"],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
+    # Sort gallery example by file name instead of number of lines (default)
+    "within_subsection_order": FileNameSortKey,
     # directory where function granular galleries are stored
     "backreferences_dir": None,
-    # Modules for which function level galleries are created.  In
+    # Modules for which function level galleries are created. In
     "doc_module": "ansys-mapdl-core",
     "image_scrapers": ("pyvista", "matplotlib"),
     "ignore_pattern": "flycheck*",
@@ -83,7 +90,9 @@ intersphinx_mapping = {
 }
 
 # numpydoc configuration
+numpydoc_use_plots = True
 numpydoc_show_class_members = False
+numpydoc_class_members_toctree = False
 numpydoc_xref_param_type = True
 
 # Image referencing
@@ -107,6 +116,24 @@ numpydoc_validation_checks = {
     # type, unless multiple values are being returned"
 }
 
+# Manage errors
+pyvista.set_error_output_file("errors.txt")
+
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True
+
+# must be less than or equal to the XVFB window size
+pyvista.rcParams["window_size"] = np.array([1024, 768])
+
+# Save figures in specified directory
+pyvista.FIGURE_PATH = os.path.join(os.path.abspath("./images/"), "auto-generated/")
+if not os.path.exists(pyvista.FIGURE_PATH):
+    os.makedirs(pyvista.FIGURE_PATH)
+
+
+# necessary when building the sphinx gallery
+pyvista.BUILDING_GALLERY = True
+pymapdl.BUILDING_GALLERY = True
 
 # static path
 html_static_path = ["_static"]
