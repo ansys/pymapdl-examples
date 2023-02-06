@@ -42,9 +42,10 @@ The following topics are available:
 *  `28.5. Boundary Conditions and Loading`_
 *  `28.6. Analysis and Solution Controls`_
 *  `28.7. Results and Discussion`_
-*  `28.8. Recommendations`_
-*  `28.9. References`_
-*  `28.10. Input Files`_
+*  `28.8. Exit MAPDL`_
+*  `28.9. Recommendations`_
+*  `28.10. References`_
+*  `28.11. Input Files`_
 
 You can also perform this example analysis entirely in the Ansys Mechanical
 Application. For more information, see Friction Stir Welding (FSW) Simulation
@@ -1646,7 +1647,17 @@ tool-penetration is shallow and the tool pin is ignored, the plastic heat is sma
 compared to frictional heat.
 
 
-28.8. Recommendations
+28.8. Exit MAPDL
+----------------
+
+.. jupyter-execute::
+    :hide-code:
+
+    mapdl.finish()
+    mapdl.exit()
+
+
+28.9. Recommendations
 ---------------------
 
 To perform a similar FSW analysis, consider the following hints and
@@ -1695,8 +1706,8 @@ recommendations:
   To minimize computational time, the tool can be considered to be rigid with no
   temperature degrees of freedom.
 
-28.9. References
-----------------
+28.10. References
+-----------------
 
 The following papers are cited in this example problem:
 
@@ -1720,23 +1731,20 @@ The following papers are cited in this example problem:
    OH: ASM International.
 
 
-28.10. Input files
+28.11. Input files
 ------------------
 
 The following files were used in this problem:
 
 * :download:`fsw.cdb <https://github.com/pyansys/example-data/blob/master/tech_demos/td-28/fsw.cdb>` -- Common database file containing the FSW model information
 
-You can also download the MAPDL files from:
 
-* `Download the zipped td-28 file set for this problem. <https://storage.ansys.com/doclinks/techdemos.html?code=td-28-DLU-N2a>`_
-* `Download all td-nn file sets in a single zip file. <https://storage.ansys.com/doclinks/techdemos.html?code=td-all-DLU-N2a>`_ 
++-----------------------------------------------------------------------------------------------------------------------------------+
+| `Download the zipped td-28 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-28-DLU-N2a>`_     |
++-----------------------------------------------------------------------------------------------------------------------------------+
 
-.. jupyter-execute::
-    :hide-code:
+For more information, see `Obtaining the Input Files <examples_intro_>`_.
 
-    mapdl.finish()
-    mapdl.exit()
 
 .. only:: html
 

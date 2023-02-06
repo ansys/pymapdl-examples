@@ -950,13 +950,12 @@ The following input files were used for this problem:
   **full\_non\_linear.html** and **linear\_non\_prestressed\_par.html** files, respectively).
   :download:`Download file: disc_pad_model.cdb <https://github.com/pyansys/example-data/blob/master/tech_demos/td-1/disc_pad_model.cdb>`.
 
-+-------------------------------------------------------------------------------------------------------------------------------------------+
-| `Download the zipped td-1 file set for this problem. <https://storage.ansys.com/doclinks/techdemos.html?code=td-1-DLU-N2a>`_              |
-+-------------------------------------------------------------------------------------------------------------------------------------------+
-| `Download all td-nn file sets in a single zip file. <https://storage.ansys.com/doclinks/techdemos.html?code=td-all-DLU-N2a>`_             |
-+-------------------------------------------------------------------------------------------------------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------+
+| `Download the zipped td-1 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-1-DLU-N2a>`_       |
++-----------------------------------------------------------------------------------------------------------------------------------+
 
-For more information, see `Obtaining the Input Files. <examples_intro_>`_
+For more information, see `Obtaining the Input Files <examples_intro_>`_.
+
 
 .. only:: html
 

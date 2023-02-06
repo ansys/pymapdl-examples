@@ -17,7 +17,7 @@
 
 .. _sphx_glr_download_examples_examples_technology_showcase_examples-techdemo_20-example-technology-showcase-dynamic-simulation-PCB.py:
 
-.. _sphx_glr_ex_20-tecPCB.py:
+.. _sphx_glr_ex_20-tecPCB.rst:
 .. _ref_dynamic_simulation_printed_circuit_board:
 .. _tech_demo_20:
 
@@ -2599,32 +2599,20 @@ Exit MAPDL
 
 
 
-
-
 .. rst-class:: sphx-glr-timing
 
    **Total running time of the script:** ( 0 minutes  44.344 seconds)
 
 
-.. _sphx_glr_download_examples_gallery_examples_06-verif-manual_20-example-technology-showcase-dynamic-simulation-PCB.py:
++-----------------------------------------------------------------------------------------------------------------------------------+
+| `Download the zipped td-20 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-20-DLU-N2a>`_     |
++-----------------------------------------------------------------------------------------------------------------------------------+
+| `Download the Download Python source code <ex_20-tecPCB.py>`_                                                                     |
++-----------------------------------------------------------------------------------------------------------------------------------+
+| `Download the Download Jupyter notebook <ex_20-tecPCB.ipynb>`_                                                                    |
++-----------------------------------------------------------------------------------------------------------------------------------+
 
-
-.. only :: html
-
- .. container:: sphx-glr-footer
-    :class: sphx-glr-footer-example
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-python
-
-     :download:`Download Python source code: ex_20-tecPCB.py <ex_20-tecPCB.py>`
-
-
-
-  .. container:: sphx-glr-download sphx-glr-download-jupyter
-
-     :download:`Download Jupyter notebook: ex_20-tecPCB.ipynb <ex_20-tecPCB.ipynb>`
+For more information, see `Obtaining the Input Files <examples_intro_>`_.
 
 
 .. only:: html
