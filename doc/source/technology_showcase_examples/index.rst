@@ -60,11 +60,29 @@ in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
   .. image:: ./images/thumb/sphx_glr_tse-020-PCB_thumb.png
     :alt: Dynamic simulation of a printed circuit board assembly
 
-  :ref:`sphx_glr_ex_20-tecPCB.py`
+  :ref:`sphx_glr_ex_20-tecPCB.rst`
 
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
+    </div>
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 25: Cardiovascular Stent Simulation">
+
+.. only:: html
+
+  .. image:: ./images/thumb/sphx_glr_tse-025-stent_thumb.png
+    :alt: Cardiovascular Stent Simulation
+
+  :ref:`sphx_glr_ex_25-tecstent.rst`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Cardiovascular Stent Simulation</div>
     </div>
 
 
@@ -99,6 +117,7 @@ in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
     techdemo-1/ex_01-tecbrakesqueal.rst
     techdemo-15/ex_15-teccalvalhyper.rst
     techdemo-20/ex_20-tecPCB.rst
+    techdemo-25/ex_25-tecstent.rst
     techdemo-28/ex_28-tecfricstir.rst
 
 .. only:: html

@@ -45,7 +45,7 @@ which necessitate more resources.
 
 .. include:: ./technology_showcase_examples/index.rst
   :start-line: 9
-  :end-line: 95
+  :end-line: 112
 
 .. === TECHNOLOGY SHOWCASES ===
 

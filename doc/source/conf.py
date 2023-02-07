@@ -3,6 +3,7 @@ from datetime import datetime
 import os
 
 from ansys.mapdl import core as pymapdl
+from ansys_sphinx_theme import ansys_favicon
 from ansys_sphinx_theme import pyansys_logo_black as logo
 import numpy as np
 import pyvista
@@ -16,6 +17,7 @@ release = version = "0.1.dev0"
 
 # Select desired logo, theme, and declare the html title
 html_logo = logo
+html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyMAPDL Examples"
 
