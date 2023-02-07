@@ -1,5 +1,6 @@
 .. _ref_vm_examples:
 
+===================
 Verification Manual
 ===================
 This section demonstrates a range of Mechanical APDL elements and capabilities

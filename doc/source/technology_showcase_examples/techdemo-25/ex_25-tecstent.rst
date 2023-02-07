@@ -368,7 +368,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    import warnings
    warnings.filterwarnings('ignore')
 
-   file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
+   file = "./source/technology_showcase_examples/techdemo-25/data/mesh.vtk"
    mesh_file = pyvista.read(file)
    pl = pyvista.Plotter()
    pl.add_mesh(mesh_file, cmap='jet', show_scalar_bar=False, show_edges=True)
@@ -389,7 +389,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/u.vtk"
+   file = "./source/technology_showcase_examples/techdemo-25/data/u.vtk"
    u_file = pyvista.read(file)
    u_file = u_file.warp_by_scalar('U')
    pl = pyvista.Plotter(notebook=True)
@@ -417,7 +417,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/s_VM.vtk"
+   file = "./source/technology_showcase_examples/techdemo-25/data/s_VM.vtk"
    s_VM_file = pyvista.read(file)
    s_VM_file = s_VM_file.warp_by_scalar('S_VM')
    pl = pyvista.Plotter(notebook=True)
@@ -466,10 +466,10 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/mesh.vtk"
+   file = "./source/technology_showcase_examples/techdemo-25/data/mesh.vtk"
    mesh_file = pyvista.read(file)
 
-   file = "./source/technology_showcase_examples/techdemo-25/mesh_sco.vtk"
+   file = "./source/technology_showcase_examples/techdemo-25/data/mesh_sco.vtk"
    mesh_sco_file = pyvista.read(file)
 
    pl = pyvista.Plotter(shape=(1, 2))
@@ -491,7 +491,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/u_stent.vtk"
+   file = "./source/technology_showcase_examples/techdemo-25/data/u_stent.vtk"
    u_stent_file = pyvista.read(file)
    u_stent_file.warp_by_scalar('U_STENT')
    data = u_stent_file.get_array('U_STENT')
@@ -522,10 +522,6 @@ The following files were used in this problem:
 
 +-----------------------------------------------------------------------------------------------------------------------------------+
 | `Download the zipped td-25 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-25-DLU-N2a>`_     |
-+-----------------------------------------------------------------------------------------------------------------------------------+
-| `Download the Download Python source code <ex_25-tecstent.py>`_                                                                   |
-+-----------------------------------------------------------------------------------------------------------------------------------+
-| `Download the Download Jupyter notebook <ex_20-tecstent.ipynb>`_                                                                  |
 +-----------------------------------------------------------------------------------------------------------------------------------+
 
 For more information, see `Obtaining the Input Files <examples_intro_>`_.
