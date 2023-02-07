@@ -45,7 +45,7 @@ The following topics are available:
 *  `28.8. Exit MAPDL`_
 *  `28.9. Recommendations`_
 *  `28.10. References`_
-*  `28.11. Input Files`_
+*  `28.11. Input files`_
 
 You can also perform this example analysis entirely in the Ansys Mechanical
 Application. For more information, see Friction Stir Welding (FSW) Simulation
@@ -1743,7 +1743,7 @@ The following files were used in this problem:
 | `Download the zipped td-28 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-28-DLU-N2a>`_     |
 +-----------------------------------------------------------------------------------------------------------------------------------+
 
-For more information, see `Obtaining the Input Files <examples_intro_>`_.
+For more information, see `Obtaining the input files <examples_intro_>`_.
 
 
 .. only:: html

@@ -23,7 +23,7 @@ The following topics are available:
 *  `1.7. Results and Discussion`_
 *  `1.8. Recommendations`_
 *  `1.9. References`_
-*  `1.10. Input Files`_
+*  `1.10. Input files`_
 
 You can also perform this example analysis entirely in the Ansys
 Mechanical Application. For more information, see Brake-Squeal Analysis in the 
@@ -932,7 +932,7 @@ The following works were consulted when creating this example problem:
    *Proceedings of the twenty second International Modal Analysis
    Conference (IMAC XXII).*
 
-1.10. Input Files
+1.10. Input files
 -----------------
 
 The following input files were used for this problem:
@@ -954,7 +954,7 @@ The following input files were used for this problem:
 | `Download the zipped td-1 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-1-DLU-N2a>`_       |
 +-----------------------------------------------------------------------------------------------------------------------------------+
 
-For more information, see `Obtaining the Input Files <examples_intro_>`_.
+For more information, see `Obtaining the input files <examples_intro_>`_.
 
 
 .. only:: html

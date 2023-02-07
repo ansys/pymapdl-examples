@@ -13,6 +13,16 @@ The analysis exposes advanced modeling techniques using PyMAPDL such as:
 * Mixed u-P formulation
 * Nonlinear stabilization
 
+The following topics are available:
+
+*  `25.1. Introduction`_
+*  `25.2. Setting up the model`_
+*  `25.3. Analysis`_
+*  `25.4. Solution of the model`_
+*  `25.5. Results`_
+*  `25.6. Exit MAPDL`_
+*  `25.7. Input files`_
+
 This example is inspired from the model and analysis defined in Chapter 25 of the `Mechanical
 APDL Technology Showcase Manual <mapdl_tech_show_>`_.
 
@@ -57,11 +67,9 @@ deformation, and the sliding contact between the stent and the artery wall.
    print(mapdl)
 
 
-25.2. Modeling
---------------
 
-25.2.1. Setting up the model
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+25.2. Setting up the model
+--------------------------
 
 First, we define the material properties. 
 
@@ -321,7 +329,7 @@ Finally, we apply stabilization with energy option.
 
 
 
-25.3. Solution of the model
+25.4. Solution of the model
 ---------------------------
 
 .. code:: ipython3
@@ -332,7 +340,7 @@ Finally, we apply stabilization with energy option.
 
 
 
-25.4. Results
+25.5. Results
 -------------
 
 This section illustrates the use of PyDPF-Core to post-process the results.
@@ -344,7 +352,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    import pyvista
 
 
-25.4.1. Mesh of the model
+25.5.1. Mesh of the model
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
@@ -376,7 +384,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    pl.show()
 
 
-25.4.2. Computed displacements of the model
+25.5.2. Computed displacements of the model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
@@ -398,7 +406,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    pl.show()
 
 
-25.4.3. Von Mises stress
+25.5.3. Von Mises stress
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: ipython3
@@ -426,7 +434,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    pl.show()
 
 
-25.4.4. Computed displacements of the stent
+25.5.4. Computed displacements of the stent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -502,7 +510,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    u_stent_mesh.plot(scalars='U_STENT', show_scalar_bar=True, scalar_bar_args={'title':'Displacements'}, cmap='jet', text='Displacements of the stent')
 
 
-25.5. Exit MAPDL
+25.6. Exit MAPDL
 ----------------
 
 .. code:: ipython3
@@ -510,7 +518,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    mapdl.exit()
 
 
-25.6. Input Files
+25.7. Input files
 -----------------
 
 The following files were used in this problem:
@@ -524,7 +532,7 @@ The following files were used in this problem:
 | `Download the zipped td-25 file set for this problem <https://storage.ansys.com/doclinks/techdemos.html?code=td-25-DLU-N2a>`_     |
 +-----------------------------------------------------------------------------------------------------------------------------------+
 
-For more information, see `Obtaining the Input Files <examples_intro_>`_.
+For more information, see `Obtaining the input files <examples_intro_>`_.
 
 
 .. only:: html
