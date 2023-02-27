@@ -7,7 +7,6 @@ pythreejs==2.4.2
 pyvista==0.38.3
 vtk==9.2.5
 
-
 # Documentation dependencies
 Sphinx==5.3.0
 numpydoc==1.5.0
