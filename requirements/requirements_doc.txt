@@ -20,4 +20,4 @@ sphinx-autobuild==2021.3.14
 sphinx-autodoc-typehints==1.22
 sphinx-notfound-page==0.8.3
 panel==0.14.3
-pypandoc==1.10
+pypandoc==1.11
