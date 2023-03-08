@@ -62,7 +62,7 @@ L = 431.8 + 2 * (19 - 9.5)  # Length of cylinder (mm)
 pext = 0.24  # Differential external pressure (MPa)
 
 # start MAPDL as a service
-mapdl = launch_mapdl()
+mapdl = launch_mapdl(run_location='D:\PyAnsys\Examples\Buckling_PostBuckling_TD21')
 print(mapdl)
 
 mapdl.filname("buckling")  # change filename
@@ -126,6 +126,8 @@ mapdl.cmsel("all")
 #
 # Loading consists of a uniformly distributed external differential
 # pressure: Pext = 0.24 MPa
+
+print('Begin static prestress analysis')
 
 mapdl.csys(1)  # activate cylindrical coordinate system
 
@@ -199,6 +201,8 @@ print(output)
 mapdl.post1()
 mapdl.set("last")
 mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
+
+print('End static prestress analysis')
 #%%
 ###############################################################################
 # Run linear buckling analysis
@@ -211,6 +215,8 @@ mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 # To run the linear buckling analysis, a static solution with prestress effects
 # must be obtained, followed by the eigenvalue buckling solution using the
 # Block Lanczos method and mode expansion.
+
+print('Begin linear buckling analysis')
 
 # Define and solve linear buckling analysis
 mapdl.slashsolu()
@@ -227,6 +233,8 @@ mapdl.set(1, 1)
 mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 mapdl.set(1, 10)
 mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
+
+print('End linear buckling analysis')
 #%%
 ###############################################################################
 # Generate imperfections
@@ -243,12 +251,17 @@ mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 # displacement of a mode shape is 1 mm, a factor of 0.1 is applied when
 # updating the geometry with mode shapes. The factor assumes the manufacturing
 # tolerance of the radius to be on the order of 0.1.
+
+print('Begin adding imperfections')
+
 mapdl.finish()
 mapdl.prep7()
 for i in range(1, 11):
     mapdl.upgeom(0.1, 1, i, "buckling", "rst")  # Add imperfections as a tenth of each
     # mode shape
 mapdl.finish()
+
+print('Finish adding imperfections')
 #%%
 ###############################################################################
 # Run nonlinear static analysis on geometry with imperfections
@@ -260,6 +273,8 @@ mapdl.finish()
 # small time increments so that the expected critical buckling load can
 # be predicted accurately.
 # Note - as this is a buckling analysis, divergence is expected.
+
+print('Begin nonlinear static analysis on imperfect geometry')
 
 mapdl.slashsolu()
 mapdl.antype("STATIC")
@@ -275,6 +290,8 @@ output = mapdl.solve()
 print(output)
 mapdl.finish()
 
+print('End nonlinear static analysis on imperfect geometry')
+
 #%%
 ###############################################################################
 # Post-buckling analysis
@@ -287,33 +304,40 @@ mapdl.finish()
 # occurred at this time; to be sure, the analysis is continued. The goal is to
 # verify the assessment made at this stage by obtaining the load-displacement
 # behavior over a larger range. Because the post-buckling state is unstable,
-# special techniques are necessary to compensate, in this case, nonlinear
+# special techniques are necessary to compensate - in this case, nonlinear
 # stabilization is used.
+
+print('Begin post-buckling analysis')
 
 mapdl.slashsolu()  # Restart analysis with stabilization
 mapdl.antype("static", "restart", 1, 10)
 mapdl.nsubst(100, 50000, 10)
 mapdl.rescontrol("define", "last")
-mapdl.stabilize("constant", "energy", 0.000143)  # Use energy option
+mapdl.stabilize("constant", "energy", 0.000145)  # Use energy option
 output = mapdl.solve()
 print(output)
 mapdl.finish()
+
+print('End of post-buckling analysis run')
 
 #%%
 ###############################################################################
 # Postprocess buckling analysis in POST1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
+print('Begin POST1 postprocessing of post-buckling analysis')
 mapdl.post1()
 mapdl.set("last")
 mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 mapdl.post_processing.plot_nodal_eqv_stress()
 mapdl.finish()
+print('End POST1 postprocessing of post-buckling analysis')
 #%%
 ###############################################################################
 # Postprocess buckling analysis in POST26
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
+print('Begin POST26 postprocessing of post-buckling analysis')
 mapdl.post26()
 
 
@@ -368,6 +392,8 @@ mapdl.show("png")
 mapdl.show("close")
 mapdl.finish()
 
+print('End POST26 postprocessing of post-buckling analysis')
+
 #%%
 ###############################################################################
 # Exit MAPDL
@@ -375,3 +401,4 @@ mapdl.finish()
 # Exit MAPDL instance
 
 mapdl.exit()
+print('Exited MAPDL')
