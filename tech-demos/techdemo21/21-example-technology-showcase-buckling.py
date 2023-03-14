@@ -307,92 +307,103 @@ print('End nonlinear static analysis on imperfect geometry')
 # special techniques are necessary to compensate - in this case, nonlinear
 # stabilization is used.
 
-print('Begin post-buckling analysis')
+# This part of the analysis takes a long time to run so has been commented out.
+# To run the post-bukcling analysis, uncomment the code.
 
-mapdl.slashsolu()  # Restart analysis with stabilization
-mapdl.antype("static", "restart", 1, 10)
-mapdl.nsubst(100, 50000, 10)
-mapdl.rescontrol("define", "last")
-mapdl.stabilize("constant", "energy", 0.000145)  # Use energy option
-output = mapdl.solve()
-print(output)
-mapdl.finish()
+# print('Begin post-buckling analysis')
 
-print('End of post-buckling analysis run')
+# mapdl.slashsolu()  # Restart analysis with stabilization
+# mapdl.antype("static", "restart", 1, 10)
+# mapdl.nsubst(100, 50000, 10)
+# mapdl.rescontrol("define", "last")
+# mapdl.stabilize("constant", "energy", 0.000145)  # Use energy option
+# output = mapdl.solve()
+# print(output)
+# mapdl.finish()
+
+# print('End of post-buckling analysis run')
 
 #%%
 ###############################################################################
 # Postprocess buckling analysis in POST1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-print('Begin POST1 postprocessing of post-buckling analysis')
-mapdl.post1()
-mapdl.set("last")
-mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
-mapdl.post_processing.plot_nodal_eqv_stress()
-mapdl.finish()
-print('End POST1 postprocessing of post-buckling analysis')
+
+# Because the post-buckling analysis has been commented out,
+# the post-processing is also commented out.
+
+# print('Begin POST1 postprocessing of post-buckling analysis')
+# mapdl.post1()
+# mapdl.set("last")
+# mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
+# mapdl.post_processing.plot_nodal_eqv_stress()
+# mapdl.finish()
+# print('End POST1 postprocessing of post-buckling analysis')
 #%%
 ###############################################################################
 # Postprocess buckling analysis in POST26
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
-print('Begin POST26 postprocessing of post-buckling analysis')
-mapdl.post26()
+
+# Because the post-buckling analysis has been commented out,
+# the post-processing is also commented out.
+
+# print('Begin POST26 postprocessing of post-buckling analysis')
+# mapdl.post26()
 
 
-mapdl.numvar(100)  # allow storage for 100 variables
-mapdl.enersol(13, "sene")  # store stiffness energy
-mapdl.enersol(14, "sten")  # store artificial stabilization energy
+# mapdl.numvar(100)  # allow storage for 100 variables
+# mapdl.enersol(13, "sene")  # store stiffness energy
+# mapdl.enersol(14, "sten")  # store artificial stabilization energy
 
-# time history plot of stiffness and stabilization energies
-mapdl.show("png")
-mapdl.plvar(13, 14)
-mapdl.show("close")
+# # time history plot of stiffness and stabilization energies
+# mapdl.show("png")
+# mapdl.plvar(13, 14)
+# mapdl.show("close")
 
-# pressure versus axial shortening for some nodes under the upper ring
-mapdl.nsol(2, 67319, "U", "Z", "UZ1")
-mapdl.prod(
-    ir=3, ia=2, ib="", ic="", name="strain1", facta="", factb="", factc=-1 / 431.8
-)
-mapdl.prod(ir=12, ia=1, ib="", ic="", name="Load", facta="", factb="", factc=0.24)
-mapdl.xvar(3)
-mapdl.show("png")
-mapdl.xrange(0.01)
-mapdl.yrange(0.24)
-mapdl.axlab("X", "Axial Shortening")
-mapdl.axlab("Y", "Applied Pressure ")
-mapdl.plvar(12)
-mapdl.show("close")
-mapdl.xvar(3)
-mapdl.show("png")
-mapdl.xrange(0.002)
-mapdl.yrange(1)
-mapdl.axlab("X", "Axial Shortening")
-mapdl.axlab("Y", "Time")
-mapdl.plvar(1)
-mapdl.show("png")
-mapdl.show("close")
+# # pressure versus axial shortening for some nodes under the upper ring
+# mapdl.nsol(2, 67319, "U", "Z", "UZ1")
+# mapdl.prod(
+#     ir=3, ia=2, ib="", ic="", name="strain1", facta="", factb="", factc=-1 / 431.8
+# )
+# mapdl.prod(ir=12, ia=1, ib="", ic="", name="Load", facta="", factb="", factc=0.24)
+# mapdl.xvar(3)
+# mapdl.show("png")
+# mapdl.xrange(0.01)
+# mapdl.yrange(0.24)
+# mapdl.axlab("X", "Axial Shortening")
+# mapdl.axlab("Y", "Applied Pressure ")
+# mapdl.plvar(12)
+# mapdl.show("close")
+# mapdl.xvar(3)
+# mapdl.show("png")
+# mapdl.xrange(0.002)
+# mapdl.yrange(1)
+# mapdl.axlab("X", "Axial Shortening")
+# mapdl.axlab("Y", "Time")
+# mapdl.plvar(1)
+# mapdl.show("png")
+# mapdl.show("close")
 
-# pressure versus radial displacement for the node with max. deformation
-mapdl.nsol(6, 65269, "U", "Y", "UY_1")
-mapdl.prod(ir=7, ia=6, ib=6, ic="", name="UY2_1")
-mapdl.nsol(8, 65269, "U", "X", "UX_1")
-mapdl.prod(ir=9, ia=8, ib=8, ic="", name="UX2_1")
-mapdl.add(10, 7, 9, "sum")
-mapdl.sqrt(ir=11, ia=10, name="Urad")
-mapdl.xvar(11)
-mapdl.show("png")
-mapdl.xrange(4)
-mapdl.yrange(0.24)
-mapdl.axlab("X", "Radial Displacement")
-mapdl.axlab("Y", "Applied Pressure")
-mapdl.plvar(12)
-mapdl.show("png")
-mapdl.show("close")
-mapdl.finish()
+# # pressure versus radial displacement for the node with max. deformation
+# mapdl.nsol(6, 65269, "U", "Y", "UY_1")
+# mapdl.prod(ir=7, ia=6, ib=6, ic="", name="UY2_1")
+# mapdl.nsol(8, 65269, "U", "X", "UX_1")
+# mapdl.prod(ir=9, ia=8, ib=8, ic="", name="UX2_1")
+# mapdl.add(10, 7, 9, "sum")
+# mapdl.sqrt(ir=11, ia=10, name="Urad")
+# mapdl.xvar(11)
+# mapdl.show("png")
+# mapdl.xrange(4)
+# mapdl.yrange(0.24)
+# mapdl.axlab("X", "Radial Displacement")
+# mapdl.axlab("Y", "Applied Pressure")
+# mapdl.plvar(12)
+# mapdl.show("png")
+# mapdl.show("close")
+# mapdl.finish()
 
-print('End POST26 postprocessing of post-buckling analysis')
+# print('End POST26 postprocessing of post-buckling analysis')
 
 #%%
 ###############################################################################
