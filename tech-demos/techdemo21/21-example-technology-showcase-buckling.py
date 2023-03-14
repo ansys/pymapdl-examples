@@ -62,7 +62,7 @@ L = 431.8 + 2 * (19 - 9.5)  # Length of cylinder (mm)
 pext = 0.24  # Differential external pressure (MPa)
 
 # start MAPDL as a service
-mapdl = launch_mapdl(run_location='D:\PyAnsys\Examples\Buckling_PostBuckling_TD21')
+mapdl = launch_mapdl(run_location="D:\PyAnsys\Examples\Buckling_PostBuckling_TD21")
 print(mapdl)
 
 mapdl.filname("buckling")  # change filename
@@ -127,7 +127,7 @@ mapdl.cmsel("all")
 # Loading consists of a uniformly distributed external differential
 # pressure: Pext = 0.24 MPa
 
-print('Begin static prestress analysis')
+print("Begin static prestress analysis")
 
 mapdl.csys(1)  # activate cylindrical coordinate system
 
@@ -202,7 +202,7 @@ mapdl.post1()
 mapdl.set("last")
 mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 
-print('End static prestress analysis')
+print("End static prestress analysis")
 #%%
 ###############################################################################
 # Run linear buckling analysis
@@ -216,7 +216,7 @@ print('End static prestress analysis')
 # must be obtained, followed by the eigenvalue buckling solution using the
 # Block Lanczos method and mode expansion.
 
-print('Begin linear buckling analysis')
+print("Begin linear buckling analysis")
 
 # Define and solve linear buckling analysis
 mapdl.slashsolu()
@@ -234,7 +234,7 @@ mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 mapdl.set(1, 10)
 mapdl.post_processing.plot_nodal_displacement("NORM", smooth_shading=True)
 
-print('End linear buckling analysis')
+print("End linear buckling analysis")
 #%%
 ###############################################################################
 # Generate imperfections
@@ -252,7 +252,7 @@ print('End linear buckling analysis')
 # updating the geometry with mode shapes. The factor assumes the manufacturing
 # tolerance of the radius to be on the order of 0.1.
 
-print('Begin adding imperfections')
+print("Begin adding imperfections")
 
 mapdl.finish()
 mapdl.prep7()
@@ -261,7 +261,7 @@ for i in range(1, 11):
     # mode shape
 mapdl.finish()
 
-print('Finish adding imperfections')
+print("Finish adding imperfections")
 #%%
 ###############################################################################
 # Run nonlinear static analysis on geometry with imperfections
@@ -274,7 +274,7 @@ print('Finish adding imperfections')
 # be predicted accurately.
 # Note - as this is a buckling analysis, divergence is expected.
 
-print('Begin nonlinear static analysis on imperfect geometry')
+print("Begin nonlinear static analysis on imperfect geometry")
 
 mapdl.slashsolu()
 mapdl.antype("STATIC")
@@ -285,12 +285,12 @@ mapdl.nsubst(100, 10000, 10)
 mapdl.rescontrol("define", "all", 1)
 mapdl.outres("all", "all")
 mapdl.ncnv(2)  # Do not terminate the program execution if the solution diverges
-mapdl.allow_ignore=True # in order for PyMAPDL to not raise an error 
+mapdl.allow_ignore = True  # in order for PyMAPDL to not raise an error
 output = mapdl.solve()
 print(output)
 mapdl.finish()
 
-print('End nonlinear static analysis on imperfect geometry')
+print("End nonlinear static analysis on imperfect geometry")
 
 #%%
 ###############################################################################
@@ -412,4 +412,4 @@ print('End nonlinear static analysis on imperfect geometry')
 # Exit MAPDL instance
 
 mapdl.exit()
-print('Exited MAPDL')
+print("Exited MAPDL")
