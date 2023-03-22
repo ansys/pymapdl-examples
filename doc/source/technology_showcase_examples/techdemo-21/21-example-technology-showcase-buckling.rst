@@ -10,7 +10,7 @@ cylinder using nonlinear stabilization
 ======================================================
 
 This examples shows how to use PyMAPDL to import an existing FE model and to
-perform a nonlinear buckling and postbuckling analysis using nonlinear
+perform a nonlinear buckling and post-buckling analysis using nonlinear
 stabilization. The problem uses a stiffened cylinder subjected to uniform
 external pressure to show how to find the nonlinear buckling loads,
 achieve convergence at the post-buckling stage, and interpret the results.
