@@ -13,6 +13,7 @@ eigensolver
 eigensolvers
 elastoplastic
 equibiaxial
+EQUIL
 gage
 Gerges
 GPa

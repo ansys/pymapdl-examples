@@ -1,9 +1,15 @@
-:orphan:
 
+.. _sphx_glr_technology_showcase_examples:
 
+Technology Showcases
 
+====================
 
-Read me.
+ 
+
+The following examples initially come from the `APDL Technology Showcase Manual <mapdl_tech_show_>`_. 
+They initially were MAPDL files. 
+They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
 
 .. raw:: html
 
@@ -61,6 +67,24 @@ Read me.
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Dynamic simulation of a printed circuit board assembly</div>
+    </div>
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 21: Buckling and postbuckling analysis of a ring stiffened cylinder>
+
+.. only:: html
+
+  .. image:: ./images/thumb/sphx_glr_21-example-technology-showcase-buckling.png
+    :alt: Buckling of a ring stiffned cylinder
+
+  :ref:` _sphx_glr_technology_showcase_examples_21-example-technology-showcase-buckling.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Buckling and postbuckling of a ring stiffened cylinder</div>
     </div>
 
 

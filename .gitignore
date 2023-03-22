@@ -159,3 +159,7 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python
 
 PyMAPDL_Dev
+doc/source/technology_showcase_examples/*.ipynb 
+doc/source/technology_showcase_examples/*.py 
+doc/source/technology_showcase_examples/*.md5 
+doc/source/technology_showcase_examples/*.pickle 
