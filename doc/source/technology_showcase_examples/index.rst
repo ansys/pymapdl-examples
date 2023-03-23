@@ -1,11 +1,9 @@
 
 .. _sphx_glr_technology_showcase_examples:
 
-Technology Showcases
-
 ====================
-
- 
+Technology Showcases
+====================
 
 The following examples initially come from the `APDL Technology Showcase Manual <mapdl_tech_show_>`_. 
 They initially were MAPDL files. 
@@ -73,18 +71,18 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 21: Buckling and postbuckling analysis of a ring stiffened cylinder>
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 21: Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization">
 
 .. only:: html
 
-  .. image:: ./images/thumb/sphx_glr_21-example-technology-showcase-buckling.png
-    :alt: Buckling of a ring stiffned cylinder
+  .. image:: ./images/thumb/sphx_glr_tse-021-buckling_thumb.png
+    :alt: Buckling and post-buckling analysis
 
-  :ref:` _sphx_glr_technology_showcase_examples_21-example-technology-showcase-buckling.py`
+  :ref:`sphx_glr_ex_21-tecbuckling.rst`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Buckling and postbuckling of a ring stiffened cylinder</div>
+      <div class="sphx-glr-thumbnail-title">Buckling and post-buckling</div>
     </div>
 
 
@@ -130,15 +128,16 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
     </div>
 
 
-
 .. toctree::
     :hidden:
 
     techdemo-1/ex_01-tecbrakesqueal.rst
     techdemo-15/ex_15-teccalvalhyper.rst
     techdemo-20/ex_20-tecPCB.rst
+    techdemo-21/ex_21-tecbuckling.rst
     techdemo-25/ex_25-tecstent.rst
     techdemo-28/ex_28-tecfricstir.rst
+
 
 .. only:: html
 

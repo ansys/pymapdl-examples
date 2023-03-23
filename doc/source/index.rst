@@ -44,8 +44,8 @@ Verification Manual <mapdl_vm_>`_. They are complete and concrete case studies
 which necessitate more resources. 
 
 .. include:: ./technology_showcase_examples/index.rst
-  :start-line: 9
-  :end-line: 112
+  :start-line: 11
+  :end-line: 130
 
 .. === TECHNOLOGY SHOWCASES ===
 

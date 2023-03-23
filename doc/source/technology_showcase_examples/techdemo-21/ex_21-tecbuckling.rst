@@ -1,22 +1,20 @@
-.. rst-class:: sphx-glr-example-title
+.. _sphx_glr_ex_21-tecbuckling.rst:
 
-.. _sphx_glr_technology_showcase_examples_21-example-technology-showcase-buckling.py:
+.. _tech_demo_21:
 
 
-.. _ref_buckling_postbuckling_ring_stiffened_cylinder:
+Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization
+==============================================================================================
 
-Buckling and post-buckling analysis of a ring-stiffened 
-cylinder using nonlinear stabilization
-======================================================
 
-This examples shows how to use PyMAPDL to import an existing FE model and to
-perform a nonlinear buckling and post-buckling analysis using nonlinear
+This examples shows how to use PyMAPDL to import an existing FE model and
+to perform a7 nonlinear buckling and post-buckling analysis using nonlinear
 stabilization. The problem uses a stiffened cylinder subjected to uniform
-external pressure to show how to find the nonlinear buckling loads,
-achieve convergence at the post-buckling stage, and interpret the results.
+external pressure to show how to find the nonlinear buckling loads, achieve
+convergence at the post-buckling stage, and interpret the results.
 
-This example is inspired from the model and analysis defined in Chapter 21 of
-the Mechanical APDL Technology Showcase Manual.
+This example is inspired from the model and analysis defined in Chapter 21
+of the Mechanical APDL Technology Showcase Manual.
 
 
 Setting up model
@@ -44,9 +42,6 @@ by default.
 
 Starting MAPDL as a service and importing an external model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 52-118
 
 .. code-block:: python
 
@@ -141,10 +136,10 @@ Starting MAPDL as a service and importing an external model
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 119-129
 
 Define static prestress analysis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Displacement boundary conditions are defined to prevent the six rigid body
 motions. A total of six displacements are therefore applied to three nodes
 located on the top plate at 0, 90, and 270 degrees; the nodes are restricted
@@ -153,8 +148,6 @@ cylinder.
 
 Loading consists of a uniformly distributed external differential
 pressure: Pext = 0.24 MPa
-
-.. GENERATED FROM PYTHON SOURCE LINES 129-206
 
 .. code-block:: python
 
@@ -404,21 +397,17 @@ pressure: Pext = 0.24 MPa
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 207-218
-
-##############################################################################
- Run linear buckling analysis
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- This preliminary analysis predicts the theoretical buckling pressure of the
- ideal linear elastic structure (perfect cylinder) and the buckled mode shapes
- used in the next step to generate the imperfections.
- It is also an efficient way to check the completeness and
- correctness of modeling.
- To run the linear buckling analysis, a static solution with prestress effects
- must be obtained, followed by the eigenvalue buckling solution using the
- Block Lanczos method and mode expansion.
-
-.. GENERATED FROM PYTHON SOURCE LINES 218-238
+Run linear buckling analysis
+----------------------------
+ 
+This preliminary analysis predicts the theoretical buckling pressure of the
+ideal linear elastic structure (perfect cylinder) and the buckled mode shapes
+used in the next step to generate the imperfections.
+It is also an efficient way to check the completeness and
+correctness of modeling.
+To run the linear buckling analysis, a static solution with prestress effects
+must be obtained, followed by the eigenvalue buckling solution using the
+Block Lanczos method and mode expansion.
 
 .. code-block:: python
 
@@ -534,27 +523,21 @@ pressure: Pext = 0.24 MPa
     End linear buckling analysis
 
 
+Generate imperfections
+----------------------
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 239-254
-
-##############################################################################
- Generate imperfections
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- If a structure is perfectly symmetric, nonsymmetric buckling does not occur
- numerically, and a nonlinear buckling analysis fails because
- nonsymmetric buckling responses cannot be triggered. In this problem,
- the geometry, elements, and pressure are all axisymmetric.
- It is not possible, therefore, to simulate nonaxisymmetric buckling with
- the initial model. To overcome this problem, small geometric imperfections
- (similar to those caused by manufacturing a real structure) must be
- introduced to trigger the buckling responses.
- Because the radius of the cylinder is 355.69 mm and the maximum
- displacement of a mode shape is 1 mm, a factor of 0.1 is applied when
- updating the geometry with mode shapes. The factor assumes the manufacturing
- tolerance of the radius to be on the order of 0.1.
-
-.. GENERATED FROM PYTHON SOURCE LINES 254-265
+If a structure is perfectly symmetric, nonsymmetric buckling does not occur
+numerically, and a nonlinear buckling analysis fails because
+nonsymmetric buckling responses cannot be triggered. In this problem,
+the geometry, elements, and pressure are all axisymmetric.
+It is not possible, therefore, to simulate nonaxisymmetric buckling with
+the initial model. To overcome this problem, small geometric imperfections
+(similar to those caused by manufacturing a real structure) must be
+introduced to trigger the buckling responses.
+Because the radius of the cylinder is 355.69 mm and the maximum
+displacement of a mode shape is 1 mm, a factor of 0.1 is applied when
+updating the geometry with mode shapes. The factor assumes the manufacturing
+tolerance of the radius to be on the order of 0.1.
 
 .. code-block:: python
 
@@ -583,20 +566,17 @@ pressure: Pext = 0.24 MPa
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 266-276
+Run nonlinear static analysis on geometry with imperfections
+------------------------------------------------------------
 
-##############################################################################
- Run nonlinear static analysis on geometry with imperfections
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- The nonlinear buckling analysis is a static analysis performed after adding
- imperfections with large deflection active (NLGEOM,ON), extended to a point
- where the stiffened cylinder can reach its limit load.
- To perform the analysis, the load must be allowed to increase using very
- small time increments so that the expected critical buckling load can
- be predicted accurately.
- Note - as this is a buckling analysis, divergence is expected.
+The nonlinear buckling analysis is a static analysis performed after adding
+imperfections with large deflection active (NLGEOM,ON), extended to a point
+where the stiffened cylinder can reach its limit load.
+To perform the analysis, the load must be allowed to increase using very
+small time increments so that the expected critical buckling load can
+be predicted accurately.
+Note - as this is a buckling analysis, divergence is expected.
 
-.. GENERATED FROM PYTHON SOURCE LINES 276-295
 
 .. code-block:: python
 
@@ -1442,27 +1422,22 @@ pressure: Pext = 0.24 MPa
 
 
 
+Post-buckling analysis
+----------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 296-309
+An unconverged solution of the nonlinear static analysis could mean that
+buckling has occurred. In this example, the change in time (or load)
+increment, and displacement value, occurs between substeps 10 and 11,
+which corresponds to TIME = 0.51781 and TIME = 0.53806 and to a pressure
+between 0.124 MPa and 0.129 MPa. It is therefore very likely that buckling
+occurred at this time; to be sure, the analysis is continued. The goal is to
+verify the assessment made at this stage by obtaining the load-displacement
+behavior over a larger range. Because the post-buckling state is unstable,
+special techniques are necessary to compensate - in this case, nonlinear
+stabilization is used.
 
-##############################################################################
- Post-buckling analysis
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- An unconverged solution of the nonlinear static analysis could mean that
- buckling has occurred. In this example, the change in time (or load)
- increment, and displacement value, occurs between substeps 10 and 11,
- which corresponds to TIME = 0.51781 and TIME = 0.53806 and to a pressure
- between 0.124 MPa and 0.129 MPa. It is therefore very likely that buckling
- occurred at this time; to be sure, the analysis is continued. The goal is to
- verify the assessment made at this stage by obtaining the load-displacement
- behavior over a larger range. Because the post-buckling state is unstable,
- special techniques are necessary to compensate - in this case, nonlinear
- stabilization is used.
-
-.. GENERATED FROM PYTHON SOURCE LINES 309-323
 
 .. code-block:: python
-
 
     print('Begin post-buckling analysis')
 
@@ -1478,19 +1453,8 @@ pressure: Pext = 0.24 MPa
 
 
 
-
-
-
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 324-328
-
-##############################################################################
- Postprocess buckling analysis in POST1
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 328-336
+Postprocess buckling analysis in POST1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -1523,14 +1487,8 @@ pressure: Pext = 0.24 MPa
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 337-341
-
-##############################################################################
- Postprocess buckling analysis in POST26
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 341-399
+Postprocess buckling analysis in POST26
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -1628,14 +1586,12 @@ pressure: Pext = 0.24 MPa
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 400-404
 
-##############################################################################
- Exit MAPDL
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- Exit MAPDL instance
+Exit MAPDL
+----------
+ 
+Exit MAPDL instance.
 
-.. GENERATED FROM PYTHON SOURCE LINES 404-407
 
 .. code-block:: python
 
@@ -1644,20 +1600,11 @@ pressure: Pext = 0.24 MPa
     print("Exited MAPDL")
 
 
-
-
 .. rst-class:: sphx-glr-script-out
 
  .. code-block:: none
 
     Exited MAPDL
 
-
-
-
-
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** ( 18 minutes  55.321 seconds)
 
 @author: pmaroneh
