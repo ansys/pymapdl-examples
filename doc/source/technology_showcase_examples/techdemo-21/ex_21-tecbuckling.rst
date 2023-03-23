@@ -1605,8 +1605,3 @@ Exit MAPDL instance.
  .. code-block:: none
 
     Exited MAPDL
-
-
-:Author:
-
-    https://github.com/pmaroneh
