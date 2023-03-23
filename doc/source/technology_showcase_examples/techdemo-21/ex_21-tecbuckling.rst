@@ -21,7 +21,7 @@ Setting up model
 ----------------
 
 The original FE model is given in the Ansys Mechanical APDL Technology
-Showcase Manual.  The .cdb contains a FE model of a ring-stiffened cylinder.
+Showcase Manual. The .cdb contains a FE model of a ring-stiffened cylinder.
 
 A circular cylinder made of bare 2024-T3 aluminum alloy is stiffened inside
 with five Z-section rings. Its ends are closed with thick aluminum bulkheads.
@@ -147,7 +147,7 @@ so that all rigid translations and rotations are not possible for the
 cylinder.
 
 Loading consists of a uniformly distributed external differential
-pressure: Pext = 0.24 MPa
+pressure: :math:`P_{ext} = 0.24 MPa`
 
 .. code-block:: python
 
@@ -1607,4 +1607,6 @@ Exit MAPDL instance.
     Exited MAPDL
 
 
-@author: pmaroneh
+:Author:
+
+    https://github.com/pmaroneh
