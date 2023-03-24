@@ -130,6 +130,7 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
 
 .. toctree::
     :hidden:
+    :includehidden:
 
     techdemo-1/ex_01-tecbrakesqueal.rst
     techdemo-15/ex_15-teccalvalhyper.rst
