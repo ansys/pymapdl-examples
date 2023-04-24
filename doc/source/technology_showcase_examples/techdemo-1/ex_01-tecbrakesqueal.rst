@@ -210,7 +210,7 @@ Start this example by launching MAPDL and loading the model.
     )
 
 
-.. jupyter-execute:: ../common_jupyter_execute.py
+.. jupyter-execute:: ../../common_jupyter_execute.py
    :hide-code:
 
 .. jupyter-execute::

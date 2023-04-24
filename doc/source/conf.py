@@ -139,7 +139,7 @@ if not os.path.exists(pyvista.FIGURE_PATH):
     os.makedirs(pyvista.FIGURE_PATH)
 
 # Executing theming
-with open("technology_showcase_examples/common_jupyter_execute.py") as f:
+with open("common_jupyter_execute.py") as f:
     exec(f.read())
 
 # static path

@@ -365,7 +365,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    mesh.plot()   
 
 
-.. jupyter-execute:: ../common_jupyter_execute.py
+.. jupyter-execute:: ../../common_jupyter_execute.py
    :hide-code:
 
 .. jupyter-execute::

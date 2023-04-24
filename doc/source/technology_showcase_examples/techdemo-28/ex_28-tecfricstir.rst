@@ -118,7 +118,7 @@ two percent of the total heat and is therefore negligible.
 The simulation welds two 304L stainless steel plates (workpiece) with a
 cylindrical shape tool, as shown in the following figure:
 
-.. jupyter-execute:: ../common_jupyter_execute.py
+.. jupyter-execute:: ../../common_jupyter_execute.py
    :hide-code:
 
 .. jupyter-execute::
