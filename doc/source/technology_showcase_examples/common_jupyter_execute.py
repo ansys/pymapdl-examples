@@ -7,18 +7,19 @@ It homogenize style and settings. If needed, you can change the configuration lo
 # Because of a bug in 'jupyter-execute' directive this file can only be located at one level above
 # the techdemos files or at each techdemo directory.
 
-import numpy as np
-import pandas as pd
-
 import warnings
-warnings.filterwarnings('ignore')
+
+import numpy as np  # noqa: F401
+import pandas as pd  # noqa: F401
+
+warnings.filterwarnings("ignore")
 
 # jupyterlab boilerplate setup
-import plotly.graph_objects as go
+import plotly.graph_objects as go  # noqa: F401
 import pyvista
 
 pyvista.set_plot_theme("document")
-pyvista.global_theme.background = 'white'
+pyvista.global_theme.background = "white"
 pyvista.global_theme.font.size = 22
 pyvista.global_theme.font.label_size = 22
 pyvista.global_theme.font.title_size = 22

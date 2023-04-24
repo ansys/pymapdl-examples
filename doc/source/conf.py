@@ -9,7 +9,6 @@ import numpy as np
 import pyvista
 from sphinx_gallery.sorting import FileNameSortKey
 
-
 # Project information
 project = "pymapdl-examples"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -28,7 +27,7 @@ pyvista.OFF_SCREEN = True
 # necessary when building the sphinx gallery
 pyvista.BUILDING_GALLERY = True
 pymapdl.BUILDING_GALLERY = True
-os.environ['PYVISTA_BUILDING_GALLERY'] = 'true'
+os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
 
 # specify the location of your github repo
 html_theme_options = {
