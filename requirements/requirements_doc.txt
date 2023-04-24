@@ -17,7 +17,7 @@ jupyterlab>=3.2.8
 sphinxemoji==0.2.0
 sphinx-gallery==0.13.0
 sphinx-autobuild==2021.3.14
-sphinx-autodoc-typehints==1.22
+sphinx-autodoc-typehints==1.23.0
 sphinx-notfound-page==0.8.3
 panel==0.14.4
 pypandoc==1.11
