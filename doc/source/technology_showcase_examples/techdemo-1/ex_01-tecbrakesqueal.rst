@@ -210,20 +210,11 @@ Start this example by launching MAPDL and loading the model.
     )
 
 
-.. jupyter-execute::
+.. jupyter-execute:: ../common_jupyter_execute.py
    :hide-code:
 
-   # jupyterlab boilerplate setup
-   import numpy as np
-   import plotly.graph_objects as go
-   import pandas as pd
-   import pyvista
-
-   pyvista.set_jupyter_backend('pythreejs')
-   pyvista.global_theme.background = 'white'
-   pyvista.global_theme.window_size = [600, 400]
-   pyvista.global_theme.axes.show = True
-   pyvista.global_theme.show_scalar_bar = True
+.. jupyter-execute::
+   :hide-code:
 
    from ansys.mapdl.core import examples
    from ansys.mapdl.core.examples import download_vtk_rotor, download_tech_demo_data
