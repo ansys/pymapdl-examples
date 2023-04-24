@@ -4,9 +4,6 @@ Code to executed the first time in each techdemo which uses jupyter-execute dire
 It homogenize style and settings. If needed, you can change the configuration locally per plot.
 """
 
-# Because of a bug in 'jupyter-execute' directive this file can only be located at one level above
-# the techdemos files or at each techdemo directory.
-
 import warnings
 
 import numpy as np  # noqa: F401
