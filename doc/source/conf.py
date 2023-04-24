@@ -21,6 +21,14 @@ html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyMAPDL Examples"
 
+# Ensure that offscreen rendering is used for docs generation
+pyvista.OFF_SCREEN = True
+
+# necessary when building the sphinx gallery
+pyvista.BUILDING_GALLERY = True
+pymapdl.BUILDING_GALLERY = True
+os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
+
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/pyansys/pymapdl-examples",
@@ -63,7 +71,7 @@ sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": ["../../examples/verif-manual"],
     # path where to save gallery generated examples
-    "gallery_dirs": ["verif-manual", "technology_showcase_examples"],
+    "gallery_dirs": ["verif-manual"],
     # Pattern to search for example files
     "filename_pattern": r"\.py",
     # Remove the "Download all examples" button from the top level gallery
@@ -121,8 +129,6 @@ numpydoc_validation_checks = {
 # Manage errors
 pyvista.set_error_output_file("errors.txt")
 
-# Ensure that offscreen rendering is used for docs generation
-pyvista.OFF_SCREEN = True
 
 # must be less than or equal to the XVFB window size
 pyvista.rcParams["window_size"] = np.array([1024, 768])
@@ -132,10 +138,9 @@ pyvista.FIGURE_PATH = os.path.join(os.path.abspath("./images/"), "auto-generated
 if not os.path.exists(pyvista.FIGURE_PATH):
     os.makedirs(pyvista.FIGURE_PATH)
 
-
-# necessary when building the sphinx gallery
-pyvista.BUILDING_GALLERY = True
-pymapdl.BUILDING_GALLERY = True
+# Executing theming
+with open("common_jupyter_execute.py") as f:
+    exec(f.read())
 
 # static path
 html_static_path = ["_static"]

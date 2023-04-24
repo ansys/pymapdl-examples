@@ -118,23 +118,11 @@ two percent of the total heat and is therefore negligible.
 The simulation welds two 304L stainless steel plates (workpiece) with a
 cylindrical shape tool, as shown in the following figure:
 
+.. jupyter-execute:: ../../common_jupyter_execute.py
+   :hide-code:
 
 .. jupyter-execute::
    :hide-code:
-
-   # jupyterlab boilerplate setup
-   import numpy as np
-   import plotly.graph_objects as go
-   import pandas as pd
-   import pyvista
-   import os
-
-   pyvista.set_jupyter_backend('pythreejs')
-   pyvista.global_theme.background = 'white'
-   pyvista.global_theme.window_size = [600, 400]
-   pyvista.global_theme.axes.show = True
-   pyvista.global_theme.show_scalar_bar = True
-   mytheme = pyvista.global_theme
 
    from ansys.mapdl.core import examples
    from ansys.mapdl.core.examples import download_vtk_rotor, download_tech_demo_data
@@ -570,8 +558,7 @@ The following contact settings are used for the ``CONTA174`` elements:
                      bc_glyph_size=0.002,
                      return_plotter=True,
                      show_axes=False,
-                     theme=mytheme,
-                     notebook='pythreejs')
+                     theme=mytheme)
     pl.background_color = 'white'
 
     for elem, color in zip((170, 174), ('red', 'blue')):
@@ -871,7 +858,6 @@ perpendicular direction (z direction).
         return_plotter=True,
         bc_glyph_size=0.002,
         theme=mytheme,
-        notebook='pythreejs',
         show_axes=False)
     pl.show()
 
