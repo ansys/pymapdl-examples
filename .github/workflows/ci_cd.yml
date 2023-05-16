@@ -59,7 +59,7 @@ jobs:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
       PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
       PYMAPDL_START_INSTANCE: FALSE
-      DOCKER_PACKAGE: ghcr.io/pyansys/pymapdl/mapdl
+      DOCKER_PACKAGE: ghcr.io/ansys/pymapdl/mapdl
       DOCKER_IMAGE_VERSION_DOCS_BUILD: v22.2.0
       DPF_PORT: 21002
 
@@ -108,8 +108,8 @@ jobs:
 
       - name: DPF Server Activation
         run: |
-          docker pull ghcr.io/pyansys/dpf-core:22.2dev
-          docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/pyansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
+          docker pull ghcr.io/ansys/dpf-core:22.2dev
+          docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
       
       - name: "Cache Verification Manual examples"
         uses: actions/cache@v3
