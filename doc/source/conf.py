@@ -31,7 +31,7 @@ os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pymapdl-examples",
+    "github_url": "https://github.com/ansys/pymapdl-examples",
     "show_prev_next": False,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
@@ -42,7 +42,7 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/pyansys/pymapdl-examples/discussions",
+            "url": "https://github.com/ansys/pymapdl-examples/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],
