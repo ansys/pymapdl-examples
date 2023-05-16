@@ -1722,7 +1722,7 @@ The following papers are cited in this example problem:
 
 The following files were used in this problem:
 
-* :download:`fsw.cdb <https://github.com/pyansys/example-data/blob/master/tech_demos/td-28/fsw.cdb>` -- Common database file containing the FSW model information
+* :download:`fsw.cdb <https://github.com/ansys/example-data/blob/master/tech_demos/td-28/fsw.cdb>` -- Common database file containing the FSW model information
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------+

@@ -9,8 +9,8 @@
 .. _pyansys: https://docs.pyansys.com
 
 .. #PyMAPDL related
-.. _pymapdl_docs: https://mapdl.docs.pyansys.com
-.. _pymapdl_github: https://github.com/pyansys/pymapdl
+.. _pymapdl_docs: https://mapdl.docs.pyansys.com/version/stable/
+.. _pymapdl_github: https://github.com/ansys/pymapdl
 .. _pymapdl_examples: https://mapdl.docs.pyansys.com/examples/index.html
 
 .. # Examples
