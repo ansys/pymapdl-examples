@@ -37,7 +37,7 @@ html_theme_options = {
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
         ("PyMAPDL", "https://mapdl.docs.pyansys.com/"),
-        ("Examples", "https://mapdl.docs.pyansys.com/dev/examples/index.html"),
+        ("Examples", "https://mapdl.docs.pyansys.com/version/stable/examples/"),
     ],
     "icon_links": [
         {
