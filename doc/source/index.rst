@@ -10,7 +10,7 @@ The Technology Showcases and the Verification Manual examples for
 .. === VERIFICATION MANUAL ===
 
 .. include:: ./verif-manual/index.rst
-   :start-line: 5
+   :start-line: 6
    :end-line: 211
 
 
