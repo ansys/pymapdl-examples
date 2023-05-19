@@ -9,16 +9,6 @@ The Technology Showcases and the Verification Manual examples for
 
 .. === VERIFICATION MANUAL ===
 
-
-Verification Manual
-===================
-
-These examples present how to use PyMAPDL in an academic modeling context. 
-They ensure the PyMAPDL accuracy.
-
-Summary of the exposed Verification Manual Examples
----------------------------------------------------
-
 .. include:: ./verif-manual/index.rst
    :start-line: 5
    :end-line: 211
