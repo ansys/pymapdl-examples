@@ -19,8 +19,8 @@ Summary of the exposed Verification Manual Examples
 ---------------------------------------------------
 
 .. include:: ./verif-manual/index.rst
-   :start-after: verification_manual_start
-   :end-before: verification_manual_end
+   :start-line: 8
+   :end-line: 212
 
 
 .. === TECHNOLOGY SHOWCASES ===
