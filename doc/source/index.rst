@@ -9,7 +9,6 @@ The Technology Showcases and the Verification Manual examples for
 
 .. === VERIFICATION MANUAL ===
 
-
 Verification Manual
 ===================
 
@@ -20,8 +19,8 @@ Summary of the exposed Verification Manual Examples
 ---------------------------------------------------
 
 .. include:: ./verif-manual/index.rst
-   :start-line: 5
-   :end-line: 211
+   :start-line: 8
+   :end-line: 212
 
 
 .. === TECHNOLOGY SHOWCASES ===
