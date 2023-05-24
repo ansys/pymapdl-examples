@@ -54,7 +54,7 @@ Analysis Assumptions and Modeling Notes:
    is used to obtain the nonlinear plastic solution (load steps 2 and 3).
 
 """
-# sphinx_gallery_thumbnail_path = '_static/vm11_setup.png'
+# sphinx_gallery_thumbnail_path = '_static/vm11_setup_1.png'
 
 import math
 
@@ -75,7 +75,7 @@ mapdl.clear()  # optional as MAPDL just started
 
 mapdl.verify("vm11")
 mapdl.prep7()
-mapdl.title("VM11 RESIDUAL STRESS PROBLEM")
+mapdl.title("VM11 RESIDUAL STRESS PROBLEM", mute=True)
 
 ###############################################################################
 # Define element type
@@ -90,7 +90,7 @@ mapdl.et(1, "LINK180")
 mapdl.sectype(1, "LINK")
 mapdl.secdata(1)
 mapdl.mp("EX", 1, 30e6)
-mapdl.tb("PLAS", 1, "", "", "BKIN")  # TABLE FOR BILINEAR KINEMATIC HARDENING
+mapdl.tb("PLAS", 1, tbopt="BKIN")  # TABLE FOR BILINEAR KINEMATIC HARDENING
 mapdl.tbtemp(100)
 mapdl.tbdata(1, 30000)  # YIELD STRESS
 
@@ -108,7 +108,7 @@ xloc = L * math.tan(math.radians(theta))
 mapdl.n(1, -xloc)
 mapdl.n(3, xloc)
 mapdl.fill()
-mapdl.n(4, "", -L, mute=True)
+mapdl.n(4, y=-L, mute=True)
 
 ###############################################################################
 # Define elements
@@ -117,10 +117,10 @@ mapdl.n(4, "", -L, mute=True)
 mapdl.e(1, 4)
 mapdl.e(2, 4)
 mapdl.e(3, 4)
-mapdl.outpr("", 1)
-mapdl.d(1, "ALL", "", "", 3)
+mapdl.outpr(freq=1)
+mapdl.d(1, "ALL", nend=3)
 mapdl.f(4, "FY", -51961.5)  # APPLY LOAD F1
-mapdl.finish()
+mapdl.finish(mute=True)
 
 ###############################################################################
 # Solve
@@ -128,7 +128,7 @@ mapdl.finish()
 # Enter solution mode and run the simulation.
 mapdl.slashsolu()
 mapdl.solve()
-mapdl.finish()
+mapdl.finish(mute=True)
 
 ###############################################################################
 # Post-processing
@@ -140,24 +140,24 @@ mapdl.post1()
 
 q = mapdl.queries
 bot_node = q.node(0, -100, 0)
-def_node = mapdl.get("_", "NODE", bot_node, "U", "Y")
+def_node = mapdl.get_value("NODE", bot_node, "U", "Y")
 mapdl.finish()
 mapdl.slashsolu()
 mapdl.autots("ON")  # TURN ON AUTOMATIC LOAD STEPPING
 mapdl.nsubst(10)
-mapdl.outpr("", 10)
+mapdl.outpr(freq=10)
 mapdl.f(4, "FY", -81961.5)  # APPLY LOAD F2
 mapdl.solve()
 mapdl.nsubst(5)
-mapdl.outpr("", 5)
-mapdl.f(4, "FY")  # REMOVE LOAD F2
+mapdl.outpr(freq=5)
+mapdl.fdele(4, "FY")  # REMOVE LOAD F2
 mapdl.solve()
 mapdl.finish()
 
 
 mapdl.post1()
 mapdl.etable("STRS", "LS", 1)
-strss = mapdl.get("_", "ELEM", 2, "ETAB", "STRS")
+strss = mapdl.get_value("ELEM", 2, "ETAB", "STRS")
 message = f"""
 ------------------- VM11 RESULTS COMPARISON ---------------------
    TARGET      |  TARGET     |   ANSYS       |   RATIO
