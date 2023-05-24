@@ -20,7 +20,7 @@ Summary of the exposed Verification Manual Examples
 
 .. include:: ./verif-manual/index.rst
    :start-line: 8
-   :end-line: 212
+   :end-line: 229
 
 
 .. === TECHNOLOGY SHOWCASES ===
