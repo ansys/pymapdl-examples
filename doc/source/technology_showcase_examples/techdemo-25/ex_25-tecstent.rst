@@ -371,7 +371,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/data/mesh.vtk"
+   file = "./doc/source/technology_showcase_examples/techdemo-25/data/mesh.vtk"
    mesh_file = pyvista.read(file)
    pl = pyvista.Plotter()
    pl.add_mesh(mesh_file, cmap='jet', show_scalar_bar=False, show_edges=True)
@@ -392,7 +392,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/data/u.vtk"
+   file = "./doc/source/technology_showcase_examples/techdemo-25/data/u.vtk"
    u_file = pyvista.read(file)
    u_file = u_file.warp_by_scalar('U')
    pl = pyvista.Plotter(notebook=True)
@@ -420,7 +420,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/data/s_VM.vtk"
+   file = "./doc/source/technology_showcase_examples/techdemo-25/data/s_VM.vtk"
    s_VM_file = pyvista.read(file)
    s_VM_file = s_VM_file.warp_by_scalar('S_VM')
    pl = pyvista.Plotter(notebook=True)
@@ -469,10 +469,10 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/data/mesh.vtk"
+   file = "./doc/source/technology_showcase_examples/techdemo-25/data/mesh.vtk"
    mesh_file = pyvista.read(file)
 
-   file = "./source/technology_showcase_examples/techdemo-25/data/mesh_sco.vtk"
+   file = "./doc/source/technology_showcase_examples/techdemo-25/data/mesh_sco.vtk"
    mesh_sco_file = pyvista.read(file)
 
    pl = pyvista.Plotter(shape=(1, 2))
@@ -494,7 +494,7 @@ This section illustrates the use of PyDPF-Core to post-process the results.
 .. jupyter-execute::
   :hide-code:
 
-   file = "./source/technology_showcase_examples/techdemo-25/data/u_stent.vtk"
+   file = "./doc/source/technology_showcase_examples/techdemo-25/data/u_stent.vtk"
    u_stent_file = pyvista.read(file)
    u_stent_file.warp_by_scalar('U_STENT')
    data = u_stent_file.get_array('U_STENT')
