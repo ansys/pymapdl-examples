@@ -26,7 +26,7 @@ Windows
 
 .. code-block:: text
 
-    tox -e doc-windows
+    tox -e doc-win
 
 MacOS/Linux (requires make)
 
