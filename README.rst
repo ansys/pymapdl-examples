@@ -22,17 +22,9 @@ Documentation
 -------------
 Documentation can be rendered by running:
 
-Windows
-
 .. code-block:: text
 
-    tox -e doc-windows
-
-MacOS/Linux (requires make)
-
-.. code-block:: text
-
-    tox -e doc-linux
+    tox -e doc
 
 The resultant HTML files can be inspected using your favorite web browser:
 
