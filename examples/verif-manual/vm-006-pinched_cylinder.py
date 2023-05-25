@@ -348,7 +348,7 @@ plot_nodal_disp()
 
 def get_displacements():
     # Select keypoint by its number ``top_keypoint``.
-    mapdl.ksel("S", vmin="top_keypoint")
+    mapdl.ksel("S", vmin=top_keypoint)
 
     # Select the node associated with the selected keypoint.
     mapdl.nslk()
