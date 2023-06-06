@@ -2,7 +2,6 @@ r""".. _ref_vm12_example:
 
 Combined bending and torsion
 ----------------------------
-
 Problem description:
  - A vertical bar of length :math:`l` is subjected to the action of a
    horizontal force F acting at a distance d from the axis of the bar.
