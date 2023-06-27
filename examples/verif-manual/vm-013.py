@@ -34,9 +34,11 @@ mapdl.verify("vm13")
 # Set the title of the analysis
 mapdl.title("VM13 CYLINDRICAL SHELL UNDER PRESSURE")
 
-# Provide reference information for the analysis
-mapdl.run("C***   STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11")
-mapdl.run("C***   AND UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981")
+"""
+The references for the analysis can be found here: 
+  - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
+  - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
+"""
 
 # Enter the model creation preprocessor
 mapdl.prep7()
