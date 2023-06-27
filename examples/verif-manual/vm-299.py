@@ -3,9 +3,8 @@ VM299 Sound Diffusion in a Flat Room
 ========================================================================
 
 Description:
-Sound diffusion is modeled in a flat room of size 30x30x3 m3.
-A sound source is placed at (2,2,1) with a sound power level of 1x10-2 W.
-The wall absorption coefficient is equal to 0.1.
+Sound diffusion is modeled in a flat room of size 30x30x3 m3. A sound source is placed at (2,2,1)
+with a sound power level of 1x10-2 W. The wall absorption coefficient is equal to 0.1.
 The coefficient of atmospheric attenuation is 0.01 m-1.
 
 """

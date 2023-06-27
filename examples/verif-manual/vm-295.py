@@ -3,12 +3,10 @@ VM295 Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
 ========================================================================
 
 Description:
-The test case is to simulate a one-dimensional Terzaghi's problem with
-permeability as a function of the soil depth. A pressure P is applied
-on the top surface of the soil with depth H and width W. The top
-surface of the soil is fully permeable and the permeability decreases
-linearly with depth. The excess pore water pressure
-for 0.1, 0.2, 0.3, 0.4, and 0.5 day is calculated and compared
+The test case is to simulate a one-dimensional Terzaghi's problem with permeability as a function
+of the soil depth. A pressure P is applied on the top surface of the soil with depth H and width W.
+The top surface of the soil is fully permeable and the permeability decreases linearly with depth.
+The excess pore water pressure for 0.1, 0.2, 0.3, 0.4, and 0.5 day is calculated and compared
 against the reference results obtained using the PIM method.
 
 """

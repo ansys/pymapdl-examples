@@ -3,10 +3,9 @@ VM291 Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
 ========================================================================
 
 Description:
-A point force is applied at the origin of a half-space 2-D axisymmetric
-solid modeled with far-field domain. Determine the displacement in the
-Y-direction on nodes along the radial direction (at location Y = 0)
-and vertical direction (at location X = 0).
+A point force is applied at the origin of a half-space 2-D axisymmetric solid modeled with
+far-field domain. Determine the displacement in the Y-direction on nodes along the radial
+direction (at location Y = 0) and vertical direction (at location X = 0).
 
 """
 import os
@@ -44,7 +43,7 @@ mapdl.com("*******************************************")
 mapdl.prep7()
 
 # Constant value of PI
-pi = math.pi # need to add "import math" at the beginning of the file
+pi = math.pi  # need to add "import math" at the beginning of the file
 
 # 2D 4-NODE STRUCTURAL SOLID
 mapdl.et(1, "PLANE182")
@@ -53,10 +52,10 @@ mapdl.keyopt(1, 3, 1)
 
 # DEFINE MATERIAL MODEL
 # YOUNG'S MODULUS
-exx=1.0
+exx = 1.0
 mapdl.mp("EX", 1, exx)
 # POISSON'S RATIO
-nuxy=0.1
+nuxy = 0.1
 mapdl.mp("PRXY", 1, nuxy)
 
 # DEFINE NODES
@@ -121,7 +120,7 @@ mapdl.allsel()
 mapdl.eplot()
 
 # FORCE magnitude
-p=-1
+p = -1
 # APPLY FORCE ALONG Y DIRECTION AT NODE1 having magnitude "p"
 mapdl.f(1, "FY", "P")
 
@@ -159,39 +158,39 @@ with mapdl.non_interactive:
     mapdl.run("/GOPR")
 
 # Set constant parameters
-r1=1
-z1=1
+r1 = 1
+z1 = 1
 
 # UY AT NODE (1,0,0)
-uy1=p*(1-nuxy**2)/(pi*exx*r1)
+uy1 = p * (1 - nuxy**2) / (pi * exx * r1)
 # UY AT NODE (0,1,0)
-up1=p/(2*pi*exx*z1)*(1+nuxy+2-2*nuxy**2)
+up1 = p / (2 * pi * exx * z1) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(1,0,0)
 uya1 = mapdl.get("UYA1", "NODE", 2, "U", "Y")
 # MADPL UY AT NODE(0,1,0)
 upa1 = mapdl.get("UPA1", "NODE", 4, "U", "Y")
 
 # Set constant parameters
-r2=2
-z2=2
+r2 = 2
+z2 = 2
 
 # UY AT NODE (2,0,0)
-uy2=p*(1-nuxy**2)/(pi*exx*r2)
+uy2 = p * (1 - nuxy**2) / (pi * exx * r2)
 # UY AT NODE (0,2,0)
-up2=p*(2*pi*exx*z2)*(1+nuxy+2-2*nuxy**2)
+up2 = p * (2 * pi * exx * z2) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(2,0,0)
 uya2 = mapdl.get("UYA2", "NODE", 5, "U", "Y")
 # MADPL UY AT NODE(0,2,0)
 upa2 = mapdl.get("UPA2", "NODE", 9, "U", "Y")
 
 # Set constant parameters, R3=3 and Z3=3
-r3=3
-z3=3
+r3 = 3
+z3 = 3
 
 # UY AT NODE (3,0,0)
-uy3=p*(1-nuxy**2)/(pi*exx*r3)
+uy3 = p * (1 - nuxy**2) / (pi * exx * r3)
 # UY AT NODE (0,3,0)
-up3=p/(2*pi*exx*z3)*(1+nuxy+2-2*nuxy**2)
+up3 = p / (2 * pi * exx * z3) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(3,0,0)
 uya3 = mapdl.get("UYA3", "NODE", 10, "U", "Y")
 # MADPL UY AT NODE(0,3,0)
@@ -202,9 +201,9 @@ r4 = 4
 z4 = 4
 
 # UY AT NODE (4,0,0)
-uy4=p*(1-nuxy**2)/(pi*exx*r4)
+uy4 = p * (1 - nuxy**2) / (pi * exx * r4)
 # UY AT NODE (0,4,0)
-up4=p/(2*pi*exx*z4)*(1+nuxy+2-2*nuxy**2)
+up4 = p / (2 * pi * exx * z4) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(4,0,0)
 uya4 = mapdl.get("UYA4", "NODE", 15, "U", "Y")
 # MADPL UY AT NODE(0,4,0)
@@ -264,7 +263,7 @@ mapdl.com("***************************************")
 mapdl.prep7()
 
 # Constant value of PI
-mapdl.run("PI=ACOS(-1)")
+pi = math.pi  # need to add "import math" at the beginning of the file
 
 # YOUNG'S MODULUS
 mapdl.run("Exx=1.0                 ")

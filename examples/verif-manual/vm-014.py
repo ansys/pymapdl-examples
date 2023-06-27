@@ -3,16 +3,14 @@ VM14 Large Deflection Eccentric Compression of Slender Column.
 ==============================================================
 
 Description:
-Find the deflection Δ at the middle and the maximum tensile
-and compressive stresses in an eccentrically compressed steel
-strut of length L. The cross-section is a channel with the
-dimensions shown in the diagram. The ends are pinned at the
-point of load application. The distance between the centroid
-and the back of the channel is e, and the compressive force F
-acts in the plane of the back of the channel and in the
-symmetry plane of the channel.
+Find the deflection :math:`/delta` at the middle and the maximum tensile and compressive stresses
+in an eccentrically compressed steel strut of length L. The cross-section is a channel
+with the dimensions shown in the diagram. The ends are pinned at the point of load application.
+The distance between the centroid and the back of the channel is e, and the compressive force F
+acts in the plane of the back of the channel and in the symmetry plane of the channel.
 
 """
+
 import os
 
 from ansys.mapdl.core import launch_mapdl
