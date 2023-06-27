@@ -131,7 +131,7 @@ mapdl.finish()
 mapdl.slashsolu()
 
 # Performing static analysis
-mapdl.run("ANTYPE,STATIC")
+mapdl.antype("STATIC")
 
 # Controls the solution data written to the database.
 mapdl.outres("ALL", "ALL")
