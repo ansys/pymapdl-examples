@@ -23,7 +23,7 @@ mapdl.clear()
 mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2")
 
 # Run the FINISH command to exists normally from a processor
-mapdl.run("FINISH")
+mapdl.finish()
 
 # Run the /VERIFY command for VM13
 mapdl.verify("vm13")
