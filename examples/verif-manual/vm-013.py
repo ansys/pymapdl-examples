@@ -66,6 +66,9 @@ mapdl.d(2, "ROTZ")  # Fix ROTZ (rotation around Z-axis) for node 2
 mapdl.f(2, "FY", 5654866.8)  # Apply a concentrated force FY to node 2
 mapdl.sfe(1, 1, "PRES", "", 500)  # Apply internal pressure of 500 psi to element 1
 
+mapdl.esel("s", "ALL")
+mapdl.eplot()
+
 # Finish the pre-processing processor
 mapdl.finish()
 
