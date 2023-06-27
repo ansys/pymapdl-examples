@@ -157,57 +157,57 @@ with mapdl.non_interactive:
     # reactivates suppressed printout
     mapdl.run("/GOPR")
 
-# Set constant parameters, R1=1 and Z1=1
-mapdl.run("R1=1")
-mapdl.run("Z1=1")
+# Set constant parameters
+r1=1
+z1=1
 
 # UY AT NODE (1,0,0)
-mapdl.run("UY1=P*(1-NUxy**2)/(PI*Exx*R1)               ")
+uy1=p*(1-nuxy**2)/(pi*exx*r1)
 # UY AT NODE (0,1,0)
-mapdl.run("UP1=P/(2*PI*Exx*Z1)*(1+NUxy+2-2*NUxy**2)    ")
+up1=p/(2*pi*exx*z1)*(1+nuxy+2-2*nuxy**2)
 # MAPDL UY AT NODE(1,0,0)
-mapdl.get("UYA1", "NODE", 2, "U", "Y")
+uya1 = mapdl.get("UYA1", "NODE", 2, "U", "Y")
 # MADPL UY AT NODE(0,1,0)
-mapdl.get("UPA1", "NODE", 4, "U", "Y")
+upa1 = mapdl.get("UPA1", "NODE", 4, "U", "Y")
 
-# Set constant parameters, R2=2 and Z2=2
-mapdl.run("R2=2")
-mapdl.run("Z2=2")
+# Set constant parameters
+r2=2
+z2=2
 
 # UY AT NODE (2,0,0)
-mapdl.run("UY2=P*(1-NUxy**2)/(PI*Exx*R2)               ")
+uy2=p*(1-nuxy**2)/(pi*exx*r2)
 # UY AT NODE (0,2,0)
-mapdl.run("UP2=P/(2*PI*Exx*Z2)*(1+NUxy+2-2*NUxy**2)    ")
+up2=p*(2*pi*exx*z2)*(1+nuxy+2-2*nuxy**2)
 # MAPDL UY AT NODE(2,0,0)
-mapdl.get("UYA2", "NODE", 5, "U", "Y")
+uya2 = mapdl.get("UYA2", "NODE", 5, "U", "Y")
 # MADPL UY AT NODE(0,2,0)
-mapdl.get("UPA2", "NODE", 9, "U", "Y")
+upa2 = mapdl.get("UPA2", "NODE", 9, "U", "Y")
 
 # Set constant parameters, R3=3 and Z3=3
-mapdl.run("R3=3")
-mapdl.run("Z3=3")
+r3=3
+z3=3
 
 # UY AT NODE (3,0,0)
-mapdl.run("UY3=P*(1-NUxy**2)/(PI*Exx*R3)               ")
+uy3=p*(1-nuxy**2)/(pi*exx*r3)
 # UY AT NODE (0,3,0)
-mapdl.run("UP3=P/(2*PI*Exx*Z3)*(1+NUxy+2-2*NUxy**2)    ")
+up3=p/(2*pi*exx*z3)*(1+nuxy+2-2*nuxy**2)
 # MAPDL UY AT NODE(3,0,0)
-mapdl.get("UYA3", "NODE", 10, "U", "Y")
+uya3 = mapdl.get("UYA3", "NODE", 10, "U", "Y")
 # MADPL UY AT NODE(0,3,0)
-mapdl.get("UPA3", "NODE", 14, "U", "Y")
+upa3 = mapdl.get("UPA3", "NODE", 14, "U", "Y")
 
 # Set constant parameters, R4=4 and Z4=4
-mapdl.run("R4=4")
-mapdl.run("Z4=4")
+r4 = 4
+z4 = 4
 
 # UY AT NODE (4,0,0)
-mapdl.run("UY4=P*(1-NUxy**2)/(PI*Exx*R4)               ")
+uy4=p*(1-nuxy**2)/(pi*exx*r4)
 # UY AT NODE (0,4,0)
-mapdl.run("UP4=P/(2*PI*Exx*Z4)*(1+NUxy+2-2*NUxy**2)    ")
+up4=p/(2*pi*exx*z4)*(1+nuxy+2-2*nuxy**2)
 # MAPDL UY AT NODE(4,0,0)
-mapdl.get("UYA4", "NODE", 15, "U", "Y")
+uya4 = mapdl.get("UYA4", "NODE", 15, "U", "Y")
 # MADPL UY AT NODE(0,4,0)
-mapdl.get("UPA4", "NODE", 19, "U", "Y")
+upa4 = mapdl.get("UPA4", "NODE", 19, "U", "Y")
 
 # Enter non-interactive mode
 with mapdl.non_interactive:
