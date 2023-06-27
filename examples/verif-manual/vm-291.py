@@ -117,7 +117,8 @@ mapdl.nsel("S", "LOC", "X", 0)
 mapdl.d("ALL", "UX", 0)
 
 # Selects all entities
-mapdl.run("ALLS")
+mapdl.allsel()
+mapdl.eplot()
 
 # FORCE magnitude
 p=-1
