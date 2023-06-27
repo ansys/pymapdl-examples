@@ -44,7 +44,7 @@ mapdl.com("*******************************************")
 mapdl.prep7()
 
 # Constant value of PI
-mapdl.run("PI=ACOS(-1)")
+pi = math.pi # need to add "import math" at the beginning of the file
 
 # 2D 4-NODE STRUCTURAL SOLID
 mapdl.et(1, "PLANE182")
@@ -53,11 +53,11 @@ mapdl.keyopt(1, 3, 1)
 
 # DEFINE MATERIAL MODEL
 # YOUNG'S MODULUS
-mapdl.run("Exx=1.0                 ")
-mapdl.mp("EX", 1, "Exx")
+exx=1.0
+mapdl.mp("EX", 1, exx)
 # POISSON'S RATIO
-mapdl.run("NUxy=0.1                ")
-mapdl.mp("PRXY", 1, "NUxy")
+nuxy=0.1
+mapdl.mp("PRXY", 1, nuxy)
 
 # DEFINE NODES
 mapdl.n(1, 0, 0)
