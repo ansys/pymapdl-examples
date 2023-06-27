@@ -3,12 +3,9 @@ VM13 Cylindrical Shell Under Pressure
 =========================================
 
 Description:
-A long cylindrical pressure vessel of mean
-diameter d and wall thickness t has closed
-ends and is subjected to an internal
-pressure P. Determine the axial stress sigmay
-and the hoop stress sigmaz in the vessel at the
-midthickness of the wall.
+A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
+ends and is subjected to an internal pressure P. Determine the axial stress 
+:math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the midthickness of the wall.
 
 """
 import os
