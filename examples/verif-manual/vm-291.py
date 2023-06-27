@@ -128,7 +128,7 @@ mapdl.f(1, "FY", "P")
 mapdl.finish()
 
 # Enter the solution processor to define solution controls
-mapdl.run("/SOLUTION")
+mapdl.slashsolu()
 
 # Performing static analysis
 mapdl.run("ANTYPE,STATIC")
