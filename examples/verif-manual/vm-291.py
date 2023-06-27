@@ -120,7 +120,7 @@ mapdl.d("ALL", "UX", 0)
 mapdl.run("ALLS")
 
 # FORCE magnitude
-mapdl.run("P=-1                    ")
+p=-1
 # APPLY FORCE ALONG Y DIRECTION AT NODE1 having magnitude "p"
 mapdl.f(1, "FY", "P")
 
