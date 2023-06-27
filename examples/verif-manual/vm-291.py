@@ -108,7 +108,7 @@ mapdl.nsel("S", "", "", 15, 19)
 mapdl.einfin("", "NPOLE")
 
 # Selects all entities
-mapdl.run("ALLS")
+mapdl.allsel()
 
 # Selects nodes using location x=0
 mapdl.nsel("S", "LOC", "X", 0)
