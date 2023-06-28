@@ -4,8 +4,9 @@ VM13 Cylindrical Shell Under Pressure
 
 Description:
 A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
-ends and is subjected to an internal pressure P. Determine the axial stress 
-:math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the midthickness of the wall.
+ends and is subjected to an internal pressure P. Determine the axial stress
+:math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the
+midthickness of the wall.
 
 """
 import os
@@ -32,7 +33,7 @@ mapdl.verify("vm13")
 mapdl.title("VM13 CYLINDRICAL SHELL UNDER PRESSURE")
 
 """
-The references for the analysis can be found here: 
+The references for the analysis can be found here:
   - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
   - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
 """
@@ -66,7 +67,8 @@ mapdl.d(2, "ROTZ")  # Fix ROTZ (rotation around Z-axis) for node 2
 mapdl.f(2, "FY", 5654866.8)  # Apply a concentrated force FY to node 2
 mapdl.sfe(1, 1, "PRES", "", 500)  # Apply internal pressure of 500 psi to element 1
 
-mapdl.esel("s", "ALL")
+# Selects all entities
+mapdl.allsel()
 mapdl.eplot()
 
 # Finish the pre-processing processor
@@ -140,7 +142,7 @@ Stress, Z (psi)   {29749:.5f}     {stress_z:.5f}   {abs(stress_z/29749):.5f}
 """
 print(message)
 
-mapdl.run("/GOPR")
+mapdl.gopr()
 
 # Finish the post-processing processor
 mapdl.finish()

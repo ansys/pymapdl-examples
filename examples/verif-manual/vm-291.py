@@ -8,6 +8,7 @@ far-field domain. Determine the displacement in the Y-direction on nodes along t
 direction (at location Y = 0) and vertical direction (at location X = 0).
 
 """
+import math
 import os
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
@@ -20,7 +21,7 @@ mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit
 mapdl.clear()
 
 # Run the FINISH command to exists normally from a processor
-mapdl.run("FINISH")
+mapdl.finish()
 
 # Set the ANSYS version
 mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2")
@@ -29,12 +30,14 @@ mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2"
 mapdl.run("/VERIFY,VM291")
 
 # Set the title of the analysis
-mapdl.title("VM291FORCE ON BOUNDARY OF A SEMI-INFINITE BODY (BOUSSINESQ PROBLEM)")
+mapdl.title("VM291 FORCE ON BOUNDARY OF A SEMI-INFINITE BODY (BOUSSINESQ PROBLEM)")
 
-# Comment line: Providing additional information about the analysis
-mapdl.com("")
-mapdl.com("REFERENCE: 'TIMOSHENKO,S.P.,AND J.N.GOODIER,THEORY OF ELASTICITY")
-mapdl.com("MCGRAW-HILL,NEW YORK, PP 398-402, 1970")
+"""
+The references for the analysis can be found here:
+-TIMOSHENKO,S.P.,AND J.N.GOODIER,THEORY OF ELASTICITY
+-MCGRAW-HILL,NEW YORK, PP 398-402, 1970.
+"""
+
 mapdl.com("******************************************")
 mapdl.com("USING PLANE182 AND INFIN257 ELEMENTS")
 mapdl.com("*******************************************")
@@ -122,7 +125,7 @@ mapdl.eplot()
 # FORCE magnitude
 p = -1
 # APPLY FORCE ALONG Y DIRECTION AT NODE1 having magnitude "p"
-mapdl.f(1, "FY", "P")
+mapdl.f(1, "FY", p)
 
 # Finish pre-processing processor
 mapdl.finish()
@@ -155,7 +158,7 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    mapdl.gopr()
 
 # Set constant parameters
 r1 = 1
@@ -177,7 +180,7 @@ z2 = 2
 # UY AT NODE (2,0,0)
 uy2 = p * (1 - nuxy**2) / (pi * exx * r2)
 # UY AT NODE (0,2,0)
-up2 = p * (2 * pi * exx * z2) * (1 + nuxy + 2 - 2 * nuxy**2)
+up2 = p / (2 * pi * exx * z2) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(2,0,0)
 uya2 = mapdl.get("UYA2", "NODE", 5, "U", "Y")
 # MADPL UY AT NODE(0,2,0)
@@ -218,24 +221,13 @@ with mapdl.non_interactive:
     mapdl.dim("VALUE", "", 3, 6)
     mapdl.dim("LABEL", "CHAR", 3, 2)
     # Define labels for output
-    mapdl.run("VALUE(1,1)=UY2")
-    mapdl.run("VALUE(2,1)=UY3")
-    mapdl.run("VALUE(3,1)=UY4")
-    mapdl.run("VALUE(1,2)=UYA2")
-    mapdl.run("VALUE(2,2)=UYA3")
-    mapdl.run("VALUE(3,2)=UYA4")
-    mapdl.run("VALUE(1,3)=UP2")
-    mapdl.run("VALUE(2,3)=UP3")
-    mapdl.run("VALUE(3,3)=UP4")
-    mapdl.run("VALUE(1,4)=UPA2")
-    mapdl.run("VALUE(2,4)=UPA3")
-    mapdl.run("VALUE(3,4)=UPA4")
-    mapdl.run("VALUE(1,5)=UY2/UYA2")
-    mapdl.run("VALUE(2,5)=UY3/UYA3")
-    mapdl.run("VALUE(3,5)=UY4/UYA4")
-    mapdl.run("VALUE(1,6)=UP2/UPA2")
-    mapdl.run("VALUE(2,6)=UP3/UPA3")
-    mapdl.run("VALUE(3,6)=UP4/UPA4")
+    mapdl.vfill("VALUE(1", "1)", "DATA", uy2, uy3, uy4)
+    mapdl.vfill("VALUE(1", "2)", "DATA", uya2, uya3, uya4)
+    mapdl.vfill("VALUE(1", "3)", "DATA", up2, up3, up4)
+    mapdl.vfill("VALUE(1", "4)", "DATA", upa2, upa3, upa4)
+    mapdl.vfill("VALUE(1", "5)", "DATA", uy2 / uya2, uy3 / uya3, uy4 / uya4)
+    mapdl.vfill("VALUE(1", "6)", "DATA", up2 / upa2, up3 / upa3, up4 / upa4)
+
     mapdl.run("LABEL(1,1)='NODE5'")
     mapdl.run("LABEL(2,1)='NODE10'")
     mapdl.run("LABEL(3,1)='NODE15'")
@@ -253,7 +245,7 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    # mapdl.gopr()
 
 mapdl.com("***************************************")
 mapdl.com("USING PLANE183 AND INFIN257 ELEMENTS")
@@ -266,13 +258,13 @@ mapdl.prep7()
 pi = math.pi  # need to add "import math" at the beginning of the file
 
 # YOUNG'S MODULUS
-mapdl.run("Exx=1.0                 ")
+exx = 1.0
 # POISSON'S RATIO
-mapdl.run("NUxy=0.1                ")
+nuxy = 0.1
 
 # DEFINE MATERIAL MODEL
-mapdl.mp("EX", 1, "Exx")
-mapdl.mp("PRXY", 1, "NUxy")
+mapdl.mp("EX", 1, exx)
+mapdl.mp("PRXY", 1, nuxy)
 
 # 2D 8-NODE STRUCTURAL SOLID
 mapdl.et(1, "PLANE183")
@@ -363,7 +355,8 @@ mapdl.nsel("A", "NODE", "", 47, 48, 1)
 mapdl.einfin("", "NPOLE")
 
 # Selects all entities
-mapdl.run("ALLS")
+mapdl.allsel()
+mapdl.eplot()
 
 # Selects nodes using location x=0
 mapdl.nsel("S", "LOC", "X", 0)
@@ -371,21 +364,21 @@ mapdl.nsel("S", "LOC", "X", 0)
 # CONSTRAINT UX DOF AT LOCATION X=0
 mapdl.d("ALL", "UX", 0)
 # Selects all entities
-mapdl.run("ALLS")
+mapdl.allsel()
 
 # FORCE magnitude
-mapdl.run("P=-1                    ")
+p = -1
 # APPLY FORCE ALONG Y DIRECTION AT NODE6
-mapdl.f(6, "FY", "P")
+mapdl.f(6, "FY", p)
 
 # Finish pre-processing processor
 mapdl.finish()
 
 # Enter the solution processor to define solution controls
-mapdl.run("/SOLUTION")
+mapdl.slashsolu()
 
-# Specify static analysis type
-mapdl.run("ANTYPE,STATIC")
+# Performing static analysis
+mapdl.antype("STATIC")
 
 # Controls the solution data written to the database.
 mapdl.outres("ALL", "ALL")
@@ -409,56 +402,59 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    mapdl.gopr()
 
-# Set constant parameters, R1=1 and Z1=1
-mapdl.run("R1=1")
-mapdl.run("Z1=1")
+# Set constant parameters
+r1 = 1
+z1 = 1
+
 # UY AT NODE (1,0,0)
-mapdl.run("UY1=P*(1-NUxy**2)/(PI*Exx*R1)               ")
+uy1 = p * (1 - nuxy**2) / (pi * exx * r1)
 # UY AT NODE (0,1,0)
-mapdl.run("UP1=P/(2*PI*Exx*Z1)*(1+NUxy+2-2*NUxy**2)    ")
+up1 = p / (2 * pi * exx * z1) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(1,0,0)
-mapdl.get("UYA1", "NODE", 4, "U", "Y")
+uya1 = mapdl.get("UYA1", "NODE", 4, "U", "Y")
 # MADPL UY AT NODE(0,1,0)
-mapdl.get("UPA1", "NODE", 1, "U", "Y")
+upa1 = mapdl.get("UPA1", "NODE", 1, "U", "Y")
 
-# Set constant parameters, R2=2 and Z2=2
-mapdl.run("R2=2")
-mapdl.run("Z2=2")
+# Set constant parameters
+r2 = 2
+z2 = 2
 
 # UY AT NODE (2,0,0)
-mapdl.run("UY2=P*(1-NUxy**2)/(PI*Exx*R2)               ")
+uy2 = p * (1 - nuxy**2) / (pi * exx * r2)
 # UY AT NODE (0,2,0)
-mapdl.run("UP2=P/(2*PI*Exx*Z2)*(1+NUxy+2-2*NUxy**2)    ")
+up2 = p / (2 * pi * exx * z2) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(2,0,0)
-mapdl.get("UYA2", "NODE", 10, "U", "Y")
+uya2 = mapdl.get("UYA2", "NODE", 10, "U", "Y")
 # MADPL UY AT NODE(0,2,0)
-mapdl.get("UPA2", "NODE", 19, "U", "Y")
+upa2 = mapdl.get("UPA2", "NODE", 19, "U", "Y")
 
-# Set constant parameters, R3=3 and Z3=3
-mapdl.run("R3=3")
-mapdl.run("Z3=3")
+# Set constant parameters
+r3 = 3
+z3 = 3
+
 # UY AT NODE (3,0,0)
-mapdl.run("UY3=P*(1-NUxy**2)/(PI*Exx*R3)               ")
+uy3 = p * (1 - nuxy**2) / (pi * exx * r3)
 # UY AT NODE (0,3,0)
-mapdl.run("UP3=P/(2*PI*Exx*Z3)*(1+NUxy+2-2*NUxy**2)    ")
+up3 = p / (2 * pi * exx * z3) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(3,0,0)
-mapdl.get("UYA3", "NODE", 23, "U", "Y")
+uya3 = mapdl.get("UYA3", "NODE", 23, "U", "Y")
 # MADPL UY AT NODE(0,3,0)
-mapdl.get("UPA3", "NODE", 33, "U", "Y")
+upa3 = mapdl.get("UPA3", "NODE", 33, "U", "Y")
 
-# Set constant parameters, R4=4 and Z4=4
-mapdl.run("R4=4")
-mapdl.run("Z4=4")
+# Set constant parameters
+r4 = 4
+z4 = 4
+
 # UY AT NODE (4,0,0)
-mapdl.run("UY4=P*(1-NUxy**2)/(PI*Exx*R4)               ")
+uy4 = p * (1 - nuxy**2) / (pi * exx * r4)
 # UY AT NODE (0,4,0)
-mapdl.run("UP4=P/(2*PI*Exx*Z4)*(1+NUxy+2-2*NUxy**2)    ")
+up4 = p / (2 * pi * exx * z4) * (1 + nuxy + 2 - 2 * nuxy**2)
 # MAPDL UY AT NODE(4,0,0)
-mapdl.get("UYA4", "NODE", 37, "U", "Y")
+uya4 = mapdl.get("UYA4", "NODE", 37, "U", "Y")
 # MADPL UY AT NODE(0,4,0)
-mapdl.get("UPA4", "NODE", 47, "U", "Y")
+upa4 = mapdl.get("UPA4", "NODE", 47, "U", "Y")
 
 # Enter non-interactive mode
 with mapdl.non_interactive:
@@ -469,24 +465,13 @@ with mapdl.non_interactive:
     mapdl.dim("VALUE1", "", 3, 6)
     mapdl.dim("LABEL1", "CHAR", 3, 2)
     # Define labels for output
-    mapdl.run("VALUE1(1,1)=UY2")
-    mapdl.run("VALUE1(2,1)=UY3")
-    mapdl.run("VALUE1(3,1)=UY4")
-    mapdl.run("VALUE1(1,2)=UYA2")
-    mapdl.run("VALUE1(2,2)=UYA3")
-    mapdl.run("VALUE1(3,2)=UYA4")
-    mapdl.run("VALUE1(1,3)=UP2")
-    mapdl.run("VALUE1(2,3)=UP3")
-    mapdl.run("VALUE1(3,3)=UP4")
-    mapdl.run("VALUE1(1,4)=UPA2")
-    mapdl.run("VALUE1(2,4)=UPA3")
-    mapdl.run("VALUE1(3,4)=UPA4")
-    mapdl.run("VALUE1(1,5)=UY2/UYA2")
-    mapdl.run("VALUE1(2,5)=UY3/UYA3")
-    mapdl.run("VALUE1(3,5)=UY4/UYA4")
-    mapdl.run("VALUE1(1,6)=UP2/UPA2")
-    mapdl.run("VALUE1(2,6)=UP3/UPA3")
-    mapdl.run("VALUE1(3,6)=UP4/UPA4")
+    mapdl.vfill("VALUE1(1", "1)", "DATA", uy2, uy3, uy4)
+    mapdl.vfill("VALUE1(1", "2)", "DATA", uya2, uya3, uya4)
+    mapdl.vfill("VALUE1(1", "3)", "DATA", up2, up3, up4)
+    mapdl.vfill("VALUE1(1", "4)", "DATA", upa2, upa3, upa4)
+    mapdl.vfill("VALUE1(1", "5)", "DATA", uy2 / uya2, uy3 / uya3, uy4 / uya4)
+    mapdl.vfill("VALUE1(1", "6)", "DATA", up2 / upa2, up3 / upa3, up4 / upa4)
+
     mapdl.run("LABEL1(1,1)='NODE10'")
     mapdl.run("LABEL1(2,1)='NODE23'")
     mapdl.run("LABEL1(3,1)='NODE37'")
@@ -555,7 +540,7 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    mapdl.gopr()
 
 # Get the mapdl temporary working directory
 vrt_file_path = os.path.join(mapdl.directory, "vm291.vrt")

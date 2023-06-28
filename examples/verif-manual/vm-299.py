@@ -8,6 +8,7 @@ with a sound power level of 1x10-2 W. The wall absorption coefficient is equal t
 The coefficient of atmospheric attenuation is 0.01 m-1.
 
 """
+import math
 import os
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
@@ -19,7 +20,7 @@ mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit
 mapdl.clear()
 
 # Run the FINISH command to exists normally from a processor
-mapdl.run("FINISH")
+mapdl.finish()
 
 # Set the ANSYS version
 mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2")
@@ -28,14 +29,13 @@ mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2"
 mapdl.run("/VERIFY,VM299")
 
 # Set the title of the analysis
-mapdl.title("VM299SOUND PRESSURE LEVEL IN A FLAT ROOM")
+mapdl.title("VM299 SOUND PRESSURE LEVEL IN A FLAT ROOM")
 
-# Comment line: Providing additional information about the analysis
-mapdl.com("")
-mapdl.com("REFERENCE: A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION")
-mapdl.com("WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS'")
-mapdl.com("MARCH 2008.")
-mapdl.com("")
+"""
+The references for the analysis can be found here:
+-REFERENCE: A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
+WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS MARCH 2008.
+"""
 
 # Entering the PREP7 environment in MAPDL
 mapdl.prep7()
@@ -43,41 +43,46 @@ mapdl.prep7()
 # It is not recommended to use '/NOPR' in a normal PyMAPDL session.
 mapdl._run("/NOPR")
 
+# Constant value of PI
+pi = math.pi  # need to add "import math" at the beginning of the file
+
 # Set parameters for ROOM SIZE
-mapdl.run("LX=30")
-mapdl.run("LY=30")
-mapdl.run("LZ=3")
-mapdl.run("VOL=LX*LY*LZ")
-mapdl.run("SURF=2*(LX*LY+LY*LZ+LX*LZ)")
-mapdl.run("MFP=4*VOL/SURF")
+LX = 30
+LY = 30
+LZ = 3
+VOL = LX * LY * LZ
+SURF = 2 * (LX * LY + LY * LZ + LX * LZ)
+MFP = 4 * VOL / SURF
 
 # set parameters for MATERIAL PROPERTIES
-mapdl.run("C0 = 343")
-mapdl.run("RHO = 1.21")
-mapdl.run("ROOMD=MFP*C0/3")
-mapdl.run("ATTN=0.01")
-mapdl.run("ROOMDP=ROOMD/(1.+ATTN*MFP)")
-mapdl.run("ALPHA=0.1")
-mapdl.run("WS=1.E-2")
+C0 = 343
+RHO = 1.21
+ROOMD = MFP * C0 / 3
+ATTN = 0.01
+ROOMDP = ROOMD / (1.0 + ATTN * MFP)
+ALPHA = 0.1
+WS = 1.0e-2
+
 # DEFINE MATERIALS
-mapdl.mp("DENS", 1, "RHO")
-mapdl.mp("SONC", 1, "C0")
+mapdl.mp("DENS", 1, RHO)
+mapdl.mp("SONC", 1, C0)
 mapdl.tb("AFDM", 1, "", "", "ROOM")
-mapdl.tbdata(1, "ROOMDP", "ATTN")
+mapdl.tbdata(1, ROOMDP, ATTN)
 # GENERATE GEOMETRY
-mapdl.run("H=0.5")
+H = 0.5
 mapdl.dim("A", "ARRAY", 3)
 mapdl.dim("B", "ARRAY", 3)
 mapdl.dim("C", "ARRAY", 3)
-mapdl.run("A(1)=0")
-mapdl.run("A(2)=2.")
-mapdl.run("A(3)=LX")
-mapdl.run("B(1)=0")
-mapdl.run("B(2)=2.")
-mapdl.run("B(3)=LY")
-mapdl.run("C(1)=0")
-mapdl.run("C(2)=1.")
-mapdl.run("C(3)=LZ")
+
+mapdl.vfill("A(1)", "DATA", 0)
+mapdl.vfill("A(2)", "DATA", 2.0)
+mapdl.vfill("A(3)", "DATA", LX)
+mapdl.vfill("B(1)", "DATA", 0)
+mapdl.vfill("B(2)", "DATA", 2.0)
+mapdl.vfill("B(3)", "DATA", LY)
+mapdl.vfill("C(1)", "DATA", 0)
+mapdl.vfill("C(2)", "DATA", 2.0)
+mapdl.vfill("C(3)", "DATA", LZ)
 
 # Enter non-interactive mode
 with mapdl.non_interactive:
@@ -88,6 +93,7 @@ with mapdl.non_interactive:
     mapdl.run("*ENDDO")
     mapdl.run("*ENDDO")
     mapdl.run("*ENDDO")
+# mapdl.aplot()
 
 # Generates new volumes by “gluing” volumes.
 mapdl.vglue("ALL")
@@ -95,13 +101,10 @@ mapdl.vglue("ALL")
 mapdl.et(1, 220, 3, 4)
 mapdl.type(1)  # set element type, Type=1
 mapdl.mat(1)  # set material type, MAT=1
-mapdl.esize("H")  # Specifies the element size.
+mapdl.esize(H)  # Specifies the element size.
 
 # Generates nodes and volume elements within volumes.
 mapdl.vmesh(9, 15, 1)
-# mapdl.type(1)
-# mapdl.mat(1)
-# mapdl.esize("H")
 
 # For elements that support multiple shapes, specifies the element shape, set mshape=3D
 mapdl.mshape(0, "3D")
@@ -109,16 +112,16 @@ mapdl.mshape(0, "3D")
 mapdl.vmesh(1)
 # select nodes of specified location
 mapdl.nsel("S", "LOC", "X", 0)
-mapdl.nsel("A", "LOC", "X", "LX")
+mapdl.nsel("A", "LOC", "X", LX)
 mapdl.nsel("A", "LOC", "Y", 0)
-mapdl.nsel("A", "LOC", "Y", "LY")
+mapdl.nsel("A", "LOC", "Y", LY)
 mapdl.nsel("A", "LOC", "Z", 0)
-mapdl.nsel("A", "LOC", "Z", "LZ")
+mapdl.nsel("A", "LOC", "Z", LZ)
 
 # Define Absorption coefficient and transmission loss
-mapdl.sf("ALL", "ATTN", "ALPHA")
+mapdl.sf("ALL", "ATTN", ALPHA)
 # Selects all entities
-mapdl.run("ALLS")
+mapdl.allsel()
 # select nodes of specified location
 mapdl.nsel("S", "LOC", "X", "A(2)")
 mapdl.nsel("R", "LOC", "Y", "B(2)")
@@ -126,10 +129,11 @@ mapdl.nsel("R", "LOC", "Z", "C(2)")
 
 # Define Mass source; mass source rate; or power source
 # in an energy diffusion solution for room acoustics
-mapdl.bf("ALL", "MASS", "WS")
+mapdl.bf("ALL", "MASS", WS)
 
 # Selects all entities
-mapdl.run("ALLS")
+mapdl.allsel()
+mapdl.eplot()
 # Finish pre-processing processor
 mapdl.finish()
 
@@ -160,46 +164,54 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    # mapdl.gopr()
 
 # Prints path items along a geometry path.
 mapdl.prpath("UX", "SPLX")
 
+# redirects solver output to a file named "SCRATCH"
+mapdl.run("/OUT,SCRATCH")
+# Sets various line graph display options
+# DIVX: Determines the number of divisions (grid markers) that will be plotted on the X
+mapdl.gropt("DIVX", 15)
+# Specifies a linear ordinate (Y) scale range.
+mapdl.yrange(71, 82)
+# DIVY: Determines the number of divisions (grid markers) that will be plotted on the Y
+mapdl.gropt("DIVY", 11)
+# Specifies the device and other parameters for graphics displays.
+# Creates PNG (Portable Network Graphics) files that are named Jobnamennn.png
+mapdl.show("PNG")
+
+mapdl.plpath("UX", "SPLX")  # Displays path items on a graph.
+mapdl.show("CLOSE")  # This option purges the graphics file buffer.
+
+q = mapdl.queries
+n1 = q.node(5, 15, 1)
+n2 = q.node(10, 15, 1)
+n3 = q.node(15, 15, 1)
+n4 = q.node(20, 15, 1)
+n5 = q.node(25, 15, 1)
+
+en_1 = mapdl.get("EN_1", "NODE", n1, "ENKE")
+en_2 = mapdl.get("EN_2", "NODE", n2, "ENKE")
+en_3 = mapdl.get("EN_3", "NODE", n3, "ENKE")
+en_4 = mapdl.get("EN_4", "NODE", n4, "ENKE")
+en_5 = mapdl.get("EN_5", "NODE", n5, "ENKE")
+
+PREF = 2e-5
+x1 = (RHO * en_1 * C0**2) / PREF**2
+x2 = (RHO * en_2 * C0**2) / PREF**2
+x3 = (RHO * en_3 * C0**2) / PREF**2
+x4 = (RHO * en_4 * C0**2) / PREF**2
+x5 = (RHO * en_5 * C0**2) / PREF**2
+SPL_1 = 10 * (math.log10(x1))
+SPL_2 = 10 * (math.log10(x2))
+SPL_3 = 10 * (math.log10(x3))
+SPL_4 = 10 * (math.log10(x4))
+SPL_5 = 10 * (math.log10(x5))
+
 # Enter non-interactive mode
 with mapdl.non_interactive:
-    # redirects solver output to a file named "SCRATCH"
-    mapdl.run("/OUT,SCRATCH")
-    # Sets various line graph display options
-    # DIVX: Determines the number of divisions (grid markers) that will be plotted on the X
-    mapdl.gropt("DIVX", 15)
-    # Specifies a linear ordinate (Y) scale range.
-    mapdl.yrange(71, 82)
-    # DIVY: Determines the number of divisions (grid markers) that will be plotted on the Y
-    mapdl.gropt("DIVY", 11)
-    # Specifies the device and other parameters for graphics displays.
-    # Creates PNG (Portable Network Graphics) files that are named Jobnamennn.png
-    mapdl.show("PNG")
-
-    mapdl.plpath("UX", "SPLX")  # Displays path items on a graph.
-    mapdl.show("CLOSE")  # This option purges the graphics file buffer.
-
-    mapdl.run("N1=NODE(5,15,1)")
-    mapdl.run("N2=NODE(10,15,1)")
-    mapdl.run("N3=NODE(15,15,1)")
-    mapdl.run("N4=NODE(20,15,1)")
-    mapdl.run("N5=NODE(25,15,1)")
-    mapdl.run("*GET,EN_1,NODE,N1,ENKE")
-    mapdl.run("*GET,EN_2,NODE,N2,ENKE")
-    mapdl.run("*GET,EN_3,NODE,N3,ENKE")
-    mapdl.run("*GET,EN_4,NODE,N4,ENKE")
-    mapdl.run("*GET,EN_5,NODE,N5,ENKE")
-    mapdl.run("PREF=2E-5")
-    mapdl.run("PI=ACOS(-1)")
-    mapdl.run("SPL_1=10*LOG10((RHO*EN_1*C0**2)/PREF**2)")
-    mapdl.run("SPL_2=10*LOG10((RHO*EN_2*C0**2)/PREF**2)")
-    mapdl.run("SPL_3=10*LOG10((RHO*EN_3*C0**2)/PREF**2)")
-    mapdl.run("SPL_4=10*LOG10((RHO*EN_4*C0**2)/PREF**2)")
-    mapdl.run("SPL_5=10*LOG10((RHO*EN_5*C0**2)/PREF**2)")
     # Define dimensions for output
     mapdl.dim("LABEL", "CHAR", 5)
     mapdl.dim("VALUE", "ARRAY", 5, 3)
@@ -209,19 +221,17 @@ with mapdl.non_interactive:
     mapdl.run("LABEL(1,1)='X = 5 m','X = 10 m','X = 15 m','X = 20 m','X = 25 m'")
 
     # Fill in the values for the first case
-    mapdl.vfill(
-        "VALUE(1", "1)", "DATA", "%SPL_1%", "%SPL_2%", "%SPL_3%", "%SPL_4%", "%SPL_5%"
-    )
+    mapdl.vfill("VALUE(1", "1)", "DATA", SPL_1, SPL_2, SPL_3, SPL_4, SPL_5)
     mapdl.vfill("VALUE_REF(1", "2)", "DATA", 80.0, 79.0, 77.5, 76.0, 74.5)
     mapdl.vfill(
         "VALUE_RATIO(1",
         "3)",
         "DATA",
-        "ABS(SPL_1/80.0)",
-        "ABS(SPL_2/79.0)",
-        "ABS(SPL_3/77.5)",
-        "ABS(SPL_4/76.0)",
-        "ABS(SPL_5/74.5)",
+        abs(SPL_1 / 80.0),
+        abs(SPL_2 / 79.0),
+        abs(SPL_3 / 77.5),
+        abs(SPL_4 / 76.0),
+        abs(SPL_5 / 74.5),
     )
     mapdl.run("/OUT,vm299,vrt")
     mapdl.com("")
@@ -235,7 +245,7 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    mapdl.gopr()
 
 # Get the mapdl temporary working directory
 vrt_file_path = os.path.join(mapdl.directory, "vm299.vrt")

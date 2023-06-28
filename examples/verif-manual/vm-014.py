@@ -25,7 +25,7 @@ mapdl.clear()
 mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2")
 
 # Run the FINISH command to exists normally from a processor
-mapdl.run("FINISH")
+mapdl.finish()
 
 # Run the /VERIFY command for VM14
 mapdl.run("/VERIFY,VM14")
@@ -37,7 +37,10 @@ mapdl.title("VM14 LARGE DEFLECTION ECCENTRIC COMPRESSION OF SLENDER COLUMN")
 mapdl.prep7()
 
 # Provide reference information for the analysis
-mapdl.run("C***      STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PG. 263, PROB. 1")
+"""
+The references for the analysis can be found here:
+- STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PG. 263, PROB. 1
+"""
 
 # Define element type and properties
 mapdl.et(1, "BEAM188", "", "", 3)  # Element type BEAM188
@@ -67,6 +70,11 @@ mapdl.d(1, "ALL")  # Fix all degrees of freedom for node 1
 mapdl.f(5, "FY", -4000)  # Apply a negative force FY to node 5
 mapdl.dsym("SYMM", "Z")  # Apply symmetry boundary condition in Z-direction
 
+# select all entities
+mapdl.allsel()
+# element plot
+mapdl.eplot()
+
 # Finish the pre-processing processor
 mapdl.finish()
 
@@ -91,7 +99,7 @@ with mapdl.non_interactive:
 
     mapdl.post1()  # enter post-processing processor
     mapdl.run("/OUT")  # redirects output to the default system output file
-    # mapdl.run("/GOPR")          # reactivates suppressed printout
+    mapdl.gopr()  # reactivates suppressed printout
 
 # Retrieve nodal deflection and section stresses
 mapdl.run("END_NODE = NODE (0,120/2,0)")
@@ -136,7 +144,7 @@ with mapdl.non_interactive:
     # redirects output to the default system output file
     mapdl.run("/OUT")
     # reactivates suppressed printout
-    mapdl.run("/GOPR")
+    mapdl.gopr()
 
 # Get the mapdl temporary working directory
 vrt_file_path = os.path.join(mapdl.directory, "vm14.vrt")
@@ -146,7 +154,6 @@ f = open(vrt_file_path, "r")
 for x in f:
     print(x)
 
-mapdl.run("/GOPR")
 # Finish the post-processing processor
 mapdl.finish()
 # mapdl.starlist("vm14", "vrt")
