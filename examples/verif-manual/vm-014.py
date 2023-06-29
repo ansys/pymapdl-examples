@@ -51,6 +51,7 @@ Analysis Assumptions and Modeling Notes:
 # sphinx_gallery_thumbnail_path = '_static/vm14_setup.png'
 
 import os
+import pandas
 
 from ansys.mapdl.core import launch_mapdl
 
