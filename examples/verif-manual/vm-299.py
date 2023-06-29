@@ -70,30 +70,14 @@ mapdl.tb("AFDM", 1, "", "", "ROOM")
 mapdl.tbdata(1, ROOMDP, ATTN)
 # GENERATE GEOMETRY
 H = 0.5
-mapdl.dim("A", "ARRAY", 3)
-mapdl.dim("B", "ARRAY", 3)
-mapdl.dim("C", "ARRAY", 3)
+a = np.array([0, 2.0, LX]) # import numpy as np (beginning of the file)
+b = np.array([0, 2.0, LY])
+c = np.array([0, 2.0, LZ])
 
-mapdl.vfill("A(1)", "DATA", 0)
-mapdl.vfill("A(2)", "DATA", 2.0)
-mapdl.vfill("A(3)", "DATA", LX)
-mapdl.vfill("B(1)", "DATA", 0)
-mapdl.vfill("B(2)", "DATA", 2.0)
-mapdl.vfill("B(3)", "DATA", LY)
-mapdl.vfill("C(1)", "DATA", 0)
-mapdl.vfill("C(2)", "DATA", 2.0)
-mapdl.vfill("C(3)", "DATA", LZ)
-
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    mapdl.run("*DO,I,1,2")
-    mapdl.run("*DO,J,1,2")
-    mapdl.run("*DO,K,1,2")
-    mapdl.block("A(I)", "A(I+1)", "B(J)", "B(J+1)", "C(K)", "C(K+1)")
-    mapdl.run("*ENDDO")
-    mapdl.run("*ENDDO")
-    mapdl.run("*ENDDO")
-# mapdl.aplot()
+for i in range(2):
+    for j in range(2):
+        for k in range(2):
+            mapdl.block(a[i], a[i+1], b[j], b[j+1], c[k], c[k+1])
 
 # Generates new volumes by “gluing” volumes.
 mapdl.vglue("ALL")
