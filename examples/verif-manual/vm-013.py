@@ -100,18 +100,6 @@ mapdl.etable("STRS_Z", "S", "Z")
 stress_y = mapdl.get("STRSS_Y", "ELEM", 1, "ETAB", "STRS_Y")
 stress_z = mapdl.get("STRSS_Z", "ELEM", 1, "ETAB", "STRS_Z")
 
-# Defines an array parameter and its dimensions of output quantities.
-mapdl.dim("LABEL", "CHAR", 2, 2)
-mapdl.dim("VALUE", "", 2, 3)
-
-# Set labels for output variables
-mapdl.run("LABEL(1,1) = 'STRESS,Y ','STRESS,Z'")
-mapdl.run("LABEL(1,2) = ' (psi)  ',' (psi)  '")
-
-# Fill the VALUE table with data
-mapdl.vfill("VALUE(1", "1)", "DATA", 15000, 29749)
-mapdl.vfill("VALUE(1", "2)", "DATA", "STRSS_Y", "STRSS_Z")
-mapdl.vfill("VALUE(1", "3)", "DATA", "ABS(STRSS_Y/15000 )", "ABS(STRSS_Z/29749 )")
 
 # Run non-interactive commands
 
