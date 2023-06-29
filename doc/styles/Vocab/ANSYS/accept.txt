@@ -69,11 +69,3 @@ Young
 Zhu
 BILLON
 ALLS
-pres
-nax
-tickness
-struc
-parm
-filname
-equil
-gage
