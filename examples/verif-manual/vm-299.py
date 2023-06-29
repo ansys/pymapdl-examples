@@ -9,10 +9,10 @@ The coefficient of atmospheric attenuation is 0.01 m-1.
 
 """
 import math
-import os
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -68,31 +68,16 @@ mapdl.mp("DENS", 1, RHO)
 mapdl.mp("SONC", 1, C0)
 mapdl.tb("AFDM", 1, "", "", "ROOM")
 mapdl.tbdata(1, ROOMDP, ATTN)
+
 # GENERATE GEOMETRY
 H = 0.5
-mapdl.dim("A", "ARRAY", 3)
-mapdl.dim("B", "ARRAY", 3)
-mapdl.dim("C", "ARRAY", 3)
-
-mapdl.vfill("A(1)", "DATA", 0)
-mapdl.vfill("A(2)", "DATA", 2.0)
-mapdl.vfill("A(3)", "DATA", LX)
-mapdl.vfill("B(1)", "DATA", 0)
-mapdl.vfill("B(2)", "DATA", 2.0)
-mapdl.vfill("B(3)", "DATA", LY)
-mapdl.vfill("C(1)", "DATA", 0)
-mapdl.vfill("C(2)", "DATA", 2.0)
-mapdl.vfill("C(3)", "DATA", LZ)
-
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    mapdl.run("*DO,I,1,2")
-    mapdl.run("*DO,J,1,2")
-    mapdl.run("*DO,K,1,2")
-    mapdl.block("A(I)", "A(I+1)", "B(J)", "B(J+1)", "C(K)", "C(K+1)")
-    mapdl.run("*ENDDO")
-    mapdl.run("*ENDDO")
-    mapdl.run("*ENDDO")
+a = np.array([0, 2.0, LX])
+b = np.array([0, 2.0, LY])
+c = np.array([0, 2.0, LZ])
+for i in range(2):
+    for j in range(2):
+        for k in range(2):
+            mapdl.block(a[i], a[i + 1], b[j], b[j + 1], c[k], c[k + 1])
 # mapdl.aplot()
 
 # Generates new volumes by “gluing” volumes.
@@ -123,9 +108,9 @@ mapdl.sf("ALL", "ATTN", ALPHA)
 # Selects all entities
 mapdl.allsel()
 # select nodes of specified location
-mapdl.nsel("S", "LOC", "X", "A(2)")
-mapdl.nsel("R", "LOC", "Y", "B(2)")
-mapdl.nsel("R", "LOC", "Z", "C(2)")
+mapdl.nsel("S", "LOC", "X", a[1])
+mapdl.nsel("R", "LOC", "Y", b[1])
+mapdl.nsel("R", "LOC", "Z", c[1])
 
 # Define Mass source; mass source rate; or power source
 # in an energy diffusion solution for room acoustics
@@ -140,31 +125,27 @@ mapdl.finish()
 # Enter the solution processor to define solution controls
 mapdl.slashsolu()
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # redirects solver output to a file named "SCRATCH"
-    mapdl.run("/OUT,SCRATCH")
-    # SOLVE STATIC ANALYSIS
-    mapdl.solve()
-    # exists solution processor
-    mapdl.finish()
+# redirects solver output to a file named "SCRATCH"
+mapdl.run("/OUT,SCRATCH")
+# SOLVE STATIC ANALYSIS
+mapdl.solve()
+# exists solution processor
+mapdl.finish()
 
-    # Enter POST1 module (Post-processing processor)
-    mapdl.post1()
-    # Set the current results set to the last set to be read from result file
-    mapdl.set("LAST")
-    # Defines a path name and establishes parameters for the path
-    mapdl.path("X_SPL", 2, "", 15)
-    mapdl.ppath(1, "NODE", 0, 15, 1)
-    mapdl.ppath(2, "NODE", 30, 15, 1)
-    # Interpolates an item onto a path.
-    mapdl.pdef("UX", "U", "X", "NOAV")
-    mapdl.pdef("SPLX", "SPL", "", "NOAV")
+# Enter POST1 module (Post-processing processor)
+mapdl.post1()
+# Set the current results set to the last set to be read from result file
+mapdl.set("LAST")
+# Defines a path name and establishes parameters for the path
+mapdl.path("X_SPL", 2, "", 15)
+mapdl.ppath(1, "NODE", 0, 15, 1)
+mapdl.ppath(2, "NODE", 30, 15, 1)
+# Interpolates an item onto a path.
+mapdl.pdef("UX", "U", "X", "NOAV")
+mapdl.pdef("SPLX", "SPL", "", "NOAV")
 
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    # mapdl.gopr()
+# redirects output to the default system output file
+mapdl.run("/OUT")
 
 # Prints path items along a geometry path.
 mapdl.prpath("UX", "SPLX")
@@ -210,55 +191,37 @@ SPL_3 = 10 * (math.log10(x3))
 SPL_4 = 10 * (math.log10(x4))
 SPL_5 = 10 * (math.log10(x5))
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # Define dimensions for output
-    mapdl.dim("LABEL", "CHAR", 5)
-    mapdl.dim("VALUE", "ARRAY", 5, 3)
-    mapdl.dim("VALUE_REF", "ARRAY", 5, 3)
-    mapdl.dim("VALUE_RATIO", "ARRAY", 5, 3)
-    # Define labels for output
-    mapdl.run("LABEL(1,1)='X = 5 m','X = 10 m','X = 15 m','X = 20 m','X = 25 m'")
+# Fill the Target Result Values in array
+target_ref = np.array([80.0, 79.0, 77.5, 76.0, 74.5])
+value = np.array([SPL_1, SPL_2, SPL_3, SPL_4, SPL_5])
+value_ratio = []
+for i in range(len(target_ref)):
+    a = value[i] / target_ref[i]
+    value_ratio.append(a)
 
-    # Fill in the values for the first case
-    mapdl.vfill("VALUE(1", "1)", "DATA", SPL_1, SPL_2, SPL_3, SPL_4, SPL_5)
-    mapdl.vfill("VALUE_REF(1", "2)", "DATA", 80.0, 79.0, 77.5, 76.0, 74.5)
-    mapdl.vfill(
-        "VALUE_RATIO(1",
-        "3)",
-        "DATA",
-        abs(SPL_1 / 80.0),
-        abs(SPL_2 / 79.0),
-        abs(SPL_3 / 77.5),
-        abs(SPL_4 / 76.0),
-        abs(SPL_5 / 74.5),
-    )
-    mapdl.run("/OUT,vm299,vrt")
-    mapdl.com("")
-    mapdl.com("------------ vm299 RESULTS COMPARISON --------------")
-    mapdl.com("")
-    mapdl.com("|  TARGET  |  MECHANICAL APDL  | RATIO")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL(1,1),VALUE_REF(1,2),VALUE(1,1),VALUE_RATIO(1,3)")
-    mapdl.run("(1X,A8,'   ',F7.3,'  ',F7.3,'   ',F7.3)")
-    mapdl.com("")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
+# assign labels position in meter
+label = np.array([5, 10, 15, 20, 25])
 
-# Get the mapdl temporary working directory
-vrt_file_path = os.path.join(mapdl.directory, "vm299.vrt")
+message = f"""
+------------------- VM299 RESULTS COMPARISON ---------------------
+   SPL at Position, X(m)  |  TARGET     |   Mechanical APDL  |   RATIO
+-----------------------------------------------------------------
+"""
+print(message)
 
-# read the vm299.vrt file to print the results
-f = open(vrt_file_path, "r")
-for x in f:
-    print(x)
+for i in range(len(target_ref)):
+    message = f"""
+    {label[i]:.5f}          {target_ref[i]:.5f}           {value[i]:.5f}       {value_ratio[i]:.5f}
+    """
+    print(message)
+
+message = f"""
+-----------------------------------------------------------------
+"""
+print(message)
 
 # Finish the post-processing processor
 mapdl.finish()
-# Displays/Lists the contents of an external file
-mapdl.starlist("vm299", "vrt")
 
 # Exit MAPDL session
 mapdl.exit()

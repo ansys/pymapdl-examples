@@ -1,15 +1,53 @@
-"""
-VM14 Large Deflection Eccentric Compression of Slender Column.
-==============================================================
+r""".. _ref_vm14:
 
-Description:
-Find the deflection :math:`/delta` at the middle and the maximum tensile and compressive stresses
-in an eccentrically compressed steel strut of length L. The cross-section is a channel
-with the dimensions shown in the diagram. The ends are pinned at the point of load application.
-The distance between the centroid and the back of the channel is e, and the compressive force F
-acts in the plane of the back of the channel and in the symmetry plane of the channel.
+Large Deflection Eccentric Compression of Slender Column
+--------------------------------------------------------
+Problem description:
+- Find the deflection :math:`/delta` at the middle and the maximum tensile and compressive stresses
+  in an eccentrically compressed steel strut of length L. The cross-section is a channel
+  with the dimensions shown in the diagram. The ends are pinned at the point of load application.
+  The distance between the centroid and the back of the channel is e, and the compressive force F
+  acts in the plane of the back of the channel and in the symmetry plane of the channel.
+
+Reference:
+The references for the analysis can be found here:
+    - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PG. 263, PROB. 1
+
+Analysis type(s):
+ - Static Analysis ``ANTYPE=0``
+ - Static, Large Deflection Analysis ``ANTYPE=0``
+
+Element type(s):
+ - 2-Node Finite Strain Axisymmetric Shell (SHELL208)
+
+.. image:: ../_static/vm14_setup.png
+   :width: 400
+   :alt: VM14 Problem Sketch
+
+Material properties
+ - :math:`E = 30 \cdot 10^6 psi`
+ - :math:`u = 0.3`
+
+Geometric properties:
+ - :math:`L = 10 ft`
+ - :math:`h = 8 in`
+ - :math:`s = 0.22 in`
+ - :math:`t = 0.39 in`
+ - :math:`e = 0.6465 in`
+ - :math:`b = 2.26 in`
+
+Loading:
+ - :math:`F = 4000 lb`
+
+Analysis Assumptions and Modeling Notes:
+- Only one-half of the structure is modeled because of symmetry.
+  The boundary conditions for the equivalent half model become fixed-free.
+  Large deflection is needed since the stiffness of the structure and the
+  loading change significantly with deflection. The offset e is defined in
+  the element coordinate system.
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm14_setup.png'
 
 import os
 
@@ -34,7 +72,7 @@ mapdl.run("/VERIFY,VM14")
 mapdl.title("VM14 LARGE DEFLECTION ECCENTRIC COMPRESSION OF SLENDER COLUMN")
 
 # Enter the model creation preprocessor
-mapdl.prep7()
+mapdl.prep7(mute=True)
 
 # Provide reference information for the analysis
 """
@@ -91,15 +129,13 @@ mapdl.cnvtol("M", "", 1e-4)
 # Controls the solution printout
 mapdl.outpr("", "LAST")
 
-# Run non-interactive commands
-with mapdl.non_interactive:
-    mapdl.run("/OUT,SCRATCH")  # redirects solver output to a file named "SCRATCH"
-    mapdl.solve()  # starts a solution
-    mapdl.finish()  # exists solution processor
+mapdl.run("/OUT,SCRATCH")  # redirects solver output to a file named "SCRATCH"
+mapdl.solve()  # starts a solution
+mapdl.finish()  # exists solution processor
 
-    mapdl.post1()  # enter post-processing processor
-    mapdl.run("/OUT")  # redirects output to the default system output file
-    mapdl.gopr()  # reactivates suppressed printout
+mapdl.post1()  # enter post-processing processor
+mapdl.run("/OUT")  # redirects output to the default system output file
+mapdl.gopr()  # reactivates suppressed printout
 
 # Retrieve nodal deflection and section stresses
 mapdl.run("END_NODE = NODE (0,120/2,0)")

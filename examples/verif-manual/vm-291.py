@@ -9,10 +9,10 @@ direction (at location Y = 0) and vertical direction (at location X = 0).
 
 """
 import math
-import os
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -38,12 +38,8 @@ The references for the analysis can be found here:
 -MCGRAW-HILL,NEW YORK, PP 398-402, 1970.
 """
 
-mapdl.com("******************************************")
-mapdl.com("USING PLANE182 AND INFIN257 ELEMENTS")
-mapdl.com("*******************************************")
-
 # Entering the PREP7 environment in MAPDL
-mapdl.prep7()
+mapdl.prep7(mute=True)
 
 # Constant value of PI
 pi = math.pi  # need to add "import math" at the beginning of the file
@@ -142,23 +138,21 @@ mapdl.outres("ALL", "ALL")
 # Sets the time for a load step, time=1
 mapdl.time(1)
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # redirects solver output to a file named "SCRATCH"
-    mapdl.run("/OUT,SCRATCH")
-    # SOLVE STATIC ANALYSIS
-    mapdl.solve()
-    # exists solution processor
-    mapdl.finish()
+# redirects solver output to a file named "SCRATCH"
+mapdl.run("/OUT,SCRATCH")
+# SOLVE STATIC ANALYSIS
+mapdl.solve()
+# exists solution processor
+mapdl.finish()
 
-    # Enter POST1 module (Post-processing processor)
-    mapdl.post1()
-    # Set the current results set to the last set to be read from result file
-    mapdl.set("LAST")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
+# Enter POST1 module (Post-processing processor)
+mapdl.post1()
+# Set the current results set to the last set to be read from result file
+mapdl.set("LAST")
+# redirects output to the default system output file
+mapdl.run("/OUT")
+# reactivates suppressed printout
+mapdl.gopr()
 
 # Set constant parameters
 r1 = 1
@@ -212,47 +206,63 @@ uya4 = mapdl.get("UYA4", "NODE", 15, "U", "Y")
 # MADPL UY AT NODE(0,4,0)
 upa4 = mapdl.get("UPA4", "NODE", 19, "U", "Y")
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # redirects output to the default system output file
-    mapdl.run("/OUT,SCRATCH")
+# assign labels for nodes
+label1 = np.array(["NODE5", "NODE10", "NODE15"])
+label2 = np.array(["NODE9", "NODE14", "NODE19"])
 
-    # Define dimensions for output
-    mapdl.dim("VALUE", "", 3, 6)
-    mapdl.dim("LABEL", "CHAR", 3, 2)
-    # Define labels for output
-    mapdl.vfill("VALUE(1", "1)", "DATA", uy2, uy3, uy4)
-    mapdl.vfill("VALUE(1", "2)", "DATA", uya2, uya3, uya4)
-    mapdl.vfill("VALUE(1", "3)", "DATA", up2, up3, up4)
-    mapdl.vfill("VALUE(1", "4)", "DATA", upa2, upa3, upa4)
-    mapdl.vfill("VALUE(1", "5)", "DATA", uy2 / uya2, uy3 / uya3, uy4 / uya4)
-    mapdl.vfill("VALUE(1", "6)", "DATA", up2 / upa2, up3 / upa3, up4 / upa4)
+# create results arrays for printout
+value1 = np.array([uy2, uy3, uy4])
+value_ana1 = np.array([uya2, uya3, uya4])
+value_ratio1 = []
+for i in range(len(value_ana1)):
+    a = value1[i] / value_ana1[i]
+    value_ratio1.append(a)
 
-    mapdl.run("LABEL(1,1)='NODE5'")
-    mapdl.run("LABEL(2,1)='NODE10'")
-    mapdl.run("LABEL(3,1)='NODE15'")
-    mapdl.run("LABEL(1,2)='NODE9'")
-    mapdl.run("LABEL(2,2)='NODE14'")
-    mapdl.run("LABEL(3,2)='NODE19'")
+value2 = np.array([up2, up3, up4])
+value_ana2 = np.array([upa2, upa3, upa4])
+value_ratio2 = []
+for i in range(len(value_ana2)):
+    a = value2[i] / value_ana2[i]
+    value_ratio2.append(a)
 
-    # Save the result table
-    mapdl.save("TABLE_1")
-    # exists post-processing processor
-    mapdl.finish()
+mapdl.com("")
+mapdl.com("--------------VM291 RESULTS COMPARISON--------------------")
+mapdl.com("")
+mapdl.com("|   NODES    |   TARGET   |   Mechanical APDL   | RATIO")
+mapdl.com("")
+mapdl.gopr()
+mapdl.com("")
+mapdl.com("**************************************")
+mapdl.com("USING PLANE182 AND INFIN257 ELEMENTS")
+mapdl.com("**************************************")
+mapdl.com("")
+mapdl.com("VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)")
+mapdl.com("")
+for i in range(len(value1)):
+    message = f"""
+        {label1[i]}         {value1[i]:.5f}       {value_ana1[i]:.5f}       {value_ratio1[i]:.5f}
+    """
+    print(message)
 
-    # Clears the database without restarting
-    mapdl.run("/CLEAR,NOSTART")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    # mapdl.gopr()
+mapdl.com("")
+mapdl.com("VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)")
+mapdl.com("")
+for i in range(len(value2)):
+    message = f"""
+        {label2[i]}         {value2[i]:.5f}       {value_ana2[i]:.5f}       {value_ratio2[i]:.5f}
+    """
+    print(message)
 
-mapdl.com("***************************************")
-mapdl.com("USING PLANE183 AND INFIN257 ELEMENTS")
-mapdl.com("***************************************")
+# exists post-processing processor
+mapdl.finish()
+
+# Clears the database without restarting
+mapdl.run("/CLEAR,NOSTART")
+# redirects output to the default system output file
+mapdl.run("/OUT")
 
 # Enter PREP7 module for the new analysis
-mapdl.prep7()
+mapdl.prep7(mute=True)
 
 # Constant value of PI
 pi = math.pi  # need to add "import math" at the beginning of the file
@@ -272,7 +282,6 @@ mapdl.et(1, "PLANE183")
 mapdl.keyopt(1, 3, 1)
 
 # DEFINE NODES
-mapdl.com("DEFINE NODES")
 mapdl.n(1, 0.0000, -1.0000, 0.0000)
 mapdl.n(2, 0.75000, -0.75000, 0.0000)
 mapdl.n(3, 0.37500, -0.87500, 0.0000)
@@ -328,7 +337,6 @@ mapdl.mat(1)
 mapdl.type(1)
 
 # DEFINE ELEMENTS
-mapdl.com("DEFINE ELEMENTS")
 mapdl.e(1, 2, 4, 6, 3, 5, 7, 8)
 mapdl.e(9, 10, 4, 2, 11, 12, 5, 13)
 mapdl.e(14, 9, 2, 16, 15, 13, 17, 18)
@@ -386,23 +394,21 @@ mapdl.outres("ALL", "ALL")
 # Sets the time for a load step, time=1
 mapdl.time(1)
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # redirects solver output to a file named "SCRATCH"
-    mapdl.run("/OUT,SCRATCH")
-    # SOLVE STATIC ANALYSIS
-    mapdl.solve()
-    # exists solution processor
-    mapdl.finish()
+# redirects solver output to a file named "SCRATCH"
+mapdl.run("/OUT,SCRATCH")
+# SOLVE STATIC ANALYSIS
+mapdl.solve()
+# exists solution processor
+mapdl.finish()
 
-    # Enter POST1 module (Post-processing processor)
-    mapdl.post1()
-    # Set the current results set to the last set to be read from result file
-    mapdl.set("LAST")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
+# Enter POST1 module (Post-processing processor)
+mapdl.post1()
+# Set the current results set to the last set to be read from result file
+mapdl.set("LAST")
+# redirects output to the default system output file
+mapdl.run("/OUT")
+# reactivates suppressed printout
+mapdl.gopr()
 
 # Set constant parameters
 r1 = 1
@@ -456,104 +462,54 @@ uya4 = mapdl.get("UYA4", "NODE", 37, "U", "Y")
 # MADPL UY AT NODE(0,4,0)
 upa4 = mapdl.get("UPA4", "NODE", 47, "U", "Y")
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # redirects output to the default system output file
-    mapdl.run("/OUT,SCRATCH")
+# assign labels for nodes
+label1 = np.array(["NODE10", "NODE23", "NODE37"])
+label2 = np.array(["NODE19", "NODE33", "NODE47"])
 
-    # Define dimensions for output
-    mapdl.dim("VALUE1", "", 3, 6)
-    mapdl.dim("LABEL1", "CHAR", 3, 2)
-    # Define labels for output
-    mapdl.vfill("VALUE1(1", "1)", "DATA", uy2, uy3, uy4)
-    mapdl.vfill("VALUE1(1", "2)", "DATA", uya2, uya3, uya4)
-    mapdl.vfill("VALUE1(1", "3)", "DATA", up2, up3, up4)
-    mapdl.vfill("VALUE1(1", "4)", "DATA", upa2, upa3, upa4)
-    mapdl.vfill("VALUE1(1", "5)", "DATA", uy2 / uya2, uy3 / uya3, uy4 / uya4)
-    mapdl.vfill("VALUE1(1", "6)", "DATA", up2 / upa2, up3 / upa3, up4 / upa4)
+value1 = np.array([uy2, uy3, uy4])
+value_ana1 = np.array([uya2, uya3, uya4])
+value_ratio1 = []
+for i in range(len(value_ana1)):
+    a = value1[i] / value_ana1[i]
+    value_ratio1.append(a)
 
-    mapdl.run("LABEL1(1,1)='NODE10'")
-    mapdl.run("LABEL1(2,1)='NODE23'")
-    mapdl.run("LABEL1(3,1)='NODE37'")
-    mapdl.run("LABEL1(1,2)='NODE19'")
-    mapdl.run("LABEL1(2,2)='NODE33'")
-    mapdl.run("LABEL1(3,2)='NODE47'")
+value2 = np.array([up2, up3, up4])
+value_ana2 = np.array([upa2, upa3, upa4])
+value_ratio2 = []
+for i in range(len(value_ana2)):
+    a = value2[i] / value_ana2[i]
+    value_ratio2.append(a)
 
-    # Save the result table
-    mapdl.save("TABLE_2")
-    # exists post-processing processor
-    mapdl.finish()
-    # Resume table "TABLE_1"
-    mapdl.resume("TABLE_1")
-    mapdl.run("/OUT,vm291,vrt")
-    mapdl.com("")
-    mapdl.com("--------------VM291 RESULTS COMPARISON--------------------")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("|   TARGET   |   Mechanical APDL   | RATIO")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("**************************************")
-    mapdl.com("USING PLANE182 AND INFIN257 ELEMENTS")
-    mapdl.com("**************************************")
-    mapdl.com("")
-    mapdl.com("VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL(1,1),VALUE(1,1),VALUE(1,2),VALUE(1,5)")
-    mapdl.run("(4X,A10'  ',F10.4,'       ',F10.4,'        ',1F5.3)")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL(1,2),VALUE(1,3),VALUE(1,4),VALUE(1,6)")
-    mapdl.run("(4X,A10'  ',F10.4,'       ',F10.4,'        ',1F5.3)")
-    mapdl.com("")
-    mapdl.com("")
+mapdl.gopr()
+mapdl.com("")
+mapdl.com("**************************************")
+mapdl.com("USING PLANE183 AND INFIN257 ELEMENTS")
+mapdl.com("**************************************")
+mapdl.com("")
+mapdl.com("VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)")
+mapdl.com("")
+for i in range(len(value1)):
+    message = f"""
+        {label1[i]}         {value1[i]:.5f}       {value_ana1[i]:.5f}       {value_ratio1[i]:.5f}
+    """
+    print(message)
 
-    # It is not recommended to use '/NOPR' in a normal PyMAPDL session.
-    mapdl._run("/NOPR")
-    # Resume table "TABLE_1"
-    mapdl.resume("TABLE_2")
+mapdl.com("")
+mapdl.com("VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)")
+mapdl.com("")
+for i in range(len(value2)):
+    message = f"""
+        {label2[i]}         {value2[i]:.5f}       {value_ana2[i]:.5f}       {value_ratio2[i]:.5f}
+    """
+    print(message)
 
-    mapdl.gopr()
-    mapdl.com("")
-    mapdl.com("**************************************")
-    mapdl.com("USING PLANE183 AND INFIN257 ELEMENTS")
-    mapdl.com("**************************************")
-    mapdl.com("")
-    mapdl.com("VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL1(1,1),VALUE1(1,1),VALUE1(1,2),VALUE1(1,5)")
-    mapdl.run("(4X,A10'  ',F10.4,'       ',F10.4,'        ',1F5.3)")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL1(1,2),VALUE1(1,3),VALUE1(1,4),VALUE1(1,6)")
-    mapdl.run("(4X,A10'  ',F10.4,'       ',F10.4,'        ',1F5.3)")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("")
-    mapdl.com("----------------------------------------------------------")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
-
-# Get the mapdl temporary working directory
-vrt_file_path = os.path.join(mapdl.directory, "vm291.vrt")
-
-# read the vm291.vrt file to print the results
-f = open(vrt_file_path, "r")
-for x in f:
-    print(x)
+message = f"""
+-----------------------------------------------------------------
+"""
+print(message)
 
 # Finish the post-processing processor
 mapdl.finish()
-# Displays/Lists the contents of an external file
-mapdl.starlist("vm291", "vrt")
 
 # Exit MAPDL session
 mapdl.exit()

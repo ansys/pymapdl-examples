@@ -1,18 +1,50 @@
-"""
-VM13 Cylindrical Shell Under Pressure
-=========================================
+r""".. _ref_vm13:
 
-Description:
-A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
-ends and is subjected to an internal pressure P. Determine the axial stress
-:math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the
-midthickness of the wall.
+Cylindrical Shell Under Pressure
+---------------------------------
+Problem description:
+- A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
+  ends and is subjected to an internal pressure P. Determine the axial stress
+  :math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the
+  midthickness of the wall.
+
+Reference:
+The references for the analysis can be found here:
+  - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
+  - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
+
+Analysis type(s):
+ - Static Analysis ``ANTYPE=0``
+
+Element type(s):
+ - 	Elastic Tapered Unsymmetric Beam Elements (BEAM188)
+
+.. image:: ../_static/vm13_setup.png
+   :width: 400
+   :alt: VM13 Problem Sketch
+
+Material properties
+ - :math:`E = 30 \cdot 10^6 psi`
+
+Geometric properties:
+ - :math:`t = 0.1 in`
+ - :math:`d = 120 in`
+
+Loading:
+ - :math:`P = 500 psi`
+
+Analysis Assumptions and Modeling Notes:
+- An arbitrary axial length of 10 inches is selected.
+  Nodal coupling is used in the radial direction. An axial
+  force of 5654866.8 lb (:math:`(Pπd^2)/4`) is applied to
+  simulate the closed-end effect.
 
 """
-import os
+# sphinx_gallery_thumbnail_path = '_static/vm13_setup.png'
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 
 # Launch MAPDL with specified settings
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -32,14 +64,8 @@ mapdl.verify("vm13")
 # Set the title of the analysis
 mapdl.title("VM13 CYLINDRICAL SHELL UNDER PRESSURE")
 
-"""
-The references for the analysis can be found here:
-  - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
-  - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
-"""
-
 # Enter the model creation preprocessor
-mapdl.prep7()
+mapdl.prep7(mute=True)
 
 # Define element type and section properties
 mapdl.et(1, "SHELL208")  # Element type SHELL208
@@ -100,34 +126,14 @@ mapdl.etable("STRS_Z", "S", "Z")
 stress_y = mapdl.get("STRSS_Y", "ELEM", 1, "ETAB", "STRS_Y")
 stress_z = mapdl.get("STRSS_Z", "ELEM", 1, "ETAB", "STRS_Z")
 
-# Defines an array parameter and its dimensions of output quantities.
-mapdl.dim("LABEL", "CHAR", 2, 2)
-mapdl.dim("VALUE", "", 2, 3)
-
-# Set labels for output variables
-mapdl.run("LABEL(1,1) = 'STRESS,Y ','STRESS,Z'")
-mapdl.run("LABEL(1,2) = ' (psi)  ',' (psi)  '")
-
-# Fill the VALUE table with data
-mapdl.vfill("VALUE(1", "1)", "DATA", 15000, 29749)
-mapdl.vfill("VALUE(1", "2)", "DATA", "STRSS_Y", "STRSS_Z")
-mapdl.vfill("VALUE(1", "3)", "DATA", "ABS(STRSS_Y/15000 )", "ABS(STRSS_Z/29749 )")
-
-# Run non-interactive commands
-
-# Get the mapdl temporary working directory
-vrt_file_path = os.path.join(mapdl.directory, "vm13.vrt")
-
-# read the vm14.vrt file to print the results
-f = open(vrt_file_path, "r")
-for x in f:
-    print(x)
+# Fill the Target Result Values in array
+Target_values = np.array([15000, 29749])
 
 message = f"""
 ------------------- VM13 RESULTS COMPARISON ---------------------
-   RESULT      |  TARGET     |   ANSYS       |   RATIO
-Stress, Y (psi)   {15000:.5f}     {stress_y:.5f}   {abs(stress_y/15000):.5f}
-Stress, Z (psi)   {29749:.5f}     {stress_z:.5f}   {abs(stress_z/29749):.5f}
+   RESULT      |  TARGET     |   Mechanical APDL   |   RATIO
+Stress, Y (psi)  {Target_values[0]:.5f}    {stress_y:.5f}       {abs(stress_y/Target_values[0]):.5f}
+Stress, Z (psi)  {Target_values[1]:.5f}    {stress_z:.5f}       {abs(stress_z/Target_values[1]):.5f}
 -----------------------------------------------------------------
 """
 print(message)
@@ -136,7 +142,6 @@ mapdl.gopr()
 
 # Finish the post-processing processor
 mapdl.finish()
-mapdl.starlist("vm13", "vrt")
 
 # Exit MAPDL
 mapdl.exit()

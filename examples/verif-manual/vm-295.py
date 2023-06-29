@@ -10,10 +10,9 @@ The excess pore water pressure for 0.1, 0.2, 0.3, 0.4, and 0.5 day is calculated
 against the reference results obtained using the PIM method.
 
 """
-import os
-
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -43,7 +42,7 @@ IN APPLIED MECHANICS AND ENGINEERING 190 (2001),PG: 5907-5922
 """
 
 # Entering the PREP7 environment in MAPDL
-mapdl.prep7()
+mapdl.prep7(mute=True)
 
 # Set Parameters
 day = 24 * 3600  # SECONDS IN ONE DAY
@@ -120,23 +119,21 @@ mapdl.nsubst(nsbstp=350, nsbmx=1000, nsbmn=150)
 mapdl.outres("ALL", "ALL")
 mapdl.kbc(1)  # STEPPED LOADING
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # redirects solver output to a file named "SCRATCH"
-    mapdl.run("/OUT,SCRATCH")
-    # SOLVE STATIC ANALYSIS
-    mapdl.solve()
-    # exists solution processor
-    mapdl.finish()
+# redirects solver output to a file named "SCRATCH"
+mapdl.run("/OUT,SCRATCH")
+# SOLVE STATIC ANALYSIS
+mapdl.solve()
+# exists solution processor
+mapdl.finish()
 
-    # Enter POST1 module (Post-processing processor)
-    mapdl.post1()
-    # Set the current results set to the last set to be read from result file
-    mapdl.set("LAST")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
+# Enter POST1 module (Post-processing processor)
+mapdl.post1()
+# Set the current results set to the last set to be read from result file
+mapdl.set("LAST")
+# redirects output to the default system output file
+mapdl.run("/OUT")
+# reactivates suppressed printout
+mapdl.gopr()
 
 # Specify Reference Solution
 mapdl.com("")
@@ -152,8 +149,6 @@ nd1 = q.node(1.0, 6.0, 0.0)
 
 # redirects solver output to a file named "SCRATCH"
 mapdl.run("/OUT,SCRATCH")
-# Define dimensions for output
-mapdl.dim("P", "", 5)
 # Specify load set to read from the result file, load step =1, sub-step=16
 mapdl.set(1, 16)
 p11 = mapdl.get("P11", "NODE", nd1, "PRES")
@@ -167,7 +162,6 @@ mapdl.com("")
 mapdl.com("INTERPOLATE THE RESULTS AT LOCATION (1,6,0) FOR TIME=0.1DAY")
 mapdl.com("")
 pt1 = (p11 + (t1 - t11) / (t12 - t11) * (p12 - p11)) / 1e3
-mapdl.vfill("P(1)", "DATA", pt1)
 # Specify load set to read from the result file, load step =1, sub-step=31
 mapdl.set(1, 31)
 p21 = mapdl.get("P21", "NODE", nd1, "PRES")
@@ -181,7 +175,6 @@ mapdl.com("")
 mapdl.com("INTERPOLATE THE RESULTS AT LOCATION (1,6,0) FOR TIME=0.2DAY")
 mapdl.com("")
 pt2 = (p21 + (t2 - t21) / (t22 - t21) * (p22 - p21)) / 1e3
-mapdl.vfill("P(2)", "DATA", pt2)
 # Specify load set to read from the result file, load step =1, sub-step=46
 mapdl.set(1, 46)
 p31 = mapdl.get("P31", "NODE", nd1, "PRES")
@@ -195,7 +188,6 @@ mapdl.com("")
 mapdl.com("INTERPOLATE THE RESULTS AT LOCATION (1,6,0) FOR TIME=0.3DAY")
 mapdl.com("")
 pt3 = (p31 + (t3 - t31) / (t32 - t31) * (p32 - p31)) / 1e3
-mapdl.vfill("P(3)", "DATA", pt3)
 # Specify load set to read from the result file, load step =1, sub-step=61
 mapdl.set(1, 61)
 p41 = mapdl.get("P41", "NODE", nd1, "PRES")
@@ -209,7 +201,6 @@ mapdl.com("")
 mapdl.com("INTERPOLATE THE RESULTS AT LOCATION (1,6,0) FOR TIME=0.4DAY")
 mapdl.com("")
 pt4 = (p41 + (t4 - t41) / (t42 - t41) * (p42 - p41)) / 1e3
-mapdl.vfill("P(4)", "DATA", pt4)
 # Specify load set to read from the result file, load step =1, sub-step=76
 mapdl.set(1, 76)
 p51 = mapdl.get("P51", "NODE", nd1, "PRES")
@@ -223,46 +214,42 @@ mapdl.com("")
 mapdl.com("INTERPOLATE THE RESULTS AT LOCATION (1,6,0) FOR TIME=0.5DAY")
 mapdl.com("")
 pt5 = (p51 + (t5 - t51) / (t52 - t51) * (p52 - p51)) / 1e3
-mapdl.vfill("P(5)", "DATA", pt5)
+# Store values in array
+P = np.array([pt1, pt2, pt3, pt4, pt5])
 
-# Enter non-interactive mode
-with mapdl.non_interactive:
-    # REFERENCE RESULTS, FIGURE 5, PG 5916
-    mapdl.dim("CP", "", 5)
-    mapdl.run("CP(1)=5.230,2.970,1.769,1.043,0.632  ")
-    mapdl.dim("RT", "", 5)
-    mapdl.run("*DO,I,1,5")
-    mapdl.run("RT(I)=P(I)/CP(I)")
-    mapdl.run("*ENDDO")
-    mapdl.dim("LABEL", "CHAR", 5)
-    mapdl.run("LABEL(1)='0.1','0.2','0.3','0.4','0.5'")
-    mapdl.com("")
-    mapdl.run("/OUT,vm295,vrt")
-    mapdl.com("------------ vm295 RESULTS COMPARISON --------------")
-    mapdl.com("")
-    mapdl.com("Time     |  TARGET   |  Mechanical APDL  |  RATIO")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL(1),CP(1),P(1),RT(1)")
-    mapdl.run("(8X,A4,'       ',F10.3,'       ',F10.3,'    ',F10.2)")
-    mapdl.com("")
-    mapdl.com("------------------------------------------------------")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
+# REFERENCE RESULTS, FIGURE 5, PG 5916
+# Fill the Target Result Values in array
+Target_CP = np.array([5.230, 2.970, 1.769, 1.043, 0.632])
 
-# Get the mapdl temporary working directory
-vrt_file_path = os.path.join(mapdl.directory, "vm295.vrt")
+RT = []
+for i in range(len(Target_CP)):
+    a = P[i] / Target_CP[i]
+    RT.append(a)
 
-# read the vm295.vrt file to print the results
-f = open(vrt_file_path, "r")
-for x in f:
-    print(x)
+# assign labels for days
+label = np.array([0.1, 0.2, 0.3, 0.4, 0.5])
+
+
+message = f"""
+------------------- VM295 RESULTS COMPARISON ---------------------
+   Time (day)  |  TARGET (kPa)    |   Mechanical APDL  |   RATIO
+-----------------------------------------------------------------
+"""
+print(message)
+
+for i in range(len(Target_CP)):
+    message = f"""
+    {label[i]:.5f}        {Target_CP[i]:.5f}              {P[i]:.5f}          {RT[i]:.5f}
+    """
+    print(message)
+
+message = f"""
+-----------------------------------------------------------------
+"""
+print(message)
 
 # Finish the post-processing processor
 mapdl.finish()
-# Displays/Lists the contents of an external file
-mapdl.starlist("vm295", "vrt")
 
 # Exit MAPDL session
 mapdl.exit()
