@@ -114,16 +114,6 @@ mapdl.vfill("VALUE(1", "2)", "DATA", "STRSS_Y", "STRSS_Z")
 mapdl.vfill("VALUE(1", "3)", "DATA", "ABS(STRSS_Y/15000 )", "ABS(STRSS_Z/29749 )")
 
 # Run non-interactive commands
-with mapdl.non_interactive:
-    mapdl.run("/OUT,vm13,vrt")  # Output to a file named vm13.vrt
-    mapdl.com("------------------- VM13 RESULTS COMPARISON ---------------------")
-    mapdl.com("")
-    mapdl.com("|   TARGET   |   Mechanical APDL   |   RATIO")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL(1,1),LABEL(1,2),VALUE(1,1),VALUE(1,2),VALUE(1,3)")
-    mapdl.run("(1X,A8,A8,'   ',F10.0,'  ',F12.0,'   ',1F15.3)")
-    mapdl.com("-----------------------------------------------------------------")
-    mapdl.run("/OUT")
 
 # Get the mapdl temporary working directory
 vrt_file_path = os.path.join(mapdl.directory, "vm13.vrt")
