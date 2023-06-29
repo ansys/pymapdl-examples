@@ -1,18 +1,55 @@
-"""
-VM299 Sound Diffusion in a Flat Room
-========================================================================
+r""".. _ref_vm299:
 
-Description:
-Sound diffusion is modeled in a flat room of size 30x30x3 m3. A sound source is placed at (2,2,1)
-with a sound power level of 1x10-2 W. The wall absorption coefficient is equal to 0.1.
-The coefficient of atmospheric attenuation is 0.01 m-1.
+Sound Diffusion in a Flat Room
+------------------------------
+Problem description:
+ - Sound diffusion is modeled in a flat room of size 30x30x3 m3. A sound source is placed at (2,2,1)
+   with a sound power level of 1x10-2 W. The wall absorption coefficient is equal to 0.1.
+   The coefficient of atmospheric attenuation is 0.01 m-1.
+
+Reference:
+The references for the analysis can be found here:
+ - REFERENCE: A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
+   WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS MARCH 2008.
+
+Analysis type(s):
+ - Static Analysis ``ANTYPE=0``
+
+Element type(s):
+ - 3-D 20-Node Acoustic Solid (FLUID220)
+
+.. image:: ../_static/vm299_setup.png
+   :width: 400
+   :alt: VM299 Finite Element Model of a Flat Room
+
+Material properties:
+ - Speed of sound, :math:`c_0 = 343 m/s`
+ - Density, :math:`rho = 1.21 kg/m^3`
+ - Wall absorption coefficient, :math:`alpha = 0.1`
+ - Atmospheric attenuation coefficient attn. = :math:`0.01 m-1`
+
+Geometric properties:
+ - Room length = :math:`30 m`
+ - Room width = :math:`30 m`
+ - Room height = :math:`3 m`
+
+Loading:
+ - Sound power source = :math:`1 \cdot 10^-2 W`
+
+
+Analysis Assumptions and Modeling Notes:
+ - Steady analysis is performed to determine the sound pressure level inside the room.
+   In the post-processing, the sound pressure level (SPL) is listed every 2 m along a line
+   passing through the room center at 1 m high. The sound pressure level is calculated in
+   Mechanical APDL as:
 
 """
-import math
+# sphinx_gallery_thumbnail_path = '_static/vm299_setup.png'
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
 import numpy as np
+import math
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -30,12 +67,6 @@ mapdl.run("/VERIFY,VM299")
 
 # Set the title of the analysis
 mapdl.title("VM299 SOUND PRESSURE LEVEL IN A FLAT ROOM")
-
-"""
-The references for the analysis can be found here:
--REFERENCE: A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
-WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS MARCH 2008.
-"""
 
 # Entering the PREP7 environment in MAPDL
 mapdl.prep7()

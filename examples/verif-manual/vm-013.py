@@ -3,15 +3,15 @@ r""".. _ref_vm13:
 Cylindrical Shell Under Pressure
 ---------------------------------
 Problem description:
-- A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
-  ends and is subjected to an internal pressure P. Determine the axial stress
-  :math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the
-  midthickness of the wall.
+ - A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
+   ends and is subjected to an internal pressure P. Determine the axial stress
+   :math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the
+   midthickness of the wall.
 
 Reference:
 The references for the analysis can be found here:
-  - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
-  - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
+ - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
+ - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
 
 Analysis type(s):
  - Static Analysis ``ANTYPE=0``
@@ -21,7 +21,7 @@ Element type(s):
 
 .. image:: ../_static/vm13_setup.png
    :width: 400
-   :alt: VM13 Problem Sketch
+   :alt: VM13 Cylindrical Shell Problem Sketch
 
 Material properties
  - :math:`E = 30 \cdot 10^6 psi`
@@ -34,10 +34,10 @@ Loading:
  - :math:`P = 500 psi`
 
 Analysis Assumptions and Modeling Notes:
-- An arbitrary axial length of 10 inches is selected.
-  Nodal coupling is used in the radial direction. An axial
-  force of 5654866.8 lb (:math:`(Pπd^2)/4`) is applied to
-  simulate the closed-end effect.
+ - An arbitrary axial length of 10 inches is selected.
+   Nodal coupling is used in the radial direction. An axial
+   force of 5654866.8 lb (:math:`(Pπd^2)/4`) is applied to
+   simulate the closed-end effect.
 
 """
 # sphinx_gallery_thumbnail_path = '_static/vm13_setup.png'

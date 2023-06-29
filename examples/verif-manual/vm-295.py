@@ -1,15 +1,56 @@
-"""
-VM295 Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
-========================================================================
+r""".. _ref_vm295:
 
-Description:
-The test case is to simulate a one-dimensional Terzaghi's problem with permeability as a function
-of the soil depth. A pressure P is applied on the top surface of the soil with depth H and width W.
-The top surface of the soil is fully permeable and the permeability decreases linearly with depth.
-The excess pore water pressure for 0.1, 0.2, 0.3, 0.4, and 0.5 day is calculated and compared
-against the reference results obtained using the PIM method.
+One Dimensional Terzaghi's Consolidation Problem with Permeability as Function of Depth
+---------------------------------------------------------------------------------------
+Problem description:
+ - The test case is to simulate a one-dimensional Terzaghi's problem with permeability as a function
+   of the soil depth. A pressure P is applied on the top surface of the soil with depth H and
+   width W. The top surface of the soil is fully permeable and the permeability decreases linearly
+   with depth. The excess pore water pressure for 0.1, 0.2, 0.3, 0.4, and 0.5 day is calculated and
+   compared against the reference results obtained using the PIM method.
+
+Reference:
+The references for the analysis can be found here:
+ - REFERENCE: A POINT INTERPOLATION METHOD FOR SIMULATING DISSIPATION PROCESS
+   OF CONSOLIDATION, J.G.WANG, G.R.LIU, Y.G.WU, COMPUTER METHODS
+   IN APPLIED MECHANICS AND ENGINEERING 190 (2001),PG: 5907-5922
+
+Analysis type(s):
+ - Static Analysis ``ANTYPE=0``
+
+Element type(s):
+ - 2-D 4-Node Coupled Pore-Pressure Element (CPT212)
+
+.. image:: ../_static/vm295_setup.png
+   :width: 400
+   :alt: VM295 Problem Sketch
+
+Material properties:
+ - Youngs modulus, :math:`E = 4 \cdot 10^7 Pa`
+ - Poissons ratio, :math:`v = 0.3`
+ - Permeability value at bottom of the soil, :math:`fpx = 1.728 \cdot 10^-7 m/day`
+ - Permeability value at the top of the soil = :math:`100 * fpx'
+
+Geometric properties:
+ - Height, :math:`H = 16 m`
+ - Width, :math:`W = 1 m`
+
+Loading:
+ - Pressure, :math:`P = 1 \cdot 10^4 Pa`
+
+Analysis Assumptions and Modeling Notes:
+ - The soil is modeled using 2-D CPT212 elements with plane strain element behavior.
+   The UX degree of freedom for all nodes is constrained and the UY degree of freedom at the bottom
+   of the soil is constrained. The pressure degree of freedom at the top edge is constrained to
+   make it fully permeable. Linearly varying permeability of the soil is defined using the TB,PM
+   material model. Static analysis is performed with an end time of 86400 seconds (1 day) and with
+   stepped pressure loading P on the top edge of the soil. The excess water pore pressure at depth
+   H = 6 m is computed for 0.1 (8640s), 0.2 (17280s), 0.3 (25920s), 0.4 (34560s), and
+   0.5 days (43200s) by interpolating the solution obtained at the nearest time points.
 
 """
+# sphinx_gallery_thumbnail_path = '_static/vm295_setup.png'
+
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
 import numpy as np
@@ -32,14 +73,6 @@ mapdl.run("/VERIFY,VM295")
 mapdl.title(
     "VM295 1D TERZAGHI'S CONSOLIDATION PROBLEM WITH PERMEABILITY AS FUNCTION OF DEPTH"
 )
-
-# Provide reference information for the analysis
-"""
-The references for the analysis can be found here:
--REFERENCE: A POINT INTERPOLATION METHOD FOR SIMULATING DISSIPATION PROCESS
-OF CONSOLIDATION, J.G.WANG, G.R.LIU, Y.G.WU, COMPUTER METHODS
-IN APPLIED MECHANICS AND ENGINEERING 190 (2001),PG: 5907-5922
-"""
 
 # Entering the PREP7 environment in MAPDL
 mapdl.prep7(mute=True)

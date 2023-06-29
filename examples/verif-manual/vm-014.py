@@ -3,11 +3,11 @@ r""".. _ref_vm14:
 Large Deflection Eccentric Compression of Slender Column
 --------------------------------------------------------
 Problem description:
-- Find the deflection :math:`/delta` at the middle and the maximum tensile and compressive stresses
-  in an eccentrically compressed steel strut of length L. The cross-section is a channel
-  with the dimensions shown in the diagram. The ends are pinned at the point of load application.
-  The distance between the centroid and the back of the channel is e, and the compressive force F
-  acts in the plane of the back of the channel and in the symmetry plane of the channel.
+ - Find the deflection :math:`/delta` at the middle and the maximum tensile and compressive stresses
+   in an eccentrically compressed steel strut of length L. The cross-section is a channel
+   with the dimensions shown in the diagram. The ends are pinned at the point of load application.
+   The distance between the centroid and the back of the channel is e, and the compressive force F
+   acts in the plane of the back of the channel and in the symmetry plane of the channel.
 
 Reference:
  - S. Timoshenko, Strength of Materials, Part I, Elementary Theory and
@@ -15,7 +15,6 @@ Reference:
    pg. 263, problem 1.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
  - Static, Large Deflection Analysis ``ANTYPE=0``
 
 Element type(s):
@@ -23,7 +22,7 @@ Element type(s):
 
 .. image:: ../_static/vm14_setup.png
    :width: 400
-   :alt: VM14 Problem Sketch
+   :alt: VM14 Slender Column Problem Sketch
 
 Material properties
  - :math:`E = 30 \cdot 10^6 psi`
@@ -41,19 +40,18 @@ Loading:
  - :math:`F = 4000 lb`
 
 Analysis Assumptions and Modeling Notes:
-- Only one-half of the structure is modeled because of symmetry.
-  The boundary conditions for the equivalent half model become fixed-free.
-  Large deflection is needed since the stiffness of the structure and the
-  loading change significantly with deflection. The offset e is defined in
-  the element coordinate system.
+ - Only one-half of the structure is modeled because of symmetry.
+   The boundary conditions for the equivalent half model become fixed-free.
+   Large deflection is needed since the stiffness of the structure and the
+   loading change significantly with deflection. The offset e is defined in
+   the element coordinate system.
 
 """
 # sphinx_gallery_thumbnail_path = '_static/vm14_setup.png'
 
-import os
-import pandas
-
+# Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import pandas
 
 # Launch MAPDL with specified settings
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -138,24 +136,26 @@ mapdl.run("END_NODE = NODE (0,120/2,0)")
 # Retrieve nodal deflection and section stresses
 mapdl.run("END_NODE = NODE (0,120/2,0)")
 deflection = mapdl.get("DEF", "NODE", "END_NODE", "U", "X")  # Nodal deflection
-strss_tens = float(mapdl.get(
-    "STS_TENS", "SECR", 1, "S", "X", "MAX"
-)[:11])  # Maximum section tensile stress
-strss_comp = float(mapdl.get(
-    "STS_COMP", "SECR", 1, "S", "X", "MIN"
-)[:11])  # Minimum section compressive stress
+strss_tens = float(
+    mapdl.get("STS_TENS", "SECR", 1, "S", "X", "MAX")[:11]
+)  # Maximum section tensile stress
+strss_comp = float(
+    mapdl.get("STS_COMP", "SECR", 1, "S", "X", "MIN")[:11]
+)  # Minimum section compressive stress
 
 target_def = 0.1086
 target_tens = 1803.63
 target_comp = -2394.53
 
-data = [[target_def, deflection, target_def/deflection], 
-    [target_tens, strss_tens, target_tens/strss_tens],
-    [target_def, strss_comp, target_def/strss_comp]]
-col_headers=["TARGET", "Mechanical APDL", "RATIO"]
-row_headers = ["DEFLECTION (in)", "STRSS_TENS (psi)" , "DEFLECTION (in)"]
+data = [
+    [target_def, deflection, target_def / deflection],
+    [target_tens, strss_tens, target_tens / strss_tens],
+    [target_comp, strss_comp, target_comp / strss_comp],
+]
+col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
+row_headers = ["DEFLECTION (in)", "STRSS_TENS (psi)", "STRSS_COMP (psi)"]
 
-print(pandas.DataFrame(data, col_headers, row_headers))
+print(pandas.DataFrame(data, row_headers, col_headers))
 
 # Finish the post-processing processor
 mapdl.finish()

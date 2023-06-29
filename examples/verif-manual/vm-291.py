@@ -1,18 +1,53 @@
-"""
-VM291 Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
-========================================================================
+r""".. _ref_vm291:
 
-Description:
-A point force is applied at the origin of a half-space 2-D axisymmetric solid modeled with
-far-field domain. Determine the displacement in the Y-direction on nodes along the radial
-direction (at location Y = 0) and vertical direction (at location X = 0).
+Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
+------------------------------------------------------------------
+Problem description:
+ - A point force is applied at the origin of a half-space 2-D axisymmetric solid modeled with
+   far-field domain. Determine the displacement in the Y-direction on nodes along the radial
+   direction (at location Y = 0) and vertical direction (at location X = 0).
+
+Reference:
+The references for the analysis can be found here:
+ - TIMOSHENKO,S.P.,AND J.N.GOODIER,THEORY OF ELASTICITY
+   MCGRAW-HILL,NEW YORK, PP 398-402, 1970.
+
+Analysis type(s):
+ - Static Analysis ``ANTYPE=0``
+
+Element type(s):
+ - Structural Infinite Solid (INFIN257)
+ - 2-D 4-Node Structural Solid (PLANE182)
+ - 2-D 8-Node Structural Solid (PLANE183)
+
+.. image:: ../_static/vm291_setup1.png
+   :width: 400
+   :alt: VM291 Finite and Infinite Element Mesh of the Problem (PLANE182 and INFIN257)
+
+.. image:: ../_static/vm291_setup2.png
+   :width: 400
+   :alt: VM291 Finite and Infinite Element Mesh of the Problem (PLANE183 and INFIN257)
+
+Material properties
+ - Youngs modulus, :math:`E = 1.0`
+ - Poissons ratio, :math:`v = 0.3`
+
+Geometric properties:
+ - Radius of finite mesh :math:`= 4.0`
+ - Radius of infinite mesh :math:`= 4.0`
+
+Loading:
+ - Point Load :math:`= 1.0`
+
+Analysis Assumptions and Modeling Notes:
 
 """
-import math
+# sphinx_gallery_thumbnail_path = '_static/vm291_setup.png'
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
 import numpy as np
+import math
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -31,12 +66,6 @@ mapdl.run("/VERIFY,VM291")
 
 # Set the title of the analysis
 mapdl.title("VM291 FORCE ON BOUNDARY OF A SEMI-INFINITE BODY (BOUSSINESQ PROBLEM)")
-
-"""
-The references for the analysis can be found here:
--TIMOSHENKO,S.P.,AND J.N.GOODIER,THEORY OF ELASTICITY
--MCGRAW-HILL,NEW YORK, PP 398-402, 1970.
-"""
 
 # Entering the PREP7 environment in MAPDL
 mapdl.prep7(mute=True)
