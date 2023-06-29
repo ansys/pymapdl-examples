@@ -10,8 +10,9 @@ Problem description:
   acts in the plane of the back of the channel and in the symmetry plane of the channel.
 
 Reference:
-The references for the analysis can be found here:
-    - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PG. 263, PROB. 1
+ - S. Timoshenko, Strength of Materials, Part I, Elementary Theory and
+   Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
+   pg. 263, problem 1.
 
 Analysis type(s):
  - Static Analysis ``ANTYPE=0``
