@@ -74,12 +74,6 @@ mapdl.title("VM14 LARGE DEFLECTION ECCENTRIC COMPRESSION OF SLENDER COLUMN")
 # Enter the model creation preprocessor
 mapdl.prep7(mute=True)
 
-# Provide reference information for the analysis
-"""
-The references for the analysis can be found here:
-- STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PG. 263, PROB. 1
-"""
-
 # Define element type and properties
 mapdl.et(1, "BEAM188", "", "", 3)  # Element type BEAM188
 mapdl.sectype(1, "BEAM", "CHAN")  # Section type BEAM CHAN
