@@ -134,56 +134,27 @@ mapdl.gopr()  # reactivates suppressed printout
 
 # Retrieve nodal deflection and section stresses
 mapdl.run("END_NODE = NODE (0,120/2,0)")
-deform = mapdl.get("DEF", "NODE", "END_NODE", "U", "X")  # Nodal deflection
-Strss_Tens = mapdl.get(
+# Retrieve nodal deflection and section stresses
+mapdl.run("END_NODE = NODE (0,120/2,0)")
+deflection = mapdl.get("DEF", "NODE", "END_NODE", "U", "X")  # Nodal deflection
+strss_tens = float(mapdl.get(
     "STS_TENS", "SECR", 1, "S", "X", "MAX"
-)  # Maximum section tensile stress
-Strss_Comp = mapdl.get(
+)[:11])  # Maximum section tensile stress
+strss_comp = float(mapdl.get(
     "STS_COMP", "SECR", 1, "S", "X", "MIN"
-)  # Minimum section compressive stress
+)[:11])  # Minimum section compressive stress
 
-# Defines an array parameter and its dimensions of output quantities.
-mapdl.dim("LABEL", "CHAR", 3, 2)
-mapdl.dim("VALUE", "", 3, 3)
+target_def = 0.1086
+target_tens = 1803.63
+target_comp = -2394.53
 
-# Set labels for output variables
-mapdl.run("LABEL(1,1) = 'DEFLECTI','STRSS_TE','STRSS_CO'")
-mapdl.run("LABEL(1,2) = 'ON (in) ','NS (psi)','MP (psi)'")
+data = [[target_def, deflection, target_def/deflection], 
+    [target_tens, strss_tens, target_tens/strss_tens],
+    [target_def, strss_comp, target_def/strss_comp]]
+col_headers=["TARGET", "Mechanical APDL", "RATIO"]
+row_headers = ["DEFLECTION (in)", "STRSS_TENS (psi)" , "DEFLECTION (in)"]
 
-# Fill the VALUE table with data
-mapdl.vfill("VALUE(1", "1)", "DATA", 0.1086, 1803.63, -2394.53)
-mapdl.vfill("VALUE(1", "2)", "DATA", "ABS(DEF)", "STS_TENS", "STS_COMP")
-mapdl.vfill(
-    "VALUE(1",
-    "3)",
-    "DATA",
-    "ABS(DEF/.1086 )",
-    "ABS(STS_TENS/1803.63)",
-    "ABS(STS_COMP/2394.53)",
-)
-
-# Run non-interactive commands
-with mapdl.non_interactive:
-    mapdl.run("/OUT,vm14,vrt")  # Output to a file named vm14.vrt
-    mapdl.com("------------------- VM14 RESULTS COMPARISON ---------------------")
-    mapdl.com("")
-    mapdl.com("|   TARGET   |   Mechanical APDL   |   RATIO")
-    mapdl.com("")
-    mapdl.run("*VWRITE,LABEL(1,1),LABEL(1,2),VALUE(1,1),VALUE(1,2),VALUE(1,3)")
-    mapdl.run("(1X,A8,A8,'   ',F10.4,'  ',F12.4,'   ',1F15.3)")
-    mapdl.com("-----------------------------------------------------------------")
-    # redirects output to the default system output file
-    mapdl.run("/OUT")
-    # reactivates suppressed printout
-    mapdl.gopr()
-
-# Get the mapdl temporary working directory
-vrt_file_path = os.path.join(mapdl.directory, "vm14.vrt")
-
-# read the vm14.vrt file to print the results
-f = open(vrt_file_path, "r")
-for x in f:
-    print(x)
+print(pandas.DataFrame(data, col_headers, row_headers))
 
 # Finish the post-processing processor
 mapdl.finish()
