@@ -123,19 +123,28 @@ mapdl.cnvtol("M", "", 1e-4)
 # Controls the solution printout
 mapdl.outpr("", "LAST")
 
-mapdl.run("/OUT,SCRATCH")  # redirects solver output to a file named "SCRATCH"
+# ###########################################################
+# Solving the model
+# ~~~~~~~~~~~~~~~~~
+
 mapdl.solve()  # starts a solution
 mapdl.finish()  # exists solution processor
 
-mapdl.post1()  # enter post-processing processor
-mapdl.run("/OUT")  # redirects output to the default system output file
-mapdl.gopr()  # reactivates suppressed printout
+# ###########################################################
+# Post-processing of the model results
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Retrieve nodal deflection and section stresses
+mapdl.post1()  # enter post-processing processor
+
+# ###########################################################
 # inline functions in PyMAPDL to query node
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
 end_node = q.node(0, 60, 0)
 
+# ###########################################################
+# Retrieve nodal deflection and section stresses
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 deflection = mapdl.get("DEF", "NODE", end_node, "U", "X")  # Nodal deflection
 strss_tens = float(
     mapdl.get("STS_TENS", "SECR", 1, "S", "X", "MAX")[:11]
