@@ -3,7 +3,7 @@ r""".. _ref_vm291:
 Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
 ------------------------------------------------------------------
 Problem description:
- - A point force is applied at the origin of a half-space 2-D axisymmetric solid modeled with
+ - A point force is applied at the origin of a half-space 2D axisymmetric solid modeled with
    far-field domain. Determine the displacement in the Y-direction on nodes along the radial
    direction (at location Y = 0) and vertical direction (at location X = 0).
 
@@ -44,10 +44,11 @@ Analysis Assumptions and Modeling Notes:
 """
 # sphinx_gallery_thumbnail_path = '_static/vm291_setup.png'
 
+import math
+
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
 import numpy as np
-import math
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -71,7 +72,7 @@ mapdl.title("VM291 FORCE ON BOUNDARY OF A SEMI-INFINITE BODY (BOUSSINESQ PROBLEM
 mapdl.prep7(mute=True)
 
 # Constant value of PI
-pi = math.pi  # need to add "import math" at the beginning of the file
+pi = math.pi
 
 # 2D 4-NODE STRUCTURAL SOLID
 mapdl.et(1, "PLANE182")
@@ -126,13 +127,15 @@ mapdl.e(18, 17, 12, 13)
 mapdl.e(19, 18, 13, 14)
 
 # select node located at (0,0,0) and assign it to variable "NPOLE"
-mapdl.run("NPOLE=NODE(0,0,0)")
+# inline functions in PyMAPDL to query node
+q = mapdl.queries
+NPOLE = q.node(0, 0, 0)
 
 # selects nodes
 mapdl.nsel("S", "", "", 15, 19)
 
 # GENERATE SEMI-INFINITE SOLID ELEMENTS
-mapdl.einfin("", "NPOLE")
+mapdl.einfin("", NPOLE)
 
 # Selects all entities
 mapdl.allsel()
@@ -247,6 +250,7 @@ for i in range(len(value_ana1)):
     a = value1[i] / value_ana1[i]
     value_ratio1.append(a)
 
+# create results arrays for printout
 value2 = np.array([up2, up3, up4])
 value_ana2 = np.array([upa2, upa3, upa4])
 value_ratio2 = []
@@ -294,7 +298,7 @@ mapdl.run("/OUT")
 mapdl.prep7(mute=True)
 
 # Constant value of PI
-pi = math.pi  # need to add "import math" at the beginning of the file
+pi = math.pi
 
 # YOUNG'S MODULUS
 exx = 1.0
@@ -495,6 +499,7 @@ upa4 = mapdl.get("UPA4", "NODE", 47, "U", "Y")
 label1 = np.array(["NODE10", "NODE23", "NODE37"])
 label2 = np.array(["NODE19", "NODE33", "NODE47"])
 
+# create results arrays for printout
 value1 = np.array([uy2, uy3, uy4])
 value_ana1 = np.array([uya2, uya3, uya4])
 value_ratio1 = []
@@ -502,6 +507,7 @@ for i in range(len(value_ana1)):
     a = value1[i] / value_ana1[i]
     value_ratio1.append(a)
 
+# create results arrays for printout
 value2 = np.array([up2, up3, up4])
 value_ana2 = np.array([upa2, upa3, upa4])
 value_ratio2 = []

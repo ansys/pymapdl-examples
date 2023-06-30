@@ -138,8 +138,6 @@ Stress, Z (psi)  {Target_values[1]:.5f}    {stress_z:.5f}       {abs(stress_z/Ta
 """
 print(message)
 
-mapdl.gopr()
-
 # Finish the post-processing processor
 mapdl.finish()
 

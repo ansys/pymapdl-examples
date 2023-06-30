@@ -3,20 +3,20 @@ r""".. _ref_vm299:
 Sound Diffusion in a Flat Room
 ------------------------------
 Problem description:
- - Sound diffusion is modeled in a flat room of size 30x30x3 m3. A sound source is placed at (2,2,1)
-   with a sound power level of 1x10-2 W. The wall absorption coefficient is equal to 0.1.
-   The coefficient of atmospheric attenuation is 0.01 m-1.
+ - Sound diffusion is modeled in a flat room of size:math:'30 \cdot 30 \cdot 3 m^3'. A sound source
+   is placed at (2,2,1) with a sound power level of :math: '1 \cdot 10^-2 W'. The wall absorption
+   coefficient is equal to 0.1. The coefficient of atmospheric attenuation is :math: '0.01 m^-1'.
 
 Reference:
 The references for the analysis can be found here:
- - REFERENCE: A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
+ - A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
    WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS MARCH 2008.
 
 Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
 Element type(s):
- - 3-D 20-Node Acoustic Solid (FLUID220)
+ - 3D 20-Node Acoustic Solid (FLUID220)
 
 .. image:: ../_static/vm299_setup.png
    :width: 400
@@ -26,7 +26,7 @@ Material properties:
  - Speed of sound, :math:`c_0 = 343 m/s`
  - Density, :math:`rho = 1.21 kg/m^3`
  - Wall absorption coefficient, :math:`alpha = 0.1`
- - Atmospheric attenuation coefficient attn. = :math:`0.01 m-1`
+ - Atmospheric attenuation coefficient attn. = :math:`0.01 m^-1`
 
 Geometric properties:
  - Room length = :math:`30 m`
@@ -46,10 +46,11 @@ Analysis Assumptions and Modeling Notes:
 """
 # sphinx_gallery_thumbnail_path = '_static/vm299_setup.png'
 
+import math
+
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
 import numpy as np
-import math
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -75,7 +76,7 @@ mapdl.prep7()
 mapdl._run("/NOPR")
 
 # Constant value of PI
-pi = math.pi  # need to add "import math" at the beginning of the file
+pi = math.pi
 
 # Set parameters for ROOM SIZE
 LX = 30
@@ -89,8 +90,8 @@ MFP = 4 * VOL / SURF
 C0 = 343
 RHO = 1.21
 ROOMD = MFP * C0 / 3
-ATTN = 0.01
-ROOMDP = ROOMD / (1.0 + ATTN * MFP)
+ATTN_Val = 0.01
+ROOMDP = ROOMD / (1.0 + ATTN_Val * MFP)
 ALPHA = 0.1
 WS = 1.0e-2
 
@@ -98,7 +99,7 @@ WS = 1.0e-2
 mapdl.mp("DENS", 1, RHO)
 mapdl.mp("SONC", 1, C0)
 mapdl.tb("AFDM", 1, "", "", "ROOM")
-mapdl.tbdata(1, ROOMDP, ATTN)
+mapdl.tbdata(1, ROOMDP, ATTN_Val)
 
 # GENERATE GEOMETRY
 H = 0.5
@@ -192,11 +193,12 @@ mapdl.yrange(71, 82)
 mapdl.gropt("DIVY", 11)
 # Specifies the device and other parameters for graphics displays.
 # Creates PNG (Portable Network Graphics) files that are named Jobnamennn.png
-mapdl.show("PNG")
+mapdl.show("PNG", "rev")
 
 mapdl.plpath("UX", "SPLX")  # Displays path items on a graph.
 mapdl.show("CLOSE")  # This option purges the graphics file buffer.
 
+# inline functions in PyMAPDL to query node
 q = mapdl.queries
 n1 = q.node(5, 15, 1)
 n2 = q.node(10, 15, 1)
@@ -222,9 +224,13 @@ SPL_3 = 10 * (math.log10(x3))
 SPL_4 = 10 * (math.log10(x4))
 SPL_5 = 10 * (math.log10(x5))
 
-# Fill the Target Result Values in array
+# Fill the target tesult values in array
 target_ref = np.array([80.0, 79.0, 77.5, 76.0, 74.5])
+
+# Fill the simulated result values in array
 value = np.array([SPL_1, SPL_2, SPL_3, SPL_4, SPL_5])
+
+# store ratio
 value_ratio = []
 for i in range(len(target_ref)):
     a = value[i] / target_ref[i]

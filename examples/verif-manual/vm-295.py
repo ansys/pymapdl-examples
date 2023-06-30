@@ -11,7 +11,7 @@ Problem description:
 
 Reference:
 The references for the analysis can be found here:
- - REFERENCE: A POINT INTERPOLATION METHOD FOR SIMULATING DISSIPATION PROCESS
+ - A POINT INTERPOLATION METHOD FOR SIMULATING DISSIPATION PROCESS
    OF CONSOLIDATION, J.G.WANG, G.R.LIU, Y.G.WU, COMPUTER METHODS
    IN APPLIED MECHANICS AND ENGINEERING 190 (2001),PG: 5907-5922
 
@@ -19,7 +19,7 @@ Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
 Element type(s):
- - 2-D 4-Node Coupled Pore-Pressure Element (CPT212)
+ - 2D 4-Node Coupled Pore-Pressure Element (CPT212)
 
 .. image:: ../_static/vm295_setup.png
    :width: 400
@@ -39,14 +39,14 @@ Loading:
  - Pressure, :math:`P = 1 \cdot 10^4 Pa`
 
 Analysis Assumptions and Modeling Notes:
- - The soil is modeled using 2-D CPT212 elements with plane strain element behavior.
+ - The soil is modeled using 2D CPT212 elements with plane strain element behavior.
    The UX degree of freedom for all nodes is constrained and the UY degree of freedom at the bottom
    of the soil is constrained. The pressure degree of freedom at the top edge is constrained to
    make it fully permeable. Linearly varying permeability of the soil is defined using the TB,PM
    material model. Static analysis is performed with an end time of 86400 seconds (1 day) and with
    stepped pressure loading P on the top edge of the soil. The excess water pore pressure at depth
-   H = 6 m is computed for 0.1 (8640s), 0.2 (17280s), 0.3 (25920s), 0.4 (34560s), and
-   0.5 days (43200s) by interpolating the solution obtained at the nearest time points.
+   H = 6 m is computed for 0.1 (8640 s), 0.2 (17280 s), 0.3 (25920 s), 0.4 (34560 s), and
+   0.5 days (43200 s) by interpolating the solution obtained at the nearest time points.
 
 """
 # sphinx_gallery_thumbnail_path = '_static/vm295_setup.png'
@@ -145,9 +145,10 @@ mapdl.nsel("S", "LOC", "Y", h)
 mapdl.sf("ALL", "PRES", pres)
 # selects all nodes
 mapdl.nsel("ALL")
+
 # Specify number of SUBSTEPS
 mapdl.nsubst(nsbstp=350, nsbmx=1000, nsbmn=150)
-# mapdl.run("NSUBS,350,1000,150  ")
+
 # Controls the solution data written to the database.
 mapdl.outres("ALL", "ALL")
 mapdl.kbc(1)  # STEPPED LOADING
@@ -177,6 +178,7 @@ mapdl.com("AND 0.5 DAY (43200 SECONDS) ARE COMPUTED AND COMPARED")
 mapdl.com("AGAINST REFERENCE SOLUTION")
 mapdl.com("")
 
+# inline functions in PyMAPDL to query node
 q = mapdl.queries
 nd1 = q.node(1.0, 6.0, 0.0)
 
@@ -247,13 +249,14 @@ mapdl.com("")
 mapdl.com("INTERPOLATE THE RESULTS AT LOCATION (1,6,0) FOR TIME=0.5DAY")
 mapdl.com("")
 pt5 = (p51 + (t5 - t51) / (t52 - t51) * (p52 - p51)) / 1e3
-# Store values in array
+# Store result values in array
 P = np.array([pt1, pt2, pt3, pt4, pt5])
 
 # REFERENCE RESULTS, FIGURE 5, PG 5916
 # Fill the Target Result Values in array
 Target_CP = np.array([5.230, 2.970, 1.769, 1.043, 0.632])
 
+# store ratio
 RT = []
 for i in range(len(Target_CP)):
     a = P[i] / Target_CP[i]
@@ -261,7 +264,6 @@ for i in range(len(Target_CP)):
 
 # assign labels for days
 label = np.array([0.1, 0.2, 0.3, 0.4, 0.5])
-
 
 message = f"""
 ------------------- VM295 RESULTS COMPARISON ---------------------

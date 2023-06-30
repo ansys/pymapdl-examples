@@ -132,10 +132,11 @@ mapdl.run("/OUT")  # redirects output to the default system output file
 mapdl.gopr()  # reactivates suppressed printout
 
 # Retrieve nodal deflection and section stresses
-mapdl.run("END_NODE = NODE (0,120/2,0)")
-# Retrieve nodal deflection and section stresses
-mapdl.run("END_NODE = NODE (0,120/2,0)")
-deflection = mapdl.get("DEF", "NODE", "END_NODE", "U", "X")  # Nodal deflection
+# inline functions in PyMAPDL to query node
+q = mapdl.queries
+end_node = q.node(0, 60, 0)
+
+deflection = mapdl.get("DEF", "NODE", end_node, "U", "X")  # Nodal deflection
 strss_tens = float(
     mapdl.get("STS_TENS", "SECR", 1, "S", "X", "MAX")[:11]
 )  # Maximum section tensile stress
@@ -159,7 +160,6 @@ print(pandas.DataFrame(data, row_headers, col_headers))
 
 # Finish the post-processing processor
 mapdl.finish()
-# mapdl.starlist("vm14", "vrt")
 
 # Exit MAPDL
 mapdl.exit()
