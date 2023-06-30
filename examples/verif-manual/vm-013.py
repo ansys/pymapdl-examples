@@ -9,7 +9,6 @@ Problem description:
    midthickness of the wall.
 
 Reference:
-The references for the analysis can be found here:
  - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
  - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
 
@@ -25,9 +24,10 @@ Element type(s):
 
 Material properties
  - :math:`E = 30 \cdot 10^6 psi`
+ - :math:`\upsilon = 0.3`
 
 Geometric properties:
- - :math:`t = 0.1 in`
+ - :math:`t = 1 in`
  - :math:`d = 120 in`
 
 Loading:

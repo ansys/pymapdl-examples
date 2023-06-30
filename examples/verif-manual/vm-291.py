@@ -8,7 +8,6 @@ Problem description:
    direction (at location Y = 0) and vertical direction (at location X = 0).
 
 Reference:
-The references for the analysis can be found here:
  - TIMOSHENKO,S.P.,AND J.N.GOODIER,THEORY OF ELASTICITY
    MCGRAW-HILL,NEW YORK, PP 398-402, 1970.
 
@@ -40,8 +39,31 @@ Loading:
  - Point Load :math:`= 1.0`
 
 Analysis Assumptions and Modeling Notes:
+ - The problem is solved for two cases:
+   - Case 1: Using PLANE182 and INFIN257 elements
+   - Case 2: Using PLANE183 and INFIN257 elements
 
-"""
+ - The problem is composed with 12 axisymmetric finite element mesh
+   (PLANE182 or PLANE183) with a radius of 4 from the origin, and 4
+   infinite element mesh (INFIN257) modeling the far-field domain with
+   a radius of 4 extending from the finite element domain. The infinite
+   element mesh is modeled using the EINFIN command. The UX degrees of
+   freedom are constrained at location X = 0. The UY results are computed
+   along the radial and vertical direction on the nodes belonging to the
+   finite element mesh and then compared to the analytical results.
+
+ - The analytic solution to compute vertical displacement for the problem
+   of a point load on a half space is:
+   :math:`\omega = \frac{P}{2 \pi E} \bigg [ \frac{(1+\nu)z^2}{(r^2+z^2)^{3/2}} + \frac{2(1-\nu ^2)}{(r^2 + z^2)^{1/2}} \bigg]`
+   Where :math:`P` is the point load, :math:`E` is the Young’s modulus,
+   :math:`\nu` is the Poisson’s ratio, and :math:`r` and :math:`z` are
+   the radial and vertical distance from the point load.
+   The above equation clearly shows the :math:`\frac {1}{r}` singularity
+   at the point of application of the load (:math:`r=0` and :math:`z=0`),
+   which indicates that the finite element results may not be close to
+   the analytical solution a points close to the origin.
+"""  # noqa:E501
+
 # sphinx_gallery_thumbnail_path = '_static/vm291_setup.png'
 
 import math

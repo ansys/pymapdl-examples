@@ -10,7 +10,6 @@ Problem description:
    compared against the reference results obtained using the PIM method.
 
 Reference:
-The references for the analysis can be found here:
  - A POINT INTERPOLATION METHOD FOR SIMULATING DISSIPATION PROCESS
    OF CONSOLIDATION, J.G.WANG, G.R.LIU, Y.G.WU, COMPUTER METHODS
    IN APPLIED MECHANICS AND ENGINEERING 190 (2001),PG: 5907-5922
@@ -22,14 +21,14 @@ Element type(s):
  - 2D 4-Node Coupled Pore-Pressure Element (CPT212)
 
 .. image:: ../_static/vm295_setup.png
-   :width: 400
+   :width: 100
    :alt: VM295 Problem Sketch
 
 Material properties:
  - Youngs modulus, :math:`E = 4 \cdot 10^7 Pa`
- - Poissons ratio, :math:`v = 0.3`
+ - Poissons ratio, :math:`\mu = 0.3`
  - Permeability value at bottom of the soil, :math:`fpx = 1.728 \cdot 10^-7 m/day`
- - Permeability value at the top of the soil = :math:`100 * fpx'
+ - Permeability value at the top of the soil = :math:`100 * fpx`
 
 Geometric properties:
  - Height, :math:`H = 16 m`

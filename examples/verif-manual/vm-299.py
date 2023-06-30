@@ -8,7 +8,6 @@ Problem description:
    coefficient is equal to 0.1. The coefficient of atmospheric attenuation is :math: '0.01 m^-1'.
 
 Reference:
-The references for the analysis can be found here:
  - A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
    WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS MARCH 2008.
 
@@ -34,7 +33,7 @@ Geometric properties:
  - Room height = :math:`3 m`
 
 Loading:
- - Sound power source = :math:`1 \cdot 10^-2 W`
+ - Sound power source = :math:`1 \cdot 10^{-2} W`
 
 
 Analysis Assumptions and Modeling Notes:
@@ -43,7 +42,11 @@ Analysis Assumptions and Modeling Notes:
    passing through the room center at 1 m high. The sound pressure level is calculated in
    Mechanical APDL as:
 
-"""
+   :math:`SPL = 10 \times \log_{10} \times \frac{\rho \times c_0^2 \times w}{P_{ref}^2}`
+
+ where w is diffuse sound energy and reference pressure :math:`P_{ref} = 2 \times 10^{-5}`.
+"""  # noqa:E501
+
 # sphinx_gallery_thumbnail_path = '_static/vm299_setup.png'
 
 import math
