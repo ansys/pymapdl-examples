@@ -121,6 +121,7 @@ mapdl.outpr(freq=1)
 mapdl.d(1, "ALL", nend=3)
 mapdl.f(4, "FY", -51961.5)  # APPLY LOAD F1
 mapdl.finish(mute=True)
+mapdl.eplot()
 
 ###############################################################################
 # Solve
