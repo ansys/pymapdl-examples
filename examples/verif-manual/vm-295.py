@@ -7,7 +7,7 @@ Problem description:
    of the soil depth. A pressure P is applied on the top surface of the soil with depth H and
    width W. The top surface of the soil is fully permeable and the permeability decreases linearly
    with depth. The excess pore water pressure for 0.1, 0.2, 0.3, 0.4, and 0.5 day is calculated and
-   compared against the reference results obtained using the PIM method.
+   compared against the reference results obtained using the PIM method (Figure 5, pg. 5916).
 
 Reference:
  - A POINT INTERPOLATION METHOD FOR SIMULATING DISSIPATION PROCESS
@@ -27,7 +27,7 @@ Element type(s):
 Material properties:
  - Youngs modulus, :math:`E = 4 \cdot 10^7 Pa`
  - Poissons ratio, :math:`\mu = 0.3`
- - Permeability value at bottom of the soil, :math:`fpx = 1.728 \cdot 10^-7 m/day`
+ - Permeability value at bottom of the soil, :math:`fpx = 1.728 \cdot 10^-3 m/day`
  - Permeability value at the top of the soil = :math:`100 * fpx`
 
 Geometric properties:
@@ -84,22 +84,22 @@ pres = 1e4  # PRESSURE IN PA
 ex = 4e7  # YOUNG'S MODULUS IN PA
 tt = 1 * day
 
-# Define element definition
-mapdl.et(1, "CPT212")  # 2D 4 NODE COUPLED PORE PRESSURE ELEMENT
+###############################################################################
+# Define element type and properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Use 2D 4 NOode Coupled Pore Pressure Element (CPT212) and
+# set PLANE STRAIN Formulation Keyopt(3)=2.
+
+mapdl.et(1, "CPT212")
 mapdl.keyopt(1, 12, 1)
-mapdl.keyopt(1, 3, 2)  # Set Keyopt(3)=2, PLANE STRAIN Formulation
+mapdl.keyopt(1, 3, 2)
 
-# Create geometry and mesh
-mapdl.rectng(0, w, 0, h)  # Generate rectangle
-# Specifies the divisions and spacing ratio on unmeshed lines
-mapdl.lesize(4, "", "", 16)
-mapdl.lesize(3, "", "", 1)
-# For elements that support multiple shapes, specifies the element shape, set mshape=2D
-mapdl.mshape(0, "2D")
-mapdl.mshkey(1)  # Key(1) = Specifies mapped meshing should be used to mesh
-mapdl.amesh(1)  # CREATING CPT212 ELEMENTS
+###############################################################################
+# Define material
+# ~~~~~~~~~~~~~~~
+# Set up the material and its type (a single material), Young's modulus of 4e7
+# and Poisson's ratio of 0.3 is specified.
 
-# Define material properties
 mapdl.mp("EX", 1, ex)
 mapdl.mp("NUXY", 1, 0.3)
 
@@ -117,11 +117,34 @@ mapdl.tbdata(1, fpx * 100, fpx * 100, fpx * 100)
 mapdl.tb("PM", 1, "", "", "BIOT")  # DEFINING BIOT COEFFICINET FOR SOIL
 mapdl.tbdata(1, one)  # BIOT COEFFICIENT
 
-# Define Constraints
+###############################################################################
+# Define geometry
+# ~~~~~~~~~~~~~~~
+# Set up the nodes and elements. This creates a mesh just like in the
+# problem setup.
+
+mapdl.rectng(0, w, 0, h)  # Generate rectangle
+# Specifies the divisions and spacing ratio on unmeshed lines
+mapdl.lesize(4, "", "", 16)
+mapdl.lesize(3, "", "", 1)
+# For elements that support multiple shapes, specifies the element shape, set mshape=2D
+mapdl.mshape(0, "2D")
+mapdl.mshkey(1)  # Key(1) = Specifies mapped meshing should be used to mesh
+mapdl.amesh(1)  # CREATING CPT212 ELEMENTS
+
+###############################################################################
+# Define boundary conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Fix UX degrees of freedom. Constraining UY DOF AT Location Y=0.
+# Defining the top portion of the soil as permeable.
+# Then exit prep7 processor.
+
 mapdl.d("ALL", "UX", 0)  # CONSTRAINING ALL UX DOF
+
 mapdl.nsel("S", "LOC", "Y", 0)
 mapdl.d("ALL", "UY", 0)  # CONSTRAINING UY DOF AT LOCATION Y=0
 mapdl.nsel("ALL")
+
 mapdl.nsel("S", "LOC", "Y", h)
 mapdl.d("ALL", "PRES", 0)  # DEFINING THE TOP PORTION OF SOIL AS PERMEABLE
 # selects all nodes
@@ -132,7 +155,10 @@ mapdl.esel("ALL")
 # Finish pre-processing processor
 mapdl.finish()
 
-# Enter the solution processor to define solution controls
+###############################################################################
+# Solve
+# ~~~~~
+# Enter solution mode and solve the system.
 mapdl.slashsolu()
 
 mapdl.antype("STATIC")  # Performing static analysis
@@ -152,14 +178,16 @@ mapdl.nsubst(nsbstp=350, nsbmx=1000, nsbmn=150)
 mapdl.outres("ALL", "ALL")
 mapdl.kbc(1)  # STEPPED LOADING
 
-# redirects solver output to a file named "SCRATCH"
-mapdl.run("/OUT,SCRATCH")
 # SOLVE STATIC ANALYSIS
 mapdl.solve()
 # exists solution processor
 mapdl.finish()
 
-# Enter POST1 module (Post-processing processor)
+###############################################################################
+# Post-processing
+# ~~~~~~~~~~~~~~~
+# Enter post-processing. Compute pore pressure.
+
 mapdl.post1()
 # Set the current results set to the last set to be read from result file
 mapdl.set("LAST")
@@ -168,7 +196,9 @@ mapdl.run("/OUT")
 # reactivates suppressed printout
 mapdl.gopr()
 
+# ###########################################################
 # Specify Reference Solution
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.com("")
 mapdl.com("EXCESS PORE PRESSURE IN KILOPASCALS AT LOCATION X=1,Y=6")
 mapdl.com("FOR 0.1 DAY (8640 SECONDS),0.2 DAY (17280 SECONDS)")
@@ -177,7 +207,9 @@ mapdl.com("AND 0.5 DAY (43200 SECONDS) ARE COMPUTED AND COMPARED")
 mapdl.com("AGAINST REFERENCE SOLUTION")
 mapdl.com("")
 
-# inline functions in PyMAPDL to query node
+# ###########################################################
+# Inline functions in PyMAPDL to query node
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
 nd1 = q.node(1.0, 6.0, 0.0)
 
@@ -264,6 +296,10 @@ for i in range(len(Target_CP)):
 # assign labels for days
 label = np.array([0.1, 0.2, 0.3, 0.4, 0.5])
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 message = f"""
 ------------------- VM295 RESULTS COMPARISON ---------------------
    Time (day)  |  TARGET (kPa)    |   Mechanical APDL  |   RATIO
@@ -282,8 +318,12 @@ message = f"""
 """
 print(message)
 
-# Finish the post-processing processor
+###############################################################################
+# Finish the post-processing processor.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
-# Exit MAPDL session
+###############################################################################
+# Stop MAPDL.
+# ~~~~~~~~~~~
 mapdl.exit()

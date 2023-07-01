@@ -3,7 +3,7 @@ r""".. _ref_vm14:
 Large Deflection Eccentric Compression of Slender Column
 --------------------------------------------------------
 Problem description:
- - Find the deflection :math:`/delta` at the middle and the maximum tensile and compressive stresses
+ - Find the deflection :math:`\delta` at the middle and the maximum tensile and compressive stresses
    in an eccentrically compressed steel strut of length L. The cross-section is a channel
    with the dimensions shown in the diagram. The ends are pinned at the point of load application.
    The distance between the centroid and the back of the channel is e, and the compressive force F
@@ -18,7 +18,7 @@ Analysis type(s):
  - Static, Large Deflection Analysis ``ANTYPE=0``
 
 Element type(s):
- - 2-Node Finite Strain Axisymmetric Shell (SHELL208)
+ - Elastic Tapered Unsymmetric Beam Elements (BEAM188)
 
 .. image:: ../_static/vm14_setup.png
    :width: 400
@@ -26,7 +26,7 @@ Element type(s):
 
 Material properties
  - :math:`E = 30 \cdot 10^6 psi`
- - :math:`u = 0.3`
+ - :math:`\mu = 0.3`
 
 Geometric properties:
  - :math:`L = 10 ft`
@@ -74,17 +74,31 @@ mapdl.title("VM14 LARGE DEFLECTION ECCENTRIC COMPRESSION OF SLENDER COLUMN")
 # Enter the model creation preprocessor
 mapdl.prep7(mute=True)
 
+###############################################################################
 # Define element type and properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Use 3D 2-Node Beam element (Beam188) and set cubic shape function Keyopt(3)=3.
+
 mapdl.et(1, "BEAM188", "", "", 3)  # Element type BEAM188
 mapdl.sectype(1, "BEAM", "CHAN")  # Section type BEAM CHAN
 mapdl.secdata(2.26, 2.26, 8, 0.39, 0.39, 0.22)  # Section data
 mapdl.secoffset("USER", "", 0.6465)  # Section offset
 
-# Define material properties
-mapdl.mp("EX", 1, 30e6)  # Young's modulus
-mapdl.mp("PRXY", 1, 0.3)  # Poisson's ratio
+###############################################################################
+# Define material
+# ~~~~~~~~~~~~~~~
+# Set up the material and its type (a single material), Young's modulus of 30e6
+# and Poisson's ratio of 0.3 is specified.
 
-# Define nodes and element connectivity
+mapdl.mp("EX", 1, 30e6)
+mapdl.mp("PRXY", 1, 0.3)
+
+###############################################################################
+# Define geometry
+# ~~~~~~~~~~~~~~~
+# Set up the nodes and elements. This creates a mesh just like in the
+# problem setup.
+
 mapdl.n(1)  # Node 1
 mapdl.n(5, "", 60)  # Node 5 at 60 degrees
 
@@ -97,7 +111,16 @@ mapdl.e(1, 2)  # Element 1 with nodes 1 and 2
 # Generates elements from an existing pattern
 mapdl.egen(4, 1, 1)
 
-# Apply load and boundary conditions
+###############################################################################
+# Define coupling and boundary conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Fix all degrees of freedom for node 1. Apply a negative force 4000 lb in FY
+# direction at node 5. Apply symmetry boundary condition along z-direction.
+# Then exit prep7 processor.
+#
+# Effectiely, this sets:
+# - :math:`F = 4000 lb`
+
 mapdl.d(1, "ALL")  # Fix all degrees of freedom for node 1
 mapdl.f(5, "FY", -4000)  # Apply a negative force FY to node 5
 mapdl.dsym("SYMM", "Z")  # Apply symmetry boundary condition in Z-direction
@@ -110,7 +133,11 @@ mapdl.eplot()
 # Finish the pre-processing processor
 mapdl.finish()
 
-# Enter the solution processor to define solution controls
+###############################################################################
+# Solve
+# ~~~~~
+# Enter solution mode and solve the system.
+
 mapdl.slashsolu()
 
 # Activate large deflections
@@ -120,21 +147,18 @@ mapdl.nlgeom("ON")
 mapdl.cnvtol("F", "", 1e-4)
 mapdl.cnvtol("M", "", 1e-4)
 
-# ###########################################################
-# Solving the model
-# ~~~~~~~~~~~~~~~~~
-
 mapdl.solve()  # starts a solution
 mapdl.finish()  # exists solution processor
 
-# ###########################################################
-# Post-processing of the model results
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+###############################################################################
+# Post-processing
+# ~~~~~~~~~~~~~~~
+# Enter post-processing. Compute deflection and stress components.
 
-mapdl.post1()  # enter post-processing processor
+mapdl.post1()
 
 # ###########################################################
-# inline functions in PyMAPDL to query node
+# Inline functions in PyMAPDL to query node
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
 end_node = q.node(0, 60, 0)
@@ -150,6 +174,7 @@ strss_comp = float(
     mapdl.get("STS_COMP", "SECR", 1, "S", "X", "MIN")[:11]
 )  # Minimum section compressive stress
 
+# Fill the array with target values
 target_def = 0.1086
 target_tens = 1803.63
 target_comp = -2394.53
@@ -162,10 +187,18 @@ data = [
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["DEFLECTION (in)", "STRSS_TENS (psi)", "STRSS_COMP (psi)"]
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 print(pandas.DataFrame(data, row_headers, col_headers))
 
-# Finish the post-processing processor
+###############################################################################
+# Finish the post-processing processor.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
-# Exit MAPDL
+###############################################################################
+# Stop MAPDL.
+# ~~~~~~~~~~~
 mapdl.exit()

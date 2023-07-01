@@ -3,9 +3,9 @@ r""".. _ref_vm299:
 Sound Diffusion in a Flat Room
 ------------------------------
 Problem description:
- - Sound diffusion is modeled in a flat room of size:math:'30 \cdot 30 \cdot 3 m^3'. A sound source
-   is placed at (2,2,1) with a sound power level of :math: '1 \cdot 10^-2 W'. The wall absorption
-   coefficient is equal to 0.1. The coefficient of atmospheric attenuation is :math: '0.01 m^-1'.
+ - Sound diffusion is modeled in a flat room of size 30 x 30 x 3 :math:`m^3`. A sound source
+   is placed at (2,2,1) with a sound power level of :math:`1 \cdot 10^-2 W`. The wall absorption
+   coefficient is equal to 0.1. The coefficient of atmospheric attenuation is :math:`0.01 m^-1`.
 
 Reference:
  - A.BILLON,J.PICAUT,'INTRODUCING ATMOSPHERIC ATTENUATION
@@ -23,8 +23,8 @@ Element type(s):
 
 Material properties:
  - Speed of sound, :math:`c_0 = 343 m/s`
- - Density, :math:`rho = 1.21 kg/m^3`
- - Wall absorption coefficient, :math:`alpha = 0.1`
+ - Density, :math:`\rho = 1.21 kg/m^3`
+ - Wall absorption coefficient, :math:`\alpha = 0.1`
  - Atmospheric attenuation coefficient attn. = :math:`0.01 m^-1`
 
 Geometric properties:
@@ -98,13 +98,22 @@ ROOMDP = ROOMD / (1.0 + ATTN_Val * MFP)
 ALPHA = 0.1
 WS = 1.0e-2
 
-# DEFINE MATERIALS
+###############################################################################
+# Define material
+# ~~~~~~~~~~~~~~~
+# Set up the material and its type (a single material), density, speed of sound
+# wall absorption coefficient and Atmospheric attenuation coefficient is specified.
+
 mapdl.mp("DENS", 1, RHO)
 mapdl.mp("SONC", 1, C0)
 mapdl.tb("AFDM", 1, "", "", "ROOM")
 mapdl.tbdata(1, ROOMDP, ATTN_Val)
 
-# GENERATE GEOMETRY
+###############################################################################
+# Define geometry
+# ~~~~~~~~~~~~~~~
+# Set up the nodes and elements. This creates a mesh just like in the
+# problem setup.
 H = 0.5
 a = np.array([0, 2.0, LX])
 b = np.array([0, 2.0, LY])
@@ -138,7 +147,16 @@ mapdl.nsel("A", "LOC", "Y", LY)
 mapdl.nsel("A", "LOC", "Z", 0)
 mapdl.nsel("A", "LOC", "Z", LZ)
 
-# Define Absorption coefficient and transmission loss
+###############################################################################
+# Define boundary conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Define Absorption coefficient and transmission loss.Define Mass source; mass
+# source rate; or power source in an energy diffusion solution for room acoustics.
+# Then exit prep7 processor.
+#
+# Effectiely, this sets:
+# - Sound power source = :math:`1 \cdot 10^{-2} W`
+
 mapdl.sf("ALL", "ATTN", ALPHA)
 # Selects all entities
 mapdl.allsel()
@@ -147,8 +165,6 @@ mapdl.nsel("S", "LOC", "X", a[1])
 mapdl.nsel("R", "LOC", "Y", b[1])
 mapdl.nsel("R", "LOC", "Z", c[1])
 
-# Define Mass source; mass source rate; or power source
-# in an energy diffusion solution for room acoustics
 mapdl.bf("ALL", "MASS", WS)
 
 # Selects all entities
@@ -157,17 +173,21 @@ mapdl.eplot()
 # Finish pre-processing processor
 mapdl.finish()
 
-# Enter the solution processor to define solution controls
+###############################################################################
+# Solve
+# ~~~~~
+# Enter solution mode and solve the system.
 mapdl.slashsolu()
-
-# redirects solver output to a file named "SCRATCH"
-mapdl.run("/OUT,SCRATCH")
 # SOLVE STATIC ANALYSIS
 mapdl.solve()
 # exists solution processor
 mapdl.finish()
 
-# Enter POST1 module (Post-processing processor)
+###############################################################################
+# Post-processing
+# ~~~~~~~~~~~~~~~
+# Enter post-processing. Compute sound pressure level (SPL).
+
 mapdl.post1()
 # Set the current results set to the last set to be read from result file
 mapdl.set("LAST")
@@ -201,7 +221,9 @@ mapdl.show("PNG", "rev")
 mapdl.plpath("UX", "SPLX")  # Displays path items on a graph.
 mapdl.show("CLOSE")  # This option purges the graphics file buffer.
 
-# inline functions in PyMAPDL to query node
+# ###########################################################
+# Inline functions in PyMAPDL to query node
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
 n1 = q.node(5, 15, 1)
 n2 = q.node(10, 15, 1)
@@ -242,6 +264,10 @@ for i in range(len(target_ref)):
 # assign labels position in meter
 label = np.array([5, 10, 15, 20, 25])
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 message = f"""
 ------------------- VM299 RESULTS COMPARISON ---------------------
    SPL at Position, X(m)  |  TARGET     |   Mechanical APDL  |   RATIO
@@ -260,8 +286,12 @@ message = f"""
 """
 print(message)
 
-# Finish the post-processing processor
+###############################################################################
+# Finish the post-processing processor.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
-# Exit MAPDL session
+###############################################################################
+# Stop MAPDL.
+# ~~~~~~~~~~~
 mapdl.exit()

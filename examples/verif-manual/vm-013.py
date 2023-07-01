@@ -5,18 +5,20 @@ Cylindrical Shell Under Pressure
 Problem description:
  - A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
    ends and is subjected to an internal pressure P. Determine the axial stress
-   :math:`/sigma _y` and the hoop stress :math:`/sigma _z` in the vessel at the
+   :math:`\sigma_y` and the hoop stress :math:`\sigma_z` in the vessel at the
    midthickness of the wall.
 
 Reference:
- - STR. OF MATL., TIMOSHENKO, PART 1, 3RD ED., PAGE 45, ART. 11
- - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981
+ - S. Timoshenko, Strength of Materials, Part I, Elementary Theory and
+   Problems, 3rd Edition, D. Van Nostrand Co., Inc., New York, NY, 1955,
+   pg. 45, article 11.
+ - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981.
 
 Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
 Element type(s):
- - 	Elastic Tapered Unsymmetric Beam Elements (BEAM188)
+ - 2-Node Finite Strain Axisymmetric Shell (SHELL208)
 
 .. image:: ../_static/vm13_setup.png
    :width: 400
@@ -24,7 +26,7 @@ Element type(s):
 
 Material properties
  - :math:`E = 30 \cdot 10^6 psi`
- - :math:`\upsilon = 0.3`
+ - :math:`\mu = 0.3`
 
 Geometric properties:
  - :math:`t = 1 in`
@@ -67,29 +69,52 @@ mapdl.title("VM13 CYLINDRICAL SHELL UNDER PRESSURE")
 # Enter the model creation preprocessor
 mapdl.prep7(mute=True)
 
+###############################################################################
 # Define element type and section properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Use 2-Node Axisymmetric Shell element (SHELL208) and "SHELL" as section type.
+
 mapdl.et(1, "SHELL208")  # Element type SHELL208
 mapdl.sectype(1, "SHELL")  # Section type SHELL
 mapdl.secdata(1)  # Define section data
 mapdl.secnum(1)  # Assign section number
 
-# Define material properties
-mapdl.mp("EX", 1, 30e6)  # Young's modulus
-mapdl.mp("NUXY", 1, 0.3)  # Poisson's ratio
+##################################################################################
+# Define material
+# ~~~~~~~~~~~~~~~
+# Set up the material and its type (a single material), Young's modulus of 30e6
+# and Poisson's ratio of 0.3 is specified.
 
-# Define nodal coordinates
+mapdl.mp("EX", 1, 30e6)
+mapdl.mp("NUXY", 1, 0.3)
+
+###############################################################################
+# Define geometry
+# ~~~~~~~~~~~~~~~
+# Set up the nodes and elements. This creates a mesh just like in the
+# problem setup.
+
 mapdl.n(1, 60)  # Node 1, 60 degrees
 mapdl.n(2, 60, 10)  # Node 2, 60 degrees and 10 units in Z-direction
 
 # Define element connectivity
 mapdl.e(1, 2)  # Element 1 with nodes 1 and 2
 
-# Apply coupling and boundary conditions
+###############################################################################
+# Define coupling and boundary conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Couple the nodes #1 and 2 in radial direction (rotation around Z-axis).
+# Fix UY displacement for node 1. Fix ROTZ (rotation around Z-axis) for node 2.
+# Apply a concentrated force value of 5654866.8 lb in FY direction at node 2.
+# Internal pressure of 500 psi is applied. Then exit prep7 processor.
+#
+# Effectiely, this sets:
+# - :math:`P = 500 psi`
+
 mapdl.cp(1, "UX", 1, 2)  # Couple radial direction (rotation around Z-axis)
 mapdl.d(1, "UY", "", "", "", "", "ROTZ")  # Fix UY displacement for node 1
 mapdl.d(2, "ROTZ")  # Fix ROTZ (rotation around Z-axis) for node 2
 
-# Apply nodal force and elemental surface pressure
 mapdl.f(2, "FY", 5654866.8)  # Apply a concentrated force FY to node 2
 mapdl.sfe(1, 1, "PRES", "", 500)  # Apply internal pressure of 500 psi to element 1
 
@@ -100,22 +125,26 @@ mapdl.eplot()
 # Finish the pre-processing processor
 mapdl.finish()
 
-# Enter the solution processor
-mapdl.slashsolu()
+###############################################################################
+# Solve
+# ~~~~~
+# Enter solution mode and solve the system.
 
+mapdl.slashsolu()
 # Set the analysis type to STATIC
 mapdl.antype("STATIC")
-
 # Controls the solution printout
 mapdl.outpr("ALL", 1)
-
 # Solve the analysis
 mapdl.solve()
-
 # Finish the solution processor
 mapdl.finish()
 
-# Enter post-processing processor
+###############################################################################
+# Post-processing
+# ~~~~~~~~~~~~~~~
+# Enter post-processing and compute stress components.
+
 mapdl.post1()
 
 # Create element tables for stress components
@@ -126,20 +155,28 @@ mapdl.etable("STRS_Z", "S", "Z")
 stress_y = mapdl.get("STRSS_Y", "ELEM", 1, "ETAB", "STRS_Y")
 stress_z = mapdl.get("STRSS_Z", "ELEM", 1, "ETAB", "STRS_Z")
 
-# Fill the Target Result Values in array
+# Fill the array with target values
 Target_values = np.array([15000, 29749])
 
-message = f"""
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
+results = f"""
 ------------------- VM13 RESULTS COMPARISON ---------------------
    RESULT      |  TARGET     |   Mechanical APDL   |   RATIO
 Stress, Y (psi)  {Target_values[0]:.5f}    {stress_y:.5f}       {abs(stress_y/Target_values[0]):.5f}
 Stress, Z (psi)  {Target_values[1]:.5f}    {stress_z:.5f}       {abs(stress_z/Target_values[1]):.5f}
 -----------------------------------------------------------------
 """
-print(message)
+print(results)
 
-# Finish the post-processing processor
+###############################################################################
+# Finish the post-processing processor.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
-# Exit MAPDL
+###############################################################################
+# Stop MAPDL.
+# ~~~~~~~~~~~
 mapdl.exit()

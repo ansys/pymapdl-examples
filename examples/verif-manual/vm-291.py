@@ -29,7 +29,7 @@ Element type(s):
 
 Material properties
  - Youngs modulus, :math:`E = 1.0`
- - Poissons ratio, :math:`v = 0.3`
+ - Poissons ratio, :math:`\mu = 0.3`
 
 Geometric properties:
  - Radius of finite mesh :math:`= 4.0`
@@ -96,20 +96,29 @@ mapdl.prep7(mute=True)
 # Constant value of PI
 pi = math.pi
 
-# 2D 4-NODE STRUCTURAL SOLID
+###############################################################################
+# Define element type and properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Use 2D 4-Node structural solid element (PLANE182) and set Keyopt(3)=1, Axisymmetric.
 mapdl.et(1, "PLANE182")
-# Set keyopt(3)=1, AXISYMMETRIC
 mapdl.keyopt(1, 3, 1)
 
-# DEFINE MATERIAL MODEL
-# YOUNG'S MODULUS
+###############################################################################
+# Define material
+# ~~~~~~~~~~~~~~~
+# Set up the material and its type (a single material), Young's modulus of 30e6
+# and Poisson'S ratio of 0.1 is specified.
 exx = 1.0
 mapdl.mp("EX", 1, exx)
-# POISSON'S RATIO
 nuxy = 0.1
 mapdl.mp("PRXY", 1, nuxy)
 
-# DEFINE NODES
+###############################################################################
+# Define geometry
+# ~~~~~~~~~~~~~~~
+# Set up the nodes and elements. This creates a mesh just like in the
+# problem setup.
+
 mapdl.n(1, 0, 0)
 mapdl.n(2, 1, 0)
 mapdl.n(3, 0.75, -0.75)
@@ -148,8 +157,10 @@ mapdl.e(17, 16, 11, 12)
 mapdl.e(18, 17, 12, 13)
 mapdl.e(19, 18, 13, 14)
 
-# select node located at (0,0,0) and assign it to variable "NPOLE"
-# inline functions in PyMAPDL to query node
+# ###########################################################
+# Inline functions in PyMAPDL to query node
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Select node located at (0,0,0) and assign it to variable "NPOLE".
 q = mapdl.queries
 NPOLE = q.node(0, 0, 0)
 
@@ -162,9 +173,17 @@ mapdl.einfin("", NPOLE)
 # Selects all entities
 mapdl.allsel()
 
+###############################################################################
+# Define boundary conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Fix UX degrees of freedom at node location X=0. Apply a negative force 1.0 lb
+# along FY direction at node 1. Then exit prep7 processor.
+#
+# Effectiely, this sets:
+# - :math:`Point Load = 1.0`
+
 # Selects nodes using location x=0
 mapdl.nsel("S", "LOC", "X", 0)
-
 # CONSTRAINT UX DOF AT LOCATION X=0
 mapdl.d("ALL", "UX", 0)
 
@@ -180,27 +199,31 @@ mapdl.f(1, "FY", p)
 # Finish pre-processing processor
 mapdl.finish()
 
-# Enter the solution processor to define solution controls
+###############################################################################
+# Solve
+# ~~~~~
+# Enter solution mode and solve the system.
+
 mapdl.slashsolu()
 
 # Performing static analysis
 mapdl.antype("STATIC")
-
 # Controls the solution data written to the database.
 mapdl.outres("ALL", "ALL")
-
 # Sets the time for a load step, time=1
 mapdl.time(1)
-
-# redirects solver output to a file named "SCRATCH"
-mapdl.run("/OUT,SCRATCH")
 # SOLVE STATIC ANALYSIS
 mapdl.solve()
 # exists solution processor
 mapdl.finish()
 
-# Enter POST1 module (Post-processing processor)
+###############################################################################
+# Post-processing
+# ~~~~~~~~~~~~~~~
+# Enter post-processing. Compute deflections.
+
 mapdl.post1()
+
 # Set the current results set to the last set to be read from result file
 mapdl.set("LAST")
 # redirects output to the default system output file
@@ -280,38 +303,53 @@ for i in range(len(value_ana2)):
     a = value2[i] / value_ana2[i]
     value_ratio2.append(a)
 
-mapdl.com("")
-mapdl.com("--------------VM291 RESULTS COMPARISON--------------------")
-mapdl.com("")
-mapdl.com("|   NODES    |   TARGET   |   Mechanical APDL   | RATIO")
-mapdl.com("")
-mapdl.gopr()
-mapdl.com("")
-mapdl.com("**************************************")
-mapdl.com("USING PLANE182 AND INFIN257 ELEMENTS")
-mapdl.com("**************************************")
-mapdl.com("")
-mapdl.com("VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)")
-mapdl.com("")
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
+results = f"""
+--------------------------VM291 RESULTS COMPARISON--------------------------
+
+USING PLANE182 AND INFIN257 ELEMENTS
+-------------------------------------
+
+VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)
+----------------------------------------------
+
+    |    NODES    |   TARGET   |   Mechanical APDL   | RATIO
+
+"""
+print(results)
+
 for i in range(len(value1)):
     message = f"""
         {label1[i]}         {value1[i]:.5f}       {value_ana1[i]:.5f}       {value_ratio1[i]:.5f}
     """
     print(message)
 
-mapdl.com("")
-mapdl.com("VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)")
-mapdl.com("")
+results = f"""
+
+VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)
+----------------------------------------------------
+
+"""
+print(results)
+
 for i in range(len(value2)):
     message = f"""
         {label2[i]}         {value2[i]:.5f}       {value_ana2[i]:.5f}       {value_ratio2[i]:.5f}
     """
     print(message)
 
-# exists post-processing processor
+###############################################################################
+# Finish the post-processing processor.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
-# Clears the database without restarting
+###############################################################################
+# Clears the database without restarting.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 mapdl.run("/CLEAR,NOSTART")
 # redirects output to the default system output file
 mapdl.run("/OUT")
@@ -322,21 +360,29 @@ mapdl.prep7(mute=True)
 # Constant value of PI
 pi = math.pi
 
-# YOUNG'S MODULUS
+###############################################################################
+# Define material
+# ~~~~~~~~~~~~~~~
+# Set up the material and its type (a single material), Young's modulus of 30e6
+# and Poisson'S ratio of 0.1 is specified.
 exx = 1.0
-# POISSON'S RATIO
-nuxy = 0.1
-
-# DEFINE MATERIAL MODEL
 mapdl.mp("EX", 1, exx)
+nuxy = 0.1
 mapdl.mp("PRXY", 1, nuxy)
 
-# 2D 8-NODE STRUCTURAL SOLID
+###############################################################################
+# Define element type and properties
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Use 2D 8-Node structural solid element (PLANE183) and set Keyopt(3)=1, Axisymmetric.
 mapdl.et(1, "PLANE183")
-# Set keyopt(3)=1, AXISYMMETRIC
 mapdl.keyopt(1, 3, 1)
 
-# DEFINE NODES
+###############################################################################
+# Define geometry
+# ~~~~~~~~~~~~~~~
+# Set up the nodes and elements. This creates a mesh just like in the
+# problem setup.
+
 mapdl.n(1, 0.0000, -1.0000, 0.0000)
 mapdl.n(2, 0.75000, -0.75000, 0.0000)
 mapdl.n(3, 0.37500, -0.87500, 0.0000)
@@ -405,8 +451,12 @@ mapdl.e(41, 36, 22, 27, 42, 40, 28, 43)
 mapdl.e(44, 41, 27, 30, 45, 43, 31, 46)
 mapdl.e(47, 44, 30, 33, 48, 46, 34, 49)
 
-# select node located at (0,0,0) and assign it to variable "NPOLE"
-mapdl.run("NPOLE=NODE(0,0,0)")
+# ###########################################################
+# Inline functions in PyMAPDL to query node
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Select node located at (0,0,0) and assign it to variable "NPOLE".
+q = mapdl.queries
+NPOLE = q.node(0, 0, 0)
 
 # select nodes
 mapdl.nsel("S", "NODE", "", 36, 38, 1)
@@ -415,15 +465,23 @@ mapdl.nsel("A", "NODE", "", 44, 45, 1)
 mapdl.nsel("A", "NODE", "", 47, 48, 1)
 
 # GENERATE SEMI-INFINITE SOLID ELEMENTS
-mapdl.einfin("", "NPOLE")
+mapdl.einfin("", NPOLE)
 
 # Selects all entities
 mapdl.allsel()
 mapdl.eplot()
 
+###############################################################################
+# Define boundary conditions
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Fix UX degrees of freedom at node location X=0. Apply a negative force 1.0 lb
+# along FY direction at node 6. Then exit prep7 processor.
+#
+# Effectiely, this sets:
+# - :math:`Point Load = 1.0`
+
 # Selects nodes using location x=0
 mapdl.nsel("S", "LOC", "X", 0)
-
 # CONSTRAINT UX DOF AT LOCATION X=0
 mapdl.d("ALL", "UX", 0)
 # Selects all entities
@@ -437,27 +495,31 @@ mapdl.f(6, "FY", p)
 # Finish pre-processing processor
 mapdl.finish()
 
-# Enter the solution processor to define solution controls
+###############################################################################
+# Solve
+# ~~~~~
+# Enter solution mode and solve the system.
+
 mapdl.slashsolu()
 
 # Performing static analysis
 mapdl.antype("STATIC")
-
 # Controls the solution data written to the database.
 mapdl.outres("ALL", "ALL")
-
 # Sets the time for a load step, time=1
 mapdl.time(1)
-
-# redirects solver output to a file named "SCRATCH"
-mapdl.run("/OUT,SCRATCH")
 # SOLVE STATIC ANALYSIS
 mapdl.solve()
 # exists solution processor
 mapdl.finish()
 
-# Enter POST1 module (Post-processing processor)
+###############################################################################
+# Post-processing
+# ~~~~~~~~~~~~~~~
+# Enter post-processing. Compute deflections.
+
 mapdl.post1()
+
 # Set the current results set to the last set to be read from result file
 mapdl.set("LAST")
 # redirects output to the default system output file
@@ -538,22 +600,32 @@ for i in range(len(value_ana2)):
     value_ratio2.append(a)
 
 mapdl.gopr()
-mapdl.com("")
-mapdl.com("**************************************")
-mapdl.com("USING PLANE183 AND INFIN257 ELEMENTS")
-mapdl.com("**************************************")
-mapdl.com("")
-mapdl.com("VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)")
-mapdl.com("")
+results = f"""
+
+USING PLANE183 AND INFIN257 ELEMENTS
+------------------------------------
+
+VERTICAL DISPLACEMENT(UY) ON THE SURFACE (Y=0)
+----------------------------------------------
+
+"""
+print(results)
+
+
 for i in range(len(value1)):
     message = f"""
         {label1[i]}         {value1[i]:.5f}       {value_ana1[i]:.5f}       {value_ratio1[i]:.5f}
     """
     print(message)
 
-mapdl.com("")
-mapdl.com("VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)")
-mapdl.com("")
+results = f"""
+
+VERTICAL DISPLACEMENT(UY) BELOW THE POINT LOAD (X=0)
+----------------------------------------------------
+
+"""
+print(results)
+
 for i in range(len(value2)):
     message = f"""
         {label2[i]}         {value2[i]:.5f}       {value_ana2[i]:.5f}       {value_ratio2[i]:.5f}
@@ -565,8 +637,12 @@ message = f"""
 """
 print(message)
 
-# Finish the post-processing processor
+###############################################################################
+# Finish the post-processing processor.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
-# Exit MAPDL session
+###############################################################################
+# Stop MAPDL.
+# ~~~~~~~~~~~
 mapdl.exit()
