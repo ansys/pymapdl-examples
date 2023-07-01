@@ -120,9 +120,6 @@ mapdl.nlgeom("ON")
 mapdl.cnvtol("F", "", 1e-4)
 mapdl.cnvtol("M", "", 1e-4)
 
-# Controls the solution printout
-mapdl.outpr("", "LAST")
-
 # ###########################################################
 # Solving the model
 # ~~~~~~~~~~~~~~~~~
