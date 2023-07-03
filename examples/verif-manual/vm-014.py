@@ -163,7 +163,7 @@ mapdl.post1()
 q = mapdl.queries
 end_node = q.node(0, 60, 0)
 
-# ###########################################################
+###############################################################################
 # Retrieve nodal deflection and section stresses
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 deflection = mapdl.get("DEF", "NODE", end_node, "U", "X")  # Nodal deflection
