@@ -196,7 +196,7 @@ mapdl.run("/OUT")
 # reactivates suppressed printout
 mapdl.gopr()
 
-# ###########################################################
+###############################################################################
 # Specify Reference Solution
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.com("")
@@ -207,7 +207,7 @@ mapdl.com("AND 0.5 DAY (43200 SECONDS) ARE COMPUTED AND COMPARED")
 mapdl.com("AGAINST REFERENCE SOLUTION")
 mapdl.com("")
 
-# ###########################################################
+###############################################################################
 # Inline functions in PyMAPDL to query node
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries

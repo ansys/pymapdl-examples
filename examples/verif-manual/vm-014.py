@@ -24,7 +24,7 @@ Element type(s):
    :width: 400
    :alt: VM14 Slender Column Problem Sketch
 
-Material properties
+Material properties:
  - :math:`E = 30 \cdot 10^6 psi`
  - :math:`\mu = 0.3`
 
@@ -157,13 +157,13 @@ mapdl.finish()  # exists solution processor
 
 mapdl.post1()
 
-# ###########################################################
+###############################################################################
 # Inline functions in PyMAPDL to query node
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
 end_node = q.node(0, 60, 0)
 
-# ###########################################################
+###############################################################################
 # Retrieve nodal deflection and section stresses
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 deflection = mapdl.get("DEF", "NODE", end_node, "U", "X")  # Nodal deflection

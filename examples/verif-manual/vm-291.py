@@ -33,7 +33,7 @@ Element type(s):
 
     **PLANE183 and INFIN257**
 
-Material properties
+Material properties:
  - Youngs modulus, :math:`E = 1.0`
  - Poissons ratio, :math:`\mu = 0.3`
 
@@ -70,7 +70,7 @@ Analysis Assumptions and Modeling Notes:
    the analytical solution a points close to the origin.
 """  # noqa:E501
 
-# sphinx_gallery_thumbnail_path = '_static/vm291_setup.png'
+# sphinx_gallery_thumbnail_path = '_static/vm291_setup1.png'
 
 import math
 

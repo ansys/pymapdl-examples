@@ -24,7 +24,7 @@ Element type(s):
    :width: 400
    :alt: VM13 Cylindrical Shell Problem Sketch
 
-Material properties
+Material properties:
  - :math:`E = 30 \cdot 10^6 psi`
  - :math:`\mu = 0.3`
 
