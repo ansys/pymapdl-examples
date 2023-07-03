@@ -157,7 +157,7 @@ mapdl.finish()  # exists solution processor
 
 mapdl.post1()
 
-# ###########################################################
+###############################################################################
 # Inline functions in PyMAPDL to query node
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
