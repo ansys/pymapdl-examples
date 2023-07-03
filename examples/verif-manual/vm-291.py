@@ -19,13 +19,19 @@ Element type(s):
  - 2-D 4-Node Structural Solid (PLANE182)
  - 2-D 8-Node Structural Solid (PLANE183)
 
-.. image:: ../_static/vm291_setup1.png
-   :width: 400
-   :alt: VM291 Finite and Infinite Element Mesh of the Problem (PLANE182 and INFIN257)
+.. figure:: ../_static/vm291_setup1.png
+    :align: center
+    :width: 400
+    :alt:  VM291 Finite and Infinite Element Mesh of the Problem (PLANE182 and INFIN257)
 
-.. image:: ../_static/vm291_setup2.png
-   :width: 400
-   :alt: VM291 Finite and Infinite Element Mesh of the Problem (PLANE183 and INFIN257)
+    **PLANE182 and INFIN257**
+
+.. figure:: ../_static/vm291_setup2.png
+    :align: center
+    :width: 400
+    :alt: VM291 Finite and Infinite Element Mesh of the Problem (PLANE183 and INFIN257)
+
+    **PLANE183 and INFIN257**
 
 Material properties
  - Youngs modulus, :math:`E = 1.0`
