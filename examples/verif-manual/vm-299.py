@@ -221,7 +221,7 @@ mapdl.show("PNG", "rev")
 mapdl.plpath("UX", "SPLX")  # Displays path items on a graph.
 mapdl.show("CLOSE")  # This option purges the graphics file buffer.
 
-# ###########################################################
+###############################################################################
 # Inline functions in PyMAPDL to query node
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 q = mapdl.queries
