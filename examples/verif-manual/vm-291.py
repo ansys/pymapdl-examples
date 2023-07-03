@@ -27,7 +27,7 @@ Element type(s):
    :width: 400
    :alt: VM291 Finite and Infinite Element Mesh of the Problem (PLANE183 and INFIN257)
 
-Material properties
+Material properties:
  - Youngs modulus, :math:`E = 1.0`
  - Poissons ratio, :math:`\mu = 0.3`
 
