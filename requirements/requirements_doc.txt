@@ -7,7 +7,7 @@ plotly==5.15.0
 pyiges==0.3.0
 pythreejs==2.4.2
 pyvista==0.40.0
-vtk==9.2.5
+vtk==9.2.6
 trame==2.5.0
 
 # Documentation dependencies
