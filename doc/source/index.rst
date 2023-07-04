@@ -54,3 +54,4 @@ which necessitate more resources.
 
     verif-manual/index
     technology_showcase_examples/index
+    contributing/index

@@ -8,10 +8,19 @@
 .. #Pyansys
 .. _pyansys: https://docs.pyansys.com
 
+.. #PyAnsys Developer Guide
+.. _dev_guide_pyansys: https://dev.docs.pyansys.com/
+.. _dev_guide_contributing: https://dev.docs.pyansys.com/how-to/contributing.html
+
+
 .. #PyMAPDL related
 .. _pymapdl_docs: https://mapdl.docs.pyansys.com/version/stable/
 .. _pymapdl_github: https://github.com/ansys/pymapdl
 .. _pymapdl_examples: https://mapdl.docs.pyansys.com/examples/index.html
+
+.. #PyMAPDL Examples
+.. _pymapdl_examples_docs: https://examples.mapdl.docs.pyansys.com/index.html
+.. _pymapdl_examples_issues:https://github.com/ansys/pymapdl-examples/issues
 
 .. # Examples
 .. _examples_intro: https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html
