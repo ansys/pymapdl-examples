@@ -186,7 +186,7 @@ mapdl.finish()
 ###############################################################################
 # Post-processing
 # ~~~~~~~~~~~~~~~
-# Enter post-processing. Compute pore pressure.
+# Enter post-processing.
 
 mapdl.post1()
 # Set the current results set to the last set to be read from result file
@@ -213,6 +213,9 @@ mapdl.com("")
 q = mapdl.queries
 nd1 = q.node(1.0, 6.0, 0.0)
 
+###############################################################################
+# Post-processing: Compute pore pressure
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # redirects solver output to a file named "SCRATCH"
 mapdl.run("/OUT,SCRATCH")
 # Specify load set to read from the result file, load step =1, sub-step=16

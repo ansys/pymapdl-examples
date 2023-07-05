@@ -186,7 +186,7 @@ mapdl.finish()
 ###############################################################################
 # Post-processing
 # ~~~~~~~~~~~~~~~
-# Enter post-processing. Compute sound pressure level (SPL).
+# Enter post-processing and read results set
 
 mapdl.post1()
 # Set the current results set to the last set to be read from result file
@@ -230,6 +230,10 @@ n2 = q.node(10, 15, 1)
 n3 = q.node(15, 15, 1)
 n4 = q.node(20, 15, 1)
 n5 = q.node(25, 15, 1)
+
+###############################################################################
+# Post-processing: Compute sound pressure level (SPL)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 en_1 = mapdl.get("EN_1", "NODE", n1, "ENKE")
 en_2 = mapdl.get("EN_2", "NODE", n2, "ENKE")
