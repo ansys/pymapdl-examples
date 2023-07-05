@@ -1,7 +1,7 @@
 How to write a good example?
 ============================
 
-Here are some tips for writing a good example:
+Here are some tips for writing a good example.
 
 Use ``mapdl.convert_script``
 ----------------------------
@@ -15,8 +15,9 @@ run the following commands::
 
 .. warning::
 
-    The ``mapdl.convert_script`` function is still under development.
-    Please, double-check there are no easier way to write the command.
+    The ``mapdl.convert_script`` function is under development and
+    needs to be improved.
+    Please, double-check if there are easier way to write some commands.
 
     For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
 
