@@ -40,4 +40,4 @@ Python facilitates the creation of colorful figures: take advantage
 of that.
 
 Libraries like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
-or `pyvista <pandas_org_>`_ can help you to make nice graphics, tables, or plottings .
+or `pyvista <pandas_org_>`_ can help you to make nice graphics, tables, or plots .
