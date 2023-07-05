@@ -67,9 +67,13 @@ PyMAPDL Examples follows the PEP8 standard as outlined in the `PyAnsys Developme
 <dev_guide_pyansys_>`_ and implements style checking using
 `pre-commit <precommit_>`_.
 
-To ensure your code meets minimum code styling standards, run this code::
+To ensure your code meets minimum code styling standards, first, you need to install
+the ``pre-commit`` library::
 
   pip install pre-commit
+
+Once done, code styling standards can be checked with the following code::
+
   pre-commit run --all-files
 
 You can also install this as a pre-commit hook by running this code::
