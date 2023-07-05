@@ -15,7 +15,7 @@ run the following commands::
 
 .. warning::
 
-    The `convert_script` function is still under development.
+    The ``mapdl.convert_script`` function is still under development.
     Please, double-check there are no easier way to write the command.
 
     For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
@@ -26,18 +26,18 @@ Use Python libraries as much as possible
 The aim of PyMAPDL is to make it possible to create workflows combining
 MAPDL and the Python environment.
 Some MAPDL workflows can be very efficient but mixing it with Python libraries
-can simplifly the code and make it more visual with new plotings.
+can simplify the code and make it more visual with new plots.
 
 Don't hesitate to have a look at the `Python Package Index <pypi_org_>`_
 to discover new Python libraries.
 
 
-Graphics and plotings
----------------------
+Graphics and plots
+------------------
 
-The more visual your example, the better!
-Python facilitates the creation of colorful figures: take advatange
-of that!
+The more visual your example, the better.
+Python facilitates the creation of colorful figures: take advantage
+of that.
 
 Libraries like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
 or `pyvista <pandas_org_>`_ can help you to make nice graphics, tables, or plottings .
