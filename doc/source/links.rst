@@ -4,6 +4,10 @@
 
 .. #Other projects
 .. _dpf_post_docs: https://post.docs.pyansys.com/
+.. _matplotlib_org: _https://matplotlib.org/
+.. _pandas_org: https://pandas.pydata.org/
+.. _pypi_org: https://pypi.org/
+.. _pyvista_org: https://docs.pyvista.org/version/stable/
 
 .. #Pyansys
 .. _pyansys: https://docs.pyansys.com

@@ -88,3 +88,10 @@ This way, it's not possible for you to push code that fails the style checks::
   check for merge conflicts................................................Passed
   debug statements (python)................................................Passed
   Validate GitHub Workflows................................................Passed
+
+
+.. toctree::
+    :hidden:
+    :includehidden:
+
+    write_examples.rst
