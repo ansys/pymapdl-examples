@@ -3,6 +3,7 @@ ansys
 Ansys
 ANSYS
 axisymmetric
+billon
 centerline
 Chao
 Conshohocken
@@ -13,7 +14,9 @@ Eigensolver
 eigensolver
 eigensolvers
 elastoplastic
+equil
 equibiaxial
+filname
 gage
 Gerges
 GPa
@@ -42,11 +45,13 @@ nonaxisymmetric
 nonlinearities
 nonsymmetric
 Ozel
+parm
 Poisson
 pmaroneh
 postprocess
 Postprocess
 Prasanna
+pres
 Prestressed
 prestressed
 Rao
@@ -54,6 +59,8 @@ ROTY
 Schroth
 Srivastava
 stenting
+struc
+STRUC
 substep
 Technology Showcases
 thermomechanical
