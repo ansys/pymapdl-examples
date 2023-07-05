@@ -5,6 +5,7 @@ Here are some tips for writing a good example:
 
 Use ``mapdl.convert_script``
 ----------------------------
+
 If you want to translate a MAPDL script into a PyMAPDL one, you can first
 run the following commands:: 
 
@@ -14,7 +15,7 @@ run the following commands::
 
 .. warning::
 
-    The `convert_script` fonction is still under development.
+    The `convert_script` function is still under development.
     Please, double-check there are no easier way to write the command.
 
     For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
