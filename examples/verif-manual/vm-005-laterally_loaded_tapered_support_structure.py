@@ -1,7 +1,7 @@
 r""".. _ref_vm5_example:
 
-Statically indeterminate reaction force analysis
-------------------------------------------------
+Laterally Loaded Tapered Support Structure
+------------------------------------------
 Problem description:
  - A cantilever beam of thickness :math:`t` and length :math:`l`
    has a depth which tapers uniformly from :math:`d` at the tip

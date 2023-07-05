@@ -20,7 +20,7 @@ Summary of the exposed Verification Manual Examples
 
 .. include:: ./verif-manual/index.rst
    :start-line: 8
-   :end-line: 229
+   :end-line: 314
 
 
 .. === TECHNOLOGY SHOWCASES ===
@@ -46,7 +46,6 @@ which necessitate more resources.
   :start-line: 11
   :end-line: 130
 
-.. === TECHNOLOGY SHOWCASES ===
 
 .. toctree::
     :hidden:
