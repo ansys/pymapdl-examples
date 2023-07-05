@@ -151,6 +151,7 @@ mapdl.d("ALL", "PRES", 0)  # DEFINING THE TOP PORTION OF SOIL AS PERMEABLE
 mapdl.nsel("ALL")
 # selects all element
 mapdl.esel("ALL")
+mapdl.aplot()
 
 # Finish pre-processing processor
 mapdl.finish()
@@ -215,7 +216,7 @@ nd1 = q.node(1.0, 6.0, 0.0)
 
 ###############################################################################
 # Post-processing: Compute pore pressure
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # redirects solver output to a file named "SCRATCH"
 mapdl.run("/OUT,SCRATCH")
 # Specify load set to read from the result file, load step =1, sub-step=16
