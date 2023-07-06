@@ -56,10 +56,6 @@ To build the PyMAPDL Examples documentation locally, in the root directory of th
 Documentation for the latest stable release of PyMAPDL Examples is hosted at
 `PyMAPDL Examples Documentation <pymapdl_examples_docs_>`_.
 
-In the upper right corner of the documentation’s title bar, there is an option for
-switching from viewing the documentation for the latest stable release to viewing
-the documentation for the development version or previously released versions.
-
 Adhere to code style
 --------------------
 
