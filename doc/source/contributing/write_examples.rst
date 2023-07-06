@@ -17,7 +17,7 @@ run the following commands::
 
     The ``mapdl.convert_script`` function is under development and
     needs to be improved.
-    Please, double-check if there are easier way to write some commands.
+    Please, double-check if there are easier ways to write some commands.
 
     For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
 
@@ -29,7 +29,7 @@ MAPDL and the Python environment.
 Some MAPDL workflows can be very efficient but mixing it with Python libraries
 can simplify the code and make it more visual with new plots.
 
-Don't hesitate to have a look at the `Python Package Index <pypi_org_>`_
+Do not hesitate to have a look at the `Python Package Index <pypi_org_>`_
 to discover new Python libraries.
 
 
@@ -41,4 +41,4 @@ Python facilitates the creation of colorful figures: take advantage
 of that.
 
 Libraries like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
-or `pyvista <pandas_org_>`_ can help you to make nice graphics, tables, or plots .
+or `pyvista <pandas_org_>`_ can help you create nice graphics, tables, or plots .
