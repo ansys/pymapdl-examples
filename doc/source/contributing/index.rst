@@ -34,13 +34,13 @@ To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@a
 Python virtual environment
 --------------------------
 
-The use of Python virtual environment is recommended. To create one, run the following commands::
+The use of a Python virtual environment is recommended. To create one, run the following commands::
 
     python -m venv .venv
      .\.venv\Scripts\activate
 
 
-To deactivate it, run::
+To deactivate the virtual environment, run this command::
     
     deactivate
 
@@ -48,7 +48,8 @@ To deactivate it, run::
 Build documentation
 -------------------
 
-To build the PyMAPDL Examples documentation locally, in the root directory of the repository, run::
+To build the PyMAPDL Examples documentation locally, in the root directory of the repository,
+run these commands::
     
     pip install -r .\requirements\requirements_doc.txt
     .\doc\make.bat html
@@ -64,15 +65,15 @@ PyMAPDL Examples follows the PEP8 standard as outlined in the `PyAnsys Developme
 `pre-commit <precommit_>`_.
 
 To ensure your code meets minimum code styling standards, first, you need to install
-the ``pre-commit`` library::
+the ``pre-commit`` library with this command::
 
   pip install pre-commit
 
-Once done, code styling standards can be checked with the following code::
+Once installed, you can run code style checks with this command::
 
   pre-commit run --all-files
 
-You can also install this as a pre-commit hook by running this code::
+You can also install this as a pre-commit hook by running this command::
 
   pre-commit install
 

@@ -7,27 +7,27 @@ Use ``mapdl.convert_script``
 ----------------------------
 
 If you want to translate a MAPDL script into a PyMAPDL one, you can first
-run the following commands:: 
+run these commands:: 
 
     from ansys.mapdl.core import convert_script
     convert_script(path_MAPDL_script)
 
 .. warning::
 
-    The ``mapdl.convert_script`` function is still on beta state, hence it is advised you check its output.
-    Please, double-check if there are easier ways to write some commands.
+    The ``mapdl.convert_script`` method is still in the beta state. You should check its output.
+    There may be easier ways to write some commands.
 
     For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
 
 
 Use Python libraries as much as possible
 ----------------------------------------
-The aim of PyMAPDL is to make possible the creation of workflows combining
+The aim of PyMAPDL is to make it possible to create workflows that combine
 MAPDL and the Python environment.
-Some MAPDL workflows can be very efficient but mixing it with Python libraries
-can simplify the code and make it more visual with new plots.
+Some MAPDL workflows can be very efficient, but mixing them with Python libraries
+can simplify the code and allow you to generate more visually effective plots.
 
-Do not hesitate to have a look at the `Python Package Index <pypi_org_>`_
+Do not hesitate to explore the `Python Package Index <pypi_org_>`_
 to discover new Python libraries.
 
 
@@ -35,7 +35,7 @@ Graphics and plots
 ------------------
 
 The more visual your example is, the better.
-Python facilitates the creation of colorful figures: take advantage
+Python facilitates the creation of sophisticate graphics and plots: take advantage
 of that.
 
 Libraries like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
