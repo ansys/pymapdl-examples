@@ -117,7 +117,7 @@ mapdl.egen(5, 1, 1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot()
+mapdl.eplot(vtk=False)
 
 ###############################################################################
 # Define boundary conditions and loadings
