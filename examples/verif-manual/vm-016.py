@@ -259,7 +259,8 @@ mapdl.finish()
 ###############################################################################
 # Clears the database without restarting.
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-mapdl.db.clear()
+# mapdl.db.clear()
+mapdl.run("/CLEAR,NOSTART")
 
 ###############################################################################
 # Case 2: Using PLANE182 Element Model
