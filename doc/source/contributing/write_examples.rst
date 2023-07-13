@@ -17,7 +17,7 @@ run these commands::
     The ``mapdl.convert_script`` method is still in the beta state. You should check its output.
     There may be easier ways to write some commands.
 
-    For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
+    For example, use ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
 
 
 Use Python libraries as much as possible
