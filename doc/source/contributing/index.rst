@@ -26,7 +26,7 @@ templates:
 * Bug report template
 * Feature request template
 
-If your issue does not fit into one of these categories, create your own issue.
+If your issue does not fit into one of these template categories, create your own issue.
 
 To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
