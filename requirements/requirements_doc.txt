@@ -1,11 +1,11 @@
 #PyMAPDL dependencies
 git+https://github.com/ansys/pymapdl@main
-numpy==1.25.0
+numpy==1.25.1
 nest-asyncio==1.5.6
 pandas==2.0.3
 plotly==5.15.0
 pythreejs==2.4.2
-pyvista==0.39.1
+pyvista==0.40.1
 vtk==9.2.6
 
 # Documentation dependencies
@@ -20,5 +20,5 @@ sphinx-gallery==0.13.0
 sphinx-autobuild==2021.3.14
 sphinx-autodoc-typehints==1.23.3
 sphinx-notfound-page==0.8.3
-panel==1.1.1
+panel==1.2.0
 pypandoc==1.11
