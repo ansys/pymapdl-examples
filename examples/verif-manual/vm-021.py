@@ -298,7 +298,7 @@ data = [target_res, sim_res, np.abs(target_res) / np.abs(sim_res)]
 print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
-title= f"""
+title = f"""
 
 
 F = 0 (unstiffened):

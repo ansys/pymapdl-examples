@@ -181,7 +181,7 @@ row_headers = ["Stress_1 (psi)", "Stress_2 (psi)"]
 
 data = [target_stress, sim_res, np.abs(target_stress) / np.abs(sim_res)]
 
-title= f"""
+title = f"""
 
 ------------------- VM20 RESULTS COMPARISON ---------------------
 

@@ -166,6 +166,10 @@ strss_b = mapdl.get("STRSS_B", "ELEM", 1, "ETAB", "STRS_BEN")
 # Get shear stresses (ETAB: STRS_SHR) for element 1
 strss_t = mapdl.get("STRSS_T", "ELEM", 1, "ETAB", "STRS_SHR")
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Set target values
 target_val = [-2.648, 6366, -3183]
 
@@ -177,18 +181,15 @@ row_headers = ["Deflection (in)", "Stress_Bend (psi)", "Shear Stress (psi)"]
 
 data = [target_val, sim_res, np.abs(target_val) / np.abs(sim_res)]
 
-results = f"""
+title = f"""
 
 ------------------- VM18 RESULTS COMPARISON ---------------------
 
 PIPE18:
 -------
 """
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
 
-print(results)
+print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
@@ -322,7 +323,7 @@ row_headers = ["Deflection (in)", "Stress_Bend (psi)", "Shear Stress (psi)"]
 
 data = [target_val, sim_res, np.abs(target_val) / np.abs(sim_res)]
 
-title= f"""
+title = f"""
 
 PIPE289:
 --------

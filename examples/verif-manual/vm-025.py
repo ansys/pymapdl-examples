@@ -227,6 +227,10 @@ mapdl.plsect("S", "Z", -1)  # Display the SZ stresses in a sectional plot
 mapdl.plsect("S", "X", -1)  # Display the SX stresses in a sectional plot
 mapdl.prsect(-1)  # Print linearized stresses
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Set target values
 target_def = 0.0078666
 target_strss = [-30000, -7778, 0]
@@ -237,11 +241,7 @@ res_def = def_4
 res_strss = [rst_4_c1, rst_6_c1, rst_8_c1]
 res_tst_strss = [tst_4_c1, tst_6_c1, tst_8_c1]
 
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
-
-results = f"""
+title = f"""
 
 ------------------- VM25 RESULTS COMPARISON ---------------------
 
@@ -255,7 +255,7 @@ row_headers = ["Displacement, in (r = 4 in)"]
 data = [
     [target_def, res_def, abs(target_def / res_def)],
 ]
-print(results)
+print(title)
 print(pd.DataFrame(data, row_headers, col_headers))
 
 # Radial stress results comparison
@@ -354,6 +354,10 @@ tst_4_c2 = mapdl.get("TST_4_C2", "NODE", LFT_NODE, "S", "Z")
 rst_x_c2 = mapdl.get("RST_X_C2", "NODE", XI_NODE, "S", "X")
 tst_x_c2 = mapdl.get("TST_X_C2", "NODE", XI_NODE, "S", "Z")
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Set target values
 target_strss = [0, 4753]
 target_tst_strss = [40588, 29436]
@@ -362,7 +366,7 @@ target_tst_strss = [40588, 29436]
 res_strss = [rst_4_c2, rst_x_c2]
 res_tst_strss = [tst_4_c2, tst_x_c2]
 
-results = f"""
+title = f"""
 
 RESULTS FOR CASE Rotation = 1000 rad/sec:
 -----------------------------------------
@@ -376,7 +380,7 @@ row_headers = ["Stress_r, psi (r = 4 in)", "Stress_r, psi (r = 5.43 in)"]
 
 data = [target_strss, res_strss, np.abs(target_strss) / np.abs(res_strss)]
 
-print(results)
+print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 # Tangential stress results comparison
