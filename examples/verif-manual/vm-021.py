@@ -45,6 +45,7 @@ Analysis Assumptions and Modeling Notes:
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
 import pandas as pd
+import numpy as np
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
