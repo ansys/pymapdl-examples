@@ -310,6 +310,10 @@ mapdl.show("close")
 # Set target values
 target_val = [-2.648, 6366, -3183]
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Fill result values
 sim_res = [def_z, strss_b, shear_sxy]
 
@@ -318,16 +322,13 @@ row_headers = ["Deflection (in)", "Stress_Bend (psi)", "Shear Stress (psi)"]
 
 data = [target_val, sim_res, np.abs(target_val) / np.abs(sim_res)]
 
-results = f"""
+title= f"""
 
 PIPE289:
 --------
 """
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
 
-print(results)
+print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
