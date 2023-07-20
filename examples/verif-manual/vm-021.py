@@ -44,8 +44,8 @@ Analysis Assumptions and Modeling Notes:
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 # Launch MAPDL with specified options
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
@@ -288,18 +288,15 @@ F neq 0 (stiffened):
 
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["Z_max, in", "Slope, rad", "M_max , in-lb"]
-data = [
-    [target_res[0], sim_res[0], abs(target_res[0] / sim_res[0])],
-    [target_res[1], sim_res[1], abs(target_res[1] / sim_res[1])],
-    [target_res[2], sim_res[2], abs(target_res[2] / sim_res[2])],
-]
+
+data = [target_res, sim_res, np.abs(target_res) / np.abs(sim_res)]
 
 ###############################################################################
 # Verify the results.
 # ~~~~~~~~~~~~~~~~~~~
 
 print(results)
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 results = f"""
 
@@ -313,11 +310,11 @@ row_headers = ["Z_max, in", "Slope, rad", "M_max , in-lb"]
 data = [
     target_res_strss,
     sim_res_strss,
-    np.abs(target_res_strss)/ np.abs(sim_res_strss)
+    np.abs(target_res_strss) / np.abs(sim_res_strss),
 ]
 
 print(results)
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 
 ###############################################################################
