@@ -46,6 +46,7 @@ Analysis Assumptions and Modeling Notes:
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 import pandas as pd
 
 # Launch MAPDL with specified options
@@ -171,12 +172,10 @@ target_stress = [15000, 29749]
 # Fill result values
 sim_res = [strs_hop, strs_ax]
 
-data = [
-    [target_stress[0], sim_res[0], abs(sim_res[0]) / target_stress[0]],
-    [target_stress[1], sim_res[1], abs(sim_res[1]) / target_stress[1]],
-]
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["Stress_1 (psi)", "Stress_2 (psi)"]
+
+data = [target_stress, sim_res, np.abs(target_stress) / np.abs(sim_res)]
 
 results = f"""
 
@@ -189,7 +188,7 @@ results = f"""
 # ~~~~~~~~~~~~~~~~~~~
 
 print(results)
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
 # Finish the post-processing processor.

@@ -51,6 +51,7 @@ Analysis Assumptions and Modeling Notes:
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 import pandas as pd
 
 # Launching MAPDL with specified settings
@@ -257,41 +258,28 @@ data = [
 print(results)
 print(pd.DataFrame(data, row_headers, col_headers))
 
+# Radial stress results comparison
 row_headers = [
     "Stress_r, psi (r = 4 in)",
     "Stress_r, psi (r = 6 in)",
     "Stress_r, psi (r = 8 in)",
 ]
-data = [
-    [target_strss[0], res_strss[0], abs(target_strss[0] / res_strss[0])],
-    [target_strss[1], res_strss[1], abs(target_strss[1] / res_strss[1])],
-    [target_strss[2], res_strss[2], abs(target_strss[2] / res_strss[2])],
-]
-print(pd.DataFrame(data, row_headers, col_headers))
 
+data = [target_strss, res_strss, np.abs(target_strss) / np.abs(res_strss)]
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
+
+# Tangential stress results comparison
 row_headers = [
     "Stress_t, psi (r = 4 in)",
     "Stress_t, psi (r = 6 in)",
     "Stress_t, psi (r = 8 in)",
 ]
 data = [
-    [
-        target_tst_strss[0],
-        res_tst_strss[0],
-        abs(target_tst_strss[0] / res_tst_strss[0]),
-    ],
-    [
-        target_tst_strss[1],
-        res_tst_strss[1],
-        abs(target_tst_strss[1] / res_tst_strss[1]),
-    ],
-    [
-        target_tst_strss[2],
-        res_tst_strss[2],
-        abs(target_tst_strss[2] / res_tst_strss[2]),
-    ],
+    target_tst_strss,
+    res_tst_strss,
+    np.abs(target_tst_strss) / np.abs(res_tst_strss),
 ]
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 
 ###############################################################################
@@ -382,29 +370,24 @@ RESULTS FOR CASE Rotation = 1000 rad/sec:
 """
 
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
+
+# Radial stress results comparison
 row_headers = ["Stress_r, psi (r = 4 in)", "Stress_r, psi (r = 5.43 in)"]
-data = [
-    [target_strss[0], res_strss[0], abs(target_strss[0] / res_strss[0])],
-    [target_strss[1], res_strss[1], abs(target_strss[1] / res_strss[1])],
-]
+
+data = [target_strss, res_strss, np.abs(target_strss) / np.abs(res_strss)]
 
 print(results)
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
+# Tangential stress results comparison
 row_headers = ["Stress_t, psi (r = 4 in)", "Stress_t, psi (r = 5.43 in)"]
+
 data = [
-    [
-        target_tst_strss[0],
-        res_tst_strss[0],
-        abs(target_tst_strss[0] / res_tst_strss[0]),
-    ],
-    [
-        target_tst_strss[1],
-        res_tst_strss[1],
-        abs(target_tst_strss[1] / res_tst_strss[1]),
-    ],
+    target_tst_strss,
+    res_tst_strss,
+    np.abs(target_tst_strss) / np.abs(res_tst_strss),
 ]
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
 # Finish the post-processing processor.

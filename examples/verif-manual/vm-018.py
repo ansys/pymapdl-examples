@@ -53,6 +53,7 @@ Analysis Assumptions and Modeling Notes:
 
 # Importing the `launch_mapdl` function from the `ansys.mapdl.core` module
 from ansys.mapdl.core import launch_mapdl
+import numpy as np
 import pandas as pd
 
 # Launch MAPDL with specified settings
@@ -171,13 +172,10 @@ target_val = [-2.648, 6366, -3183]
 # Fill result values
 sim_res = [def_z, strss_b, strss_t]
 
-data = [
-    [target_val[0], sim_res[0], abs(sim_res[0] / target_val[0])],
-    [target_val[1], sim_res[1], abs(sim_res[1] / target_val[1])],
-    [target_val[2], sim_res[2], abs(sim_res[2] / target_val[2])],
-]
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["Deflection (in)", "Stress_Bend (psi)", "Shear Stress (psi)"]
+
+data = [target_val, sim_res, np.abs(target_val) / np.abs(sim_res)]
 
 results = f"""
 
@@ -191,7 +189,7 @@ PIPE18:
 # ~~~~~~~~~~~~~~~~~~~
 
 print(results)
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
 # Finish the post-processing processor.
@@ -301,10 +299,13 @@ strs_ben = mapdl.etable("STRS_BEN", "SMISC", 35)
 # Get bending stresses (ETAB: STRS_BEN) for element 1 using ETABLE command
 strss_b = mapdl.get("STRSS_B", "ELEM", 1, "ETAB", "STRS_BEN")
 
+# for graphics displays
+mapdl.show()
 # Plot elemtal solution values for SXY component
 mapdl.plesol("S", "XY")
 # Get minimum shear stress
 shear_sxy = mapdl.get("SHEAR", "PLNSOL", 0, "MIN")
+mapdl.show("close")
 
 # Set target values
 target_val = [-2.648, 6366, -3183]
@@ -312,13 +313,10 @@ target_val = [-2.648, 6366, -3183]
 # Fill result values
 sim_res = [def_z, strss_b, shear_sxy]
 
-data = [
-    [target_val[0], sim_res[0], abs(sim_res[0] / target_val[0])],
-    [target_val[1], sim_res[1], abs(sim_res[1] / target_val[1])],
-    [target_val[2], sim_res[2], abs(sim_res[2] / target_val[2])],
-]
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["Deflection (in)", "Stress_Bend (psi)", "Shear Stress (psi)"]
+
+data = [target_val, sim_res, np.abs(target_val) / np.abs(sim_res)]
 
 results = f"""
 
@@ -330,7 +328,7 @@ PIPE289:
 # ~~~~~~~~~~~~~~~~~~~
 
 print(results)
-print(pd.DataFrame(data, row_headers, col_headers))
+print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
 # Finish the post-processing processor.
