@@ -169,6 +169,10 @@ strs_ax = mapdl.get("STRS_AX", "NODE", 1, "S", 1)
 # Set target values
 target_stress = [15000, 29749]
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Fill result values
 sim_res = [strs_hop, strs_ax]
 
@@ -177,17 +181,12 @@ row_headers = ["Stress_1 (psi)", "Stress_2 (psi)"]
 
 data = [target_stress, sim_res, np.abs(target_stress) / np.abs(sim_res)]
 
-results = f"""
+title= f"""
 
 ------------------- VM20 RESULTS COMPARISON ---------------------
 
 """
-
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
-
-print(results)
+print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
