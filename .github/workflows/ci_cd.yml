@@ -13,8 +13,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.9'
-  RESET_EXAMPLES_CACHE: 3
-  RESET_DOC_BUILD_CACHE: 3
+  RESET_EXAMPLES_CACHE: 1
+  RESET_DOC_BUILD_CACHE: 1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -146,7 +146,7 @@ jobs:
 
       - name: Deploy
         if: contains(github.ref, 'refs/heads/main')
-        uses: JamesIves/github-pages-deploy-action@v4.4.2
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
