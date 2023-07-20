@@ -310,21 +310,9 @@ F = 0 (unstiffened):
 
 row_headers = ["Z_max, in", "Slope, rad", "M_max , in-lb"]
 data = [
-    [
-        target_res_strss[0],
-        sim_res_strss[0],
-        abs(target_res_strss[0] / sim_res_strss[0]),
-    ],
-    [
-        target_res_strss[1],
-        sim_res_strss[1],
-        abs(target_res_strss[1] / sim_res_strss[1]),
-    ],
-    [
-        target_res_strss[2],
-        sim_res_strss[2],
-        abs(target_res_strss[2] / sim_res_strss[2]),
-    ],
+    target_res_strss,
+    sim_res_strss,
+    np.abs(target_res_strss)/ np.abs(sim_res_strss)
 ]
 
 print(results)
