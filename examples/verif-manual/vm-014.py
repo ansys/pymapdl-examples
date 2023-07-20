@@ -118,8 +118,8 @@ mapdl.egen(4, 1, 1)
 # direction at node 5. Apply symmetry boundary condition along z-direction.
 # Then exit prep7 processor.
 #
-# Effectiely, this sets:
-# - :math:`F = 4000 lb`
+# Effectively, this sets:
+#  :math:`F = 4000 lb`
 
 mapdl.d(1, "ALL")  # Fix all degrees of freedom for node 1
 mapdl.f(5, "FY", -4000)  # Apply a negative force FY to node 5
