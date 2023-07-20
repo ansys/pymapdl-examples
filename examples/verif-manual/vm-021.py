@@ -273,11 +273,15 @@ m_mx_c1 = mapdl.get("M_MX_C1", "VARI", 2, "EXTREM", "VMAX")
 target_res = [-0.19945, 0.0032352, -4580.1]
 target_res_strss = [-0.38241, 0.0061185, -8962.7]
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Fill result values
 sim_res = [uz_mx_c1, slope_c1, m_mx_c1]
 sim_res_strss = [uz_mx_c2, slope_c2, m_mx_c2]
 
-results = f"""
+title = f"""
 
 ------------------- VM21 RESULTS COMPARISON ---------------------
 
@@ -291,14 +295,10 @@ row_headers = ["Z_max, in", "Slope, rad", "M_max , in-lb"]
 
 data = [target_res, sim_res, np.abs(target_res) / np.abs(sim_res)]
 
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
-
-print(results)
+print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
-results = f"""
+title= f"""
 
 
 F = 0 (unstiffened):
@@ -313,7 +313,7 @@ data = [
     np.abs(target_res_strss) / np.abs(sim_res_strss),
 ]
 
-print(results)
+print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 
