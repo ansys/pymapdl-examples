@@ -4,9 +4,9 @@ Tie Rod with Lateral Loading
 ----------------------------
 Problem description:
  - A tie rod is subjected to the action of a tensile force F and a uniform lateral load p.
-   Determine the maximum deflection z_max, the slope :math:`\theta` at the left-hand end, and
-   the maximum bending moment M_max. In addition, determine the same three quantities for the
-   unstiffened tie rod (F = 0).
+   Determine the maximum deflection :math:`z_max`, the slope :math:`\theta` at the left-hand end,
+   and the maximum bending moment :math:`M_max`. In addition, determine the same three quantities
+   for the unstiffened tie rod (F = 0).
 
 Reference:
  - S. Timoshenko, Strength of Materials, Part II, Elementary Theory and
@@ -132,7 +132,7 @@ mapdl.sfbeam("ALL", 1, "PRES", 1.79253)
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot(background="w")
+mapdl.eplot()
 
 # Finish pre-processing processor
 mapdl.finish()
@@ -208,7 +208,9 @@ m_mx_c2 = mapdl.get("M_MX_C2", "VARI", 2, "EXTREM", "VMAX")
 # exists post-processing processor
 mapdl.finish()
 
+###############################################################################
 # Set a new title for the analysis
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.title("VM21 TIE ROD WITH LATERAL LOADING STRESS STIFFENING PRESENT")
 
 ###############################################################################

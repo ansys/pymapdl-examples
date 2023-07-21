@@ -120,7 +120,7 @@ mapdl.f(2, "FZ", -50)  # Define load
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot(background="w", vtk=False)
+mapdl.eplot(vtk=False)
 
 # Finish preprocessing processor
 mapdl.finish()
@@ -203,7 +203,11 @@ mapdl.finish()
 mapdl.run("/CLEAR,NOSTART")
 
 ###############################################################################
-# Case 2: Using PIPE289 Element Model
+# Set a new title for the analysis
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mapdl.title("VM18 OUT-OF-PLANE BENDING OF A CURVED BAR Using PIPE289 ELEMENT MODEL")
+
+###############################################################################
 # Switches to the preprocessor (PREP7)
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.prep7()
@@ -257,7 +261,7 @@ mapdl.f(19, "FZ", -50)
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot(background="w", vtk=False)
+mapdl.eplot(vtk=False)
 
 # exists pre-processing processor
 mapdl.finish()

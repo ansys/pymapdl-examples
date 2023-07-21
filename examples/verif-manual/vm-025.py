@@ -185,7 +185,7 @@ mapdl.finish()
 ###############################################################################
 # Post-processing
 # ~~~~~~~~~~~~~~~
-# Enter post-processing for case 1. Compute displacement and stress components.
+# Enter post-processing. Compute displacement and stress components.
 mapdl.post1()
 
 # Set the load step 1 and substep to 1
@@ -288,11 +288,11 @@ print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 mapdl.finish()
 
 ###############################################################################
-# Solve using rotation about the axis
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-mapdl.run("C*** ROTATION ABOUT AXIS")
+# Set a new title for the analysis
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+mapdl.title("VM25 Stresses in a Long Cylinder - Rotation About Axis")
 
-# Resume the FE "MODEL" save previously
+# Resume the Finite Element (FE) "MODEL" save previously
 mapdl.resume("MODEL")
 
 ###############################################################################
@@ -300,6 +300,9 @@ mapdl.resume("MODEL")
 # ~~~~~
 # Enter solution mode and solve the system.
 mapdl.slashsolu()
+
+# Print all results
+mapdl.outpr("", "ALL")
 
 ###############################################################################
 # Define boundary conditions
@@ -323,8 +326,6 @@ mapdl.nsel("ALL")  # Select all nodes
 # Rotate the cylinder with an angular velocity of 1000 RAD/SEC
 mapdl.omega("", 1000)
 
-# Print all results
-mapdl.outpr("", "ALL")
 # Solve the problem in load step 2 - centrifugal loading
 mapdl.solve()
 # exists solution processor
@@ -333,7 +334,7 @@ mapdl.finish()
 ###############################################################################
 # Post-processing
 # ~~~~~~~~~~~~~~~
-# Enter post-processing for case 2. Compute displacement and stress components.
+# Enter post-processing. Compute displacement and stress components.
 mapdl.post1()
 
 ###############################################################################
