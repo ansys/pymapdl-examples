@@ -312,12 +312,12 @@ mapdl.plesol("S", "XY")
 shear_sxy = mapdl.get("SHEAR", "PLNSOL", 0, "MIN")
 mapdl.show("close")
 
-# Set target values
-target_val = [-2.648, 6366, -3183]
-
 ###############################################################################
 # Verify the results.
 # ~~~~~~~~~~~~~~~~~~~
+
+# Set target values
+target_val = [-2.648, 6366, -3183]
 
 # Fill result values
 sim_res = [def_z, strss_b, shear_sxy]
