@@ -13,8 +13,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.9'
-  RESET_EXAMPLES_CACHE: 4
-  RESET_DOC_BUILD_CACHE: 4
+  RESET_EXAMPLES_CACHE: 5
+  RESET_DOC_BUILD_CACHE: 5
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -305,7 +305,7 @@ strs_ben = mapdl.etable("STRS_BEN", "SMISC", 35)
 strss_b = mapdl.get("STRSS_B", "ELEM", 1, "ETAB", "STRS_BEN")
 
 # for graphics displays
-mapdl.show()
+mapdl.show(option="REV")
 # Plot elemtal solution values for SXY component
 mapdl.plesol("S", "XY")
 # Get minimum shear stress

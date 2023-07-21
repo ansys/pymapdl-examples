@@ -166,12 +166,12 @@ strs_hop = mapdl.get("STRS_HOP", "NODE", 1, "S", 2)
 # Get axial stresses at node 1
 strs_ax = mapdl.get("STRS_AX", "NODE", 1, "S", 1)
 
-# Set target values
-target_stress = [15000, 29749]
-
 ###############################################################################
 # Verify the results.
 # ~~~~~~~~~~~~~~~~~~~
+
+# Set target values
+target_stress = [15000, 29749]
 
 # Fill result values
 sim_res = [strs_hop, strs_ax]
