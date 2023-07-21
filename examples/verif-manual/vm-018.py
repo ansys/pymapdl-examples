@@ -5,8 +5,8 @@ Out-of-Plane Bending of a Curved Bar
 Problem description:
  - A portion of a horizontal circular ring, built-in at A, is loaded by a vertical (Z)
    load F applied at the end B. The ring has a solid circular cross-section of diameter d.
-   Determine the deflection :math:`\delta` at end B, the maximum bending stress :math:`\sigma_Bend`,
-   and the maximum torsional shear stress τ.
+   Determine the deflection :math:`\delta` at end B, the maximum bending
+   stress :math:`\sigma_{Bend}` , and the maximum torsional shear stress τ.
 
 Reference:
  - S. Timoshenko, Strength of Materials, Part I, Elementary Theory and
@@ -37,7 +37,7 @@ Material properties:
 Geometric properties:
  - :math:`r = 100 in`
  - :math:`d = 2 in`
- - :math:`\thetha = 90 degree`
+ - :math:`\theta = 90°`
 
 Loading:
  - :math:`F = 50 lb`
@@ -90,7 +90,7 @@ mapdl.r(1, 2, 1, 100)
 # Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material and its type (a single material), Young's modulus of 30e6
-# and Poisson's ratio PRXY of 0.3 is specified.
+# and Poisson's ratio NUXY of 0.3 is specified.
 mapdl.mp("EX", 1, 30e6)
 mapdl.mp("NUXY", 1, 0.3)
 
@@ -120,7 +120,7 @@ mapdl.f(2, "FZ", -50)  # Define load
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot(vtk=False)
+mapdl.eplot(background="w", vtk=False)
 
 # Finish preprocessing processor
 mapdl.finish()
@@ -257,7 +257,7 @@ mapdl.f(19, "FZ", -50)
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot(vtk=False)
+mapdl.eplot(background="w", vtk=False)
 
 # exists pre-processing processor
 mapdl.finish()

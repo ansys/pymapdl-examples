@@ -4,11 +4,11 @@ Stresses in a Long Cylinder
 ---------------------------
 Problem description:
  - A long thick-walled cylinder is initially subjected to an internal pressure p.
-   Determine the radial displacement :math:`\delta_r`at the inner surface, the
-   radial stress :math:`\sigma_r`, and tangential stress :math:`\sigma_t`, at the
+   Determine the radial displacement :math:`\delta_r` at the inner surface, the
+   radial stress :math:`\sigma_r` , and tangential stress :math:`\sigma_t` , at the
    inner and outer surfaces and at the middle wall thickness. Internal pressure is then
    removed and the cylinder is subjected to a rotation ω about its center line. Determine
-   the radial :math:`\sigma_r`and tangential :math:`\sigma_t`stresses at the inner wall
+   the radial :math:`\sigma_r` and tangential :math:`\sigma_t` stresses at the inner wall
    and at an interior point located at r = Xi.
 
 Reference:
@@ -159,7 +159,7 @@ mapdl.sf("", "PRES", 1e-10)
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot()
+mapdl.eplot(background="w")
 
 # Finish the pre-processing processor
 mapdl.finish()
@@ -305,7 +305,7 @@ mapdl.slashsolu()
 # Define boundary conditions
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Apply a displacement boundary condition in the vertical direction (UY) to all nodes.
-# Rotate the cylinder with an angular velocity of 1000 RAD/SEC. Also, apply dummy
+# Rotate the cylinder with an angular velocity of 1000 rad/sec. Also, apply dummy
 # pressure for surface printout. Then exit solution processor.
 
 mapdl.nsel(

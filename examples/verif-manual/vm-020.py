@@ -35,7 +35,7 @@ Loading:
 
 Analysis Assumptions and Modeling Notes:
  - An arbitrary axial length is selected. Since the problem is axisymmetric, only a one element
-   sector is needed. A small angle :math:`\thetha` = 10° is used for approximating the circular
+   sector is needed. A small angle :math:`\theta` = 10° is used for approximating the circular
    boundary with a straight-sided element. Nodal coupling is used at the boundaries. An axial
    traction of 15,000 psi is applied to the edge of the element to simulate the closed-end effect.
    The internal pressure is applied as an equivalent negative pressure on the exterior (face 1)
@@ -87,7 +87,7 @@ mapdl.secdata(1, 1)  # Define section data
 # Define material
 # ~~~~~~~~~~~~~~~
 # Set up the material and its type (a single material), Young's modulus of 30e6
-# and Poisson's ratio PRXY of 0.3 is specified.
+# and Poisson's ratio NUXY of 0.3 is specified.
 
 mapdl.mp("EX", 1, 30e6)  # Define modulus of elasticity
 mapdl.mp("NUXY", 1, 0.3)  # Define Poisson's ratio
@@ -133,7 +133,7 @@ mapdl.sfe(1, 1, "PRES", "", -500)  # Apply internal pressure on elements
 # Selects all entities
 mapdl.allsel()
 # Element plot
-mapdl.eplot()
+mapdl.eplot(background="w")
 
 # Finish the preprocessing steps
 mapdl.finish()
