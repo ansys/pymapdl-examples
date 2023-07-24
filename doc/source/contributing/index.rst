@@ -26,7 +26,7 @@ templates:
 * Bug report template
 * Feature request template
 
-If your issue does not fit into one of these categories, create your own issue.
+If your issue does not fit into one of these template categories, create your own issue.
 
 To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
@@ -34,7 +34,8 @@ To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@a
 Python virtual environment
 --------------------------
 
-The use of a Python virtual environment is recommended. To create one, run the following commands::
+The use of a Python `virtual environment <https://docs.python.org/3/library/venv.html>`_ is recommended.
+To create one, run the following commands::
 
     python -m venv .venv
      .\.venv\Scripts\activate
@@ -48,7 +49,7 @@ To deactivate the virtual environment, run this command::
 Build documentation
 -------------------
 
-To build the PyMAPDL Examples documentation locally, in the root directory of the repository,
+To build the documentation for PyMAPDL Examples locally, in the root directory of the repository,
 run these commands::
     
     pip install -r .\requirements\requirements_doc.txt
@@ -64,8 +65,9 @@ PyMAPDL Examples follows the PEP8 standard as outlined in the `PyAnsys Developme
 <dev_guide_pyansys_>`_ and implements style checking using
 `pre-commit <precommit_>`_.
 
-To ensure your code meets minimum code styling standards, first, you need to install
-the ``pre-commit`` library with this command::
+``pre-commit`` is a multi-language package manager for pre-commit hooks. To ensure
+that your code meets minimum code styling standards, install ``pre-commit`` with
+this command::
 
   pip install pre-commit
 
