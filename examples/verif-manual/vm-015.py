@@ -124,7 +124,7 @@ mapdl.finish()
 ###############################################################################
 # Solve
 # ~~~~~
-# Enter solution mode and solve the system.
+# Enter solution mode and solve the system for three load steps.
 
 mapdl.slashsolu()
 
@@ -153,8 +153,8 @@ mapdl.sfe("ALL", 1, "PRES", "", 6)  # Surface Pressure load = 6 PSI on all eleme
 # start solve for 1st load case
 mapdl.solve()
 
-# Apply boundary conditions and loads for Load CASE 2
-mapdl.run("C***  CASE 2 - CONCENTRATED CENTER LOADING - CLAMPED EDGE")
+# Apply boundary conditions and loads for Load Case 2
+# Load Case 2: Concentrated Center Loading - Clamped Edge
 mapdl.f(1, "FY", -7539.82)  # apply concentrated force FY on node 1
 mapdl.sfe(
     "ALL", 1, "PRES", "", 0
@@ -163,8 +163,8 @@ mapdl.sfe(
 # start solve for 2nd load case
 mapdl.solve()
 
-# Apply boundary conditions and loads for Load CASE 3
-mapdl.run("C***  CASE 3 - UNIFORM LOADING - SIMPLY SUPPORTED EDGE")
+# Apply boundary conditions and loads for Load Case 3
+# Load Case 3: Uniform Loading - Simply Supported Edge
 mapdl.ddele(11, "ROTZ")  # Delete clamped boundary condition constraint
 mapdl.f(1, "FY")  # apply nodal force of magnitude "0"
 mapdl.sfe("ALL", 1, "PRES", "", 1.5)  # elemental surface pressure load = 1.5 PSI
@@ -244,6 +244,10 @@ mapdl.etable("STRS", "S", "X")
 # using *get command extracting elemental stress via ETAB
 strss_c3 = mapdl.get("STRSS_C3", "ELEM", 1, "ETAB", "STRS")
 
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
+
 # Set target values
 target_def = [-0.08736, -0.08736, -0.08904]
 target_strss = [7200, 3600, 2970]
@@ -252,15 +256,11 @@ target_strss = [7200, 3600, 2970]
 res_def = [def_c1, def_c2, def_c3]
 res_strss = [strss_c1, strss_c2, strss_c3]
 
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
-
-results = f"""
+title = f"""
 
 ------------------- VM15 RESULTS COMPARISON ---------------------
 """
-print(results)
+print(title)
 
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["DEFLECTION (in)", "MAX STRESS (psi)"]
@@ -271,13 +271,13 @@ for lc in range(len(res_def)):
         [target_strss[lc], abs(res_strss[lc]), abs(target_strss[lc] / res_strss[lc])],
     ]
 
-    results = f"""
+    title = f"""
 
 RESULTS FOR CASE {lc+1:1d}:
 -------------------
 
     """
-    print(results)
+    print(title)
     print(pd.DataFrame(data, row_headers, col_headers))
 
 

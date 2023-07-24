@@ -69,9 +69,9 @@ mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2"
 mapdl.title("VM16 BENDING OF A SOLID BEAM (PLANE ELEMENTS)")
 
 ###############################################################################
-# Case 1: Using PLANE42 Element Model
+# Case 1: Solve Using PLANE42 Element Model.
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Enter the model creation prep7 preprocessor
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.prep7(mute=True)
 
 ###############################################################################
@@ -205,10 +205,19 @@ u2 = mapdl.get("U2", "NODE", 16, "U", "Y")
 mapdl.graphics("POWER")  # Activates the graphics mode for power graphics
 mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
+
+# for graphics displays
+mapdl.show(option="REV")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Retrieves the maximum bending stress from the plane stress plot
 bend_stress2 = mapdl.get("BEND_STRESS2", "PLNSOL", 0, "MAX")
+
+mapdl.show("close")
+
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = [0.00500, 0.00500]
@@ -218,18 +227,14 @@ target_strss = [3000, 4050]
 res_def = [u1, u2]
 res_strss = [bend_stress1, bend_stress2]
 
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
-
-results = f"""
+title = f"""
 
 ------------------- VM16 RESULTS COMPARISON ---------------------
 
 PLANE42
 =======
 """
-print(results)
+print(title)
 
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["Deflection (in)", "Bending Stress (psi)"]
@@ -240,13 +245,13 @@ for lc in range(len(res_def)):
         [target_strss[lc], abs(res_strss[lc]), abs(target_strss[lc] / res_strss[lc])],
     ]
 
-    results = f"""
+    title = f"""
 
 RESULTS FOR CASE {lc+1:1d}:
 -------------------
 
     """
-    print(results)
+    print(title)
     print(pd.DataFrame(data, row_headers, col_headers))
 
 ###############################################################################
@@ -260,9 +265,9 @@ mapdl.finish()
 mapdl.run("/CLEAR,NOSTART")
 
 ###############################################################################
-# Case 2: Using PLANE182 Element Model
+# Case 2: Solve Using PLANE182 Element Model
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Switches to the preprocessor (PREP7)
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.prep7()
 
 ###############################################################################
@@ -310,7 +315,7 @@ mapdl.egen(5, 1, 1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot()
+mapdl.eplot(vtk=False)
 
 ###############################################################################
 # Define boundary conditions and loadings
@@ -356,10 +361,14 @@ u1 = mapdl.get("U1", "NODE", 16, "U", "Y")
 mapdl.graphics("POWER")  # Activates the graphics mode for power graphics
 mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
+
+# for graphics displays
+mapdl.show(option="REV")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Retrieves the maximum bending stress from the plane stress plot
 bend_stress1 = mapdl.get("BEND_STRESS1", "PLNSOL", 0, "MAX")
+mapdl.show("close")
 
 # exists solution processor for case 1
 mapdl.finish()
@@ -398,10 +407,18 @@ u2 = mapdl.get("U2", "NODE", 16, "U", "Y")
 mapdl.graphics("POWER")  # Activates the graphics mode for power graphics
 mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
+
+# for graphics displays
+mapdl.show(option="REV")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Retrieves the maximum bending stress from the plane stress plot
 bend_stress2 = mapdl.get("BEND_STRESS2", "PLNSOL", 0, "MAX")
+mapdl.show("close")
+
+###############################################################################
+# Verify the results.
+# ~~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = [0.00500, 0.00500]
@@ -411,16 +428,12 @@ target_strss = [3000, 4050]
 res_def = [u1, u2]
 res_strss = [bend_stress1, bend_stress2]
 
-###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
-
-results = f"""
+title = f"""
 
 PLANE182
 ========
 """
-print(results)
+print(title)
 
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["Deflection (in)", "Bending Stress (psi)"]
@@ -431,13 +444,13 @@ for lc in range(len(res_def)):
         [target_strss[lc], abs(res_strss[lc]), abs(target_strss[lc] / res_strss[lc])],
     ]
 
-    results = f"""
+    title = f"""
 
 RESULTS FOR CASE {lc+1:1d}:
 -------------------
 
     """
-    print(results)
+    print(title)
     print(pd.DataFrame(data, row_headers, col_headers))
 
 
