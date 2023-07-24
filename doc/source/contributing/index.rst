@@ -55,8 +55,6 @@ run these commands::
     pip install -r .\requirements\requirements_doc.txt
     .\doc\make.bat html
 
-Documentation for the latest stable release of PyMAPDL Examples is hosted at
-`PyMAPDL Examples Documentation <pymapdl_examples_docs_>`_.
 
 Adhere to code style
 --------------------
