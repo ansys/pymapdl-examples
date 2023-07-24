@@ -13,8 +13,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.9'
-  RESET_EXAMPLES_CACHE: 6
-  RESET_DOC_BUILD_CACHE: 6
+  RESET_EXAMPLES_CACHE: 0
+  RESET_DOC_BUILD_CACHE: 0
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -111,21 +111,21 @@ jobs:
           docker pull ghcr.io/ansys/dpf-core:22.2dev
           docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
       
-      - name: "Cache Verification Manual examples"
-        uses: actions/cache@v3
-        with:
-          path: doc/source/verif-manual
-          key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
-          restore-keys: |
-            Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}
+      # - name: "Cache Verification Manual examples"
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: doc/source/verif-manual
+      #     key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
+      #     restore-keys: |
+      #       Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}
 
-      - name: "Cache docs build directory"
-        uses: actions/cache@v3
-        with:
-          path: doc/_build
-          key: doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
-          restore-keys: |
-            doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
+      # - name: "Cache docs build directory"
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: doc/_build
+      #     key: doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
+      #     restore-keys: |
+      #       doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v4
