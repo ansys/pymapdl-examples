@@ -120,7 +120,8 @@ mapdl.egen(5, 1, 1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot(background="w")
+mapdl.eplot(vtk=False)
+# mapdl.eplot(background="w")
 
 ###############################################################################
 # Define boundary conditions and loadings
