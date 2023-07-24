@@ -5,11 +5,11 @@ Bending of a Circular Plate Using Axisymmetric Shell Elements
 Problem description:
  - A flat circular plate of radius r and thickness t is subject to
    various edge constraints and surface loadings. Determine the
-   deflection :math:`\delta` at the middle and the maximum stress :math:`\sigma_max`
+   deflection :math:`\delta` at the middle and the maximum stress :math:`\sigma_{max}`
    for each case.
-   Case 1: Uniform loading P, clamped edge.
-   Case 2: Concentrated center loading F, clamped edge.
-   Case 3: Uniform loading P/4, simply supported edge.
+    \subsection{Case 1: Uniform loading P, clamped edge.}
+    \subsection{Case 2: Concentrated center loading F, clamped edge.}
+    \subsection{Case 3: Uniform loading P/4, simply supported edge.}
 
 Reference:
  - S. Timoshenko, Strength of Materials, Part II, Elementary Theory and
@@ -31,11 +31,11 @@ Material properties:
  - :math:`\mu = 0.3`
 
 Geometric properties:
- - :math:`r = 40 in`
- - :math:`t = 1 in`
+ - :math:`r = 40.0 in`
+ - :math:`t = 1.0 in`
 
 Loading:
- - :math:`P = 6 psi`
+ - :math:`P = 6.0 psi`
  - :math:`F = 7,539.82 lb`
 
 Analysis Assumptions and Modeling Notes:

@@ -3,11 +3,12 @@ r""".. _ref_vm16:
 Bending of a Solid Beam (Plane Elements)
 ----------------------------------------
 Problem description:
- - A beam of length and height h is built-in at one end and loaded at the free end with:
-   Case 1: a moment M (END MOMENT, ROARK, PAGE 106, NO. 9)
-   Case 2: a shear force F (END LOAD, ROARK, PAGE 104, NO. 1)
+ - A beam of length :math:`l` and height :math:`h` is built-in at one end and loaded at the
+   free end with:
+    \subsection{Case 1: a moment M}
+    \subsection{Case 2: a shear force F}
    For each case, determine the deflection :math:`\delta` at the free end and the bending
-   stress :math:`\sigma_bend` a distance d from the wall at the outside fiber.
+   stress :math:`\sigma_{Bend}` a distance d from the wall at the outside fiber.
 
 Reference:
  - Formulas for Stress and Strain, R. J. Roark, 4th Edition, McGraw-Hill Book Co., Inc.,
@@ -30,12 +31,12 @@ Material properties:
 
 Geometric properties:
  - :math:`l = 10 in`
- - :math:`h = 2 in`
- - :math:`d = 1 in`
+ - :math:`h = 2.0 in`
+ - :math:`d = 1.0 in`
 
 Loading:
  - Case 1, :math:`M = 2000 in-lb`
- - Case 2,:math:`F = 300 lb`
+ - Case 2, :math:`F = 300 lb`
 
 Analysis Assumptions and Modeling Notes:
  - The stiffness matrix formed in the first load step is also used in the second
@@ -117,7 +118,7 @@ mapdl.egen(5, 1, 1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot(vtk=False)
+mapdl.eplot(background="w")
 
 ###############################################################################
 # Define boundary conditions and loadings
@@ -317,7 +318,7 @@ mapdl.egen(5, 1, 1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot(vtk=False)
+mapdl.eplot(background="w")
 
 ###############################################################################
 # Define boundary conditions and loadings
