@@ -5,8 +5,10 @@ Bending of a Solid Beam (Plane Elements)
 Problem description:
  - A beam of length :math:`l` and height :math:`h` is built-in at one end and loaded at the
    free end with:
-    \subsection{Case 1: a moment M}
-    \subsection{Case 2: a shear force F}
+   \begin{itemize}
+      \item Case 1: a moment :math:`M`.
+      \item Case 2: a shear force :math:`F`.
+   \end{itemize}
    For each case, determine the deflection :math:`\delta` at the free end and the bending
    stress :math:`\sigma_{Bend}` a distance d from the wall at the outside fiber.
 
