@@ -20,15 +20,15 @@ run these commands::
     For example, prefer using ``mapdl.eplot()`` rather than ``mapdl.run("EPLOT")``.
 
 
-Use Python libraries as much as possible
-----------------------------------------
+Use Python packages as much as possible
+---------------------------------------
 The aim of PyMAPDL is to make it possible to create workflows that combine
 MAPDL and the Python environment.
-Some MAPDL workflows can be very efficient, but mixing them with Python libraries
+Some MAPDL workflows can be very efficient, but mixing them with Python packages
 can simplify the code and allow you to generate more visually effective plots.
 
 Do not hesitate to explore the `Python Package Index <pypi_org_>`_
-to discover new Python libraries.
+to discover new Python packages.
 
 
 Graphics and plots
@@ -38,5 +38,5 @@ The more visual your example is, the better.
 Python facilitates the creation of sophisticate graphics and plots: take advantage
 of that.
 
-Libraries like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
+Packages like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
 or `pyvista <pandas_org_>`_ can help you create nice graphics, tables, or plots .
