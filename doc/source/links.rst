@@ -23,7 +23,6 @@
 .. _pymapdl_examples: https://mapdl.docs.pyansys.com/examples/index.html
 
 .. #PyMAPDL Examples
-.. _pymapdl_examples_docs: https://examples.mapdl.docs.pyansys.com/index.html
 .. _pymapdl_examples_issues:https://github.com/ansys/pymapdl-examples/issues
 
 .. # Examples
