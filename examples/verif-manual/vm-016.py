@@ -5,10 +5,10 @@ Bending of a Solid Beam (Plane Elements)
 Problem description:
  - A beam of length :math:`l` and height :math:`h` is built-in at one end and loaded at the
    free end with:
-   \begin{itemize}
-      \item Case 1: a moment :math:`M`.
-      \item Case 2: a shear force :math:`F`.
-   \end{itemize}
+
+   * Case 1: a moment :math:`M`.
+   * Case 2: a shear force :math:`F`.
+
    For each case, determine the deflection :math:`\delta` at the free end and the bending
    stress :math:`\sigma_{Bend}` a distance d from the wall at the outside fiber.
 
@@ -120,8 +120,7 @@ mapdl.egen(5, 1, 1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot(vtk=False)
-# mapdl.eplot(background="w")
+mapdl.eplot(background="w")
 
 ###############################################################################
 # Define boundary conditions and loadings
@@ -169,7 +168,7 @@ mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
 
 # for graphics displays
-mapdl.show(option="REV")
+mapdl.show(option="REV", fname="png")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Get maximum bending stress for case 1
@@ -214,7 +213,7 @@ mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
 
 # for graphics displays
-mapdl.show(option="REV")
+mapdl.show(option="REV", fname="png")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Retrieves the maximum bending stress from the plane stress plot
@@ -369,7 +368,7 @@ mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
 
 # for graphics displays
-mapdl.show(option="REV")
+mapdl.show(option="REV", fname="png")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Retrieves the maximum bending stress from the plane stress plot
@@ -415,7 +414,7 @@ mapdl.eshape(1)  # Display element shape
 mapdl.view(1, 1, 1, 1)  # Set the viewing options
 
 # for graphics displays
-mapdl.show(option="REV")
+mapdl.show(option="REV", fname="png")
 mapdl.plnsol("S", "X")  # Plot bending stress along the X-axis
 
 # Retrieves the maximum bending stress from the plane stress plot

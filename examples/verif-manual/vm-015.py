@@ -7,11 +7,10 @@ Problem description:
    various edge constraints and surface loadings. Determine the
    deflection :math:`\delta` at the middle and the maximum stress :math:`\sigma_{max}`
    for each case.
-   \begin{itemize}
-      \item Case 1: Uniform loading :math:`P`, clamped edge.
-      \item Case 2: Concentrated center loading :math:`F`, clamped edge.
-      \item Case 3: Uniform loading :math:`\frac{P}{4}`, simply supported edge.
-   \end{itemize}
+
+   * Case 1: Uniform loading :math:`P`, clamped edge.
+   * Case 2: Concentrated center loading :math:`F`, clamped edge.
+   * Case 3: Uniform loading :math:`\frac{P}{4}`, simply supported edge.
 
 Reference:
  - S. Timoshenko, Strength of Materials, Part II, Elementary Theory and
