@@ -176,11 +176,11 @@ cylindrical shape tool, as shown in the following figure:
     :hide-code:
     
     # Plotting geometry
-    p = pyvista.Plotter()
-    p.background_color='white'
-    for each in mapdl.geometry.areas():
-        p.add_mesh(each, show_edges=False, show_scalar_bar=False, style='surface', color='grey')
-    p.show()
+    # p = pyvista.Plotter()
+    # p.background_color='white'
+    # for each in mapdl.geometry.areas():
+    #     p.add_mesh(each, show_edges=False, show_scalar_bar=False, style='surface', color='grey')
+    # p.show()
 
 
 **Figure 28.1: 3-D model of workpiece and tool**
@@ -759,24 +759,24 @@ to the backing plate.
 .. jupyter-execute:: 
     :hide-code:
 
-    pl = pyvista.Plotter()
+    # pl = pyvista.Plotter()
 
-    mapdl.allsel()
-    mapdl.asel('u', 'loc', 'z', -t)
+    # mapdl.allsel()
+    # mapdl.asel('u', 'loc', 'z', -t)
 
-    areas = mapdl.geometry.areas()
-    for each_area in areas:
-        pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
-                    style='surface', color='red')
+    # areas = mapdl.geometry.areas()
+    # for each_area in areas:
+    #     pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
+    #                 style='surface', color='red')
 
-    mapdl.asel('s', 'loc', 'z', -t)
+    # mapdl.asel('s', 'loc', 'z', -t)
 
-    areas = mapdl.geometry.areas()
-    for each_area in areas:
-        pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
-                    style='surface', color='yellow')
-    
-    pl.show()
+    # areas = mapdl.geometry.areas()
+    # for each_area in areas:
+    #     pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
+    #                 style='surface', color='yellow')
+    # 
+    # pl.show()
 
 **Figure 28.6: Thermal boundary conditions.**
 Convection loads (:red-text:`red`) and conduction loads (:yellow-text:`yellow`)
