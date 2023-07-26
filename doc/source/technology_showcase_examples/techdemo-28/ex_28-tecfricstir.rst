@@ -765,13 +765,14 @@ to the backing plate.
 
     mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
                     style='surface', color='red')
-
+    pl.show()
+    
     mapdl.asel('s', 'loc', 'z', -t)
 
     mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
                     style='surface', color='yellow')
-    
     pl.show()
+
 
 **Figure 28.6: Thermal boundary conditions.**
 Convection loads (:red-text:`red`) and conduction loads (:yellow-text:`yellow`)
