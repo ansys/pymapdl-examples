@@ -177,6 +177,7 @@ cylindrical shape tool, as shown in the following figure:
 
     # Plotting geometry
     p = pyvista.Plotter()
+    p.background_color='white'
     mapdl.geometry.areas.plot()
     p.show()
 
