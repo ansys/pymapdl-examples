@@ -762,16 +762,12 @@ to the backing plate.
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
 
-    areas = mapdl.geometry.areas()
-    for each_area in areas:
-        pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
+    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
                     style='surface', color='red')
 
     mapdl.asel('s', 'loc', 'z', -t)
 
-    areas = mapdl.geometry.areas()
-    for each_area in areas:
-        pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
+    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
                     style='surface', color='yellow')
     
     pl.show()
