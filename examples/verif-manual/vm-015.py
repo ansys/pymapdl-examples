@@ -117,7 +117,7 @@ mapdl.egen(10, 1, -1)
 # select all entities
 mapdl.allsel()
 # element plot
-mapdl.eplot()
+mapdl.eplot(background="w")
 
 # Finish the pre-processing processor
 mapdl.finish()
