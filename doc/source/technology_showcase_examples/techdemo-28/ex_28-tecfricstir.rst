@@ -174,12 +174,10 @@ cylindrical shape tool, as shown in the following figure:
 
 .. jupyter-execute:: 
     :hide-code:
-    
+
     # Plotting geometry
     p = pyvista.Plotter()
-    p.background_color='white'
-    for each in mapdl.geometry.areas():
-        p.add_mesh(each, show_edges=False, show_scalar_bar=False, style='surface', color='grey')
+    mapdl.geometry.areas.plot()
     p.show()
 
 
