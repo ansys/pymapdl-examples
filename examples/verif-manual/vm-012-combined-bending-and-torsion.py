@@ -174,9 +174,11 @@ mapdl.get("SHEAR", "PLNSOL", 0, "MAX")
 # ~~~~~~~~~~~~~~~
 
 p_stress = mapdl.get("P_STRESS", "PLNSOL", 0, "MAX")
+mapdl.show("png")
 mapdl.plesol("S", "INT")
 shear = mapdl.get("SHEAR", "PLNSOL", 0, "MAX")
 p_trs = shear / 2
+mapdl.show("close")
 
 # Fill the array with target values
 target_p_stress = 7527
