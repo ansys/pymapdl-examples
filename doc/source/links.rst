@@ -24,7 +24,7 @@
 .. _pymapdl_examples: https://mapdl.docs.pyansys.com/examples/index.html
 
 .. #PyMAPDL Examples
-.. _pymapdl_examples_issues:https://github.com/ansys/pymapdl-examples/issues
+.. _pymapdl_examples_issues: https://github.com/ansys/pymapdl-examples/issues/
 
 .. # Examples
 .. _examples_intro: https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html
