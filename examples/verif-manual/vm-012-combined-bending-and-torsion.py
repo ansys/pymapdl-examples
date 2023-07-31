@@ -153,7 +153,7 @@ mapdl.slashsolu()
 mapdl.outpr("BASIC", 1)
 mapdl.solve()
 mapdl.finish()
-    
+
 ###############################################################################
 # Post-processing
 # ~~~~~~~~~~~~~~~
@@ -179,8 +179,8 @@ p_trs = shear / 2
 
 
 # Fill the array with target values
-target_p_stress = 7527.
-target_p_trs = 3777.
+target_p_stress = 7527.0
+target_p_trs = 3777.0
 
 data = [
     [target_p_stress, p_stress, abs(p_stress / target_p_stress)],
