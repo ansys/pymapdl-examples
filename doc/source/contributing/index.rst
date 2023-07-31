@@ -34,7 +34,7 @@ To reach the project support team, email `pyansys.core@ansys.com <pyansys.core@a
 Python virtual environment
 --------------------------
 
-The use of a Python `virtual environment <https://docs.python.org/3/library/venv.html>`_ is recommended.
+The use of a Python `virtual environment <venv_>`_ is recommended.
 To create one, run the following commands::
 
     python -m venv .venv

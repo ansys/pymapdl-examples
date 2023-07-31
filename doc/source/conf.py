@@ -33,6 +33,8 @@ os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
 html_theme_options = {
     "github_url": "https://github.com/ansys/pymapdl-examples",
     "show_prev_next": False,
+    "collapse_navigation": True,
+    "use_edit_page_button": True,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
