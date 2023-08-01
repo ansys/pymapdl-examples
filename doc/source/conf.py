@@ -15,6 +15,11 @@ copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = "0.1.dev0"
 
+REPOSITORY_NAME = "pymapdl-examples"
+USERNAME = "ansys"
+BRANCH = "main"
+DOC_PATH = "doc/source"
+
 # Select desired logo, theme, and declare the html title
 html_logo = logo
 html_favicon = ansys_favicon
@@ -31,8 +36,10 @@ os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/ansys/pymapdl-examples",
+    "github_url": f"https://github.com/{USERNAME}/{REPOSITORY_NAME}",
     "show_prev_next": False,
+    "collapse_navigation": True,
+    "use_edit_page_button": True,
     "show_breadcrumbs": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
@@ -42,10 +49,18 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "Support",
-            "url": "https://github.com/ansys/pymapdl-examples/discussions",
+            "url": f"https://github.com/{USERNAME}/{REPOSITORY_NAME}/discussions",
             "icon": "fa fa-comment fa-fw",
         },
     ],
+}
+
+html_context = {
+    "display_github": True,  # Integrate GitHub
+    "github_user": USERNAME,
+    "github_repo": REPOSITORY_NAME,
+    "github_version": BRANCH,
+    "doc_path": DOC_PATH,
 }
 
 # Sphinx extensions

@@ -6,6 +6,7 @@
 .. _dpf_post_docs: https://post.docs.pyansys.com/
 .. _matplotlib_org: _https://matplotlib.org/
 .. _pandas_org: https://pandas.pydata.org/
+.. _precommit: https://pre-commit.com/
 .. _pypi_org: https://pypi.org/
 .. _pyvista_org: https://docs.pyvista.org/version/stable/
 
@@ -23,7 +24,10 @@
 .. _pymapdl_examples: https://mapdl.docs.pyansys.com/examples/index.html
 
 .. #PyMAPDL Examples
-.. _pymapdl_examples_issues:https://github.com/ansys/pymapdl-examples/issues
+.. _pymapdl_examples_issues: https://github.com/ansys/pymapdl-examples/issues/
 
 .. # Examples
 .. _examples_intro: https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html
+
+.. # Related topics
+.. _venv: https://docs.python.org/3/library/venv.html

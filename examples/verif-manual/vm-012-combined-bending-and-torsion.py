@@ -85,16 +85,13 @@ mapdl.finish()
 
 mapdl.slashsolu()
 mapdl.outpr("BASIC", 1)
-with mapdl.non_interactive:
-    mapdl.run("/OUT,SCRATCH")
-    mapdl.solve()
-    mapdl.finish()
-    mapdl.post1()
-    mapdl.etable("P_STRS", "NMISC", 86)
-    mapdl.etable("SHR", "NMISC", 88)
-    mapdl.run("/OUT")
-    mapdl.run("/GOPR")
-mapdl.last_response
+
+mapdl.solve()
+mapdl.finish()
+mapdl.post1()
+mapdl.etable("P_STRS", "NMISC", 86)
+mapdl.etable("SHR", "NMISC", 88)
+
 
 ###############################################################################
 # Post-processing
@@ -126,9 +123,10 @@ print(pandas.DataFrame(data, row_headers, col_headers))
 # Pre-processing with ET PIPE288
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+mapdl.clear("nostart")
 mapdl.prep7()
 mapdl.run("C***     USING PIPE288")
-mapdl.run("ANTYPE,STATIC")
+mapdl.antype("STATIC")
 mapdl.et(1, "PIPE288", "", "", "", 2)
 mapdl.sectype(1, "PIPE")
 mapdl.secdata(4.67017, 2.33508)
@@ -153,34 +151,36 @@ mapdl.eplot()
 
 mapdl.slashsolu()
 mapdl.outpr("BASIC", 1)
-with mapdl.non_interactive:
-    mapdl.run("/OUT,SCRATCH")
-    mapdl.solve()
-    mapdl.finish()
-    mapdl.post1()
-    mapdl.set("LAST")
-    mapdl.graphics("POWER")
-    mapdl.eshape(1)
-    mapdl.view(1, 1, 1, 1)
-    mapdl.plesol("S", 1)
-    mapdl.run("/OUT")
-    mapdl.run("/GOPR")
-mapdl.get("P_STRESS", "PLNSOL", 0, "MAX")
-mapdl.plesol("S", "INT")
-mapdl.get("SHEAR", "PLNSOL", 0, "MAX")
+mapdl.solve()
+mapdl.finish()
 
 ###############################################################################
 # Post-processing
 # ~~~~~~~~~~~~~~~
 
+mapdl.post1()
+mapdl.set("LAST")
+mapdl.graphics("POWER")
+mapdl.eshape(1)
+mapdl.view(1, 1, 1, 1)
+
+mapdl.show(option="REV", fname="png")
+mapdl.plesol("S", 1)
+mapdl.show("close")
+
 p_stress = mapdl.get("P_STRESS", "PLNSOL", 0, "MAX")
+
+mapdl.show(option="REV", fname="png")
 mapdl.plesol("S", "INT")
+mapdl.show("close")
+
 shear = mapdl.get("SHEAR", "PLNSOL", 0, "MAX")
 p_trs = shear / 2
 
+
 # Fill the array with target values
-target_p_stress = 7527
-target_p_trs = 3777
+target_p_stress = 7527.0
+target_p_trs = 3777.0
 
 data = [
     [target_p_stress, p_stress, abs(p_stress / target_p_stress)],
