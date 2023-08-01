@@ -174,12 +174,11 @@ cylindrical shape tool, as shown in the following figure:
 
 .. jupyter-execute:: 
     :hide-code:
-    
+
     # Plotting geometry
     p = pyvista.Plotter()
     p.background_color='white'
-    for each in mapdl.geometry.areas():
-        p.add_mesh(each, show_edges=False, show_scalar_bar=False, style='surface', color='grey')
+    mapdl.geometry.areas.plot()
     p.show()
 
 
@@ -764,19 +763,16 @@ to the backing plate.
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
 
-    areas = mapdl.geometry.areas()
-    for each_area in areas:
-        pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
+    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
                     style='surface', color='red')
-
+    pl.show()
+    
     mapdl.asel('s', 'loc', 'z', -t)
 
-    areas = mapdl.geometry.areas()
-    for each_area in areas:
-        pl.add_mesh(each_area, show_edges=False, show_scalar_bar=False,
+    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
                     style='surface', color='yellow')
-    
     pl.show()
+
 
 **Figure 28.6: Thermal boundary conditions.**
 Convection loads (:red-text:`red`) and conduction loads (:yellow-text:`yellow`)
