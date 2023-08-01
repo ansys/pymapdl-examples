@@ -108,8 +108,8 @@ mapdl.e(1, 2)  # Element 1 with nodes 1 and 2
 # Apply a concentrated force value of 5654866.8 lb in FY direction at node 2.
 # Internal pressure of 500 psi is applied. Then exit prep7 processor.
 #
-# Effectiely, this sets:
-# - :math:`P = 500 psi`
+# Effectively, this sets:
+#  :math:`P = 500 psi`
 
 mapdl.cp(1, "UX", 1, 2)  # Couple radial direction (rotation around Z-axis)
 mapdl.d(1, "UY", "", "", "", "", "ROTZ")  # Fix UY displacement for node 1
