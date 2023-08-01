@@ -15,6 +15,7 @@ env:
   MAIN_PYTHON_VERSION: '3.9'
   RESET_EXAMPLES_CACHE: 1
   RESET_DOC_BUILD_CACHE: 1
+  USE_CACHE: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -113,6 +114,7 @@ jobs:
       
       - name: "Cache Verification Manual examples"
         uses: actions/cache@v3
+        if: env.USE_CACHE==true
         with:
           path: doc/source/verif-manual
           key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
@@ -121,6 +123,7 @@ jobs:
 
       - name: "Cache docs build directory"
         uses: actions/cache@v3
+        if: env.USE_CACHE==true
         with:
           path: doc/_build
           key: doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
