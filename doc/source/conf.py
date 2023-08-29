@@ -184,3 +184,9 @@ rst_epilog = ""
 # Read link all targets from file
 with open("links.rst") as f:
     rst_epilog += f.read()
+
+# ignore some link checks
+
+linkcheck_ignore = [
+    "https://ansyshelp.ansys.com/*",
+]
