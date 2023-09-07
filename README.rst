@@ -4,9 +4,6 @@ PyMAPDL Examples
 This repository holds examples for PyMAPDL.
 
 
-How to install
---------------
-
 Code Style
 ----------
 Code style can be checked by running:
