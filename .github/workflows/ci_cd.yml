@@ -15,7 +15,7 @@ env:
   MAIN_PYTHON_VERSION: '3.9'
   RESET_EXAMPLES_CACHE: 9
   RESET_DOC_BUILD_CACHE: 9
-  USE_CACHE: true
+  USE_CACHE: false
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
