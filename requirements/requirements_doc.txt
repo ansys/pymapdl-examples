@@ -5,7 +5,7 @@ nest-asyncio==1.5.7
 pandas==2.0.3
 plotly==5.16.1
 pythreejs==2.4.2
-pyvista==0.42.3
+pyvista[jupyter]==0.42.3
 vtk==9.2.6
 
 # Documentation dependencies
@@ -19,6 +19,6 @@ sphinxemoji==0.2.0
 sphinx-gallery==0.14.0
 sphinx-autobuild==2021.3.14
 sphinx-autodoc-typehints==1.24.0
-sphinx-notfound-page==0.8.3
+sphinx-notfound-page==1.0.0
 panel==1.2.1
 pypandoc==1.11

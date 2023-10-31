@@ -25,6 +25,6 @@ pyvista.global_theme.axes.show = True
 pyvista.global_theme.show_scalar_bar = True
 pyvista.global_theme.return_cpos = False
 
-pyvista.set_jupyter_backend("panel")
+pyvista.set_jupyter_backend("trame")
 
 mytheme = pyvista.global_theme

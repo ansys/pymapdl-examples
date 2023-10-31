@@ -38,5 +38,5 @@ The more visual your example is, the better.
 Python facilitates the creation of sophisticate graphics and plots: take advantage
 of that.
 
-Packages like `matplotlib <matplotlib_org_>`_, `pandas <pandas_org_>`_
-or `pyvista <pandas_org_>`_ can help you create nice graphics, tables, or plots .
+Packages like `Matplotlib <matplotlib_org_>`_, `Pandas <pandas_org_>`_
+or `PyVista <pandas_org_>`_ can help you create nice graphics, tables, or plots .
