@@ -185,7 +185,8 @@ Start this example by launching MAPDL and loading the model.
     pyvista.set_plot_theme('document')
 
     from ansys.mapdl.core import launch_mapdl, Mapdl
-    from ansys.mapdl.core.examples import download_tech_demo_data, ansys_colormap
+    from ansys.mapdl.core.examples.downloads import download_tech_demo_data
+    from ansys.mapdl.core.examples.examples import ansys_colormap
 
     cdb_path = download_tech_demo_data("td-1", "disc_pad_model.cdb")
 
@@ -217,7 +218,7 @@ Start this example by launching MAPDL and loading the model.
    :hide-code:
 
    from ansys.mapdl.core import examples
-   from ansys.mapdl.core.examples import download_vtk_rotor, download_tech_demo_data
+   from ansys.mapdl.core.examples.downloads import download_vtk_rotor, download_tech_demo_data
 
    rotor = pyvista.read(download_vtk_rotor())
    rotor.plot(color='w', show_edges=True)
