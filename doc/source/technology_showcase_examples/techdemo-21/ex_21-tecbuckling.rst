@@ -47,7 +47,7 @@ Starting MAPDL as a service and importing an external model
 
 
     from ansys.mapdl.core import launch_mapdl
-    from ansys.mapdl.core.examples import download_tech_demo_data
+    from ansys.mapdl.core.examples.downloads import download_tech_demo_data
 
     # define geometric parameters
     bs = 95.3  # Ring spacing (mm)

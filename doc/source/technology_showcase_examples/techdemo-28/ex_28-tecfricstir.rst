@@ -125,7 +125,7 @@ cylindrical shape tool, as shown in the following figure:
    :hide-code:
 
    from ansys.mapdl.core import examples
-   from ansys.mapdl.core.examples import download_vtk_rotor, download_tech_demo_data
+   from ansys.mapdl.core.examples.downloads import download_vtk_rotor, download_tech_demo_data
 
    cdbfile = download_tech_demo_data("td-28", "fsw.cdb")
    # Generating geometry, just for plotting purposes.

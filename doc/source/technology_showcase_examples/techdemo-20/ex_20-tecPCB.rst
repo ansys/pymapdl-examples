@@ -52,7 +52,7 @@ between the IC packages and the circuit board.
     import _.pyplot as plt
 
     from ansys.mapdl.core import launch_mapdl
-    from ansys.mapdl.core.examples import download_tech_demo_data
+    from ansys.mapdl.core.examples.downloads import download_tech_demo_data
 
     # start MAPDL as a service
     mapdl = launch_mapdl()
