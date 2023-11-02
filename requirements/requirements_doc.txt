@@ -3,7 +3,7 @@ git+https://github.com/ansys/pymapdl@main
 numpy==1.26.1
 nest-asyncio==1.5.7
 pandas==2.1.2
-plotly==5.16.1
+plotly==5.18.0
 pythreejs==2.4.2
 pyvista[jupyter]==0.42.3
 vtk==9.2.6
