@@ -32,16 +32,12 @@ jobs:
     name: Code style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: PyAnsys code style checks
+        uses: ansys/actions/code-style@v4
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip tox
-      - name: Test with tox
-        run: tox -e style
+          vale-config: "doc/.vale.ini"
+          vale-version: "2.29.6"
 
   doc-style:
     name: Documentation Style Check
