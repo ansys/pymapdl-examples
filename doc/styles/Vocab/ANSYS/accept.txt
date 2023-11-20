@@ -1,6 +1,5 @@
 Allgaier
-ansys
-Ansys
+[Aa]nsys
 ANSYS
 axisymmetric
 billon
@@ -10,8 +9,7 @@ Conshohocken
 DOF
 eigenfrequency
 eigensolution
-Eigensolver
-eigensolver
+[Ee]igensolver
 eigensolvers
 elastoplastic
 equil
@@ -22,8 +20,7 @@ Gerges
 GPa
 hexahedral
 Hoffmann
-hyperelastic
-Hyperelastic
+[Hh]yperelastic
 Jordon
 Karpat
 Keiper
@@ -64,8 +61,7 @@ struc
 STRUC
 substep
 Technology Showcases
-thermomechanical
-Thermomechanical
+[Tt]hermomechanical
 thermomechanically
 Triches
 unconverged
