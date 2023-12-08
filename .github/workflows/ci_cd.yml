@@ -12,7 +12,7 @@ on:
       - main
 
 env:
-  MAIN_PYTHON_VERSION: '3.9'
+  MAIN_PYTHON_VERSION: '3.10'
   RESET_EXAMPLES_CACHE: 0
   RESET_DOC_BUILD_CACHE: 0
   USE_CACHE: true
@@ -63,8 +63,8 @@ jobs:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
       PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
       PYMAPDL_START_INSTANCE: FALSE
-      DOCKER_PACKAGE: ghcr.io/ansys/pymapdl/mapdl
-      DOCKER_IMAGE_VERSION_DOCS_BUILD: v22.2.0
+      DOCKER_PACKAGE: ghcr.io/ansys/mapdl
+      DOCKER_IMAGE_VERSION_DOCS_BUILD: v23.1.0
       DPF_PORT: 21002
 
     steps:
@@ -74,7 +74,7 @@ jobs:
       - name: "Set up Python using cache"
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
           cache: 'pip'
           cache-dependency-path: 'requirements/requirements_doc.txt'
 
