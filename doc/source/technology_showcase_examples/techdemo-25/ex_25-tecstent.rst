@@ -30,7 +30,7 @@ APDL Technology Showcase Manual <mapdl_tech_show_>`_.
 ------------------
 
 
-25.1.1. Problem Description
+25.1.1. Problem description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A bare metal stent is an effective device for opening atherosclerotic arteries and

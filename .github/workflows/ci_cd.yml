@@ -52,6 +52,7 @@ jobs:
       #   uses: ansys/actions/doc-style@v4
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     vale-version: "2.29.6"
       - name : TODO - Reactivate code style
         run : sleep 1
 

@@ -2,7 +2,7 @@ r""".. _ref_vm10_example:
 
 Bending of a Tee-Shaped Beam
 ----------------------------
-Problem Description:
+Problem description:
  - Find the maximum tensile :math:`\sigma_{\mathrm{(B,Bot)}}` and compressive
    :math:`\sigma_{\mathrm{(B,Top)}}`
    bending stresses in an unsymmetrical `T-beam` subjected to uniform bending :math:`M_z`,
@@ -26,7 +26,7 @@ Element Type(s):
 
     **Figure 1: VM10 Geometry of Beam188 and Element Model**
 
-Material Properties
+Material properties
  - :math:`E = 30 \cdot 10^6 psi`
  - :math:`\nu = 0.3`
 
