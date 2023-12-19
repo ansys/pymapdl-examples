@@ -45,12 +45,10 @@ Ozel
 parm
 Poisson
 pmaroneh
-postprocess
-Postprocess
+[Pp]ostprocess
 Prasanna
 pres
-Prestressed
-prestressed
+[Pp]restressed
 PyVista
 Rao
 ROTY
