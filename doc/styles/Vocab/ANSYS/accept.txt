@@ -10,8 +10,7 @@ Conshohocken
 DOF
 eigenfrequency
 eigensolution
-Eigensolver
-eigensolver
+[Ee]igensolver
 eigensolvers
 elastoplastic
 equil
@@ -22,8 +21,7 @@ Gerges
 GPa
 hexahedral
 Hoffmann
-hyperelastic
-Hyperelastic
+[Hh]yperelastic
 Jordon
 Karpat
 Keiper
@@ -48,12 +46,10 @@ Ozel
 parm
 Poisson
 pmaroneh
-postprocess
-Postprocess
+[Pp]ostprocess
 Prasanna
 pres
-Prestressed
-prestressed
+[Pp]restressed
 PyVista
 Rao
 ROTY
@@ -64,8 +60,7 @@ struc
 STRUC
 substep
 Technology Showcases
-thermomechanical
-Thermomechanical
+[Tt]hermomechanical
 thermomechanically
 Triches
 unconverged
