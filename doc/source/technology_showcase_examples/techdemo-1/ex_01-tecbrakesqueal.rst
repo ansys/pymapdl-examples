@@ -6,7 +6,7 @@ Brake Squeal Analysis
 =====================
 
 This example analysis shows how to solve a brake-squeal problem.
-`1.6. Analysis and Solution Controls`_ are highlighted: linear non-prestressed
+`1.6. Analysis and solution controls`_ are highlighted: linear non-prestressed
 modal, partial nonlinear perturbed modal, and full nonlinear perturbed
 modal.
 The problem demonstrates sliding frictional contact and uses complex
@@ -15,12 +15,12 @@ eigensolvers to predict unstable modes.
 The following topics are available:
 
 *  `1.1. Introduction`_
-*  `1.2. Problem Description`_
+*  `1.2. Problem description`_
 *  `1.3. Modeling`_
-*  `1.4. Material Properties`_
-*  `1.5. Boundary Conditions and Loading`_
-*  `1.6. Analysis and Solution Controls`_
-*  `1.7. Results and Discussion`_
+*  `1.4. Material properties`_
+*  `1.5. Boundary conditions and loading`_
+*  `1.6. Analysis and solution controls`_
+*  `1.7. Results and discussion`_
 *  `1.8. Recommendations`_
 *  `1.9. References`_
 *  `1.10. Input files`_
@@ -66,7 +66,7 @@ Brake noise is generally categorized as follows:
 
 For more information, see Brake-Squeal (Prestressed Modal) Analysis  in the *Structural Analysis Guide*.
 
-1.2. Problem Description
+1.2. Problem description
 ------------------------
 
 The following model is a simple brake disc-pad assembly. The disc has a thickness of
@@ -224,17 +224,17 @@ Start this example by launching MAPDL and loading the model.
    rotor.plot(color='w', show_edges=True)
 
 
-1.4. Material Properties
+1.4. Material properties
 ------------------------
 
 Linear elastic isotropic materials are assigned to all the components of the braking
 system.
 
 
-**Table 1.1: Material Properties**
+**Table 1.1: Material properties**
 
 +------------------------+----------------------+
-|                        | Material Properties  |
+|                        | Material properties  |
 +========================+======================+
 | Young's Modulus (Nm-2) | 2.0 E+11 Pa          |
 +------------------------+----------------------+
@@ -244,7 +244,7 @@ system.
 +------------------------+----------------------+
 
 
-1.5. Boundary Conditions and Loading
+1.5. Boundary conditions and loading
 ------------------------------------
 
 The inner diameter of the cylinder hub and bolt holes is constrained in all
@@ -256,13 +256,13 @@ directions except axial (along the Z-axis).
 
 .. figure:: images/gtecbrakesqueal_fig5.gif
     :align: center
-    :alt: Boundary Conditions (Displacement Constraints and Pressure Loading)
+    :alt: Boundary conditions (Displacement Constraints and Pressure Loading)
     :figclass: align-center
 
-    **Figure 1.2: Boundary Conditions (Displacement Constraints and Pressure Loading)**
+    **Figure 1.2: Boundary conditions (Displacement Constraints and Pressure Loading)**
 
 
-1.6. Analysis and Solution Controls
+1.6. Analysis and solution controls
 -----------------------------------
 
 The analysis settings and solution controls differ depending upon the method used
@@ -682,7 +682,7 @@ Following is the process for solving a brake-squeal problem using this method:
 
 
 
-1.7. Results and Discussion
+1.7. Results and discussion
 ---------------------------
 
 The unstable mode predictions for the brake disc-pad assembly using all three methods

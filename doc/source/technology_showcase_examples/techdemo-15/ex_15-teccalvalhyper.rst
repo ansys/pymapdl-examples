@@ -12,10 +12,10 @@ tension-torsion experiment.
 The following topics are available:
 
 *  `15.1. Introduction`_
-*  `15.2. Problem Description`_
-*  `15.3. Material Properties`_
-*  `15.4. Analysis and Solution Controls`_
-*  `15.5. Results and Discussion`_
+*  `15.2. Problem description`_
+*  `15.3. Material properties`_
+*  `15.4. Analysis and solution controls`_
+*  `15.5. Results and discussion`_
 *  `15.6. Recommendations`_
 *  `15.7. References`_
 *  `15.8. Input files`_
@@ -38,7 +38,7 @@ the resulting constitutive model.
 The constitutive model should therefore be compared with experimental data to ensure
 that it adequately reproduces the material behavior over the actual range of deformation.
 
-15.2. Problem Description
+15.2. Problem description
 -------------------------
 
 A constitutive model is needed that matches the behavior of a vulcanized natural
@@ -242,15 +242,15 @@ The torsion of the specimen is simulated by holding the left clamp region in pla
 and twisting the keypoints attached to the right contact surfaces about the
 longitudinal axis.
 
-15.5. Results and Discussion
+15.5. Results and discussion
 ----------------------------
 
 Results for the calibration and validation operations are discussed below:
 
-*  `15.5.1. Calibration Results`_
-*  `15.5.2. Validation Results`_
+*  `15.5.1. Calibration results`_
+*  `15.5.2. Validation results`_
 
-15.5.1. Calibration Results
+15.5.1. Calibration results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Using all of experimental data shown in :numref:`figure_experimental_data`
@@ -353,7 +353,7 @@ quickly deteriorate. In all three comparisons, the nine-parameter model quickly
 loses accuracy, and it appears that the three- and nine-parameter Mooney-Rivlin
 models have lost stability for the biaxial deformation case. 
 
-15.5.2. Validation Results
+15.5.2. Validation results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The five-parameter Mooney-Rivlin model, fit to the experimental data up to 100

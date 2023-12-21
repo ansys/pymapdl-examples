@@ -36,12 +36,12 @@ The following features and capabilities are highlighted:
 The following topics are available:
 
 *  `28.1. Introduction`_
-*  `28.2. Problem Description`_
+*  `28.2. Problem description`_
 *  `28.3. Modeling`_
-*  `28.4. Material Properties`_
-*  `28.5. Boundary Conditions and Loading`_
-*  `28.6. Analysis and Solution Controls`_
-*  `28.7. Results and Discussion`_
+*  `28.4. Material properties`_
+*  `28.5. Boundary conditions and loading`_
+*  `28.6. Analysis and solution controls`_
+*  `28.7. Results and discussion`_
 *  `28.8. Exit MAPDL`_
 *  `28.9. Recommendations`_
 *  `28.10. References`_
@@ -75,7 +75,7 @@ fully thermomechanically coupled model.
 The model consists of a coupled-field solid element with structural and thermal
 degrees of freedom. The model has two rectangular steel plates and a cylindrical
 tool. All necessary mechanical and thermal 
-`28.5. Boundary Conditions and Loading`_ are applied on the model. The
+`28.5. Boundary conditions and loading`_ are applied on the model. The
 simulation occurs over three load steps, representing the `28.5.3. Loading`_ of
 the process.
 
@@ -195,7 +195,7 @@ The workpiece sides parallel to the weld line are constrained in all the
 directions to simulate the clamping ends. The bottom side of the workpiece is
 constrained in the perpendicular (z) direction to simulate support at the
 bottom. Heat losses are considered on all the surfaces of the model. All
-`28.5. Boundary Conditions and Loading`_ are symmetric across the weld
+`28.5. Boundary conditions and loading`_ are symmetric across the weld
 centerline.
 
 The simulation is performed in three load steps, each representing a respective
@@ -741,8 +741,8 @@ The following code setup the material properties:
 This section describes the thermal and mechanical boundary conditions imposed
 on the FSW model:
 
-*  `28.5.1. Thermal Boundary Conditions`_
-*  `28.5.2. Mechanical Boundary Conditions`_
+*  `28.5.1. Thermal Boundary conditions`_
+*  `28.5.2. Mechanical Boundary conditions`_
 *  `28.5.3. Loading`_
 
 28.5.1. Thermal boundary conditions
@@ -863,7 +863,7 @@ X-direction (``UX``) in :red-text:`red`, Y-direction (``UY``) in :green-text:`gr
    
 .. code:: python 
     
-    # Mechanical Boundary Conditions
+    # Mechanical Boundary conditions
     # 20% ends of the each plate is constraint
     mapdl.nsel("s", "loc", "x", -0.8*w, -w)
     mapdl.nsel("a", "loc", "x", 0.8*w, w)
