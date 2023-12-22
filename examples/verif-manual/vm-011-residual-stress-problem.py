@@ -2,7 +2,7 @@ r""".. _ref_vm11_example:
 
 Residual Stress Problem
 ----------------------------
-Problem Description:
+Problem description:
  - A chain hoist is attached to the ceiling through three tie rods as shown below.
    The tie rods are made of cold-rolled steel with yield strength :math:`\sigma_{yp}`
    and each has an area A. Find the deflection :math:`\delta` at load :math:`F_1` when
@@ -28,7 +28,7 @@ Element Type(s):
 
     **VM11 Problem model**
 
-Material Properties
+Material properties
  - :math:`\sigma_{yp} = 30,000\,psi`
  - :math:`E = 30 \cdot 10^6\,psi`
 

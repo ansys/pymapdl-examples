@@ -23,7 +23,7 @@ Element type(s):
    :width: 400
    :alt: Geometry of COMBIN14 and COMBIN40
 
-Material Properties
+Material properties
  - :math:`k_1 = 8\,N/cm`
  - :math:`k_2 = 1\,N/cm`
  - :math:`m = 1`
