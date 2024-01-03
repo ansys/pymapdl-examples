@@ -13,8 +13,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.10'
-  RESET_EXAMPLES_CACHE: 0
-  RESET_DOC_BUILD_CACHE: 0
+  RESET_EXAMPLES_CACHE: 1
+  RESET_DOC_BUILD_CACHE: 1
   USE_CACHE: true
 
 concurrency:
@@ -134,7 +134,7 @@ jobs:
             doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v4
+        uses: ansys/actions/doc-build@v5
         with:
           requires-xvfb: true
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -142,13 +142,6 @@ jobs:
           skip-install: true
           sphinxopts: -j auto
           use-python-cache: False
-      
-      - name: "Upload HTML Documentation"
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation-html
-          path: doc/_build/html
-          retention-days: 7
 
       - name: "Deploy"
         if: contains(github.ref, 'refs/heads/main')
@@ -159,17 +152,6 @@ jobs:
           folder: doc/_build/html
           clean: true
           single-commit: true
-
-      - name: "Build PDF Documentation"
-        working-directory: doc
-        run: make pdf
-
-      - name: "Upload PDF Documentation"
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation-pdf
-          path: doc/_build/latex/pymapdl*.pdf
-          retention-days: 7
 
       - name: "Display files structure"
         if: always()
@@ -203,7 +185,7 @@ jobs:
       
       - name: "Upload logs to GitHub"
         if: always()
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v4
         with:
           name: logs-build-docs.tgz
           path: ./logs-build-docs.tgz
