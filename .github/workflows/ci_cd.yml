@@ -142,13 +142,6 @@ jobs:
           skip-install: true
           sphinxopts: -j auto
           use-python-cache: False
-      
-      - name: "Upload HTML Documentation"
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation-html
-          path: doc/_build/html
-          retention-days: 7
 
       - name: "Deploy"
         if: contains(github.ref, 'refs/heads/main')
