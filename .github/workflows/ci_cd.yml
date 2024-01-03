@@ -153,17 +153,6 @@ jobs:
           clean: true
           single-commit: true
 
-      - name: "Build PDF Documentation"
-        working-directory: doc
-        run: make pdf
-
-      - name: "Upload PDF Documentation"
-        uses: actions/upload-artifact@v4
-        with:
-          name: documentation-pdf
-          path: doc/_build/latex/pymapdl*.pdf
-          retention-days: 7
-
       - name: "Display files structure"
         if: always()
         run: |
