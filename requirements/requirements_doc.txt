@@ -6,12 +6,12 @@ pandas==2.1.4
 plotly==5.18.0
 pythreejs==2.4.2
 pyvista[jupyter]==0.43.1
-vtk==9.2.6
+vtk==9.3.0
 
 # Documentation dependencies
 Sphinx==7.2.6
 numpydoc==1.6.0
-ansys-sphinx-theme==0.12.5
+ansys-sphinx-theme==0.13.0
 sphinx-copybutton==0.5.2
 jupyter_sphinx==0.5.3
 jupyterlab>=3.2.8
