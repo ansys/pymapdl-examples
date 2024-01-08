@@ -6,7 +6,7 @@ pandas==2.1.4
 plotly==5.18.0
 pythreejs==2.4.2
 pyvista[jupyter]==0.43.1
-vtk==9.2.6
+vtk==9.3.0
 
 # Documentation dependencies
 Sphinx==7.2.6
