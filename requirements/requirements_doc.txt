@@ -13,7 +13,7 @@ Sphinx==7.2.6
 numpydoc==1.6.0
 ansys-sphinx-theme==0.12.5
 sphinx-copybutton==0.5.2
-jupyter_sphinx==0.4.0
+jupyter_sphinx==0.5.3
 jupyterlab>=3.2.8
 sphinxemoji==0.2.0
 sphinx-gallery==0.15.0
