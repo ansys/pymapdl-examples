@@ -13,8 +13,8 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.10'
-  RESET_EXAMPLES_CACHE: 0
-  RESET_DOC_BUILD_CACHE: 0
+  RESET_EXAMPLES_CACHE: 1
+  RESET_DOC_BUILD_CACHE: 1
   USE_CACHE: true
 
 concurrency:
@@ -34,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
       - name: Install dependencies
@@ -52,6 +52,7 @@ jobs:
       #   uses: ansys/actions/doc-style@v4
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     vale-version: "2.29.6"
       - name : TODO - Reactivate code style
         run : sleep 1
 
@@ -72,7 +73,7 @@ jobs:
         uses: actions/checkout@v4
      
       - name: "Set up Python using cache"
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           cache: 'pip'
@@ -133,7 +134,7 @@ jobs:
             doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v4
+        uses: ansys/actions/doc-build@v5
         with:
           requires-xvfb: true
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -141,34 +142,16 @@ jobs:
           skip-install: true
           sphinxopts: -j auto
           use-python-cache: False
-      
-      - name: "Upload HTML Documentation"
-        uses: actions/upload-artifact@v3
-        with:
-          name: documentation-html
-          path: doc/_build/html
-          retention-days: 7
 
       - name: "Deploy"
         if: contains(github.ref, 'refs/heads/main')
-        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           folder: doc/_build/html
           clean: true
           single-commit: true
-
-      - name: "Build PDF Documentation"
-        working-directory: doc
-        run: make pdf
-
-      - name: "Upload PDF Documentation"
-        uses: actions/upload-artifact@v3
-        with:
-          name: documentation-pdf
-          path: doc/_build/latex/pymapdl*.pdf
-          retention-days: 7
 
       - name: "Display files structure"
         if: always()
@@ -202,7 +185,7 @@ jobs:
       
       - name: "Upload logs to GitHub"
         if: always()
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v4
         with:
           name: logs-build-docs.tgz
           path: ./logs-build-docs.tgz
@@ -226,7 +209,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
 
       - name: Display structure of downloaded files
         run: ls -R
