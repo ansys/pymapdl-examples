@@ -15,7 +15,7 @@ ansys-sphinx-theme==0.13.1
 sphinx-copybutton==0.5.2
 jupyter_sphinx==0.5.3
 jupyterlab>=3.2.8
-sphinxemoji==0.2.0
+sphinxemoji==0.3.1
 sphinx-gallery==0.15.0
 sphinx-autobuild==2021.3.14
 sphinx-autodoc-typehints==1.25.2
