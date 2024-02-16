@@ -11,7 +11,7 @@ vtk==9.3.0
 # Documentation dependencies
 Sphinx==7.2.6
 numpydoc==1.6.0
-ansys-sphinx-theme==0.13.1
+ansys-sphinx-theme==0.13.4
 sphinx-copybutton==0.5.2
 jupyter_sphinx==0.5.3
 jupyterlab>=3.2.8
