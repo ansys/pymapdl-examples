@@ -5,7 +5,7 @@ nest-asyncio==1.6.0
 pandas==2.2.0
 plotly==5.19.0
 pythreejs==2.4.2
-pyvista[jupyter]==0.43.2
+pyvista[jupyter]==0.43.3
 vtk==9.3.0
 
 # Documentation dependencies
