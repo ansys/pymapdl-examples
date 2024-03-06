@@ -37,7 +37,7 @@ The resultant HTML files can be inspected using your favorite web browser:
 
     <browser> .tox/doc_out_html/index.html
 
-Previous will open the rendered documentation in the desired browser.
+*Previous command will open the rendered documentation in the desired browser.*
 
 
 .. LINKS AND REFERENCES
