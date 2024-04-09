@@ -16,7 +16,7 @@ env:
   DPF_START_SERVER: False
   MAIN_PYTHON_VERSION: '3.10'
   MAPDL_PACKAGE: ghcr.io/ansys/mapdl
-  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.1-ubuntu
+  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.1-ubuntu-student
   ON_CI: True
   PYANSYS_OFF_SCREEN: True
   RESET_EXAMPLES_CACHE: 1
@@ -107,6 +107,7 @@ jobs:
         env:
           LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
           MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
+          DISTRIBUTED_MODE: "dmp"
         run: |
           export INSTANCE_NAME=MAPDL_0
           .ci/start_mapdl.sh &> mapdl_launch.log & export DOCKER_PID=$!
