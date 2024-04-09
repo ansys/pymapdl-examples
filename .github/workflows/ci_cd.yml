@@ -12,10 +12,13 @@ on:
       - main
 
 env:
+  DPF_PORT: 21002
+  DPF_START_SERVER: False
   MAIN_PYTHON_VERSION: '3.10'
   MAPDL_PACKAGE: ghcr.io/ansys/mapdl
   MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.1-ubuntu-student
-  DPF_PORT: 21002
+  ON_CI: True
+  PYANSYS_OFF_SCREEN: True
   RESET_EXAMPLES_CACHE: 1
   RESET_DOC_BUILD_CACHE: 1
   USE_CACHE: true
@@ -67,6 +70,7 @@ jobs:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
       PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
       PYMAPDL_START_INSTANCE: FALSE
+      ON_DOCUMENTATION: TRUE
 
     steps:
       - name: "Install Git and checkout project"
