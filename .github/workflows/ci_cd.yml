@@ -13,6 +13,9 @@ on:
 
 env:
   MAIN_PYTHON_VERSION: '3.10'
+  MAPDL_PACKAGE: ghcr.io/ansys/mapdl
+  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.1-ubuntu-student
+  DPF_PORT: 21002
   RESET_EXAMPLES_CACHE: 1
   RESET_DOC_BUILD_CACHE: 1
   USE_CACHE: true
@@ -64,9 +67,6 @@ jobs:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
       PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
       PYMAPDL_START_INSTANCE: FALSE
-      DOCKER_PACKAGE: ghcr.io/ansys/mapdl
-      DOCKER_IMAGE_VERSION_DOCS_BUILD: v23.1.0
-      DPF_PORT: 21002
 
     steps:
       - name: "Install Git and checkout project"
@@ -99,10 +99,21 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Pull, launch, and validate MAPDL service"
+        id: start_mapdl
         env:
           LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
-          MAPDL_IMAGE: '${{ env.DOCKER_PACKAGE }}:${{ env.DOCKER_IMAGE_VERSION_DOCS_BUILD }}'
-        run: .ci/start_mapdl.sh
+          MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
+          DISTRIBUTED_MODE: "dmp"
+        run: |
+          export INSTANCE_NAME=MAPDL_0
+          .ci/start_mapdl.sh &> mapdl_launch.log & export DOCKER_PID=$!
+          echo "Launching MAPDL service at PID: $DOCKER_PID"
+          echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
+
+      - name: "DPF Server Activation"
+        run: |
+          docker pull ghcr.io/ansys/dpf-core:22.2dev
+          docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
 
       - name: "Retrieve PyMAPDL version"
         run: |
@@ -110,11 +121,6 @@ jobs:
           echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
         id: version
 
-      - name: "DPF Server Activation"
-        run: |
-          docker pull ghcr.io/ansys/dpf-core:22.2dev
-          docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
-      
       - name: "Cache Verification Manual examples"
         uses: actions/cache@v4
         if: ${{ env.USE_CACHE }} == 'true'
