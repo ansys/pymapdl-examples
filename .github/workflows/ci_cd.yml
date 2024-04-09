@@ -16,7 +16,7 @@ env:
   DPF_START_SERVER: False
   MAIN_PYTHON_VERSION: '3.10'
   MAPDL_PACKAGE: ghcr.io/ansys/mapdl
-  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.1-ubuntu-student
+  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.1-ubuntu
   ON_CI: True
   PYANSYS_OFF_SCREEN: True
   RESET_EXAMPLES_CACHE: 1
@@ -83,7 +83,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: 'requirements/requirements_doc.txt'
 
-      - name: "Install system dependencies"
+      - name: "Install OS packages"
         run: |
           sudo apt-get update
           sudo apt install zip pandoc libgl1-mesa-glx xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
@@ -99,7 +99,7 @@ jobs:
         uses: docker/login-action@v3.1.0
         with:
           registry: ghcr.io
-          username: ${{ secrets.GH_USERNAME }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Pull, launch, and validate MAPDL service"
@@ -116,8 +116,7 @@ jobs:
 
       - name: "DPF Server Activation"
         run: |
-          docker pull ghcr.io/ansys/dpf-core:22.2dev
-          docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}."
+          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
 
       - name: "Retrieve PyMAPDL version"
         run: |
