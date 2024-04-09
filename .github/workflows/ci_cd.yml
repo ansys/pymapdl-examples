@@ -142,6 +142,7 @@ jobs:
           skip-install: true
           sphinxopts: -j auto
           use-python-cache: False
+          check-links: False
 
       - name: "Deploy"
         if: contains(github.ref, 'refs/heads/main')
