@@ -113,6 +113,10 @@ jobs:
           .ci/start_mapdl.sh &> mapdl_launch.log & export DOCKER_PID=$!
           echo "Launching MAPDL service at PID: $DOCKER_PID"
           echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
+          pymapdl start --port 21005
+          echo "MAPDL service started successfully"
+          pymapdl stop --port 21005
+          echo "MAPDL service stopped successfully"
 
       - name: "DPF Server Activation"
         run: |
