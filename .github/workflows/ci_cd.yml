@@ -166,10 +166,11 @@ jobs:
 
       - name: "Display files structure"
         if: always()
+        env:
+          MAPDL_INSTANCE: mapdl
+          LOG_NAMES: logs-build-docs
         run: |
-          mkdir logs-build-docs
-          echo "::group:: Display files structure" && ls -R && echo "::endgroup::"
-          ls -R > ./logs-build-docs/files_structure.txt
+          .ci/display_logs.sh
       
       - name: "Display docker files structures"
         if: always()
