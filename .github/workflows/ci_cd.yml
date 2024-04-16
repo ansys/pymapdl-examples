@@ -89,7 +89,9 @@ jobs:
           sudo apt install zip pandoc libgl1-mesa-glx xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
 
       - name: "Install Python requirements"
-        run: pip install -r requirements/requirements_doc.txt
+        run: |
+          pip uninstall ansys-mapdl-core
+          pip install -r requirements/requirements_doc.txt
 
       - name: "Test virtual framebuffer"
         run: |
