@@ -163,20 +163,14 @@ jobs:
           folder: doc/_build/html
           clean: true
           single-commit: true
-
-      - name: "Display files structure"
+      
+      - name: "Display Docker files structures"
         if: always()
         env:
           MAPDL_INSTANCE: mapdl
           LOG_NAMES: logs-build-docs
         run: |
           .ci/display_logs.sh
-      
-      - name: "Display docker files structures"
-        if: always()
-        run: |
-          echo "::group:: Display files structure" && docker exec mapdl /bin/bash -c "ls -R" && echo "::endgroup::"
-          docker exec mapdl /bin/bash -c "ls -R" > ./logs-build-docs/docker_files_structure.txt
       
       - name: "Collect MAPDL logs on failure"
         if: always()
