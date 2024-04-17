@@ -65,6 +65,9 @@ jobs:
   doc-build:
     name: "Documentation building"
     needs: [style, doc-style]
+    timeout-minutes: 60
+    outputs:
+      PYMAPDL_VERSION: ${{ steps.version.outputs.PYMAPDL_VERSION }}
     runs-on: ubuntu-latest
     env:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
@@ -151,7 +154,7 @@ jobs:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           checkout: false
           skip-install: true
-          sphinxopts: -j auto
+          sphinxopts: -j auto -W --keep-going
           use-python-cache: False
 
       - name: "Deploy"

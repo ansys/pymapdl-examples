@@ -175,6 +175,8 @@ cylindrical shape tool, as shown in the following figure:
 .. jupyter-execute:: 
     :hide-code:
 
+    import pyvista
+
     # Plotting geometry
     p = pyvista.Plotter()
     p.background_color='white'
