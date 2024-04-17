@@ -21,7 +21,7 @@ env:
   PYANSYS_OFF_SCREEN: True
   RESET_EXAMPLES_CACHE: 1
   RESET_DOC_BUILD_CACHE: 1
-  USE_CACHE: false
+  USE_CACHE: False
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

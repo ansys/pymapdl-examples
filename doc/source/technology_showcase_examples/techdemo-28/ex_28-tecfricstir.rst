@@ -131,8 +131,14 @@ cylindrical shape tool, as shown in the following figure:
    # Generating geometry, just for plotting purposes.
    # The elements and nodes are going to be taken from the cdb file.
    
+   from ansys.mapdl.core import LOG
+   
+   LOG.setLevel("DEBUG")
+   LOG.log_to_file("mylog.log")
+   
    from ansys.mapdl.core import launch_mapdl
-   mapdl = launch_mapdl()
+   
+   mapdl = launch_mapdl(loglevel="DEBUG")
    print(mapdl)
 
    mapdl.clear()
