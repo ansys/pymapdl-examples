@@ -186,7 +186,7 @@ jobs:
         if: always()
         env:
           MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
-          MAPDL_INSTANCE: MAPDL_0
+          MAPDL_INSTANCE: mapdl
           LOG_NAMES: logs-build-docs
         run: |
           .ci/collect_mapdl_logs.sh
