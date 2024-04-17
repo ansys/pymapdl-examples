@@ -134,7 +134,6 @@ cylindrical shape tool, as shown in the following figure:
    from ansys.mapdl.core import LOG
    
    LOG.setLevel("DEBUG")
-   LOG.log_to_file("logs-build-docs/mylog.log")
    
    from ansys.mapdl.core import launch_mapdl
    
