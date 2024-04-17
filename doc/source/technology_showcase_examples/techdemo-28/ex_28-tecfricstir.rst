@@ -133,13 +133,10 @@ cylindrical shape tool, as shown in the following figure:
    
    from ansys.mapdl.core import LOG
    LOG.setLevel("DEBUG")
-   
-   from ansys.mapdl import core as pymapdl
-   print(pymapdl.Report())
 
    from ansys.mapdl.core import launch_mapdl
    
-   mapdl = launch_mapdl(loglevel="DEBUG")
+   mapdl = launch_mapdl(loglevel="DEBUG", start_instance=False)
    print(mapdl)
 
    mapdl.clear()
