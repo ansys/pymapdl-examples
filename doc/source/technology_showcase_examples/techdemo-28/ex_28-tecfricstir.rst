@@ -136,7 +136,7 @@ cylindrical shape tool, as shown in the following figure:
 
    from ansys.mapdl.core import launch_mapdl
    
-   mapdl = launch_mapdl(loglevel="DEBUG", start_instance=False)
+   mapdl = launch_mapdl(loglevel="DEBUG", start_instance=True)
    print(mapdl)
 
    mapdl.clear()
