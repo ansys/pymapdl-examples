@@ -68,10 +68,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
-      PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
+      PYMAPDL_PORT2: 21001  # for the pool testing and default won't work on GitHub runners
+      PYMAPDL_DB_PORT: 21002  # default won't work on GitHub runners
+      PYMAPDL_DB_PORT2: 21003  # default won't work on GitHub runners
       PYMAPDL_START_INSTANCE: FALSE
       ON_DOCUMENTATION: TRUE
-
+    
     steps:
       - name: "Install Git and checkout project"
         uses: actions/checkout@v4
@@ -111,29 +113,37 @@ jobs:
           MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
           DISTRIBUTED_MODE: "dmp"
         run: |
+          echo "Launching first MAPDL instance..."
           export INSTANCE_NAME=MAPDL_0
-          .ci/start_mapdl.sh & export DOCKER_PID=$!
-          echo "Launching MAPDL service at PID: $DOCKER_PID"
-          echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
+          .ci/start_mapdl.sh &> mapdl_launch_0.log & export DOCKER_PID_0=$!
+          echo "Launching a second instance for MAPDL pool testing..."
+          export PYMAPDL_PORT=${{ env.PYMAPDL_PORT2 }}
+          export PYMAPDL_DB_PORT=${{ env.PYMAPDL_DB_PORT2 }}
+          export INSTANCE_NAME=MAPDL_1
+          .ci/start_mapdl.sh &> mapdl_launch_1.log & export DOCKER_PID_1=$!
+          echo "Launching MAPDL service 0 at PID: $DOCKER_PID_0"
+          echo "Launching MAPDL service 1 at PID: $DOCKER_PID_2"
+          echo "DOCKER_PID_0=$(echo $DOCKER_PID_0)" >> $GITHUB_OUTPUT
+          echo "DOCKER_PID_1=$(echo $DOCKER_PID_1)" >> $GITHUB_OUTPUT
 
       - name: "DPF Server Activation"
         run: |
           $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
 
       - name: "Retrieve PyMAPDL version"
-        run: |
-          echo "PYMAPDL_VERSION=$(python -c 'from ansys.mapdl.core import __version__; print(__version__)')" >> $GITHUB_ENV
-          echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
         id: version
+        run: |
+          echo "PYMAPDL_VERSION=$(python -c 'from ansys.mapdl.core import __version__; print(__version__)')" >> $GITHUB_OUTPUT
+          echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
 
       - name: "Cache Verification Manual examples"
         uses: actions/cache@v4
         if: ${{ env.USE_CACHE }} == 'true'
         with:
           path: doc/source/verif-manual
-          key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
+          key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}-${{ github.sha }}
           restore-keys: |
-            Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ env.PYMAPDL_VERSION }}
+            Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}
 
       - name: "Cache docs build directory"
         uses: actions/cache@v4
