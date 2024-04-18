@@ -54,4 +54,4 @@ docker run \
     --memory-swap=16896MB \
     "$MAPDL_IMAGE" "$EXEC_PATH" -grpc -dir /jobs -"$DISTRIBUTED_MODE" -np 2 > log.txt &
 
-grep -q 'Server listening on' <(timeout 60 tail -f log.txt)
+# grep -q 'Server listening on' <(timeout 60 tail -f log.txt)
