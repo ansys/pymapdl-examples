@@ -6,7 +6,7 @@ echo "::group:: Display files structure" && ls -R && echo "::endgroup::"
 echo "::group:: Display files structure" && docker exec "$MAPDL_INSTANCE" /bin/bash -c "ls -R" && echo "::endgroup::" || echo "Failed to display the docker structure."
 
 
-echo "::group:: Display docker run log" && cat log.txt && echo "::endgroup::"
+echo "::group:: Display docker run log" && (cat log.txt | echo "The file 'log.txt' has not been generated") && echo "::endgroup::"
 
 # Displaying MAPDL files
 FILE_PAT=./"$LOG_NAMES"/*.err
