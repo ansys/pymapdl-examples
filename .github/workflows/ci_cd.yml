@@ -141,7 +141,7 @@ jobs:
 
       - name: "test"
         run:
-          docker ls
+          docker container ls
 
       - name: "test"
         shell: python
