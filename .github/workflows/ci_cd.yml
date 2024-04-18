@@ -137,6 +137,26 @@ jobs:
           key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}-${{ github.sha }}
           restore-keys: |
             Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}
+        
+
+      - name: "test"
+        run:
+          docker ls
+
+      - name: "test"
+        shell: python
+        run:
+          from ansys.mapdl.core import LOG
+
+          LOG.setLevel("DEBUG")
+          LOG.log_to_file("mylog.log")
+
+          from ansys.mapdl.core import launch_mapdl
+
+          mapdl = launch_mapdl(loglevel="DEBUG")
+
+          print(mapdl.prep7())
+          mapdl.exit()
 
       - name: "Cache docs build directory"
         uses: actions/cache@v4
