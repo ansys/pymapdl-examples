@@ -115,9 +115,9 @@ jobs:
           DISTRIBUTED_MODE: "dmp"
         run: |
           export INSTANCE_NAME=MAPDL_0
-          .ci/start_mapdl.sh &> mapdl_launch.log & export DOCKER_PID=$!
-          echo "Launching MAPDL service at PID: $DOCKER_PID"
-          echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
+          .ci/start_mapdl.sh #&> mapdl_launch.log & export DOCKER_PID=$!
+          # echo "Launching MAPDL service at PID: $DOCKER_PID"
+          # echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
   
       - name: "DPF Server Activation"
         run: |
