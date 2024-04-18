@@ -136,7 +136,7 @@ cylindrical shape tool, as shown in the following figure:
 
    from ansys.mapdl.core import launch_mapdl
    
-   mapdl = launch_mapdl(loglevel="DEBUG")
+   mapdl = launch_mapdl()
    print(mapdl)
 
    mapdl.clear()
@@ -179,13 +179,8 @@ cylindrical shape tool, as shown in the following figure:
 .. jupyter-execute:: 
     :hide-code:
 
-    import pyvista
-
     # Plotting geometry
-    p = pyvista.Plotter()
-    p.background_color='white'
     mapdl.geometry.areas.plot()
-    p.show()
 
 
 **Figure 28.1: 3-D model of workpiece and tool**
@@ -336,7 +331,6 @@ region. The following figure shows the 3-D meshed model:
     # Plotting mesh
     mapdl.allsel()
     pl = pyvista.Plotter()
-    pl.background_color = "white"
     pl.add_mesh(mapdl.mesh.grid, show_edges=True, color='gray')
     pl.show()
     
@@ -445,18 +439,17 @@ model the contact surface on the top surface of the workpiece, and the
     mapdl.allsel("all")
 
     # Plotting geometry
-    p = pyvista.Plotter()
-    p.background_color='white'
+    pl = pyvista.Plotter()
     for elem, color in zip((170, 174),('red', 'blue')):
         mapdl.esel("s", "ename","", elem)
         esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
-        p.add_mesh(esurf, 
+        pl.add_mesh(esurf, 
                     show_edges=True, 
                     show_scalar_bar=False, 
                     style='surface', 
                     color=color)
     
-    p.show()
+    pl.show()
 
 **Figure 28.4: Contact pair between tool and workpiece.**
 ``CONTA174`` in :blue-text:`blue`, and ``TARGE170`` in :red-text:`red`.
@@ -564,7 +557,6 @@ The following contact settings are used for the ``CONTA174`` elements:
                      return_plotter=True,
                      show_axes=False,
                      theme=mytheme)
-    pl.background_color = 'white'
 
     for elem, color in zip((170, 174), ('red', 'blue')):
 
