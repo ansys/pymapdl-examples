@@ -113,7 +113,7 @@ jobs:
         run: |
           .ci/waiting_services.sh
 
-      - name: "test"
+      - name: "Test Docker containers"
         run: |
           sleep 5
           docker container ls -a
@@ -130,21 +130,16 @@ jobs:
           pip uninstall ansys-mapdl-core
           pip install -r requirements/requirements_doc.txt
   
-      - name: "test"
+      - name: "Test MAPDL service from Python"
         shell: python
         run: |
           from ansys.mapdl.core import LOG
-          
           LOG.setLevel("DEBUG")
-          
           LOG.log_to_file("mylog.log")
-          
+
           from ansys.mapdl.core import launch_mapdl
-          
           mapdl = launch_mapdl(loglevel="DEBUG")
-          
-          print(mapdl.prep7())
-          
+          mapdl.prep7()
           mapdl.exit()
 
       - name: "Install OS packages"
