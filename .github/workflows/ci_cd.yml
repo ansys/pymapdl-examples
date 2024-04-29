@@ -78,13 +78,6 @@ jobs:
     steps:
       - name: "Install Git and checkout project"
         uses: actions/checkout@v4
-     
-      - name: "Set up Python using cache"
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          cache: 'pip'
-          cache-dependency-path: 'requirements/requirements_doc.txt'
 
       - name: "Login in Github Container registry"
         uses: docker/login-action@v3.1.0
@@ -108,44 +101,23 @@ jobs:
       - name: "DPF Server Activation"
         run: |
           $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
-          
-      - name: "Waiting for the services to be up"
-        run: |
-          .ci/waiting_services.sh
-
-      - name: "Test Docker containers"
-        run: |
-          sleep 5
-          docker container ls -a
-
-      - run:
-          ps aux
-
-      # - run:
-      #     ps aux | grep ${{ env.DOCKER_PID }}
-
-
-      - name: "Install Python requirements"
-        run: |
-          pip uninstall ansys-mapdl-core
-          pip install -r requirements/requirements_doc.txt
-  
-      - name: "Test MAPDL service from Python"
-        shell: python
-        run: |
-          from ansys.mapdl.core import LOG
-          LOG.setLevel("DEBUG")
-          LOG.log_to_file("mylog.log")
-
-          from ansys.mapdl.core import launch_mapdl
-          mapdl = launch_mapdl(loglevel="DEBUG")
-          mapdl.prep7()
-          mapdl.exit()
 
       - name: "Install OS packages"
         run: |
           sudo apt-get update
           sudo apt install zip pandoc libgl1-mesa-glx xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
+     
+      - name: "Set up Python using cache"
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'requirements/requirements_doc.txt'
+        
+      - name: "Install Python requirements"
+        run: |
+          pip uninstall ansys-mapdl-core
+          pip install -r requirements/requirements_doc.txt
 
       - name: "Test virtual framebuffer"
         run: |
@@ -174,6 +146,11 @@ jobs:
           key: doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
           restore-keys: |
             doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
+
+      - name: "Waiting for the services to be up"
+        timeout-minutes: 15
+        run: |
+          .ci/waiting_services.sh
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v5
