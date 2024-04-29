@@ -105,6 +105,10 @@ jobs:
           echo "Launching MAPDL service at PID: $DOCKER_PID"
           echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
 
+      - name: "DPF Server Activation"
+        run: |
+          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
+          
       - name: "Waiting for the services to be up"
         run: |
           .ci/waiting_services.sh
@@ -136,10 +140,6 @@ jobs:
           print(mapdl.prep7())
           
           mapdl.exit()
-
-      - name: "DPF Server Activation"
-        run: |
-          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
 
       - name: "Install OS packages"
         run: |
