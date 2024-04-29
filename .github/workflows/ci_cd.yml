@@ -116,7 +116,6 @@ jobs:
         
       - name: "Install Python requirements"
         run: |
-          pip uninstall ansys-mapdl-core
           pip install -r requirements/requirements_doc.txt
 
       - name: "Test virtual framebuffer"
