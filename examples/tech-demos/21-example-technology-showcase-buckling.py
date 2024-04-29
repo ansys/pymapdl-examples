@@ -84,7 +84,7 @@ L = 431.8 + 2 * (19 - 9.5)  # Length of cylinder (mm)
 pext = 0.24  # Differential external pressure (MPa)
 
 # start MAPDL as a service
-mapdl = launch_mapdl(run_location="D:\PyAnsys\Examples\Buckling_PostBuckling_TD21")
+mapdl = launch_mapdl()
 print(mapdl)
 
 mapdl.filname("buckling")  # change filename
