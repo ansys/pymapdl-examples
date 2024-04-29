@@ -105,6 +105,10 @@ jobs:
           echo "Launching MAPDL service at PID: $DOCKER_PID"
           echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
 
+      - name: "Waiting for the services to be up"
+        run: |
+          .ci/waiting_services.sh
+
       - name: "test"
         run: |
           sleep 5
@@ -113,8 +117,8 @@ jobs:
       - run:
           ps aux
 
-      - run:
-          ps aux | grep ${{ env.DOCKER_PID }}
+      # - run:
+      #     ps aux | grep ${{ env.DOCKER_PID }}
 
       - name: "test"
         shell: python
