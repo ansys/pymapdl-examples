@@ -58,7 +58,7 @@ Starting MAPDL as a service and importing an external model
     pext = 0.24  # Differential external pressure (MPa)
 
     # start MAPDL as a service
-    mapdl = launch_mapdl(run_location="D:\PyAnsys\Examples\Buckling_PostBuckling_TD21")
+    mapdl = launch_mapdl()
     print(mapdl)
 
     mapdl.filname("buckling")  # change filename
