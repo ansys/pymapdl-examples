@@ -9,7 +9,7 @@ pyvista[jupyter]==0.43.7
 vtk==9.3.0
 
 # Documentation dependencies
-Sphinx==7.2.6
+Sphinx==7.3.7
 numpydoc==1.7.0
 ansys-sphinx-theme==0.15.2
 sphinx-copybutton==0.5.2
