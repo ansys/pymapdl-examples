@@ -105,6 +105,8 @@ sphinx_gallery_conf = {
     "thumbnail_size": (350, 350),
 }
 
+suppress_warnings = ["config.cache"]
+
 # Intersphinx mapping
 intersphinx_mapping = {
     "python": ("https://docs.python.org/dev", None),
