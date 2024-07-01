@@ -38,6 +38,8 @@ jobs:
     name: "Code style"
     runs-on: ubuntu-latest
     steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
       - name: PyAnsys code style checks
         uses: ansys/actions/code-style@v6
         with:
