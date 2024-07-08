@@ -1,6 +1,6 @@
 #PyMAPDL dependencies
 git+https://github.com/ansys/pymapdl@main
-numpy==1.26.4
+numpy==2.0.0
 nest-asyncio==1.6.0
 pandas==2.2.2
 plotly==5.22.0
