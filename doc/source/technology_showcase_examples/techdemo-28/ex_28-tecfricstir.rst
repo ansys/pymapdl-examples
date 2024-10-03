@@ -440,7 +440,7 @@ model the contact surface on the top surface of the workpiece, and the
     for elem, color in zip((170, 174),('red', 'blue')):
         mapdl.esel("s", "ename","", elem)
         esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
-        pl.add_mesh(esurf, 
+        pl.add_mesh(mesh=esurf,
                     show_edges=True, 
                     show_scalar_bar=False, 
                     style='surface', 
@@ -561,8 +561,14 @@ The following contact settings are used for the ``CONTA174`` elements:
         mapdl.esel("r", "ename", "", elem)
         esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
         if mapdl.mesh.n_elem != 1:
-            pl.add_mesh(esurf, show_edges=True, show_scalar_bar=False,
-                    style='surface', color=color)
+            pl.add_mesh(
+                meshes=esurf,
+                points=None,
+                show_edges=True,
+                show_scalar_bar=False,
+                style='surface',
+                color=color
+            )
     pl.show()
 
 **Figure 28.5: Rigid surface constrained.**
