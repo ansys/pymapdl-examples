@@ -5,11 +5,11 @@ nest-asyncio==1.6.0
 pandas==2.2.2
 plotly==5.22.0
 pythreejs==2.4.2
-pyvista[jupyter]==0.43.10
+pyvista[jupyter]==0.44.0
 vtk==9.3.1
 
 # Documentation dependencies
-Sphinx==7.3.7
+Sphinx==7.4.0
 numpydoc==1.7.0
 ansys-sphinx-theme==0.16.6
 sphinx-copybutton==0.5.2
