@@ -110,8 +110,8 @@ jobs:
 
       - name: "Install OS packages"
         run: |
-          sudo apt-get update
-          sudo apt-get install zip pandoc libgl1 xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
+          sudo apt update && sudo apt upgrade  
+          sudo apt install zip pandoc libgl1 xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
 
       - name: "Install Python requirements"
         run: |
@@ -150,11 +150,6 @@ jobs:
         timeout-minutes: 15
         run: |
           .ci/waiting_services.sh
-
-      - name: "Exporting environment variables"
-        run: |
-          export LIBGL_ALWAYS_INDIRECT=0
-          export GALLIUM_DRIVER=llvmpipe
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
