@@ -210,7 +210,7 @@ jobs:
 
   release:
     if: github.event_name == 'refs/heads/main' && !contains(github.ref, 'refs/tags')
-    needs: [style, doc-build] #docs-style
+    needs: [code-style, doc-build] #docs-style
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
