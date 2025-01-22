@@ -91,6 +91,7 @@ jobs:
           LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
           MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
           DISTRIBUTED_MODE: "dmp"
+          LIBGL_ALWAYS_INDIRECT: 1
         run: |
           export INSTANCE_NAME=MAPDL_0
           .ci/start_mapdl.sh & export DOCKER_PID=$!
