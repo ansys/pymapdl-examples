@@ -40,7 +40,7 @@ Analysis type(s):
  - Static Analysis ``ANTYPE=0``
 
 Element type(s):
- - 2-D 4-Node Sructural Solid Elements (PLANE182)
+ - 2-D 4-Node Structural Solid Elements (PLANE182)
  - 2-D 8-Node Structural Solid Elements (PLANE183)
 
 .. image:: ../_static/vm5_setup.png
