@@ -117,7 +117,6 @@ jobs:
         run: |
           pip uninstall ansys-mapdl-core
           pip install -r requirements/requirements_doc.txt
-          export LIBGL_ALWAYS_INDIRECT=1
 
       - name: "Test virtual framebuffer"
         run: |
@@ -151,6 +150,11 @@ jobs:
         timeout-minutes: 15
         run: |
           .ci/waiting_services.sh
+
+      - name: "Exporting environment variables"
+        run: |
+          export LIBGL_ALWAYS_INDIRECT=0
+          export GALLIUM_DRIVER=llvmpipe
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
