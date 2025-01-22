@@ -110,9 +110,9 @@ jobs:
 
       - name: "Install OS packages"
         run: |
-          sudo apt update
-          sudo apt install zip pandoc libgl1-mesa-glx xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
-        
+          sudo apt-get update
+          sudo apt-get install zip pandoc libgl1 xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
+
       - name: "Install Python requirements"
         run: |
           pip uninstall ansys-mapdl-core
