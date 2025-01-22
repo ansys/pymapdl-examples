@@ -1,5 +1,5 @@
 Allgaier
-ansys
+[Aa]nsys
 ANSYS
 axisymmetric
 billon
