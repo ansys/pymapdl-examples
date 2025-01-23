@@ -562,9 +562,7 @@ The following contact settings are used for the ``CONTA174`` elements:
         esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
         if mapdl.mesh.n_elem != 1:
             pl.add_mesh(
-                meshes=mapdl.mesh.grid,
-                points=esurf,
-                labels= None,
+                meshes=esurf,
                 show_edges=True,
                 show_scalar_bar=False,
                 style='surface',
