@@ -111,7 +111,7 @@ jobs:
       - name: "Install OS packages"
         run: |
           sudo apt update && sudo apt upgrade  
-          sudo apt install zip pandoc libglx-mesa0 xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
+          sudo apt install zip pandoc libgl1 xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
 
       - name: "Install Python requirements"
         run: |
@@ -154,7 +154,7 @@ jobs:
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
         env:
-          export LIBGL_ALWAYS_INDIRECT: 1
+          LIBGL_ALWAYS_INDIRECT: 1
         with:
           requires-xvfb: true
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
