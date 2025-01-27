@@ -155,6 +155,7 @@ jobs:
         uses: ansys/actions/doc-build@v8
         env:
           LIBGL_ALWAYS_SOFTWARE: 1
+          PYANSYS_VISUALIZER_HTML_BACKEND: true
         with:
           requires-xvfb: true
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
