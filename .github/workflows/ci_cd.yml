@@ -153,12 +153,14 @@ jobs:
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
+        env:
+          export LIBGL_ALWAYS_INDIRECT: 1
         with:
           requires-xvfb: true
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           checkout: false
           skip-install: true
-          sphinxopts: -j auto
+          sphinxopts: -j auto -W --keep-going
           use-python-cache: False
           check-links: False
 
