@@ -3,13 +3,13 @@ from datetime import datetime
 import os
 
 from ansys.mapdl import core as pymapdl
+import ansys.tools.visualization_interface as viz_interface
 from ansys_sphinx_theme import ansys_favicon
 from ansys_sphinx_theme import pyansys_logo_black as logo
 import numpy as np
 import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
-import ansys.tools.visualization_interface as viz_interface
 
 # Project information
 project = "pymapdl-examples"
