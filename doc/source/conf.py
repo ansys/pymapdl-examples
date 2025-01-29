@@ -3,7 +3,6 @@ from datetime import datetime
 import os
 
 from ansys.mapdl import core as pymapdl
-import ansys.tools.visualization_interface as viz_interface
 from ansys_sphinx_theme import ansys_favicon
 from ansys_sphinx_theme import pyansys_logo_black as logo
 import numpy as np
@@ -33,7 +32,6 @@ html_short_title = html_title = "PyMAPDL Examples"
 pymapdl.BUILDING_GALLERY = True
 pyvista.BUILDING_GALLERY = True
 pyvista.OFF_SCREEN = True
-viz_interface.DOCUMENTATION_BUILD = True
 
 # specify the location of your github repo
 html_theme_options = {
