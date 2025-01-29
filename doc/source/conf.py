@@ -33,7 +33,6 @@ pyvista.OFF_SCREEN = True
 # necessary when building the sphinx gallery
 pyvista.BUILDING_GALLERY = True
 pymapdl.BUILDING_GALLERY = True
-os.environ["PYVISTA_BUILDING_GALLERY"] = "true"
 
 # specify the location of your github repo
 html_theme_options = {
