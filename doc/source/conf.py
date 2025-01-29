@@ -9,6 +9,7 @@ import numpy as np
 import pyvista
 from pyvista.plotting.utilities.sphinx_gallery import DynamicScraper
 from sphinx_gallery.sorting import FileNameSortKey
+import ansys.tools.visualization_interface as viz_interface
 
 # Project information
 project = "pymapdl-examples"
@@ -27,12 +28,12 @@ html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "PyMAPDL Examples"
 
-# Ensure that offscreen rendering is used for docs generation
-pyvista.OFF_SCREEN = True
 
 # necessary when building the sphinx gallery
-pyvista.BUILDING_GALLERY = True
 pymapdl.BUILDING_GALLERY = True
+pyvista.BUILDING_GALLERY = True
+pyvista.OFF_SCREEN = True
+viz_interface.DOCUMENTATION_BUILD = True
 
 # specify the location of your github repo
 html_theme_options = {
