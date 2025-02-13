@@ -327,7 +327,7 @@ region. The following figure shows the 3-D meshed model:
     
     # Plotting mesh
     mapdl.allsel()
-    pl = pyvista.Plotter()
+    pl = pyvista.Plotter(theme=mytheme)
     pl.add_mesh(mapdl.mesh.grid, show_edges=True, color='gray')
     pl.show()
     
@@ -436,7 +436,7 @@ model the contact surface on the top surface of the workpiece, and the
     mapdl.allsel("all")
 
     # Plotting geometry
-    pl = pyvista.Plotter()
+    pl = pyvista.Plotter(theme=mytheme)
     for elem, color in zip((170, 174),('red', 'blue')):
         mapdl.esel("s", "ename","", elem)
         esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
@@ -543,6 +543,9 @@ The following contact settings are used for the ``CONTA174`` elements:
 
 .. jupyter-execute:: 
     :hide-code:
+    
+    # Unselecting previous elements
+    mapdl.esel("none")
 
     ## figure 28.5
     mapdl.allsel("all")
@@ -760,7 +763,7 @@ to the backing plate.
 .. jupyter-execute:: 
     :hide-code:
 
-    pl = pyvista.Plotter()
+    pl = pyvista.Plotter(theme=mytheme)
 
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
@@ -1041,7 +1044,7 @@ workpiece due to plunging of the tool in the first load step:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.9.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1057,7 +1060,7 @@ tool, as shown in this figure:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.10.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
