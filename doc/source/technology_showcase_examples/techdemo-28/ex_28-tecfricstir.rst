@@ -543,9 +543,6 @@ The following contact settings are used for the ``CONTA174`` elements:
 
 .. jupyter-execute:: 
     :hide-code:
-    
-    # Unselecting previous elements
-    mapdl.esel("none")
 
     ## figure 28.5
     mapdl.allsel("all")
