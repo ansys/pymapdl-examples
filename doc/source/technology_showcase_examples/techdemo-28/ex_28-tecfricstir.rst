@@ -1073,7 +1073,7 @@ this figure:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.11.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1089,7 +1089,7 @@ frictional stresses from load step 1 to load step 2:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.12.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1101,7 +1101,7 @@ frictional stresses from load step 1 to load step 2:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.13.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1123,7 +1123,7 @@ second and third load steps:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.14.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1134,7 +1134,7 @@ second and third load steps:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.15.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1278,7 +1278,7 @@ at location 1:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.19.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.camera.position=(0,0.15,0)
    pl.show() 
@@ -1390,7 +1390,7 @@ load step is shown in the following figure:
    :hide-code:
 
    mesh = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.21.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(mesh, scalars="values", cmap='jet', show_edges=True)
    pl.camera.position=(0.15,0.0,0)
    pl.show() 
@@ -1409,7 +1409,7 @@ welding region would increase, as shown in this figure:
    :hide-code:
 
    mesh = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.22.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(mesh, scalars="values", cmap='jet', show_edges=True)
    pl.camera.position=(0.15,0.0,0)
    pl.show() 
