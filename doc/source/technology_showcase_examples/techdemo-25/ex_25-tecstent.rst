@@ -502,7 +502,14 @@ This section illustrates the use of PyDPF-Core to post-process the results.
    u_stent_mesh.point_data['U_STENT'] = data
    u_stent_mesh = mesh_sco_file.point_data_to_cell_data()
    u_stent_mesh.title = 'Displacements of the stent'
-   u_stent_mesh.plot(scalars='U_STENT', show_scalar_bar=True, scalar_bar_args={'title':'Displacements'}, cmap='jet', text='Displacements of the stent')
+   u_stent_mesh.plot(
+      scalars='U_STENT',
+      show_scalar_bar=True,
+      scalar_bar_args={'title':'Displacements'},
+      cmap='jet',
+      text='Displacements of the stent',
+      theme=mytheme,
+   )
 
 
 25.6. Exit MAPDL

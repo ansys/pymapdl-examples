@@ -177,7 +177,7 @@ cylindrical shape tool, as shown in the following figure:
     :hide-code:
 
     # Plotting geometry
-    mapdl.geometry.areas.plot()
+    mapdl.geometry.areas.plot(theme=mytheme)
 
 
 **Figure 28.1: 3-D model of workpiece and tool**
@@ -765,14 +765,24 @@ to the backing plate.
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
 
-    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
-                    style='surface', color='red')
+    mapdl.geometry.areas.plot(
+        show_edges=False,
+        show_scalar_bar=False,
+        style='surface',
+        color='red',
+        theme=mytheme
+    )
     pl.show()
     
     mapdl.asel('s', 'loc', 'z', -t)
 
-    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
-                    style='surface', color='yellow')
+    mapdl.geometry.areas.plot(
+        show_edges=False,
+        show_scalar_bar=False,
+        style='surface',
+        color='yellow',
+        theme=mytheme
+    )
     pl.show()
 
 
