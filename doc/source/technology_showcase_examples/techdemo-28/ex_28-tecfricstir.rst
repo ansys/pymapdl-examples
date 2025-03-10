@@ -760,6 +760,7 @@ to the backing plate.
 .. jupyter-execute:: 
     :hide-code:
 
+
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
 
@@ -768,6 +769,7 @@ to the backing plate.
         show_scalar_bar=False,
         style='surface',
         color='red',
+        jupyter_backend='html',
     )
     
     mapdl.asel('s', 'loc', 'z', -t)
@@ -777,6 +779,7 @@ to the backing plate.
         show_scalar_bar=False,
         style='surface',
         color='yellow',
+        jupyter_backend='html',
     )
 
 
