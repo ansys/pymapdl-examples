@@ -760,8 +760,6 @@ to the backing plate.
 .. jupyter-execute:: 
     :hide-code:
 
-    .. pl = pyvista.Plotter(theme=mytheme)
-
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
 
@@ -771,7 +769,6 @@ to the backing plate.
         style='surface',
         color='red',
     )
-    .. pl.show()
     
     mapdl.asel('s', 'loc', 'z', -t)
 
@@ -781,7 +778,6 @@ to the backing plate.
         style='surface',
         color='yellow',
     )
-    .. pl.show()
 
 
 **Figure 28.6: Thermal boundary conditions.**
