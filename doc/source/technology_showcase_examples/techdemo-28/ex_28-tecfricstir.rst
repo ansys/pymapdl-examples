@@ -177,7 +177,7 @@ cylindrical shape tool, as shown in the following figure:
     :hide-code:
 
     # Plotting geometry
-    mapdl.geometry.areas.plot()
+    mapdl.geometry.areas.plot(jupyter_backend='html')
 
 
 **Figure 28.1: 3-D model of workpiece and tool**
