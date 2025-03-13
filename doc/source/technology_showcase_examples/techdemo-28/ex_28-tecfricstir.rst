@@ -541,42 +541,6 @@ The following contact settings are used for the ``CONTA174`` elements:
 * To set the behavior of contact surface as bonded (always): ``KEYOPT(12) = 5``
 
 
-.. jupyter-execute:: 
-    :hide-code:
-
-    ## figure 28.5
-    mapdl.allsel("all")
-    mapdl.esel('s', 'mat', '', 2)
-    mapdl.nsle('s')
-
-    pl = mapdl.eplot(plot_bc=True, 
-                     bc_glyph_size=0.002,
-                     return_plotter=True,
-                     show_axes=False,
-                     theme=mytheme)
-
-    for elem, color in zip((170, 174), ('red', 'blue')):
-
-        mapdl.esel('s', 'mat', '', 2)
-        mapdl.esel("r", "ename", "", elem)
-        esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
-        if mapdl.mesh.n_elem != 1:
-            pl.add_mesh(
-                meshes=[esurf],
-                points=[],
-                labels=[],
-                show_edges=True,
-                show_scalar_bar=False,
-                style='surface',
-                color=color
-            )
-    pl.show()
-
-**Figure 28.5: Rigid surface constrained.**
-Pilot node or master with applied boundary conditions and the constrained 
-top surface of the tool (:blue-text:`blue`).**
-
-
 .. code:: python
 
     # * Define Rigid Surface Constraint on tool top surface
@@ -618,6 +582,41 @@ top surface of the tool (:blue-text:`blue`).**
     mapdl.esln()
     mapdl.esurf()
     mapdl.allsel("all")
+
+
+.. jupyter-execute:: 
+    :hide-code:
+
+    ## figure 28.5
+    mapdl.allsel("all")
+    mapdl.esel('s', 'mat', '', 2)
+    mapdl.nsle('s')
+
+    pl = mapdl.eplot(plot_bc=True, 
+                     bc_glyph_size=0.002,
+                     return_plotter=True,
+                     show_axes=False,
+                     theme=mytheme)
+
+    for elem, color in zip((170, 174), ('red', 'blue')):
+
+        mapdl.esel('s', 'mat', '', 2)
+        mapdl.esel("r", "ename", "", elem)
+        esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
+        if mapdl.mesh.n_elem != 1:
+            pl.add_mesh(
+                meshes=esurf,
+                show_edges=True,
+                show_scalar_bar=False,
+                style='surface',
+                color=color
+            )
+    pl.show()
+
+**Figure 28.5: Rigid surface constrained.**
+Pilot node or master with applied boundary conditions and the constrained 
+top surface of the tool (:blue-text:`blue`).**
+
 
 
 28.4. Material properties
