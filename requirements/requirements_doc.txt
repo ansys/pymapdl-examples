@@ -1,5 +1,5 @@
 #PyMAPDL dependencies
-git+https://github.com/ansys/pymapdl@fix/plotter-issues
+git+https://github.com/ansys/pymapdl@main
 numpy==2.2.2
 nest-asyncio==1.6.0
 pandas==2.2.3
