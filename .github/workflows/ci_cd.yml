@@ -215,7 +215,7 @@ jobs:
 
   release:
     if: github.event_name == 'refs/heads/main' && !contains(github.ref, 'refs/tags')
-    needs: [code-style, doc-build] #docs-style
+    needs: [doc-build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
