@@ -171,7 +171,7 @@ cylindrical shape tool, as shown in the following figure:
    mapdl.cyl4(0, 0, r1, 90, r1, 180, h)
    mapdl.cyl4(0, 0, r1, 180, r1, 270, h)
    mapdl.cyl4(0, 0, r1, 270, r1, 360, h)
-   mapdl.vglue(3, 4, 5, 6);
+   mapdl.vglue(3, 4, 5, 6)
 
 .. jupyter-execute:: 
     :hide-code:
