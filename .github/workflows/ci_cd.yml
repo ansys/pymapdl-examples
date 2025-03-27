@@ -14,7 +14,7 @@ on:
 env:
   DPF_PORT: 21002
   DPF_START_SERVER: False
-  MAIN_PYTHON_VERSION: '3.10'
+  MAIN_PYTHON_VERSION: '3.12'
   MAPDL_PACKAGE: ghcr.io/ansys/mapdl
   MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.2-ubuntu
   ON_CI: True
@@ -151,6 +151,9 @@ jobs:
 
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@v8
+        env:
+          LIBGL_ALWAYS_SOFTWARE: 1
+          PYANSYS_VISUALIZER_HTML_BACKEND: true
         with:
           requires-xvfb: true
           python-version: ${{ env.MAIN_PYTHON_VERSION }}

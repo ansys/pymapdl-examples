@@ -177,7 +177,7 @@ cylindrical shape tool, as shown in the following figure:
     :hide-code:
 
     # Plotting geometry
-    mapdl.geometry.areas.plot()
+    mapdl.geometry.areas.plot(jupyter_backend='html')
 
 
 **Figure 28.1: 3-D model of workpiece and tool**
@@ -327,7 +327,7 @@ region. The following figure shows the 3-D meshed model:
     
     # Plotting mesh
     mapdl.allsel()
-    pl = pyvista.Plotter()
+    pl = pyvista.Plotter(theme=mytheme)
     pl.add_mesh(mapdl.mesh.grid, show_edges=True, color='gray')
     pl.show()
     
@@ -436,7 +436,7 @@ model the contact surface on the top surface of the workpiece, and the
     mapdl.allsel("all")
 
     # Plotting geometry
-    pl = pyvista.Plotter()
+    pl = pyvista.Plotter(theme=mytheme)
     for elem, color in zip((170, 174),('red', 'blue')):
         mapdl.esel("s", "ename","", elem)
         esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
@@ -541,40 +541,6 @@ The following contact settings are used for the ``CONTA174`` elements:
 * To set the behavior of contact surface as bonded (always): ``KEYOPT(12) = 5``
 
 
-.. jupyter-execute:: 
-    :hide-code:
-
-    ## figure 28.5
-    mapdl.allsel("all")
-    mapdl.esel('s', 'mat', '', 2)
-    mapdl.nsle('s')
-
-    pl = mapdl.eplot(plot_bc=True, 
-                     bc_glyph_size=0.002,
-                     return_plotter=True,
-                     show_axes=False,
-                     theme=mytheme)
-
-    for elem, color in zip((170, 174), ('red', 'blue')):
-
-        mapdl.esel('s', 'mat', '', 2)
-        mapdl.esel("r", "ename", "", elem)
-        esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
-        if mapdl.mesh.n_elem != 1:
-            pl.add_mesh(
-                meshes=esurf,
-                show_edges=True,
-                show_scalar_bar=False,
-                style='surface',
-                color=color
-            )
-    pl.show()
-
-**Figure 28.5: Rigid surface constrained.**
-Pilot node or master with applied boundary conditions and the constrained 
-top surface of the tool (:blue-text:`blue`).**
-
-
 .. code:: python
 
     # * Define Rigid Surface Constraint on tool top surface
@@ -617,6 +583,39 @@ top surface of the tool (:blue-text:`blue`).**
     mapdl.esurf()
     mapdl.allsel("all")
 
+
+.. jupyter-execute:: 
+    :hide-code:
+
+    ## figure 28.5
+    mapdl.allsel("all")
+    mapdl.esel('s', 'mat', '', 2)
+    mapdl.nsle('s')
+
+    pl = mapdl.eplot(plot_bc=True, 
+                     bc_glyph_size=0.002,
+                     return_plotter=True,
+                     show_axes=False,
+                     theme=mytheme)
+
+    for elem, color in zip((170, 174), ('red', 'blue')):
+
+        mapdl.esel('s', 'mat', '', 2)
+        mapdl.esel("r", "ename", "", elem)
+        esurf = mapdl.mesh._grid.linear_copy().extract_surface().clean()
+        if mapdl.mesh.n_elem != 1:
+            pl.add_mesh(
+                meshes=esurf,
+                show_edges=True,
+                show_scalar_bar=False,
+                style='surface',
+                color=color
+            )
+    pl.show()
+
+**Figure 28.5: Rigid surface constrained.**
+Pilot node or master with applied boundary conditions and the constrained 
+top surface of the tool (:blue-text:`blue`).**
 
 
 
@@ -760,20 +759,27 @@ to the backing plate.
 .. jupyter-execute:: 
     :hide-code:
 
-    pl = pyvista.Plotter()
 
     mapdl.allsel()
     mapdl.asel('u', 'loc', 'z', -t)
 
-    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
-                    style='surface', color='red')
-    pl.show()
+    mapdl.geometry.areas.plot(
+        show_edges=False,
+        show_scalar_bar=False,
+        style='surface',
+        color='red',
+        jupyter_backend='html',
+    )
     
     mapdl.asel('s', 'loc', 'z', -t)
 
-    mapdl.geometry.areas.plot(show_edges=False, show_scalar_bar=False,
-                    style='surface', color='yellow')
-    pl.show()
+    mapdl.geometry.areas.plot(
+        show_edges=False,
+        show_scalar_bar=False,
+        style='surface',
+        color='yellow',
+        jupyter_backend='html',
+    )
 
 
 **Figure 28.6: Thermal boundary conditions.**
@@ -1041,7 +1047,7 @@ workpiece due to plunging of the tool in the first load step:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.9.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1057,7 +1063,7 @@ tool, as shown in this figure:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.10.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1070,7 +1076,7 @@ this figure:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.11.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1086,7 +1092,7 @@ frictional stresses from load step 1 to load step 2:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.12.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1098,7 +1104,7 @@ frictional stresses from load step 1 to load step 2:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.13.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1120,7 +1126,7 @@ second and third load steps:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.14.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1131,7 +1137,7 @@ second and third load steps:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.15.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.show() 
 
@@ -1275,7 +1281,7 @@ at location 1:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.19.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(rotor1, scalars="values", cmap='jet', show_edges=True)
    pl.camera.position=(0,0.15,0)
    pl.show() 
@@ -1387,7 +1393,7 @@ load step is shown in the following figure:
    :hide-code:
 
    mesh = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.21.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(mesh, scalars="values", cmap='jet', show_edges=True)
    pl.camera.position=(0.15,0.0,0)
    pl.show() 
@@ -1406,7 +1412,7 @@ welding region would increase, as shown in this figure:
    :hide-code:
 
    mesh = pyvista.read(download_tech_demo_data("td-28/supporting_files",'Figure_28.22.vtk'))
-   pl = pyvista.Plotter()
+   pl = pyvista.Plotter(theme=mytheme)
    pl.add_mesh(mesh, scalars="values", cmap='jet', show_edges=True)
    pl.camera.position=(0.15,0.0,0)
    pl.show() 

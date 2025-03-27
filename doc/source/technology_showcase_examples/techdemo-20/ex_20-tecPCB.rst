@@ -2070,7 +2070,7 @@ It is recommended to use `DPF Post <dpf_post_docs_>`_.
     total_def = core.operators.math.norm_fc(displacements)
     total_def_container = total_def.outputs.fields_container()
     mesh = model.metadata.meshed_region
-    mesh.plot(total_def_container.get_field_by_time_id(1))
+    mesh.plot(total_def_container.get_field_by_time_id(1), theme=mytheme)
 
 
 

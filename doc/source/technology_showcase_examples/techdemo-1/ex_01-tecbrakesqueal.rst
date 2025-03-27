@@ -221,7 +221,7 @@ Start this example by launching MAPDL and loading the model.
    from ansys.mapdl.core.examples.downloads import download_vtk_rotor, download_tech_demo_data
 
    rotor = pyvista.read(download_vtk_rotor())
-   rotor.plot(color='w', show_edges=True)
+   rotor.plot(color='w', show_edges=True, theme=mytheme)
 
 
 1.4. Material properties
@@ -347,7 +347,7 @@ The following input shows the solution steps involved in this method:
    :hide-code:
 
    rotor1 = pyvista.read(download_tech_demo_data('td-1', 'rotor_linear_step21_unorm.vtk' ))
-   rotor1.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor1.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 **Figure 1.3: Mode Shape for Unstable Mode (Mode 21).**
@@ -504,7 +504,7 @@ The following inputs show the solution steps involved with this method:
    :hide-code:
     
    rotor2_21 = pyvista.read(download_tech_demo_data('td-1', 'rotor_partial_step21_unorm.vtk' ))
-   rotor2_21.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor2_21.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 **Figure 1.5: Mode Shape for Unstable Mode (Mode 21).**
@@ -516,7 +516,7 @@ Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
    :hide-code:
    
    rotor2_22 = pyvista.read(download_tech_demo_data('td-1', 'rotor_partial_step22_unorm.vtk' ))
-   rotor2_22.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor2_22.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 **Figure 1.6: Mode Shape for Unstable Mode (Mode 21).**
@@ -662,7 +662,7 @@ Following is the process for solving a brake-squeal problem using this method:
    :hide-code:
     
    rotor3_21 = pyvista.read(download_tech_demo_data('td-1', 'rotor_non_linear_step21_unorm.vtk' )) 
-   rotor3_21.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor3_21.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 
@@ -674,7 +674,7 @@ Following is the process for solving a brake-squeal problem using this method:
    :hide-code:
 
    rotor3_22 = pyvista.read(download_tech_demo_data('td-1', 'rotor_non_linear_step22_unorm.vtk' )) 
-   rotor3_22.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor3_22.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 
@@ -699,7 +699,7 @@ produce a squealing noise.
    :hide-code:
     
    rotor3_21 = pyvista.read(download_tech_demo_data('td-1', 'rotor_linear_step21_unorm.vtk' ))
-   rotor3_21.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor3_21.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 **Figure 1.9: Mode Shape for Unstable Mode (Mode 21).**
@@ -712,7 +712,7 @@ Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
    
    rotor3_22 = pyvista.read(download_tech_demo_data('td-1', 'rotor_linear_step22_unorm.vtk' ))
    rotor3_22['values'] = rotor3_22['values']*100
-   rotor3_22.plot(scalars='values', cmap='jet', show_edges=True)
+   rotor3_22.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
 **Figure 1.10: Mode Shape for Unstable Mode (Mode 22).**
