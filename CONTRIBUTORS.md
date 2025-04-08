@@ -6,7 +6,7 @@
 
 ## Individual Contributors
 
-* [German](https://github.com/germa89)
+* [Germán Martinez Ayuso](https://github.com/germa89)
 * [Jamil Hajjar](https://github.com/Gryfenfer97)
 * [Kathy Pippert](https://github.com/PipKat)
 * [Kerry McAdams](https://github.com/klmcadams)
