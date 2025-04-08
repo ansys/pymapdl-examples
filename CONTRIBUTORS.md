@@ -6,10 +6,11 @@
 
 ## Individual Contributors
 
-* [Roberto Pastor Muela](https://github.com/RobPasMue)
 * [Germán Martinez Ayuso](https://github.com/germa89)
-* [Vikas Namdeo](https://github.com/vnamdeo)
 * [Jamil Hajjar](https://github.com/Gryfenfer97)
+* [Kathy Pippert](https://github.com/PipKat)
+* [Kerry McAdams](https://github.com/klmcadams)
 * [Maxime Rey](https://github.com/MaxJPRey)
 * [Pernelle Marone-Hitz](https://github.com/pmaroneh)
-* [Kathy Pippert](https://github.com/PipKat)
+* [Roberto Pastor Muela](https://github.com/RobPasMue)
+* [Vikas Namdeo](https://github.com/vnamdeo)
