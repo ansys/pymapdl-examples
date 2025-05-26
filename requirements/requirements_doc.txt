@@ -1,15 +1,11 @@
 #PyMAPDL dependencies
-git+https://github.com/ansys/pymapdl@main
+git+https://github.com/ansys/pymapdl.git#egg=ansys-mapdl-core[graphics]
 numpy==2.2.2
 nest-asyncio==1.6.0
 pandas==2.2.3
 plotly==6.0.1
 pythreejs==2.4.2
 pyvista[jupyter]==0.44.2
-
-# Graphics dependencies
-ansys-tools-visualization-interface==0.9.1
-matplotlib==3.10.3
 
 # Documentation dependencies
 Sphinx==8.1.3
