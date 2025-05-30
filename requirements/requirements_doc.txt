@@ -1,5 +1,5 @@
 #PyMAPDL dependencies
-git+https://github.com/ansys/pymapdl@main
+git+https://github.com/ansys/pymapdl.git#egg=ansys-mapdl-core[graphics]
 numpy==2.2.2
 nest-asyncio==1.6.0
 pandas==2.2.3
