@@ -122,7 +122,16 @@ direction at most locations. Mixed u-P element formulation is enabled (KEYOPT(6)
 Starting MAPDL as a service and importing an external model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: python
+.. jupyter-execute:: ../../common_jupyter_execute.py
+   :hide-code:
+
+.. jupyter-execute::
+
+    # starting MAPDL as a service and importing an external model
+    from ansys.mapdl.core import launch_mapdl
+    from ansys.mapdl.core.examples.downloads import download_tech_demo_data
+
+    mapdl = launch_mapdl()
 
     # Download the CDB file of aortic lumen.
     aorta_mesh_file = download_tech_demo_data(
@@ -130,6 +139,7 @@ Starting MAPDL as a service and importing an external model
     )
 
     # Entering the PREP7 processor in MAPDL instance.
+    mapdl.clear()
     mapdl.prep7()
 
     # Reads a CDB file of solid model and database information into the database.
@@ -139,10 +149,11 @@ Starting MAPDL as a service and importing an external model
     mapdl.allsel("all", "all")
 
     # Element plot of the Abdominal Aorta Model
-    mapdl.eplot(background='w')
+    mapdl.eplot(background='w', theme=mytheme, notebook=True, jupyter_backend='html')
 
     # Exits from a pre-processor.
     mapdl.finish()
+
 
 2.1. Material properties
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -253,13 +264,15 @@ on the input geometry.
     # Solve the load step 1 (inverse-solving).
     mapdl.solve()
 
+
 3.2. Load Step 2 (Forward-Solving)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After an inverse-solving load step, the solver generally allows an analysis to continue
 as forward-solving in a new load step. You can modify existing loads or apply new loads
 in the forward-solving step. For more information, see `Reverting to Forward Solving and
-Continuing the Analysis as a New Load Step in the Structural Analysis Guide`_.
+Continuing the Analysis as a New Load Step in the Structural Analysis Guide 
+<https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23strinvsolvrevertfwd>`_.
 
 Load Step 2 (Forward-Solving) - To solve the model for end-systolic pressure (120 mm Hg),
 the solution continues using forward solving (INVOPT,OFF). The pressure load is increased
@@ -453,7 +466,8 @@ When performing a similar type of analysis using inverse-solving, consider the f
 
  - Use a reversed sign to apply displacement type loading in the inverse-solving load step.
 
-   For more information, see `Applying Loads in an Inverse-Solving Analysis in the Structural Analysis Guide`_.
+   For more information, see `Applying Loads in an Inverse-Solving Analysis in the Structural Analysis Guide
+   <https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23sect2_zjl_jbv_1rb>`_.
 
 
 7. References
