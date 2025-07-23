@@ -1641,7 +1641,6 @@ compared to frictional heat.
 ----------------
 
 .. jupyter-execute::
-    :hide-code:
 
     mapdl.finish()
     mapdl.exit()

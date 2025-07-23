@@ -154,6 +154,9 @@ Starting MAPDL as a service and importing an external model
     # Exits from a pre-processor.
     mapdl.finish()
 
+    # Exists MAPDL instance.
+    mapdl.exit()
+
 
 2.1. Material properties
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -454,20 +457,20 @@ and prestress effects, the actual maximum total deformation is much lower.
 
 When performing a similar type of analysis using inverse-solving, consider the following:
 
- - Use a structured mesh with a sufficient number of element layers in the thickness direction.
+- Use a structured mesh with a sufficient number of element layers in the thickness direction.
 
-   Doing so captures results more accurately, as a free mesh may give lesser-quality tetrahedral
-   and/or pyramid elements, leading to spurious high-stress concentrations at some locations.
+  Doing so captures results more accurately, as a free mesh may give lesser-quality tetrahedral
+  and/or pyramid elements, leading to spurious high-stress concentrations at some locations.
 
- - Perform a loop test to verify the results of an inverse-solving analysis.
+- Perform a loop test to verify the results of an inverse-solving analysis.
 
-   An inverse-solving analysis followed by a forward-solving analysis, or vice versa,
-   is known as a loop test, as it should always result in the same geometry with the same solution.
+  An inverse-solving analysis followed by a forward-solving analysis, or vice versa,
+  is known as a loop test, as it should always result in the same geometry with the same solution.
 
- - Use a reversed sign to apply displacement type loading in the inverse-solving load step.
+- Use a reversed sign to apply displacement type loading in the inverse-solving load step.
 
-   For more information, see `Applying Loads in an Inverse-Solving Analysis in the Structural Analysis Guide
-   <https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23sect2_zjl_jbv_1rb>`_.
+  For more information, see `Applying Loads in an Inverse-Solving Analysis in the Structural Analysis Guide
+  <https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23sect2_zjl_jbv_1rb>`_.
 
 
 7. References
@@ -475,22 +478,22 @@ When performing a similar type of analysis using inverse-solving, consider the f
 
 The following reference works are cited in, or were consulted when creating, this example problem:
 
- - Bols, J., Degroote, J., Trachet, B., Verhegghe, B., Segers, P., & Vierendeels, J. (2013).
-   A computational method to assess the in vivo stresses and unloaded configuration of
-   patient-specific blood vessels. Journal of Computational and Applied Mathematics. 246: 10-17.
+- Bols, J., Degroote, J., Trachet, B., Verhegghe, B., Segers, P., & Vierendeels, J. (2013).
+  A computational method to assess the in vivo stresses and unloaded configuration of
+  patient-specific blood vessels. Journal of Computational and Applied Mathematics. 246: 10-17.
 
- - Trachet, B., Renard, M., DeSantis, G., Staelens, S., DeBacker, J., Antiga, L., Loeys,
-   B., & Segers, P. (2011). An integrated framework to quantitatively link mouse-specific
-   hemodynamics to aneurysm formation in angiotensin II-infused ApoE -/- mice. Annals of
-   Biomedical Engineering. 39: 2430-2444.
+- Trachet, B., Renard, M., DeSantis, G., Staelens, S., DeBacker, J., Antiga, L., Loeys,
+  B., & Segers, P. (2011). An integrated framework to quantitatively link mouse-specific
+  hemodynamics to aneurysm formation in angiotensin II-infused ApoE -/- mice. Annals of
+  Biomedical Engineering. 39: 2430-2444.
 
- - Trachet, B., Bols, J., Degroote, J., Verhegghe, B., Stergiopulos, N., Vierendeels, J., &
-   Segers, P. (2015). An animal-specific FSI model of the abdominal aorta in anesthetized
-   mice. Annals of Biomedical Engineering. 43: 1298-1309.
+- Trachet, B., Bols, J., Degroote, J., Verhegghe, B., Stergiopulos, N., Vierendeels, J., &
+  Segers, P. (2015). An animal-specific FSI model of the abdominal aorta in anesthetized
+  mice. Annals of Biomedical Engineering. 43: 1298-1309.
 
- - Prendergast, P.J., Lally, C., Daly, S., Reid, A. J., Lee, T. C., Quinn, D., & Dolan,
-   F. (2003). Analysis of prolapse in cardiovascular stents: a constitutive equation for
-   vascular tissue and finite-element modelling. Journal of Biomechanical Engineering. 125(5): 692-699.
+- Prendergast, P.J., Lally, C., Daly, S., Reid, A. J., Lee, T. C., Quinn, D., & Dolan,
+  F. (2003). Analysis of prolapse in cardiovascular stents: a constitutive equation for
+  vascular tissue and finite-element modelling. Journal of Biomechanical Engineering. 125(5): 692-699.
 
 
 8. Input files
