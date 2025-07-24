@@ -156,7 +156,7 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
     techdemo-21/ex_21-tecbuckling.rst
     techdemo-25/ex_25-tecstent.rst
     techdemo-28/ex_28-tecfricstir.rst
-	  techdemo-62/ex_62-techinverse.rst
+    techdemo-62/ex_62-techinverse.rst
 
 
 
