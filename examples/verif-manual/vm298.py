@@ -125,12 +125,16 @@ from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
 
-mapdl = launch_mapdl(loglevel="WARNING", print_com=True)
+mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
 
 # ANSYS MEDIA REL. 2025R1 (11/08/2024) REF. VERIF. MANUAL: REL. 2025R1
 mapdl.title("VM298,PSD ANALYSIS OF 40-STORY BUILDING UNDER WIND LOAD EXCITATION")
 
-# STRUCTURAL PARAMETERS OF BUILDING
+
+###############################################################################
+# Parameter definition
+# --------------------
+# Structural parameters of the 40-story building
 
 _N = 40  # NUMBER OF STORIES
 _H = 4  # M, STORY HEIGHT
@@ -139,7 +143,8 @@ _MASS = 1.29e6  # KG, LUMPED MASS AT FLOOR LEVEL
 _K = 1e9  # N/M, ELASTIC STIFFNESS BETWEEN FLOORS
 _BETA = 2.155e4  # N/M/SEC, DAMPING COEFFICIENT BETWEEN FLOORS
 
-# AERODYNAMIC PARAMETERS OF WIND EXCITATION
+
+# Aerodynamic parameters of wind excitation
 
 _Aw = 192  # M^2, WIND LOAD TRIBUTARY AREA
 Zg = 300  # M, GRADIENT HEIGHT
@@ -153,13 +158,19 @@ _C1 = 7.7  # CONSTANT TERM
 
 _PI = 4 * math.atan(1)
 
+###############################################################################
+# Pre-processing
+# ---------------
+
 mapdl.prep7(mute=True)
 
-# ADD NODES ALONG X-AXIS FOR SPRING-DAMPER ELEMENTS
+# Add nodes along x-axis for spring-damper elements
+
 for i in range(1, _N + 2):
     mapdl.n(i, 0, _H * (i - 1), 0)
 
-# SPRING-DAMPER ELEMENTS
+# Spring-damper elements
+
 mapdl.et(1, 14)
 mapdl.keyopt(1, 2, 1)
 mapdl.r(1, _K, _BETA)
@@ -167,11 +178,13 @@ mapdl.type(1)
 mapdl.real(1)
 mapdl.mat(1)
 
-# ADD NODES FOR MASS ELEMENTS
+# Add nodes for mass elements
+
 for i in range(1, _N + 1):
     mapdl.e(i, i + 1)
 
-# POINT MASS ELEMENTS
+# Add point mass elements
+
 mapdl.et(2, 21)
 mapdl.keyopt(2, 3, 2)
 mapdl.r(2, _MASS)
@@ -180,18 +193,21 @@ mapdl.real(2)
 mapdl.mat(2)
 maxnod = mapdl.get("MAXNOD", "NODE", 0, "NUM", "MAX")
 
-# ADD POINT MASS ELEMENTS AT EACH FLOOR
+# Add point mass elements at each floor
+
 for i in range(2, int(maxnod + 1)):
     mapdl.e(i)
 
-# NODE COMPONENTS
+# Add node components
+
 mapdl.nsel("S", "LOC", "Y", 0)
 mapdl.cm("NODE_BASE", "NODE")
 mapdl.nsel("INVE")
 mapdl.cm("NODE_FLOOR", "NODE")
 mapdl.allsel("ALL", "ALL")
 
-# BOUNDARY CONDITIONS
+# Add boundary conditions
+
 mapdl.cmsel("S", "NODE_BASE")
 mapdl.d("ALL", "ALL")
 mapdl.allsel("ALL", "ALL")
@@ -206,7 +222,12 @@ mapdl.eplot()
 
 mapdl.finish()
 
-# MODAL ANALYSIS
+###############################################################################
+# Modal analysis
+# --------------
+# Perform modal analysis to obtain the first mode frequency
+# and prepare for the PSD analysis.
+
 NMODES = 1
 mapdl.slashsolu()
 mapdl.antype("MODAL")
@@ -216,43 +237,45 @@ mapdl.mxpand()
 mapdl.solve()
 mapdl.finish()
 
-# CIRCULAR FREQUENCY OF FIRST MODE
+# Circular frequency of first mode
+
 freq_1 = mapdl.get("FREQ_1", "MODE", 1, "FREQ")
 OMG_1 = 2 * _PI * freq_1
 
 print("freq:", freq_1)
 print("omg:", OMG_1)
 
-# WIND LOAD SPECTRUM INPUT
-FREQ_PTS = 120
-# BEGINNING OF FREQUENCY RANGE (1E-03 RAD/SEC)
-FREQ_BEGIN = 1e-03
-# END OF FREQUENCY RANGE (2 RAD/SEC)
-FREQ_END = 2 / (2 * _PI)
-# Frequency increment
-FREQ_INC = (FREQ_END - FREQ_BEGIN) / FREQ_PTS
+# Define frequency parameters
 
-# FREQUENCY TABLE (HZ)
+FREQ_PTS = 120  # Wind load spectrum input
+FREQ_BEGIN = 1e-03  # Beginning of frequency range in rad/sec
+FREQ_END = 2 / (2 * _PI)  # End of frequency range in rad/sec
+FREQ_INC = (FREQ_END - FREQ_BEGIN) / FREQ_PTS  # Frequency increment in rad/sec
+
+# Frequency table (Hz)
+
 mapdl.dim("FREQ_ARRAY", "ARRAY", FREQ_PTS)
 mapdl.vfill("FREQ_ARRAY", "RAMP", FREQ_BEGIN, FREQ_INC)
 FREQ_ARRAY = mapdl.parameters["FREQ_ARRAY"]
 freq_array = np.arange(FREQ_BEGIN, stop=FREQ_END, step=FREQ_INC)
 
-# CIRCULAR FREQUENCY TABLE (RAD/S)
+# Circular frequency table in rad/s
+
 OMG_BEG = 2 * _PI * FREQ_BEGIN
 OMG_INC = 2 * _PI * FREQ_INC
 mapdl.dim("OMG_ARRAY", "ARRAY", FREQ_PTS)
 mapdl.vfill("OMG_ARRAY", "RAMP", OMG_BEG, OMG_INC)
 OMG_ARRAY = mapdl.parameters["OMG_ARRAY"]
 
-# TABLE OF DIRECT AND COSPECTRAL INPUT PSD WIND SPECTRUM VALUES (DAVENPORT)
-# CREATE A 2D ARRAY FOR COSPECTRAL INPUT PSD WIND SPECTRUM VALUES
+# Table of direct and cospectral input PSD wind spectrum values (Davenport)
+# Create a 2D array for direct input PSD wind spectrum values
+
 mapdl.dim("COPHIFF", "ARRAY", _N, _N, FREQ_PTS)
 mapdl.vfill("COPHIFF", "DATA", 0.0)
 COPHIFF = mapdl.parameters["COPHIFF"]
 
-# +
-# COMPUTE DIRECT AND COSPECTRAL INPUT PSD WIND SPECTRUM VALUES
+# Compute the direct and cospectral input PSD wind spectrum values
+
 start_time = time.time()
 
 for j in range(1, _N):
@@ -277,19 +300,19 @@ elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
 # -
 
-# PSD ANALYSIS
+###############################################################################
+# PSD analysis
+# --------------
+
 mapdl.slashsolu()
-# PERFORM SPECTRUM ANALYSIS
+# Perform spectrum analysis
 mapdl.antype("SPECTRUM")
-# POWER SPECTRAL DENSITY ANALYSIS
+# Power Spectral Density analysis
 mapdl.spopt("PSD")
 
-# CONVERSION FACTOR FROM 2-SIDED INPUT PSD IN M2/RAD/S
+# Conversion factor from 2-sided input PSD in m2/rad/s to 1-sided input PSD in m2/Hz
 _FACT = 4 * _PI
 
-# +
-# TO 1-SIDED INPUT PSD IN M2/HZ
-# WIND SPECTRUM LOADING
 start_time = time.time()
 
 with mapdl.non_interactive:
@@ -304,13 +327,14 @@ with mapdl.non_interactive:
                 else:
                     mapdl.coval(j, k, COPHIFF[j, k, i] * _FACT)
         if j == 40:
-            mapdl.show("PNG", "REV")
             mapdl.plopts("DATE", 0)
+            mapdl.show("PNG", "REV")
+            mapdl.show("CLOSE")
             # DISPLAY APPLIED WIND EXCITATION PSD SPECTRUM
             mapdl.psdgraph(j - 1, j, 3)
         if j == 1:
-            mapdl.show("PNG", "REV")
             mapdl.plopts("DATE", 0)
+            mapdl.show("PNG", "REV")
             mapdl.psdgraph(j - 1, j, 3)
         # DELETE PREVIOUS WIND SPECTRUM LOAD
         mapdl.fdele(j, "FX")
@@ -318,13 +342,10 @@ with mapdl.non_interactive:
         mapdl.f(j + 1, "FX", 1.0)
         # PERFORM THE PARTICIPATION FACTOR CALCULATION
         mapdl.pfact(j, "NODE")
-        mapdl.show("CLOSE")
 
-# END OF WIND SPECTRUM LOADING
 end_time = time.time()
 elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
-# -
 
 # DELETE PREVIOUS NODAL WIND FORCE
 mapdl.fdele(node="ALL", lab="FX")
@@ -333,29 +354,41 @@ mapdl.psdres(lab="DISP")
 # PSD MODE COMBINATION (USE DEFAULT TOLERANCE)
 mapdl.psdcom()
 
+###############################################################################
+# Solve the PSD analysis
+# ~~~~~~~~~~~~~~~~~~~~~~~
+
 mapdl.solve()
 mapdl.finish()
 
-# POSTPROCESSING RESULTS AT TOP FLOOR
+###############################################################################
+# Post-processing
+# ---------------
+
+
+# Post-processing in POST1
+# ~~~~~~~~~~~~~~~~~~~~~~~~
+
 mapdl.post1()
 mapdl.set(3, 1)
 mapdl.nsel("", "NODE", "", 41)
 # Reactivates suppressed printout
 mapdl.gopr()
 
-# 1-SIGMA DISPLACEMENT SOLUTION FROM POST1
+# 1-sigma displacement solution
 prnsol_u = mapdl.prnsol("U")
 print("1-SIGMA DISPLACEMENT SOLUTION:", prnsol_u)
 
 mapdl.finish()
 
-# Postprocess PSD analysis in POST26 (time-history postprocessing)
+###############################################################################
+# Post-processing in POST26 (time-history postprocessing)
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mapdl.post26()
 
 # USER-DEFINED FREQUENCY 6.36E-03 HZ (0.04 RAD/SEC)
-# mapdl.run('STORE,PSD,,,6.36E-03')
-mapdl.store(lab="PSD")
+mapdl.store(lab="PSD", cluster="6.36E-03")
 # STORE DISPLACEMENT UX OF 40TH FLOOR
 mapdl.nsol(nvar="2", node="41", item="U", comp="X")
 # STORE RESPONSE PSD IN M2/HZ (ONE-SIDED)
@@ -404,7 +437,8 @@ mapdl.plvar(nvar1="5")
 
 mapdl.show("CLOSE")
 
-# Postprocess Response PSD plot using Matplotlib
+###############################################################################
+# Post-process PSD response plot using Matplotlib
 
 ndim = len(mapdl.parameters["RPSD_UX"])
 print(ndim)
@@ -429,7 +463,9 @@ plt.xlim(1e-2, 2)
 ax.plot(frequencies, response)
 ax.set_xlabel("FREQUENCY, [RAD/SEC]")
 ax.set_ylabel("RPSD OF TOP FLOOR,[M**2.SEC/RAD]")
+fig.show()
 
+###############################################################################
 # The above figure is plotted using lin-log scale to match Figure 2 in the reference.
 # To better show the general shape of the response PSD, it is plotted using a log-log
 # scale in the figure below.
@@ -437,6 +473,9 @@ ax.set_ylabel("RPSD OF TOP FLOOR,[M**2.SEC/RAD]")
 # Both plots are not the default response PSD (1-sided with m2/Hz units). APDL operations
 # are done on the results to obtain the 2-sided response PSD expressed in m2/rad/s as is
 # presented in the reference article.
+
+###############################################################################
+# Post-process PSD response using Matplotlib - Log-Log Scale
 
 # PLOT RPSD LOG-LOG
 mapdl.show("PNG", "REV")
@@ -449,9 +488,9 @@ mapdl.plvar(nvar1="5")
 
 mapdl.show("CLOSE")
 
-# Postprocess Response PSD plot using Matplotlib - Log-Log Scale
+###############################################################################
+# Use Matplotlib to create graph
 
-# use Matplotlib to create graph
 fig = plt.figure()
 ax = fig.add_subplot(111)
 plt.xscale("log")
@@ -461,6 +500,11 @@ plt.xlim(1e-2, 2)
 ax.plot(frequencies, response)
 ax.set_xlabel("FREQUENCY, [RAD/SEC]")
 ax.set_ylabel("RPSD OF TOP FLOOR,[M**2.SEC/RAD]")
+plt.show()
+
+
+###############################################################################
+# Compute the standard deviation of the response PSD
 
 # 1-SIGMA DISPLACEMENT SOLUTION FROM POST26 (RPSD INTEGRATION)
 mapdl.int1(ir="6", iy="3", ix="1")
@@ -478,7 +522,9 @@ print("rms_value=", rms_value)
 
 mapdl.finish()
 
-# Verify the results.
+###############################################################################
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_freq = [1.02]
@@ -488,13 +534,12 @@ target_rms = [0.0465]
 sim_freq_res = [OMG_1]
 sim_rms_res = [rms_value]
 
-# +
+
 col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["FREQ (rad/sec)"]
 
 data = [target_freq, sim_freq_res, np.abs(sim_freq_res) / np.abs(target_freq)]
 
-# +
 title = f"""
 
 ------------------- VM298 RESULTS COMPARISON ---------------------
@@ -529,6 +574,7 @@ title3 = f"""STANDARD DEVIATION OF RESPONSE PSD
 print(title3)
 print(pd.DataFrame(np.transpose(data2), row_headers, col_headers))
 
+################################################################################
 # Stop MAPDL.
 
 mapdl.exit()
