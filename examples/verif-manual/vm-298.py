@@ -486,6 +486,7 @@ mapdl.gropt(lab="LOGX", key="ON")
 
 mapdl.plvar(nvar1="5")
 
+mapdl.screenshot()
 mapdl.show("CLOSE")
 
 ###############################################################################
