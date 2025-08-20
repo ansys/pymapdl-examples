@@ -74,8 +74,8 @@ Loading (Aerodynamics Properties):
 
 Notes:
  - Partly correlated wind excitation PSD spectrum (Davenport spectrum) is
-   applied at each floor. For illustration, see Figure: Partly
-   Correlated Wind Excitation PSD Spectrum (Davenport Spectrum).
+   applied at each floor. For illustration, see Figure:
+   Partly Correlated Wind Excitation PSD Spectrum (Davenport Spectrum).
 
 .. image:: ../_static/vm298_setup2.png
    :width: 400
@@ -143,7 +143,6 @@ _HT = _N * _H  # M, TOTAL HEIGHT
 _MASS = 1.29e6  # KG, LUMPED MASS AT FLOOR LEVEL
 _K = 1e9  # N/M, ELASTIC STIFFNESS BETWEEN FLOORS
 _BETA = 2.155e4  # N/M/SEC, DAMPING COEFFICIENT BETWEEN FLOORS
-
 
 # Aerodynamic parameters of wind excitation
 
@@ -310,7 +309,7 @@ mapdl.antype("SPECTRUM")
 # Power Spectral Density analysis
 mapdl.spopt("PSD")
 
-# Conversion factor from 2-sided input PSD in m2/rad/s to 1-sided input PSD in m2/Hz
+# Conversion factor from 2-sided input PSD in :math:'m^2/rad/s' to 1-sided PSD in :math:'m^2/Hz'
 _FACT = 4 * _PI
 
 start_time = time.time()
@@ -470,8 +469,8 @@ fig.show()
 # To better show the general shape of the response PSD, it is plotted using a log-log
 # scale in the figure below.
 #
-# Both plots are not the default response PSD (1-sided with m^2/Hz units). APDL operations
-# are done on the results to obtain the 2-sided response PSD expressed in m^2/rad/s as is
+# Both plots are not the default response PSD (1-sided with :math:'m^2/Hz' units). APDL operations
+# are done on the results to obtain the 2-sided response PSD expressed in :math:'m^2/rad/s' as is
 # presented in the reference article.
 
 ###############################################################################
