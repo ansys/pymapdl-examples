@@ -26,7 +26,7 @@ PSD Analysis of 40-Story Building Under Wind Load Excitation
 ------------------------------------------------------------
 Problem description:
  - A 40-story building is modeled using spring-damper (``COMBIN14``) and point mass elements
-   (MASS21). The stiffness represents the linear elastic massless column and the mass of
+   (``MASS21``). The stiffness represents the linear elastic massless column and the mass of
    each floor is concentrated at the floor level, as shown in Figure: Finite Element
    Representation of 40-Story Building Using Spring-Mass Damper System.
 
@@ -45,8 +45,8 @@ Analysis type(s):
  - PSD Analysis ``ANTYPE=8``
 
 Element type(s):
- - Spring-Damper Element (COMBIN14)
- - Structural Mass (MASS21)
+ - Spring-Damper Element (``COMBIN14``)
+ - Structural Point Mass Element (``MASS21``)
 
 .. image:: ../_static/vm298_setup.png
    :align: center
@@ -96,7 +96,7 @@ Analysis Assumptions and Modeling Notes:
 
  - The PSD analysis loading consists of partly correlated wind excitation PSD applied
    at each of the floors. The different wind spectrum curves are calculated as APDL array
-   parameters and input with PSDVAL and COVAL. In this example, the displacement response PSD
+   parameters and input with ``PSDVAL`` and ``COVAL``. In this example, the displacement response PSD
    at the top floor is calculated and compared with the reference curve. Using this calculated
    response PSD, the standard deviation is calculated and compared with the reference value.
 
@@ -128,16 +128,16 @@ import time
 from ansys.mapdl.core import launch_mapdl
 from matplotlib import pyplot as plt
 import numpy as np
-import pandas as pd
 
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit=True)
 
 # ANSYS MEDIA REL. 2025R1 (11/08/2024) REF. VERIF. MANUAL: REL. 2025R1
 mapdl.title("VM298,PSD ANALYSIS OF 40-STORY BUILDING UNDER WIND LOAD EXCITATION")
 
-###############################################################################
-# Parameter definition
-# --------------------
+"""
+Parameter definition
+--------------------
+"""
 
 
 _N = 40  # NUMBER OF STORIES
@@ -159,11 +159,11 @@ _KO = 0.03  # GROUND SURFACE DRAG COEFFICIENT
 _ALPHA = 0.4  # EXPONENT FOR THE MEAN-WIND-PROFILE POWER LAW
 _C1 = 7.7  # CONSTANT TERM
 
-_PI = 4 * math.atan(1)
+_PI = math.pi  # PI, CIRCULAR CONSTANT
 
 ###############################################################################
-# Pre-processing
-# ---------------
+# Preprocessing: Model 40-story building using 1-D spring-damper system and point mass elements
+# ---------------------------------------------------------------------------------------------
 
 mapdl.prep7(mute=True)
 
@@ -260,7 +260,6 @@ FREQ_INC = (FREQ_END - FREQ_BEGIN) / FREQ_PTS  # Frequency increment in rad/sec
 mapdl.dim("FREQ_ARRAY", "ARRAY", FREQ_PTS)
 mapdl.vfill("FREQ_ARRAY", "RAMP", FREQ_BEGIN, FREQ_INC)
 FREQ_ARRAY = mapdl.parameters["FREQ_ARRAY"]
-freq_array = np.arange(FREQ_BEGIN, stop=FREQ_END, step=FREQ_INC)
 
 # Circular frequency table in rad/s
 
@@ -322,21 +321,20 @@ with mapdl.non_interactive:
         # SET PSD UNIT FOR WIND FORCE
         mapdl.psdunit(j, "FORC")
         for k in range(j, _N):
-            for i in range(0, FREQ_PTS):
+            for i in range(FREQ_PTS):
                 mapdl.psdfrq(j, k, FREQ_ARRAY[i][0])
                 if j == k:
                     mapdl.psdval(j, COPHIFF[j, j, i] * _FACT)
                 else:
                     mapdl.coval(j, k, COPHIFF[j, k, i] * _FACT)
         if j == 40:
-            mapdl.plopts("DATE", 0)
             mapdl.show("PNG", "REV")
-            mapdl.show("CLOSE")
+            mapdl.plopts("DATE", 0)
             # DISPLAY APPLIED WIND EXCITATION PSD SPECTRUM
             mapdl.psdgraph(j - 1, j, 3)
         if j == 1:
-            mapdl.plopts("DATE", 0)
             mapdl.show("PNG", "REV")
+            mapdl.plopts("DATE", 0)
             mapdl.psdgraph(j - 1, j, 3)
         # DELETE PREVIOUS WIND SPECTRUM LOAD
         mapdl.fdele(j, "FX")
@@ -344,6 +342,9 @@ with mapdl.non_interactive:
         mapdl.f(j + 1, "FX", 1.0)
         # PERFORM THE PARTICIPATION FACTOR CALCULATION
         mapdl.pfact(j, "NODE")
+
+mapdl.screenshot()
+mapdl.show("CLOSE")
 
 end_time = time.time()
 elapsed_time = end_time - start_time
@@ -392,9 +393,9 @@ mapdl.post26()
 # USER-DEFINED FREQUENCY 6.36E-03 HZ (0.04 RAD/SEC)
 mapdl.store(lab="PSD", freq="6.36E-03")
 # STORE DISPLACEMENT UX OF 40TH FLOOR
-mapdl.nsol(nvar="2", node="41", item="U", comp="X")
+N41_UX = mapdl.nsol(nvar="2", node="41", item="U", comp="X")
 # STORE RESPONSE PSD IN M2/HZ (ONE-SIDED)
-mapdl.rpsd(ir="3", ia="2", itype="1", datum="2", name="RPSD_UX_HZ")
+PSD_UX_HZ = mapdl.rpsd(ir="3", ia="2", itype="1", datum="2", name="RPSD_UX_HZ")
 
 # GET THE CIRCULAR FREQUENCY AS A VARIABLE (AS ON REFERENCE PLOT FIG.2)
 mapdl.vget(par="FREQ", ir="1")
@@ -437,13 +438,13 @@ mapdl.xvar(n="4")
 
 mapdl.plvar(nvar1="5")
 
+mapdl.screenshot()
 mapdl.show("CLOSE")
 
 ###############################################################################
 # Post-process PSD response plot using Matplotlib
 
 ndim = len(mapdl.parameters["RPSD_UX"])
-print(ndim)
 
 # store MAPDL results to python variables
 mapdl.dim("frequencies", "array", ndim, 1)
@@ -545,10 +546,20 @@ sim_rms_res = rms_value
 # reference in the table below.
 
 headers = ["Units", "TARGET", "Mechanical APDL", "RATIO"]
-data_freq = [["FREQ (rad/sec)", target_freq, sim_freq_res, np.abs(sim_freq_res) / np.abs(target_freq)]]
-data_rms = [["RMS Value (m)", target_rms, sim_rms_res, np.abs(sim_rms_res) / np.abs(target_rms)]]
+data_freq = [
+    [
+        "FREQ (rad/sec)",
+        target_freq,
+        sim_freq_res,
+        np.abs(sim_freq_res) / np.abs(target_freq),
+    ]
+]
+data_rms = [
+    ["RMS Value (m)", target_rms, sim_rms_res, np.abs(sim_rms_res) / np.abs(target_rms)]
+]
 
-print(f"""
+print(
+    f"""
 ------------------- VM298 RESULTS COMPARISON ---------------------
 MODAL FREQUENCY
 
@@ -558,9 +569,12 @@ STANDARD DEVIATION OF RESPONSE PSD
 
 {tabulate(data_rms, headers=headers)}
 
-""")
+"""
+)
 
 ################################################################################
 # Stop MAPDL.
 
 mapdl.exit()
+
+""
