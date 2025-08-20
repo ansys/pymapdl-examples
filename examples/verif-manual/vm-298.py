@@ -89,7 +89,7 @@ Analysis Assumptions and Modeling Notes:
  - The 40-story building is modeled using 1-D spring-damper system with one end fixed
    at its foundation. The motion of the tall building is allowed along the wind direction only.
 
- - The damping in the structure is based on material beta damping using MP,BETD.
+ - The damping in the structure is based on material beta damping using ``MP,BETD``.
 
  - The modal analysis is performed using the Lanczos eigensolver. Only the first frequency
    is used in the subsequent PSD analysis.
