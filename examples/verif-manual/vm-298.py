@@ -447,8 +447,7 @@ print(ndim)
 
 # store MAPDL results to python variables
 mapdl.dim("frequencies", "array", ndim, 1)
-mapdl.vget("frequencies(1)", 4)
-frequencies = mapdl.parameters["frequencies"]
+frequencies = mapdl.vget("frequencies(1)", 4)
 
 # store MAPDL results to python variables
 mapdl.dim("response", "array", ndim, 1)
