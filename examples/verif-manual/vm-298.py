@@ -519,7 +519,7 @@ d_variance = mapdl.get(
 rms_value = math.sqrt(d_variance)
 
 # REFERENCE STANDARD DEVIATION VALUE, SigmaX40 = 4.65E-2 M
-print("rms_value=", rms_value)
+print(f"rms_value={rms_value:0.2f}")
 
 mapdl.finish()
 
