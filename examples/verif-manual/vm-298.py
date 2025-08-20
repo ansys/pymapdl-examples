@@ -49,7 +49,9 @@ Element type(s):
  - Structural Mass (MASS21)
 
 .. image:: ../_static/vm298_setup.png
-   :width: 400
+   :align: center
+   :figclass: align-center
+   :width: 200
    :alt: VM298 Finite Element Representation of 40-Story Building Using Spring-Mass Damper System
 
 Material properties:
