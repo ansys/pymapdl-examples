@@ -79,7 +79,9 @@ Notes:
    applied at each floor. For illustration, see Figure:
    Partly Correlated Wind Excitation PSD Spectrum (Davenport Spectrum).
 
-.. image:: ../_static/vm298_setup2.png
+.. figure:: ../_static/vm298_setup2.png
+   :align: center
+   :figclass: align-center
    :width: 400
    :alt: VM298 Partly Correlated Wind Excitation PSD Spectrum (Davenport Spectrum)
 
