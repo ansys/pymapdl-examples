@@ -30,14 +30,14 @@ Problem description:
    each floor is concentrated at the floor level, as shown in Figure: Finite Element
    Representation of 40-Story Building Using Spring-Mass Damper System.
 
-- The wind load excitation is applied at discrete floor levels along the wind motion.
+ - The wind load excitation is applied at discrete floor levels along the wind motion.
    Because natural strong winds are turbulent in nature with randomly fluctuating wind
    velocities, a probabilistic approach like Power Spectral Density (PSD) analysis is
    the most suitable approach to analyze such structures. This analysis is performed to
    calculate the response PSD of the 40th floor.
 
 Reference:
- - Yang, J.N., Lin, Y.K.,'Along-Wind Motion of Multistorey Building",
+ - Yang, J.N., Lin, Y.K., "Along-Wind Motion of Multistorey Building",
    ASCE Publications, April 1981.
 
 Analysis type(s):
@@ -53,9 +53,9 @@ Element type(s):
    :alt: VM298 Finite Element Representation of 40-Story Building Using Spring-Mass Damper System
 
 Material properties:
- - Floor mass, :math:`m = 1.29 x 10^6 kg`
- - Column stiffness, :math:`K = 1 x 10^9 N/m`
- - Damping coefficient, :math:`\beta = 2.155 x 10^4 N/m/sec`
+ - Floor mass, :math:`m = 1.29 \times 10^6 kg`
+ - Column stiffness, :math:`K = 1 \cdot 10^9 N/m`
+ - Damping coefficient, :math:`\beta = 2.155 \times 10^4 N/m/sec`
 
 Geometric properties:
  - Number of stories, :math:`N = 40`
@@ -299,7 +299,6 @@ for j in range(1, _N):
 end_time = time.time()
 elapsed_time = end_time - start_time
 print(f"Elapsed time: {elapsed_time} seconds")
-# -
 
 ###############################################################################
 # PSD analysis
@@ -471,8 +470,8 @@ fig.show()
 # To better show the general shape of the response PSD, it is plotted using a log-log
 # scale in the figure below.
 #
-# Both plots are not the default response PSD (1-sided with m2/Hz units). APDL operations
-# are done on the results to obtain the 2-sided response PSD expressed in m2/rad/s as is
+# Both plots are not the default response PSD (1-sided with m^2/Hz units). APDL operations
+# are done on the results to obtain the 2-sided response PSD expressed in m^2/rad/s as is
 # presented in the reference article.
 
 ###############################################################################
