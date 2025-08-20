@@ -388,7 +388,7 @@ mapdl.finish()
 mapdl.post26()
 
 # USER-DEFINED FREQUENCY 6.36E-03 HZ (0.04 RAD/SEC)
-mapdl.store(lab="PSD", cluster="6.36E-03")
+mapdl.store(lab="PSD", freq="6.36E-03")
 # STORE DISPLACEMENT UX OF 40TH FLOOR
 mapdl.nsol(nvar="2", node="41", item="U", comp="X")
 # STORE RESPONSE PSD IN M2/HZ (ONE-SIDED)
