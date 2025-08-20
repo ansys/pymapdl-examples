@@ -451,8 +451,7 @@ frequencies = mapdl.vget("frequencies(1)", 4)
 
 # store MAPDL results to python variables
 mapdl.dim("response", "array", ndim, 1)
-mapdl.vget("response(1)", 5)
-response = mapdl.parameters["response"]
+response = mapdl.vget("response(1)", 5)
 
 # use Matplotlib to create graph
 fig = plt.figure()
