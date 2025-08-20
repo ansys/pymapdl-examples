@@ -107,7 +107,7 @@ Postprocessing:
 
 Reference results:
  - Modal frequency of first mode, :math:`\omega_1 = 1.02 rad/sec`
- - Standard deviation of response PSD at the top floor, :math:`\sigma_{X40} = 4.65E-2 m`
+ - Standard deviation of response PSD at the top floor, :math:`\sigma_{X40} = 4.65\cdot 10^{-2} m`
 
 Additional Notes:
  - The model uses COMBIN14 elements for spring-damper representation and MASS21 elements
