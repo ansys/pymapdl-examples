@@ -527,53 +527,38 @@ mapdl.finish()
 # Verify the results
 # ~~~~~~~~~~~~~~~~~~
 
+
+from tabulate import tabulate
+
 # Set target values
-target_freq = [1.02]
-target_rms = [0.0465]
+target_freq = 1.02
+target_rms = 0.0465
 
 # Fill result values
-sim_freq_res = [OMG_1]
-sim_rms_res = [rms_value]
+sim_freq_res = OMG_1
+sim_rms_res = rms_value
 
-
-col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
-row_headers = ["FREQ (rad/sec)"]
-
-data = [target_freq, sim_freq_res, np.abs(sim_freq_res) / np.abs(target_freq)]
-
-title = f"""
-
-------------------- VM298 RESULTS COMPARISON ---------------------
-
-"""
-
-title2 = f"""MODAL FREQUENCY
-
-"""
-# -
-
-print(title)
-print(title2)
-print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
-
-# +
-col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
-row_headers = ["RMS Value (m)"]
-
-data2 = [target_rms, sim_rms_res, np.abs(sim_rms_res) / np.abs(target_rms)]
-# -
-
-title3 = f"""STANDARD DEVIATION OF RESPONSE PSD
-
-"""
 
 # Using the computed displacement response PSD, the standard deviation is computed
 # by integration and square root operations. It matches the 1-sigma displacement
 # obtained directly in POST1 at load step 3 - substep 1. It is compared with the
 # reference in the table below.
 
-print(title3)
-print(pd.DataFrame(np.transpose(data2), row_headers, col_headers))
+headers = ["Units", "TARGET", "Mechanical APDL", "RATIO"]
+data_freq = [["FREQ (rad/sec)", target_freq, sim_freq_res, np.abs(sim_freq_res) / np.abs(target_freq)]]
+data_rms = [["RMS Value (m)", target_rms, sim_rms_res, np.abs(sim_rms_res) / np.abs(target_rms)]]
+
+print(f"""
+------------------- VM298 RESULTS COMPARISON ---------------------
+MODAL FREQUENCY
+
+{tabulate(data_freq, headers=headers)}
+
+STANDARD DEVIATION OF RESPONSE PSD
+
+{tabulate(data_rms, headers=headers)}
+
+""")
 
 ################################################################################
 # Stop MAPDL.
