@@ -25,7 +25,7 @@ r""".. _ref_vm298:
 PSD Analysis of 40-Story Building Under Wind Load Excitation
 ------------------------------------------------------------
 Problem description:
- - A 40-story building is modeled using spring-damper (COMBIN14) and point mass elements
+ - A 40-story building is modeled using spring-damper (``COMBIN14``) and point mass elements
    (MASS21). The stiffness represents the linear elastic massless column and the mass of
    each floor is concentrated at the floor level, as shown in Figure: Finite Element
    Representation of 40-Story Building Using Spring-Mass Damper System.
