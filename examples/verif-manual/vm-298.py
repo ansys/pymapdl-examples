@@ -309,7 +309,7 @@ mapdl.antype("SPECTRUM")
 # Power Spectral Density analysis
 mapdl.spopt("PSD")
 
-# Conversion factor from 2-sided input PSD in :math:'m^2/rad/s' to 1-sided PSD in :math:'m^2/Hz'
+# Conversion factor from 2-sided input PSD in m^2/rad/s to 1-sided input PSD in m^2/Hz.
 _FACT = 4 * _PI
 
 start_time = time.time()
@@ -426,7 +426,7 @@ mapdl.gropt(lab="LOGY", key="ON")
 # Specifies the X variable to be displayed
 mapdl.xvar(n="4")
 
-# The frequency distribution of the displacement response PSD at the top floor :math:`X_40`
+# The frequency distribution of the displacement response PSD at the top floor X_40
 # is shown in the following figure. It is typical of wind response of tall structures.
 # The first peak occurring around 0.04 rad/sec is due to the maximum of the wind spectrum
 # (quasi-static response). The second peak occurring around 1.08 rad/sec coincides with
@@ -469,8 +469,8 @@ fig.show()
 # To better show the general shape of the response PSD, it is plotted using a log-log
 # scale in the figure below.
 #
-# Both plots are not the default response PSD (1-sided with :math:'m^2/Hz' units). APDL operations
-# are done on the results to obtain the 2-sided response PSD expressed in :math:'m^2/rad/s' as is
+# Both plots are not the default response PSD (1-sided with m^2/Hz units). APDL operations
+# are done on the results to obtain the 2-sided response PSD expressed in m^2/rad/s as is
 # presented in the reference article.
 
 ###############################################################################
