@@ -27,7 +27,8 @@ NRC Piping Benchmarks: NUREG/CR-1677: Volume 1, Benchmark Problem No. 1
 Problem description:
  - The example problem contains Mechanical APDL solutions to NRC piping
    benchmark problems taken from publications NUREG/CR-1677, Volumes 1.
-   The piping benchmark solutions given in NRC publications were obtained
+
+ - The piping benchmark solutions given in NRC publications were obtained
    by using a computer program EPIPE which is a modification of the widely
    available program SAP IV specifically prepared to perform piping analyses.
 
@@ -45,14 +46,21 @@ Analysis type(s):
  - Spectral Analysis ``ANTYPE=8``
 
 Element type(s):
- - Structural Mass Element (MASS21)
- - 3-D 3-Node Pipe Element (PIPE289)
- - 3-D 3-Node Elbow Element (ELBOW290)
+ - Structural Mass Element (``MASS21``)
+ - 3-D 3-Node Pipe Element (``PIPE289``)
+ - 3-D 3-Node Elbow Element (``ELBOW290``)
+
+.. image:: ../_static/vm-nr1677-01-1a_setup.png
+   :align: center
+   :figclass: align-center
+   :width: 200
+   :alt: vm-nr1677-01-1a Finite Element Model of NRC Piping Benchmark Problems, Volume 1, Problem 1
+
 
 Model description:
  - The model consists of a piping system with straight pipes and elbows.
  - The system is subjected to uniform support motion in three spatial directions.
- - The model is meshed using PIPE289 and ELBOW290 elements for the piping components
+ - The model is meshed using ``PIPE289`` and ``ELBOW290`` elements for the piping components
    and MASS21 elements for point mass representation.
 
 Postprocessing:
@@ -62,43 +70,50 @@ Postprocessing:
  - Reaction forces from the spectrum solution are obtained.
 """  # noqa:E501
 
+# sphinx_gallery_thumbnail_path = '_static/vm-nr1677-01-1a_setup.png'
+
+""
 # Import the MAPDL module
-# Ensure you have the ansys-mapdl-core package installed
-# pip install ansys-mapdl-core
 from ansys.mapdl.core import launch_mapdl
 
 # Launch MAPDL with a specific log level and print command output
-# Adjust the loglevel and print_com parameters as needed
 # Here, we set loglevel to "WARNING" to reduce verbosity and print_com to True to see commands
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True)
 
-mapdl.title("NRC Piping Benchmark Problems, Volume 1, Problem 1")
+"""
+Preprocessing: Modeling of NRC Piping Benchmark Problems using Pipe289 and Elbow290 elements
+---------------------------------------------------------------------------------------------
+"""
 
 # Clear any previous data in MAPDL
+
 mapdl.clear()
+
+mapdl.title("NRC Piping Benchmark Problems, Volume 1, Problem 1")
 
 mapdl.prep7(mute=True)
 
 # PIPE289 using cubic shape function and Thick pipe theory.
-# The pipe289 element is a 3-node pipe element with cubic shape functions.
-# It is used to model straight pipes with bending and torsional effects.
+
 mapdl.et(1, "pipe289")
 mapdl.keyopt(1, 4, 2)
 
 # ELBOW290 using cubic shape function and number of Fourier terms = 6.
-# The elbow290 element is a 3-node elbow element with cubic shape functions.
-# It is used to model the bending of pipes at elbows.
+
 mapdl.et(2, "elbow290", "", 6)
 
 # MASS21, 3-D Mass without Rotary Inertia
+
 mapdl.et(3, "mass21")
 mapdl.keyopt(3, 3, 2)
 
 # Real Constants
+
 mapdl.sectype(1, "pipe")
 mapdl.secdata(7.289, 0.241, 24)
 
-# Keypoints
+# Define Keypoints
+
 mapdl.k(1, 0.0, 0.0, 0.0)
 mapdl.k(2, 0.0, 54.45, 0.0)
 mapdl.k(3, 0.0, 108.9, 0.0)
@@ -130,15 +145,19 @@ mapdl.l(9, 10)
 mapdl.l(10, 11)  # Line number 6
 
 # Bend Pipe Elements
+
 mapdl.run("larch,3,4,12")  # Line number 7
 mapdl.run("larch,4,5,13")
 mapdl.run("larch,7,8,14")
 mapdl.run("larch,8,9,15")  # line number 10
 
+# Define Material Properties
+
 mapdl.mp("ex", 1, 24e6)
 mapdl.mp("nuxy", 1, 0.3)
 
-# Meshing for Straight pipe
+# Meshing for straight pipe using PIPE289 elements
+
 mapdl.type(1)
 mapdl.secnum(1)
 mapdl.mat(1)
@@ -149,7 +168,8 @@ mapdl.lesize("all", "", "", 2)
 mapdl.lmesh("all")
 mapdl.allsel("all", "all")
 
-# Meshing for bend pipe
+# Meshing for bend pipe using ELBOW290 elements
+
 mapdl.type(2)
 mapdl.secnum(1)
 mapdl.mat(1)
@@ -161,6 +181,7 @@ mapdl.lmesh("all")
 mapdl.allsel("all", "all")
 
 # Real constants for mass element
+
 mapdl.r(12, 0.03988)
 mapdl.r(13, 0.05032)
 mapdl.r(14, 0.02088)
@@ -172,6 +193,7 @@ mapdl.r(19, 0.01795)
 mapdl.r(20, 0.01501)
 
 # Mass Elements
+
 mapdl.type(3)
 mapdl.real(12)
 mapdl.e(2)
@@ -201,42 +223,72 @@ mapdl.real(20)
 mapdl.e(20)
 
 # Using ELBOW, to convert some PIPE289 into ELBOW290
+
 mapdl.elbow("on", "", "", "sect")
 
 mapdl.allsel("all", "all")
-mapdl.eshape(scale="1.0", key="1")
-mapdl.replot()
+
+# Display the model
+
 mapdl.eplot()
 
-# Constraints
+# Define constraints
+
 mapdl.dk(1, "all", 0)
 mapdl.dk(11, "all", 0)
 
 mapdl.allsel("all", "all")
 mapdl.finish()
-mapdl.save()
 
-# Solution Controls for Modal Solve
+###############################################################################
+# Modal analysis
+# --------------
+# Perform modal analysis to obtain the first five natural frequencies
+# of the system. The results will be used to determine the response spectrum
+# analysis. The modal analysis is performed using the LANB method.
+
 mapdl.slashsolu()
 mapdl.antype("modal")
 
 # LANB mode extraction method
-mapdl.modopt("lanb", 5)
+
+nmodes = 5
+mapdl.modopt("lanb", nmodes)
+
+# Set the number of modes to extract
 mapdl.mxpand("", "", "", "yes")
+
+###############################################################################
+# Solve the modal analysis
+# ------------------------
 
 mapdl.solve()
 mapdl.finish()
-mapdl.save()
+
+###############################################################################
+# Postprocessing: Extracting frequencies from the modal analysis
+# --------------------------------------------------------------
 
 mapdl.post1()
 
 # Frequencies from Modal solve
+
 freq_list = mapdl.set("list")
 print("Frequencies from Modal solve:", freq_list)
 
 mapdl.finish()
 
-# Solution Controls for Spectrum Solve
+###############################################################################
+# Response Spectrum Analysis
+# --------------------------
+# Perform spectrum analysis using the frequencies obtained from the modal analysis.
+# The response spectrum analysis will be performed for a single point excitation
+# response spectrum. The damping ratio is set to a constant value for all modes.
+# The modes are grouped based on a significance level, and the seismic acceleration
+# response loading is defined. The excitation is applied along the X, Y, and Z
+# directions with specified frequencies and corresponding spectral values.
+# Start the solution controls for spectrum solve
+
 mapdl.slashsolu()
 
 # Perform Spectrum Analysis
@@ -280,8 +332,22 @@ mapdl.freq(25, 28.5, 30, 34.97, 55, 80, 140, 162, 588.93)
 mapdl.sv(0.02, 400, 871, 871, 700, 1188, 1188, 440, 775, 775)
 mapdl.sv(0.02, 533.2, 467.2, 443.6, 380, 289, 239.4, 192.6, 184.1, 145)
 
+###############################################################################
+# Solve the spectrum analysis
+# ---------------------------
+
 mapdl.solve()
 mapdl.finish()
+
+###############################################################################
+# Postprocessing: Extracting results from the spectrum analysis
+# ----------------------------------------------------------------------
+# Extract maximum nodal displacements and rotations from the spectrum solution.
+# The results will be stored in the MAPDL database and can be accessed using
+# the `starstatus` command. The nodal displacements and rotations are obtained
+# for specific nodes in the model. The element forces and moments are obtained
+# for specific nodes from spectrum solution. The reaction forces from the spectrum
+# solution are also extracted.
 
 mapdl.post1()
 mcom_file = mapdl.input("", "mcom")
@@ -293,7 +359,9 @@ mapdl.get("ArotX", "NODE", 9, "ROT", "X")
 mapdl.get("ArotY", "NODE", 18, "ROT", "Y")
 mapdl.get("ArotZ", "NODE", 9, "ROT", "Z")
 
+###############################################################################
 # Maximum nodal displacements and rotations obtained from spectrum solution
+
 adisx = mapdl.starstatus("AdisX")
 adisy = mapdl.starstatus("AdisY")
 adisz = mapdl.starstatus("AdisZ")
@@ -307,10 +375,10 @@ print(
     f"ArotX: {arotx},\n ArotY: {aroty},\n ArotZ: {arotz}"
 )
 
+###############################################################################
 # Element Forces and Moments obtained from spectrum solution for Node "I"
 
 # Element results extraction for element #12 (Pipe289 elements)
-
 mapdl.esel("s", "elem", "", 12)
 mapdl.etable("pxi_12", "smisc", 1)
 mapdl.etable("vyi_12", "smisc", 6)
@@ -321,7 +389,6 @@ mapdl.etable("mzi_12", "smisc", 3)
 mapdl.esel("all")
 
 # Element results extraction for element #14 (Elbow 290 elements)
-
 mapdl.esel("s", "elem", "", 14)
 
 mapdl.etable("pxi_14", "smisc", 1)
@@ -332,10 +399,10 @@ mapdl.etable("myi_14", "smisc", 2)
 mapdl.etable("mzi_14", "smisc", 3)
 mapdl.esel("all")
 
+###############################################################################
 # Element Forces and Moments obtained from spectrum solution for Node "J"
 
 # Element results extraction for element #12 (Pipe289 elements)
-
 mapdl.esel("s", "elem", "", 12)
 
 mapdl.etable("pxj_12", "smisc", 14)
@@ -347,7 +414,6 @@ mapdl.etable("mzj_12", "smisc", 16)
 mapdl.esel("all")
 
 # Element results extraction for element #14 (Elbow 290 elements)
-
 mapdl.esel("s", "elem", "", 14)
 
 mapdl.etable("pxj_14", "smisc", 36)
@@ -361,6 +427,7 @@ mapdl.esel("all")
 mapdl.allsel("all")
 mapdl.run("/GOPR")
 
+###############################################################################
 # Element forces and moments at element 12, node "i"
 
 elem_forces_12i = mapdl.pretab(
@@ -368,6 +435,7 @@ elem_forces_12i = mapdl.pretab(
 )
 print("Element forces and moments at element 12, node i:", elem_forces_12i)
 
+###############################################################################
 # Element forces and moments at element 12, node "j"
 
 elem_forces_12j = mapdl.pretab(
@@ -375,6 +443,7 @@ elem_forces_12j = mapdl.pretab(
 )
 print("Element forces and moments at element 12, node j:", elem_forces_12j)
 
+###############################################################################
 # Element forces and moments at element 14, node "i"
 
 elem_forces_14i = mapdl.pretab(
@@ -382,6 +451,7 @@ elem_forces_14i = mapdl.pretab(
 )
 print("Element forces and moments at element 14, node i:", elem_forces_14i)
 
+###############################################################################
 # Element forces and moments at element 14, node "j"
 
 elem_forces_14j = mapdl.pretab(
@@ -389,6 +459,7 @@ elem_forces_14j = mapdl.pretab(
 )
 print("Element forces and moments at element 14, node i:", elem_forces_14j)
 
+###############################################################################
 # Reaction forces from spectrum solution
 
 reaction_force = mapdl.prrsol()
@@ -396,6 +467,9 @@ print("Reaction forces:", reaction_force)
 
 mapdl.finish()
 
+################################################################################
 # Stop MAPDL.
 
 mapdl.exit()
+
+""
