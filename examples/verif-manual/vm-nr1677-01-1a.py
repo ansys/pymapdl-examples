@@ -148,10 +148,10 @@ mapdl.l(10, 11)  # Line number 6
 
 # Bend Pipe Elements
 
-mapdl.run("larch,3,4,12")  # Line number 7
-mapdl.run("larch,4,5,13")
-mapdl.run("larch,7,8,14")
-mapdl.run("larch,8,9,15")  # line number 10
+mapdl.larc(3,4,12)  # Line number 7
+mapdl.larc(4,5,13)
+mapdl.larc(7,8,14)
+mapdl.larc(8,9,15)  # line number 10
 
 # Define Material Properties
 
