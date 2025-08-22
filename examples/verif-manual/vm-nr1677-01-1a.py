@@ -427,36 +427,25 @@ mapdl.allsel("all")
 mapdl.run("/GOPR")
 
 ###############################################################################
-# Element forces and moments at element 12, node "i"
+# Printing element values
+# =======================
+#
+for node, element in zip([12, 14], ["Pipe289", "Elbow290"]):
+  # Element forces and moments at element, node "i"
+  values_i = ["Node i"]
+  for each in [f"pxi_{node}", f"vyi_{node}", f"vzi_{node}", f"txi_{node}", f"myi_{node}", f"mzi_{node}"]:
+      values_i.append(mapdl.get_array("ELEM", "", "ETAB", each)[node-1])
 
-elem_forces_12i = mapdl.pretab(
-    "pxi_12", "vyi_12", "vzi_12", "txi_12", "myi_12", "mzi_12"
-)
-print("Element forces and moments at element 12, node i:", elem_forces_12i)
+  # Element forces and moments atf element , node "j"
+  values_j = ["Node j"]
+  for each in [f"pxj_{node}", f"vyj_{node}", f"vzj_{node}", f"txj_{node}", f"myj_{node}", f"mzj_{node}"]:
+      values_j.append(mapdl.get_array("ELEM", "", "ETAB", each)[node-1])
 
-###############################################################################
-# Element forces and moments at element 12, node "j"
+  print(f"\n\nElement forces and moments at element {node} ({element})")
+  print("===================================================")
 
-elem_forces_12j = mapdl.pretab(
-    "pxj_12", "vyj_12", "vzj_12", "txj_12", "myj_12", "mzj_12"
-)
-print("Element forces and moments at element 12, node j:", elem_forces_12j)
-
-###############################################################################
-# Element forces and moments at element 14, node "i"
-
-elem_forces_14i = mapdl.pretab(
-    "pxi_14", "vyi_14", "vzi_14", "txi_14", "myi_14", "mzi_14"
-)
-print("Element forces and moments at element 14, node i:", elem_forces_14i)
-
-###############################################################################
-# Element forces and moments at element 14, node "j"
-
-elem_forces_14j = mapdl.pretab(
-    "pxj_14", "vyj_14", "vzj_14", "txj_14", "myj_14", "mzj_14"
-)
-print("Element forces and moments at element 14, node i:", elem_forces_14j)
+  headers = ["Node", "Axial force", "Shear force Y", "Shear force Z", "Torque", "Moment Y", "Moment Z"]
+  print(tabulate([values_i, values_j], headers=headers))
 
 ###############################################################################
 # Reaction forces from spectrum solution
