@@ -25,7 +25,8 @@ r""".. _ref_VM-NR6645-01-1-a:
 NRC Piping Benchmarks: NUREG/CR-1677: Volume 1, Benchmark Problem No. 1
 -----------------------------------------------------------------------
 Problem description:
- - The example problem contains Mechanical APDL solutions to NRC piping
+ - The example problem contains Mechanical APDL solutions to
+   Nuclear Regulatory Commission piping
    benchmark problems taken from publications NUREG/CR-1677, Volumes 1.
 
  - The piping benchmark solutions given in NRC publications were obtained
