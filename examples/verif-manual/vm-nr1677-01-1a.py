@@ -81,9 +81,10 @@ from ansys.mapdl.core import launch_mapdl
 # Here, we set loglevel to "WARNING" to reduce verbosity and print_com to True to see commands
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True)
 
-"""
-Preprocessing: Modeling of NRC Piping Benchmark Problems using Pipe289 and Elbow290 elements
----------------------------------------------------------------------------------------------
+# ###############################################################################
+# Preprocessing: Modeling of NRC Piping Benchmark Problems using ``PIPE289`` and ``ELBOW290`` elements
+# -----------------------------------------------------------------------------------------------------
+#
 """
 
 # Clear any previous data in MAPDL
