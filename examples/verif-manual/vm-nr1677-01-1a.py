@@ -275,8 +275,11 @@ mapdl.post1()
 
 # Frequencies from Modal solve
 
-freq_list = mapdl.set("list")
-print("Frequencies from Modal solve:", freq_list)
+freq_list = mapdl.set("list").to_list()
+
+print("Frequencies from Modal solve:")
+for set, time_freq, load_step, substep, cumulative in freq_list:
+    print(f" - {time_freq:0.3f} Hz")
 
 mapdl.finish()
 
