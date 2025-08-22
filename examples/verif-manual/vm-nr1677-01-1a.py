@@ -313,11 +313,15 @@ mapdl.svtyp(2)
 
 # Excitation along X direction
 mapdl.sed(1)
-mapdl.freq()
-mapdl.freq(3.1, 4, 5, 5.81, 7.1, 8.77, 10.99, 14.08, 17.24)
-mapdl.freq(25, 28.5, 30, 34.97, 55, 80, 140, 162, 588.93)
-mapdl.sv(0.02, 400, 871, 871, 700, 1188, 1188, 440, 775, 775)
-mapdl.sv(0.02, 533.2, 467.2, 443.6, 380, 289, 239.4, 192.6, 184.1, 145)
+mapdl.freq() # Erase frequency values
+
+frequencies = [3.1, 4, 5, 5.81, 7.1, 8.77, 10.99, 14.08, 17.24, 25, 28.5, 30, 34.97, 55, 80, 140, 162, 588.93]
+spectrum_values = [0.02, 400, 871, 871, 700, 1188, 1188, 440, 775, 775, 0.02, 533.2, 467.2, 443.6, 380, 289, 239.4, 192.6, 184.1, 145]
+
+for freq, spec in zip(frequencies, spectrum_values):
+    mapdl.freq(freq)
+    mapdl.sv(spec)
+
 mapdl.solve()
 
 # Excitation along Y direction
