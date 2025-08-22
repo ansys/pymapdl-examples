@@ -451,7 +451,12 @@ for node, element in zip([12, 14], ["Pipe289", "Elbow290"]):
 # Reaction forces from spectrum solution
 
 reaction_force = mapdl.prrsol()
-print("Reaction forces:", reaction_force)
+headers = reaction_force.get_columns()
+values = reaction_force.to_list()
+
+print("\n\nReaction forces")
+print("===============")
+print(tabulate(values, headers=headers))
 
 mapdl.finish()
 
