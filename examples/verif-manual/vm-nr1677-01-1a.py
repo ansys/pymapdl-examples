@@ -361,22 +361,12 @@ mapdl.finish()
 mapdl.post1()
 mcom_file = mapdl.input("", "mcom")
 
-mapdl.get("AdisX", "NODE", 10, "U", "X")
-mapdl.get("AdisY", "NODE", 36, "U", "Y")
-mapdl.get("AdisZ", "NODE", 28, "U", "Z")
-mapdl.get("ArotX", "NODE", 9, "ROT", "X")
-mapdl.get("ArotY", "NODE", 18, "ROT", "Y")
-mapdl.get("ArotZ", "NODE", 9, "ROT", "Z")
-
-###############################################################################
-# Maximum nodal displacements and rotations obtained from spectrum solution
-
-adisx = mapdl.starstatus("AdisX")
-adisy = mapdl.starstatus("AdisY")
-adisz = mapdl.starstatus("AdisZ")
-arotx = mapdl.starstatus("ArotX")
-aroty = mapdl.starstatus("ArotY")
-arotz = mapdl.starstatus("ArotZ")
+AdisX = mapdl.get("AdisX", "NODE", 10, "U", "X")
+AdisY = mapdl.get("AdisY", "NODE", 36, "U", "Y")
+AdisZ = mapdl.get("AdisZ", "NODE", 28, "U", "Z")
+ArotX = mapdl.get("ArotX", "NODE", 9, "ROT", "X")
+ArotY = mapdl.get("ArotY", "NODE", 18, "ROT", "Y")
+ArotZ = mapdl.get("ArotZ", "NODE", 9, "ROT", "Z")
 
 print("Maximum nodal displacements and rotations obtained from spectrum solution:")
 print(
