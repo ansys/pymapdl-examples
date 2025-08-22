@@ -62,7 +62,7 @@ Model description:
  - The model consists of a piping system with straight pipes and elbows.
  - The system is subjected to uniform support motion in three spatial directions.
  - The model is meshed using ``PIPE289`` and ``ELBOW290`` elements for the piping components
-   and MASS21 elements for point mass representation.
+   and ``MASS21`` elements for point mass representation.
 
 Postprocessing:
  - Frequencies obtained from modal solution.
