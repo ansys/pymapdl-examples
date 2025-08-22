@@ -51,10 +51,10 @@ Element type(s):
  - 3-D 3-Node Pipe Element (``PIPE289``)
  - 3-D 3-Node Elbow Element (``ELBOW290``)
 
-.. image:: ../_static/vm-nr1677-01-1a_setup.png
+.. figure: ../_static/vm-nr1677-01-1a_setup.png
    :align: center
    :figclass: align-center
-   :width: 200
+   :width: 500
    :alt: vm-nr1677-01-1a Finite Element Model of NRC Piping Benchmark Problems, Volume 1, Problem 1
 
 
