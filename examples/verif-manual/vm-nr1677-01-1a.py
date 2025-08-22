@@ -377,51 +377,42 @@ print(
 ###############################################################################
 # Element Forces and Moments obtained from spectrum solution for Node "I"
 
-# Element results extraction for element #12 (Pipe289 elements)
-mapdl.esel("s", "elem", "", 12)
-mapdl.etable("pxi_12", "smisc", 1)
-mapdl.etable("vyi_12", "smisc", 6)
-mapdl.etable("vzi_12", "smisc", 5)
-mapdl.etable("txi_12", "smisc", 4)
-mapdl.etable("myi_12", "smisc", 2)
-mapdl.etable("mzi_12", "smisc", 3)
-mapdl.esel("all")
+elems = [12, 14]
+# Output labels
+# px = axial force
+# vy = shear y-direction
+# vz = shear z-direction
+# tx = axial torque
+# my = moment y-direction
+# mz = moment z-direction
+labels = ['px', 'vy', 'vz', 'tx', 'my', 'mz']
 
-# Element results extraction for element #14 (Elbow 290 elements)
-mapdl.esel("s", "elem", "", 14)
+# SMISC mapping
+# To obtain the SMISC values for each element
+SMISC = {
+    # Element number 12
+    12: {
+        # Obtained from the Element reference for PIPE289
+        'i': [ 1, 6, 5, 4, 2, 3],
+        'j': [14, 19, 18, 17, 15, 16],
+    },
+    # Element number 14
+    14: {
+        # Obtained from the Element reference for ELBOW290
+        'i': [1, 6, 5, 4, 2, 3],
+        'j': [36, 41, 40, 39, 37, 38],
 
-mapdl.etable("pxi_14", "smisc", 1)
-mapdl.etable("vyi_14", "smisc", 6)
-mapdl.etable("vzi_14", "smisc", 5)
-mapdl.etable("txi_14", "smisc", 4)
-mapdl.etable("myi_14", "smisc", 2)
-mapdl.etable("mzi_14", "smisc", 3)
-mapdl.esel("all")
+    }
+}
 
-###############################################################################
-# Element Forces and Moments obtained from spectrum solution for Node "J"
+for elem in elems:
+    mapdl.esel("s", "elem", "", elem)
 
-# Element results extraction for element #12 (Pipe289 elements)
-mapdl.esel("s", "elem", "", 12)
-
-mapdl.etable("pxj_12", "smisc", 14)
-mapdl.etable("vyj_12", "smisc", 19)
-mapdl.etable("vzj_12", "smisc", 18)
-mapdl.etable("txj_12", "smisc", 17)
-mapdl.etable("myj_12", "smisc", 15)
-mapdl.etable("mzj_12", "smisc", 16)
-mapdl.esel("all")
-
-# Element results extraction for element #14 (Elbow 290 elements)
-mapdl.esel("s", "elem", "", 14)
-
-mapdl.etable("pxj_14", "smisc", 36)
-mapdl.etable("vyj_14", "smisc", 41)
-mapdl.etable("vzj_14", "smisc", 40)
-mapdl.etable("txj_14", "smisc", 39)
-mapdl.etable("myj_14", "smisc", 37)
-mapdl.etable("mzj_14", "smisc", 38)
-mapdl.esel("all")
+    for node in ["i", "j"]:
+        for label, id_ in zip(labels, SMISC[elem][node]):
+            
+            label_ = f"{label}{node}_{elem}"
+            mapdl.etable(label_, "smisc", id_)
 
 mapdl.allsel("all")
 mapdl.run("/GOPR")
