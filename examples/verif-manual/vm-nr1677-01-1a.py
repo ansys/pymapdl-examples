@@ -447,7 +447,6 @@ for elem in elems:
 
     for node in ["i", "j"]:
         for label, id_ in zip(labels, SMISC[elem][node]):
-
             label_ = f"{label}{node}_{elem}"
             mapdl.etable(label_, "smisc", id_)
 
