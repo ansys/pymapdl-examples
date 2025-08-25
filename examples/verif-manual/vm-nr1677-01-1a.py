@@ -556,65 +556,58 @@ print(
 # For Node# 12:
 
 # Set target values
-target_elem_12i_res = np.array([24.019, 7.514, 34.728, 123.39, 2131.700, 722.790])
-target_elem_12j_res = np.array([24.018, 7.514, 34.728, 123.39, 2442.700, 786.730])
+TARGET = {
+    12: {
+        "i": np.array([24.019, 7.514, 34.728, 123.39, 2131.700, 722.790]),
+        "j": np.array([24.018, 7.514, 34.728, 123.39, 2442.700, 786.730])
+    },
+    14: {
+        "i": np.array([5.1505, 7.2868, 7.9178, 450.42, 675.58, 314.970]),
+        "j": np.array([6.006, 6.6138, 7.9146, 157.85, 858.09, 302.940])
+    }
+}
 
-# Fill result values
-# sim_elem_12i_res = np.array([pxi_12, vyi_12, vzi_12, txi_12, myi_12, mzi_12])
-# sim_elem_12j_res = np.array([pxj_12, vyj_12, vzj_12, txj_12, myj_12, mzj_12])
+sections = [
+      "Axial force",
+      "Shear force Y",
+      "Shear force Z",
+      "Torque",
+      "Moment Y",
+      "Moment Z",
+  ]
 
-# For Node# 14:
-
-# Set target values
-target_elem_14i_res = np.array([5.1505, 7.2868, 7.9178, 450.42, 675.58, 314.970])
-target_elem_14j_res = np.array([6.006, 6.6138, 7.9146, 157.85, 858.09, 302.940])
-
-# Fill result values
-# sim_elem_14i_res = np.array([pxi_14, vyi_14, vzi_14, txi_14, myi_14, mzi_14])
-# sim_elem_14j_res = np.array([pxj_14, vyj_14, vzj_14, txj_14, myj_14, mzj_14])
-
-# output labels
-labels_I = ["PX(I)", "VY(I)", "VZ(I)", "TX(I)", "MY(I)", "MZ(I)"]
-labels_J = ["PX(J)", "VY(J)", "VZ(J)", "TX(J)", "MY(J)", "MZ(J)"]
 
 for node, element in zip([12, 14], ["Pipe289", "Elbow290"]):
-    # Element forces and moments at element, node "i"
-    values_i = ["Node i"]
-    for each in [
-        f"pxi_{node}",
-        f"vyi_{node}",
-        f"vzi_{node}",
-        f"txi_{node}",
-        f"myi_{node}",
-        f"mzi_{node}",
-    ]:
-        values_i.append(mapdl.get_array("ELEM", "", "ETAB", each)[node - 1])
-
-    # Element forces and moments at element , node "j"
-    values_j = ["Node j"]
-    for each in [
-        f"pxj_{node}",
-        f"vyj_{node}",
-        f"vzj_{node}",
-        f"txj_{node}",
-        f"myj_{node}",
-        f"mzj_{node}",
-    ]:
-        values_j.append(mapdl.get_array("ELEM", "", "ETAB", each)[node - 1])
-
-    print(f"\n\nElement forces and moments at element {node} ({element})")
+    print("\n\n===================================================")
+    print(f"Element forces and moments at element {node} ({element})")
     print("===================================================")
 
-    headers = [
-        "Node",
-        "Axial force",
-        "Shear force Y",
-        "Shear force Z",
-        "Torque",
-        "Moment Y",
-        "Moment Z",
-    ]
-    print(tabulate([values_i, values_j], headers=headers))
+    etab_i = [f"pxi_{node}", f"vyi_{node}", f"vzi_{node}", f"txi_{node}", f"myi_{node}", f"mzi_{node}"]
+    etab_j = [f"pxj_{node}", f"vyj_{node}", f"vzj_{node}", f"txj_{node}", f"myj_{node}", f"mzj_{node}"]
+    targets_i = TARGET[node]["i"]
+    targets_j = TARGET[node]["j"]
+
+    for each_section, each_tab_i, each_tab_j, target_i, target_j in zip(sections, etab_i, etab_j, targets_i, targets_j):
+
+      print(f"\n{each_section}")
+      print("="*len(each_section))
+
+      # Element forces and moments at element, node "i"
+      values_i = ["Node i"]
+      
+      values_i.append(mapdl.get_array("ELEM", "", "ETAB", each_tab_i)[node - 1])
+      values_i.append(target_i)
+      values_i.append(values_i[1]/target_i)
+
+      # Element forces and moments at element , node "j"
+      values_j = ["Node j"]
+
+      values_j.append(mapdl.get_array("ELEM", "", "ETAB", each_tab_j)[node - 1])
+      values_j.append(target_j)
+      values_j.append(values_j[1]/target_j)
+
+      headers = ["Node", "Mechanical APDL", "Target", "Ratio"]
+      print(tabulate([values_i, values_j], headers=headers))
 
 ###############################################################################
 # Reaction forces
