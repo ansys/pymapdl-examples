@@ -44,7 +44,7 @@ which necessitate more resources.
 
 .. include:: ./technology_showcase_examples/index.rst
   :start-line: 11
-  :end-line: 130
+  :end-line: 148
 
 
 .. toctree::

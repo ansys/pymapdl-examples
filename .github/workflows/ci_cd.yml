@@ -19,8 +19,8 @@ env:
   MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.2-ubuntu
   ON_CI: True
   PYANSYS_OFF_SCREEN: True
-  RESET_EXAMPLES_CACHE: 1
-  RESET_DOC_BUILD_CACHE: 1
+  RESET_EXAMPLES_CACHE: 0
+  RESET_DOC_BUILD_CACHE: 0
   USE_CACHE: False
 
 concurrency:
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "PyAnsys documentation style checks"
-        uses: ansys/actions/doc-style@v8
+        uses: ansys/actions/doc-style@v9
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -150,7 +150,7 @@ jobs:
           .ci/waiting_services.sh
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v8
+        uses: ansys/actions/doc-build@v9
         env:
           LIBGL_ALWAYS_SOFTWARE: 1
           PYANSYS_VISUALIZER_HTML_BACKEND: true
