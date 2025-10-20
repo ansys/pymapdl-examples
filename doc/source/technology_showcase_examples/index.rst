@@ -120,6 +120,24 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
 
       <div class="sphx-glr-thumbnail-title">Friction Stir Welding (FSW) Simulation</div>
     </div>
+	
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Technology Showcase demonstration Example 62: Inverse-Solving Analysis of a Cardiovascular Structure">
+
+.. only:: html
+
+  .. image:: ./images/thumb/sphx_glr_tse-062-aorta_thumb.png
+    :alt: Inverse-Solving Analysis of a Cardiovascular Structure
+
+  :ref:`sphx_glr_ex_62-techinverse.rst`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Inverse-Solving Analysis of a Cardiovascular Structure</div>
+    </div>
 
 
 
@@ -138,6 +156,8 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
     techdemo-21/ex_21-tecbuckling.rst
     techdemo-25/ex_25-tecstent.rst
     techdemo-28/ex_28-tecfricstir.rst
+    techdemo-62/ex_62-techinverse.rst
+
 
 
 .. only:: html
