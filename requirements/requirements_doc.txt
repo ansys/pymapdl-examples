@@ -1,24 +1,4 @@
-#PyMAPDL dependencies
-git+https://github.com/ansys/pymapdl.git#egg=ansys-mapdl-core[graphics]
-numpy==2.2.2
-nest-asyncio==1.6.0
-pandas==2.2.3
-plotly==6.1.1
-pythreejs==2.4.2
-pyvista[jupyter]==0.46.3
+#PyMAPDL dependencies and documentation requirements
+git+https://github.com/ansys/pymapdl.git#egg=ansys-mapdl-core[graphics,doc]
 
-# Documentation dependencies
-Sphinx==8.1.3
-numpydoc==1.8.0
-ansys-sphinx-theme==1.2.6
-sphinx-copybutton==0.5.2
-jupyter_sphinx==0.5.3
-jupyterlab>=4.3.4
-sphinxemoji==0.3.1
-sphinx-gallery==0.19.0
-sphinx-autobuild==2024.10.3
-sphinx-autodoc-typehints==3.0.1
-sphinx-design==0.6.1
-sphinx-notfound-page==1.1.0
-panel==1.5.5
-pypandoc==1.15
+# Additional dependencies
