@@ -3,12 +3,12 @@ git+https://github.com/ansys/pymapdl.git#egg=ansys-mapdl-core[graphics]
 numpy==2.2.2
 nest-asyncio==1.6.0
 pandas==2.2.3
-plotly==6.1.1
+plotly==6.3.1
 pythreejs==2.4.2
 pyvista[jupyter]==0.46.3
 
 # Documentation dependencies
-Sphinx==8.1.3
+Sphinx==8.2.3
 numpydoc==1.8.0
 ansys-sphinx-theme==1.2.6
 sphinx-copybutton==0.5.2
