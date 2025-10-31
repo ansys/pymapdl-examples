@@ -16,7 +16,7 @@ env:
   DPF_START_SERVER: False
   MAIN_PYTHON_VERSION: '3.12'
   MAPDL_PACKAGE: ghcr.io/ansys/mapdl
-  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.2-ubuntu
+  MAPDL_IMAGE_VERSION_DOCS_BUILD: v25.2-ubuntu-amd
   ON_CI: True
   PYANSYS_OFF_SCREEN: True
 
@@ -66,7 +66,7 @@ jobs:
       contents: read
     outputs:
       PYMAPDL_VERSION: ${{ steps.version.outputs.PYMAPDL_VERSION }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
       PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
