@@ -111,7 +111,7 @@ jobs:
 
       - name: "DPF Server Activation"
         run: |
-          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
+          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${DPF_PORT}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${DPF_PORT}.") &
 
       - name: "Install OS packages"
         run: |
