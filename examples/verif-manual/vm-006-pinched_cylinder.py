@@ -97,6 +97,7 @@ start_prep7()
 # ~~~~~~~~~~~~~~~~~~~
 # Set up the element type (a shell-type).
 
+
 # Define the element type number.
 def define_element(elem_type):
     # Type of analysis: Static.
@@ -143,6 +144,7 @@ print(
 # Define material number.
 mat_num = 1
 
+
 # Define material properties.
 def define_material():
     # Define material properties.
@@ -164,6 +166,7 @@ print(material_list)
 sec_num = 1
 t = 0.094
 
+
 # Define shell cross-section.
 def define_section():
     # Define shell cross-section.
@@ -180,6 +183,7 @@ print(section_list)
 # Define geometry
 # ~~~~~~~~~~~~~~~
 # Set up the keypoints and create the area through the keypoints.
+
 
 # Define geometry of the simplified mathematical model.
 def define_geometry():
@@ -232,6 +236,7 @@ print(f"The number of the keypoint where F is applied: {top_keypoint}")
 # ~~~~~~~
 # Define line division of the lines, then mesh the area with shell elements.
 
+
 # Define mesh properties and create the mesh with shell elements.
 def meshing():
     # Specify the default number of line divisions.
@@ -275,6 +280,7 @@ meshing()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Application of symmetric boundary conditions for simplified model.
 
+
 # Select nodes by location and apply BC.
 def define_bc():
     # Select nodes by location and apply BC.
@@ -294,6 +300,7 @@ define_bc()
 # Define distributed loads
 # ~~~~~~~~~~~~~~~~~~~~~~~~
 # Apply the force of :math:`F = (100/4) lb` in the y-direction.
+
 
 # Define loads.
 def define_loads():
@@ -330,6 +337,7 @@ print(simulation_info)
 # Enter post-processing for the model with elements ``shell181``.
 # Plotting nodal displacement.
 # Get the the radial displacement at the node where force F is applied.
+
 
 # Start post-processing mode.
 def post_processing():

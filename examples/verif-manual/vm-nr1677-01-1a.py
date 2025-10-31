@@ -499,8 +499,8 @@ headers = ["Mode", "Target", "Mechanical APDL", "Ratio"]
 
 # Print table
 print(
-    f"""------------------- VM-NR1677-01-1-a.1 RESULTS COMPARISON ---------------------  
-{tabulate(data_freq, headers=headers, tablefmt="grid")}  
+    f"""------------------- VM-NR1677-01-1-a.1 RESULTS COMPARISON ---------------------
+{tabulate(data_freq, headers=headers, tablefmt="grid")}
 """
 )
 
@@ -543,8 +543,8 @@ headers = ["Result Node", "Target", "Mechanical APDL", "Ratio"]
 
 # Print table
 print(
-    f"""  
-{tabulate(data_freq, headers=headers, tablefmt="grid")}  
+    f"""
+{tabulate(data_freq, headers=headers, tablefmt="grid")}
 """
 )
 
