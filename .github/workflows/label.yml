@@ -80,6 +80,7 @@ jobs:
         labels: bug
 
   commenter:
+    name: "Commenter"
     runs-on: ubuntu-latest
     permissions:
       contents: read
