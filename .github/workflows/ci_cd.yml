@@ -29,7 +29,7 @@ permissions: {}
 jobs:
 
   actions-security:
-    name: "Check actions security"
+    name: "Action security check"
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/check-actions-security@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
@@ -40,7 +40,7 @@ jobs:
           trust-ansys-actions: true
 
   code-style:
-    name: "Running code style checks"
+    name: "Code style checks"
     runs-on: ubuntu-latest
     steps:
       - name: "Run PyAnsys code style checks"
@@ -48,7 +48,7 @@ jobs:
 
 
   doc-style:
-    name: "Documentation Style Check"
+    name: "Documentation style check"
     runs-on: ubuntu-latest
     permissions:
       contents: read
