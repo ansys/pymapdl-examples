@@ -15,7 +15,7 @@ permissions: {}
 jobs:
 
   label-syncer:
-    name: ""Syncer"
+    name: "Syncer"
     runs-on: ubuntu-latest
     permissions:
       contents: read
