@@ -15,19 +15,23 @@ permissions: {}
 jobs:
 
   label-syncer:
-    name: Syncer
+    name: ""Syncer"
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
-      - uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
+      - name: "Install Git and checkout project"
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: false
+      - name : "Sync labels"
+        uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   labeler:
-    name: Set labels
+    name: "Set labels"
     needs: [label-syncer]
     permissions:
       contents: read
@@ -36,21 +40,23 @@ jobs:
     steps:
 
     # Label based on modified files
-    - name: Label based on changed files
+    - name: "Label based on changed files"
       uses: actions/labeler@8558fd74291d67161a8a78ce36a881fa63b766a9 # v5.0.0
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         sync-labels: true
 
     # Label based on branch name
-    - uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
+    - name: "Label based on branch name - docs"
+      uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
       if: |
         startsWith(github.event.pull_request.head.ref, 'doc') || 
         startsWith(github.event.pull_request.head.ref, 'docs')
       with:
         labels: documentation
 
-    - uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
+    - name: "Label based on branch name - maintenance"
+      uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
       if: |
         startsWith(github.event.pull_request.head.ref, 'maint') ||
         startsWith(github.event.pull_request.head.ref, 'no-ci') ||
@@ -58,13 +64,15 @@ jobs:
       with:
         labels: maintenance
 
-    - uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
+    - name: "Label based on branch name - enhancement"
+      uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
       if: startsWith(github.event.pull_request.head.ref, 'feat')
       with:
         labels: |
           enhancement
 
-    - uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
+    - name: "Label based on branch name - bug"
+      uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1.1.3
       if: |
         startsWith(github.event.pull_request.head.ref, 'fix') ||
         startsWith(github.event.pull_request.head.ref, 'patch')
@@ -77,7 +85,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-    - name: Suggest to add labels
+    - name: "Suggest to add labels"
       uses: peter-evans/create-or-update-comment@71345be0265236311c031f5c7866368bd1eff043 # v4.0.0
       # Execute only when no labels have been applied to the pull request
       if: toJSON(github.event.pull_request.labels.*.name) == '{}'
