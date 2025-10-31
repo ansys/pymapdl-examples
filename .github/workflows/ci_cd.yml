@@ -29,7 +29,7 @@ permissions: {}
 jobs:
 
   actions-security:
-    name: "Action security check"
+    name: "Action security checks"
     runs-on: ubuntu-latest
     steps:
       - uses: ansys/actions/check-actions-security@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
