@@ -22,7 +22,7 @@
 
 r""".. _ref_vm299:
 
-Sound Diffusion in a Flat Room
+Sound diffusion in a flat room
 ------------------------------
 Problem description:
  - Sound diffusion is modeled in a flat room of size 30 x 30 x 3 :math:`m^3`. A sound source
@@ -34,7 +34,7 @@ Reference:
    WITHIN A DIFFUSION MODEL FOR ROOM-ACOUSTIC PREDICTIONS MARCH 2008.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 3D 20-Node Acoustic Solid (FLUID220)
@@ -58,7 +58,7 @@ Loading:
  - Sound power source = :math:`1 \cdot 10^{-2} W`
 
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Steady analysis is performed to determine the sound pressure level inside the room.
    In the post-processing, the sound pressure level (SPL) is listed every 2 m along a line
    passing through the room center at 1 m high. The sound pressure level is calculated in

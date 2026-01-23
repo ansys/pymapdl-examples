@@ -2,7 +2,7 @@
 
 .. _tech_demo_01:
 
-Brake Squeal Analysis
+Brake squeal analysis
 =====================
 
 This example analysis shows how to solve a brake-squeal problem.
@@ -90,12 +90,12 @@ stability of the model.
 
 The following modeling topics are available:
 
-*  `1.3.1. Understanding the Advantages of Contact Element Technology`_
-*  `1.3.2. Modeling Contact Pairs`_
-*  `1.3.3. Generating Internal Sliding Motion`_
-*  `1.3.4. Meshing the Brake Disc-Pad Model`_
+*  `1.3.1. Understanding the advantages of contact element technology`_
+*  `1.3.2. Modeling contact pairs`_
+*  `1.3.3. Generating internal sliding motion`_
+*  `1.3.4. Meshing the brake disc-pad model`_
 
-1.3.1. Understanding the Advantages of Contact Element Technology
+1.3.1. Understanding the advantages of contact element technology
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Brake-squeal problems typically require manual calculations of the unsymmetric
@@ -115,7 +115,7 @@ Contact surface-to-surface elements offer many controls for defining contact
 pairs, such as the type of contact surface, algorithm, contact stiffness, and
 gap/initial penetration effect.
 
-1.3.2. Modeling Contact Pairs
+1.3.2. Modeling contact pairs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Frictional surface-to-surface contact pairs with a 0.3 coefficient of friction are
@@ -143,7 +143,7 @@ nodal point (normal-to-target surface) for MPC bonded contact pairs.
 
 
 
-1.3.3. Generating Internal Sliding Motion
+1.3.3. Generating internal sliding motion
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The :meth:`Mapdl.cmrotate() <ansys.mapdl.core.Mapdl.cmrotate>`
@@ -158,7 +158,7 @@ grouped to form a component named E\_ROTOR which is then later specified on the
 :meth:`Mapdl.cmrotate() <ansys.mapdl.core.Mapdl.cmrotate>`
 command to generate a sliding frictional force.
 
-1.3.4. Meshing the Brake Disc-Pad Model
+1.3.4. Meshing the brake disc-pad model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The sweep method is used to generate a hexahedral dominant mesh of the brake
@@ -269,11 +269,11 @@ The analysis settings and solution controls differ depending upon the method use
 to solve a brake-squeal problem. This section describes three possible
 methods:
 
-*  `1.6.1. Linear Non-prestressed Modal Analysis`_
-*  `1.6.2. Partial Nonlinear Perturbed Modal Analysis`_
-*  `1.6.3. Full Nonlinear Perturbed Modal Analysis`_
+*  `1.6.1. Linear non-prestressed modal analysis`_
+*  `1.6.2. Partial nonlinear perturbed modal analysis`_
+*  `1.6.3. Full nonlinear perturbed modal analysis`_
 
-1.6.1. Linear Non-prestressed Modal Analysis
+1.6.1. Linear non-prestressed modal analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A linear
@@ -311,7 +311,7 @@ not. A real eigenfrequency with a positive value indicates an unstable mode.
 
 The following input shows the solution steps involved in this method:
 
-**Modal Solution**
+**Modal solution**
 
 .. code:: python
 
@@ -350,12 +350,12 @@ The following input shows the solution steps involved in this method:
    rotor1.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
-**Figure 1.3: Mode Shape for Unstable Mode (Mode 21).**
+**Figure 1.3: Mode shape for unstable mode (Mode 21).**
 Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
 
 
 
-1.6.2. Partial Nonlinear Perturbed Modal Analysis
+1.6.2. Partial nonlinear perturbed modal analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use a partial nonlinear perturbed modal analysis when stress-stiffening affects
@@ -406,7 +406,7 @@ Following is the process for solving a brake-squeal problem using this method:
 
 The following inputs show the solution steps involved with this method:
 
-**Static Solution**
+**Static solution**
 
 .. code:: python
 
@@ -457,13 +457,13 @@ The following inputs show the solution steps involved with this method:
 
 .. figure:: images/cont_slide.png
     :align: center
-    :alt: Contact Sliding Distance
+    :alt: Contact sliding distance
     :figclass: align-center
 
-    **Figure 1.4: Contact Sliding Distance**
+    **Figure 1.4: Contact sliding distance**
 
 
-**Perturbed Modal Solution**
+**Perturbed modal solution**
 
 .. code:: python
 
@@ -507,8 +507,8 @@ The following inputs show the solution steps involved with this method:
    rotor2_21.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
-**Figure 1.5: Mode Shape for Unstable Mode (Mode 21).**
-Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
+**Figure 1.5: Mode shape for unstable mode (Mode 21).**
+Obtained from the  `1.6.1. Linear non-prestressed modal analysis`_ .
 
 
 
@@ -519,12 +519,12 @@ Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
    rotor2_22.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
-**Figure 1.6: Mode Shape for Unstable Mode (Mode 21).**
-Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
+**Figure 1.6: Mode shape for unstable mode (Mode 21).**
+Obtained from the  `1.6.1. Linear non-prestressed modal analysis`_ .
 
 
 
-1.6.3. Full Nonlinear Perturbed Modal Analysis
+1.6.3. Full nonlinear perturbed modal analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A full nonlinear perturbed modal analysis is the most accurate method for modeling
@@ -560,7 +560,8 @@ Following is the process for solving a brake-squeal problem using this method:
 6. Expand the modes and postprocess the results (from the `jobname.rstp` file).
    The following inputs show the solution steps involved with this method:
 
-**First Static Solution**
+
+**First static solution**
 
 .. code:: python
 
@@ -589,7 +590,7 @@ Following is the process for solving a brake-squeal problem using this method:
     mapdl.solve()  # Solve with prestress loading
 
 
-**Second Static Solution**
+**Second static solution**
 
 .. code:: python
 
@@ -620,7 +621,7 @@ Following is the process for solving a brake-squeal problem using this method:
     mapdl.finish()
 
 
-**Perturbed Modal Solution**
+**Perturbed modal solution**
 
 .. code:: python
 
@@ -666,7 +667,7 @@ Following is the process for solving a brake-squeal problem using this method:
 
 
 
-**Figure 1.7: Mode Shape for Unstable Mode (Mode 21).** 
+**Figure 1.7: Mode shape for unstable mode (Mode 21).** 
 
 
 
@@ -678,7 +679,7 @@ Following is the process for solving a brake-squeal problem using this method:
 
 
 
-**Figure 1.8: Mode Shape for Unstable Mode (Mode 21).** 
+**Figure 1.8: Mode shape for unstable mode (Mode 21).** 
 
 
 
@@ -702,8 +703,8 @@ produce a squealing noise.
    rotor3_21.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
-**Figure 1.9: Mode Shape for Unstable Mode (Mode 21).**
-Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
+**Figure 1.9: Mode shape for unstable mode (Mode 21).**
+Obtained from the  `1.6.1. Linear non-prestressed modal analysis`_ .
 
 
 
@@ -715,11 +716,11 @@ Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
    rotor3_22.plot(scalars='values', cmap='jet', show_edges=True, theme=mytheme)
 
 
-**Figure 1.10: Mode Shape for Unstable Mode (Mode 22).**
-Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
+**Figure 1.10: Mode shape for unstable mode (Mode 22).**
+Obtained from the  `1.6.1. Linear non-prestressed modal analysis`_ .
 
 
-**Table 1.2: Solution Output**
+**Table 1.2: Solution output**
 
 +----------+-----------------------------------+-------------------------------------------+-----------------------------------+
 |          | Linear non-prestressed modal      |  Partial nonlinear perturbed modal        |  Full nonlinear perturbed modal   |
@@ -787,7 +788,7 @@ Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
 | 30.00    | 8623.76                | 0.00     | 8616.68                  | 0.00           | 8616.68          | 0.00           |
 +----------+------------------------+----------+--------------------------+----------------+------------------+----------------+
 
-1.7.1. Determining the Modal Behavior of Individual Components
+1.7.1. Determining the modal behavior of individual components
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is important to determine the modal behavior of individual components (disc and
@@ -804,7 +805,7 @@ can couple to create dynamic instability in the system. These pad and disc bendi
 modes can couple to produce an intermediate lock, resulting in a squeal noise at a
 frequency close to 6470 Hz.
 
-1.7.2. Parametric Study with Increasing Friction Coefficient
+1.7.2. Parametric study with increasing friction coefficient
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A parametric study was performed on the brake disc model using a linear
@@ -864,7 +865,7 @@ other and couple as the coefficient of friction increases:
    )
    fig.show()
 
-**Figure 1.11: Effect of Friction Coefficient on Unstable Modes**
+**Figure 1.11: Effect of friction coefficient on unstable modes**
 
 1.8. Recommendations
 --------------------

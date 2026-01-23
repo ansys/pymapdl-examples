@@ -61,7 +61,7 @@ Geometric properties:
 Loading:
  - :math:`F = 4000 lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Only one-half of the structure is modeled because of symmetry.
    The boundary conditions for the equivalent half model become fixed-free.
    Large deflection is needed since the stiffness of the structure and the

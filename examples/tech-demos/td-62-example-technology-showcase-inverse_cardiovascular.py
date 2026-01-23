@@ -99,7 +99,7 @@ mapdl.eplot(background="w")
 
 mapdl.finish()
 
-# Analysis and Solution Controls
+# Analysis and solution controls
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Enter solution processor and specify solution controls.
 

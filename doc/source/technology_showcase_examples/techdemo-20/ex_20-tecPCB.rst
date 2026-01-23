@@ -24,7 +24,7 @@ the Mechanical APDL Technology Showcase Manual.
 20.1. Introduction
 ------------------
 
-20.1.1. Additional Packages Used
+20.1.1. Additional packages used
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * `Matplotlib <https://matplotlib.org>`_ is used for plotting purposes.
@@ -2008,7 +2008,7 @@ It is recommended to use `DPF Post <dpf_post_docs_>`_.
 
  .. code-block:: none
 
-    Modal Analysis Solution object.
+    Modal analysis solution object.
 
 
     Data Sources

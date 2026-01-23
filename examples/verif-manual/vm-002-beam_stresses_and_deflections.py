@@ -40,7 +40,7 @@ Reference:
 
 Analysis type(s):
 
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
 
@@ -258,5 +258,6 @@ print(output)
 
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

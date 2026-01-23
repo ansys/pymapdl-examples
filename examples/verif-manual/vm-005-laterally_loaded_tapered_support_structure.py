@@ -22,7 +22,7 @@
 
 r""".. _ref_vm5_example:
 
-Laterally Loaded Tapered Support Structure
+Laterally loaded tapered support structure
 ------------------------------------------
 Problem description:
  - A cantilever beam of thickness :math:`t` and length :math:`l`
@@ -37,7 +37,7 @@ Reference:
    pg. 342, problem 7.18.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-D 4-Node Structural Solid Elements (PLANE182)
@@ -240,5 +240,6 @@ print(results_183)
 
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

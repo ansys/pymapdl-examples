@@ -309,8 +309,8 @@ for set, time_freq, load_step, substep, cumulative in freq_list:
 mapdl.finish()
 
 ###############################################################################
-# Response Spectrum Analysis
-# --------------------------
+# Response spectrum analysis
+# ---------------------------
 # Perform spectrum analysis using the frequencies obtained from the modal analysis.
 # The response spectrum analysis will be performed for a single point excitation
 # response spectrum. The damping ratio is set to a constant value for all modes.

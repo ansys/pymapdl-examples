@@ -2,7 +2,7 @@
 
 .. _tech_demo_25:
 
-Cardiovascular Stent Simulation
+Cardiovascular stent simulation
 ===============================
 
 This example problem shows how to simulate stent-artery interaction during and after stent
@@ -250,7 +250,7 @@ Once all the setups are ready, we read the geometry file.
 25.3. Analysis
 --------------
 
-25.3.1. Static Analysis
+25.3.1. Static analysis
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 We, then, apply the static analysis.

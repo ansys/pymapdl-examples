@@ -22,7 +22,7 @@
 
 r""".. _ref_vm16:
 
-Bending of a Solid Beam (Plane Elements)
+Bending of a solid beam (plane elements)
 ----------------------------------------
 Problem description:
  - A beam of length :math:`l` and height :math:`h` is built-in at one end and loaded at the
@@ -39,7 +39,7 @@ Reference:
    New York, NY, 1965, pp. 104, 106.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-D Structural Solid Elements (PLANE42)
@@ -62,7 +62,7 @@ Loading:
  - Case 1, :math:`M = 2000 in-lb`
  - Case 2, :math:`F = 300 lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The stiffness matrix formed in the first load step is also used in the second
    load step (automatically determined by Mechanical APDL). The end moment is
    represented by equal and opposite forces separated by a distance h. The bending
@@ -94,8 +94,8 @@ mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2"
 mapdl.title("VM16 BENDING OF A SOLID BEAM (PLANE ELEMENTS)")
 
 ###############################################################################
-# Case 1: Solve Using PLANE42 Element Model.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Case 1: Solve using PLANE42 element model
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Enter the model creation prep7 preprocessor
 mapdl.prep7(mute=True)
 

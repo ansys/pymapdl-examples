@@ -254,5 +254,6 @@ df2 = pd.DataFrame(main_columns, index=row_names).round(2)
 df2.head()
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

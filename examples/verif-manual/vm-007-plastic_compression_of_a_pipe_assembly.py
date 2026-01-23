@@ -447,13 +447,13 @@ def solution(deflect):
 
 
 # Run each load step to reproduce needed deflection subsequently.
-# Load Step 1
+# Load step 1
 solution(deflect=defl_ls1)
 
-# Load Step 2
+# Load step 2
 solution(deflect=defl_ls2)
 
-# Load Step 3
+# Load step 3
 solution(deflect=defl_ls3)
 mapdl.finish(mute=True)
 
@@ -632,5 +632,6 @@ df.style.set_caption("Results Comparison",).set_table_styles(
 )
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

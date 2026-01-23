@@ -38,7 +38,7 @@ Reference:
    No. 3, 1973.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 4-Node Finite Strain Shell Elements (SHELL181)
@@ -462,5 +462,6 @@ output = f"""
 print(output)
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -22,8 +22,8 @@
 
 r""".. _ref_vm21:
 
-Tie Rod with Lateral Loading
-----------------------------
+Tie  rod with lateral loading
+-----------------------------
 Problem description:
  - A tie rod is subjected to the action of a tensile force F and a uniform lateral load p.
    Determine the maximum deflection :math:`z_{max}`, the slope :math:`\theta` at the left-hand end,
@@ -56,7 +56,7 @@ Loading:
  - :math:`F = 21,972.6 lb`
  - :math:`p = 1.79253 lb/in`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Due to symmetry, only one-half of the beam is modeled. The full load is applied for each
    iteration. The first solution represents the unstiffened case. The second solution represents
    the stiffened case.

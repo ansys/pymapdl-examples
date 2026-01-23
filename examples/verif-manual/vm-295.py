@@ -22,7 +22,7 @@
 
 r""".. _ref_vm295:
 
-One Dimensional Terzaghi's Consolidation Problem with Permeability as Function of Depth
+One dimensional Terzaghi's consolidation problem with permeability as function of depth
 ---------------------------------------------------------------------------------------
 Problem description:
  - The test case is to simulate a one-dimensional Terzaghi's problem with permeability as a function
@@ -37,7 +37,7 @@ Reference:
    IN APPLIED MECHANICS AND ENGINEERING 190 (2001),PG: 5907-5922
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2D 4-Node Coupled Pore-Pressure Element (CPT212)
@@ -59,7 +59,7 @@ Geometric properties:
 Loading:
  - Pressure, :math:`P = 1 \cdot 10^4 Pa`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The soil is modeled using 2D CPT212 elements with plane strain element behavior.
    The UX degree of freedom for all nodes is constrained and the UY degree of freedom at the bottom
    of the soil is constrained. The pressure degree of freedom at the top edge is constrained to
@@ -220,7 +220,7 @@ mapdl.run("/OUT")
 mapdl.gopr()
 
 ###############################################################################
-# Specify Reference Solution
+# Specify reference solution
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.com("")
 mapdl.com("EXCESS PORE PRESSURE IN KILOPASCALS AT LOCATION X=1,Y=6")
@@ -237,7 +237,7 @@ q = mapdl.queries
 nd1 = q.node(1.0, 6.0, 0.0)
 
 ###############################################################################
-# Post-processing: Compute pore pressure
+# Post-processing: compute pore pressure
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # redirects solver output to a file named "SCRATCH"
 mapdl.run("/OUT,SCRATCH")

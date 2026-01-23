@@ -36,7 +36,7 @@ Reference:
    pg. 30, problem 9.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
@@ -206,5 +206,6 @@ print(message)
 
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

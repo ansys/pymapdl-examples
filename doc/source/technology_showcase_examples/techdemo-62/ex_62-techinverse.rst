@@ -3,7 +3,7 @@
 .. _tech_demo_62:
 
 
-Inverse-Solving Analysis of a Cardiovascular Structure
+Inverse-solving analysis of a cardiovascular structure
 ======================================================
 
 
@@ -59,7 +59,7 @@ is considered:
 
 .. figure:: images/glr_tse_aorta1.png
     :align: center
-    :alt: 3D Geometry of the Abdominal Aorta of a Mouse
+    :alt: 3D geometry of the abdominal aorta of a mouse
     :figclass: align-center
 
 The model represents an approximated geometry of the abdominal aorta of a mouse,
@@ -70,7 +70,7 @@ This figure shows the inner diameter of the model at various approximate locatio
 
 .. figure:: images/glr_tse_aorta2.png
     :align: center
-    :alt: Dimensions of Each Branch in the Abdominal Aorta Model
+    :alt: Dimensions of each branch in the abdominal aorta model
     :figclass: align-center
 
 The wall thickness is assumed to be 20 percent of the local radius, so it varies
@@ -112,7 +112,7 @@ of tetrahedral SOLID187 elements (about 0.6 percent of the total mesh).
 
 .. figure:: images/glr_tse_aorta3.png
     :align: center
-    :alt: Mesh of the Abdominal Aorta Model
+    :alt: Mesh of the abdominal aorta model
     :figclass: align-center
 
 The mesh consists of 62123 elements with 4 elements to represent the wall
@@ -166,11 +166,11 @@ used to model the abdominal aorta:
 
 .. figure:: images/glr_tse_aorta4.png
     :align: center
-    :alt: Aorta Tissue Material Properties
+    :alt: Aorta tissue material properties
     :figclass: align-center
 
 
-2.2. Boundary Conditions and Loading
+2.2. Boundary conditions and loading
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The free radial boundary conditions are applied at each end cross-section in the model:
@@ -203,10 +203,10 @@ in the second load step (forward-solving).
 
 The analysis for this problem is performed in two load steps:
 
-3.1. Load Step 1 (Inverse-Solving)
+3.1. Load step 1 (inverse-solving)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Load Step 1 (Inverse-Solving) - A nonlinear static analysis with inverse solving (INVOPT,ON)
+Load step 1 (inverse-solving) - A nonlinear static analysis with inverse solving (INVOPT,ON)
 is performed on the input geometry of the model (at end-diastolic pressure (80 mm Hg)) to
 determine the zero-pressure geometry of the model and to obtain the stress/strain results
 on the input geometry.
@@ -226,7 +226,7 @@ on the input geometry.
     mapdl.dmpoption("emat", "no")   # Don't combine emat file for DANSYS
     mapdl.dmpoption("esav", "no")   # Don't combine esav file for DANSYS
 
-    # Turn on "Inverse-Solving" option for Initial Steps.
+    # Turn on "inverse-solving" option for Initial Steps.
     mapdl.run("invopt,on")
 
     # Controls file writing for multiframe restarts.
@@ -268,16 +268,16 @@ on the input geometry.
     mapdl.solve()
 
 
-3.2. Load Step 2 (Forward-Solving)
+3.2. Load step 2 (forward-solving)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 After an inverse-solving load step, the solver generally allows an analysis to continue
 as forward-solving in a new load step. You can modify existing loads or apply new loads
-in the forward-solving step. For more information, see `Reverting to Forward Solving and
-Continuing the Analysis as a New Load Step in the Structural Analysis Guide 
+in the forward-solving step. For more information, see `Reverting to forward solving and
+continuing the analysis as a new load step in the Structural Analysis Guide 
 <https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23strinvsolvrevertfwd>`_.
 
-Load Step 2 (Forward-Solving) - To solve the model for end-systolic pressure (120 mm Hg),
+Load step 2 (forward-solving) - To solve the model for end-systolic pressure (120 mm Hg),
 the solution continues using forward solving (INVOPT,OFF). The pressure load is increased
 from 80 mm Hg to 120 mm Hg. Continuing the solution as a new load step following the
 inverse-solving load step eliminates a step in the simulation, allowing for a more
@@ -298,7 +298,7 @@ efficient analysis.
     # Sets the time for the second load step.
     mapdl.time(time='2.0')
 
-    # Turn off "Inverse-Solving" option for the second steps.
+    # Turn off "inverse-solving" option for the second steps.
     mapdl.run("invopt,off")
 
     # Controls the solution data written to the database.
@@ -339,7 +339,7 @@ The results of the analysis are obtained in two load steps:
     # Defines the type of graphics display. Activate "Power" graphics.
     mapdl.graphics("power")
 
-4.1. Load Step 1 (Inverse-Solving)
+4.1. Load step 1 (inverse-solving)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The deformed shape of the abdominal aorta model after the first load step
@@ -385,7 +385,7 @@ gives the stress/strain results of the input geometry at end-diastolic pressure 
     :alt: Maximum Principal Stress After Inverse Solving (First Load Step)
     :figclass: align-center
 
-4.2. Load Step 2 (Forward-Solving)
+4.2. Load step 2 (forward-solving)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the second load step, the analysis is continued via forward solving (INVOPT,OFF)
@@ -412,17 +412,17 @@ and the pressure load is increased until it reaches end-systolic pressure (120 m
 
 .. figure:: images/inverse_analysis_cardiovascular_structure003.png
     :align: center
-    :alt: Total Deformation (USUM) After Forward Solving (Second Load Step)
+    :alt: Total deformation (USUM) after forward solving (second load step)
     :figclass: align-center
 
 .. figure:: images/inverse_analysis_cardiovascular_structure004.png
     :align: center
-    :alt: Maximum Principal Stress After Forward Solving (Second Load Step)
+    :alt: Maximum principal stress after forward solving (second load step)
     :figclass: align-center
 
 .. figure:: images/inverse_analysis_cardiovascular_structure005.png
     :align: center  
-    :alt: Maximum Principal Strain Plot of the Abdominal Aorta Model at End-Systolic Pressure (120 mm Hg)
+    :alt: Maximum principal strain plot of the abdominal aorta model at end-systolic pressure (120 mm Hg)
     :figclass: align-center
 
 
@@ -431,7 +431,7 @@ aorta at zero-pressure, end-diastolic pressure, and end-systolic pressure condit
 
 .. figure:: images/glr_tse_aorta7.png
     :align: center
-    :alt: Deformation of Cross-Section at the Proximal Abdominal Aorta Location for Various Pressure Conditions
+    :alt: Deformation of cross-section at the proximal abdominal aorta location for various pressure conditions
     :figclass: align-center
 
 The input geometry is considered at end-diastolic pressure (80 mm Hg), the deformed geometry
@@ -469,7 +469,7 @@ When performing a similar type of analysis using inverse-solving, consider the f
 
 - Use a reversed sign to apply displacement type loading in the inverse-solving load step.
 
-  For more information, see `Applying Loads in an Inverse-Solving Analysis in the Structural Analysis Guide
+  For more information, see `Applying Loads in an inverse-solving Analysis in the Structural Analysis Guide
   <https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23sect2_zjl_jbv_1rb>`_.
 
 

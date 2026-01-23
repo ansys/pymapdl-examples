@@ -22,7 +22,7 @@
 
 r""".. _ref_vm15:
 
-Bending of a Circular Plate Using Axisymmetric Shell Elements
+Bending of a circular plate using axisymmetric shell elements
 -------------------------------------------------------------
 Problem description:
  - A flat circular plate of radius r and thickness t is subject to
@@ -40,7 +40,7 @@ Reference:
    pg. 96,97, and 103.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-Node Finite Strain Axisymmetric Shell (SHELL208)
@@ -61,7 +61,7 @@ Loading:
  - :math:`P = 6.0 psi`
  - :math:`F = 7,539.82 lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The stiffness matrix formed in the first load step is automatically reused
    in the second load step. A new stiffness matrix is automatically formed in
    the third load step because of changed boundary constraints. The mesh density

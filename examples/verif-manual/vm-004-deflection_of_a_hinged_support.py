@@ -38,7 +38,7 @@ Reference:
    pg. 10, problem 2.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
@@ -221,5 +221,6 @@ Displacement [in]     -0.12          {displacement:.2f}     {abs(displacement) /
 print(results)
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()
