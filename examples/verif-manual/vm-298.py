@@ -289,7 +289,7 @@ for j in range(1, _N):
         COEFV = (4 * _vj * _vk) * (2 * _KO * _Ur**2)
         COEFU = _uj * _uk
         for i in range(FREQ_PTS):
-            OMG = OMG_ARRAY[i]
+            OMG = float(OMG_ARRAY[i])
             TERM1 = (600 * OMG / (_PI * _Ur)) ** 2
             TERM1 = TERM1 / (1 + TERM1) ** (4 / 3)
             EXPO = -(_C1 * OMG * (abs(j - k)) * _H) / (2 * _PI * _Ur)
