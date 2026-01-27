@@ -267,7 +267,7 @@ OMG_BEG = 2 * _PI * FREQ_BEGIN
 OMG_INC = 2 * _PI * FREQ_INC
 mapdl.dim("OMG_ARRAY", "ARRAY", FREQ_PTS)
 mapdl.vfill("OMG_ARRAY", "RAMP", OMG_BEG, OMG_INC)
-OMG_ARRAY = mapdl.parameters["OMG_ARRAY"]
+OMG_ARRAY = np.asarray(mapdl.parameters["OMG_ARRAY"])
 
 # Table of direct and cospectral input PSD wind spectrum values (Davenport)
 # Create a 2D array for direct input PSD wind spectrum values
@@ -289,7 +289,7 @@ for j in range(1, _N):
         COEFV = (4 * _vj * _vk) * (2 * _KO * _Ur**2)
         COEFU = _uj * _uk
         for i in range(FREQ_PTS):
-            OMG = float(OMG_ARRAY[i])
+            OMG = OMG_ARRAY[i]
             TERM1 = (600 * OMG / (_PI * _Ur)) ** 2
             TERM1 = TERM1 / (1 + TERM1) ** (4 / 3)
             EXPO = -(_C1 * OMG * (abs(j - k)) * _H) / (2 * _PI * _Ur)
