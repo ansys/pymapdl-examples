@@ -22,6 +22,9 @@ env:
   RESET_EXAMPLES_CACHE: 0
   RESET_DOC_BUILD_CACHE: 0
   USE_CACHE: False
+  PYMAPDL_GRPC_TRANSPORT: 'insecure'
+  DPF_DEFAULT_GRPC_MODE: 'insecure'
+
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
