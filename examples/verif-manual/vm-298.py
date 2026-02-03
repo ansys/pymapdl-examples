@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -289,7 +289,7 @@ for j in range(1, _N):
         COEFV = (4 * _vj * _vk) * (2 * _KO * _Ur**2)
         COEFU = _uj * _uk
         for i in range(FREQ_PTS):
-            OMG = OMG_ARRAY[i]
+            OMG = OMG_ARRAY[i][0]  # OMG_ARRAY[i] is a list with one element
             TERM1 = (600 * OMG / (_PI * _Ur)) ** 2
             TERM1 = TERM1 / (1 + TERM1) ** (4 / 3)
             EXPO = -(_C1 * OMG * (abs(j - k)) * _H) / (2 * _PI * _Ur)
