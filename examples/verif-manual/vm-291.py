@@ -332,8 +332,8 @@ for i in range(len(value_ana2)):
     value_ratio2.append(a)
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 results = f"""
 --------------------------VM291 RESULTS COMPARISON--------------------------
@@ -370,13 +370,13 @@ for i in range(len(value2)):
     print(message)
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Clears the database without restarting.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Clears the database without restarting
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mapdl.run("/CLEAR,NOSTART")
 # redirects output to the default system output file
@@ -666,11 +666,11 @@ message = f"""
 print(message)
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

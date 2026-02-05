@@ -73,7 +73,7 @@ Analysis assumptions and modeling notes:
 
 from ansys.mapdl.core import launch_mapdl
 
-# Start mapdl.
+# Start MAPDL.
 mapdl = launch_mapdl()
 
 

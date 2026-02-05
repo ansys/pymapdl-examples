@@ -54,7 +54,7 @@ between the IC packages and the circuit board.
     from ansys.mapdl.core import launch_mapdl
     from ansys.mapdl.core.examples.downloads import download_tech_demo_data
 
-    # start MAPDL as a service
+    # Start MAPDL as a service
     mapdl = launch_mapdl()
     print(mapdl)
 
@@ -78,7 +78,7 @@ between the IC packages and the circuit board.
     # download the cdb file
     pcb_mesh_file = download_tech_demo_data("td-20", "pcb_mesh_file.cdb")
 
-    # enter preprocessor and read in cdb
+    # Enter preprocessor and read in cdb
     mapdl.prep7()
     mapdl.cdread("COMB", pcb_mesh_file)
     mapdl.allsel()
@@ -182,7 +182,7 @@ number of nodes is recommended (suggestion: 300 modes).
 .. code-block:: default
 
 
-    # enter solution processor and define analysis settings
+    # Enter solution processor and define analysis settings
     mapdl.slashsolu()
     mapdl.antype("modal")
     # set number of modes to extract

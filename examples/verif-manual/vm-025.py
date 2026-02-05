@@ -250,8 +250,8 @@ mapdl.plsect("S", "X", -1)  # Display the SX stresses in a sectional plot
 mapdl.prsect(-1)  # Print linearized stresses
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = 0.0078666
@@ -305,8 +305,8 @@ print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
@@ -378,8 +378,8 @@ rst_x_c2 = mapdl.get("RST_X_C2", "NODE", XI_NODE, "S", "X")
 tst_x_c2 = mapdl.get("TST_X_C2", "NODE", XI_NODE, "S", "Z")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_strss = [0, 4753]
@@ -417,11 +417,11 @@ data = [
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -85,11 +85,11 @@ from math import cos, pi, sin
 
 from ansys.mapdl.core import launch_mapdl
 
-# start mapdl and clear it
+# Start MAPDL and clear it
 mapdl = launch_mapdl()
 mapdl.clear()  # optional as MAPDL just started
 
-# enter verification example mode and the pre-processing routine
+# Enter verification example mode and the pre-processing routine
 mapdl.verify()
 mapdl.prep7()
 

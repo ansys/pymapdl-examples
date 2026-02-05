@@ -94,8 +94,8 @@ mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2"
 mapdl.title("VM16 BENDING OF A SOLID BEAM (PLANE ELEMENTS)")
 
 ###############################################################################
-# Case 1: Solve using PLANE42 element model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Case 1: solve using PLANE42 element model
+# -----------------------------------------
 # Enter the model creation prep7 preprocessor
 mapdl.prep7(mute=True)
 
@@ -167,7 +167,7 @@ mapdl.slashsolu()
 # Set analysis type to static
 mapdl.antype("STATIC")
 
-# start solve for 1st load case
+# Start solve for 1st load case
 mapdl.solve()
 
 # exists solution processor
@@ -213,7 +213,7 @@ mapdl.slashsolu()
 mapdl.f(6, "FX", "", "", 16, 10)  # Applied force in the X-direction
 mapdl.f(6, "FY", 150, "", 16, 10)  # Applied force in the Y-direction
 
-# start solve for 2nd load case
+# Start solve for 2nd load case
 mapdl.solve()
 # exists solution processor for case 2
 mapdl.finish()
@@ -243,8 +243,8 @@ bend_stress2 = mapdl.get("BEND_STRESS2", "PLNSOL", 0, "MAX")
 mapdl.show("close")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = [0.00500, 0.00500]
@@ -282,18 +282,18 @@ RESULTS FOR CASE {lc+1:1d}:
     print(pd.DataFrame(data, row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Clears the database without restarting.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Clears the database without restarting
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.run("/CLEAR,NOSTART")
 
 ###############################################################################
-# Case 2: Solve Using PLANE182 Element Model
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Case 2: solve using PLANE182 element model
+# ------------------------------------------
 # Switches to the preprocessor (PREP7)
 mapdl.prep7()
 
@@ -367,7 +367,7 @@ mapdl.slashsolu()
 # Set analysis type to static
 mapdl.antype("STATIC")
 
-# start solve for 1st load case
+# Start solve for 1st load case
 mapdl.solve()
 
 # exists solution processor
@@ -414,7 +414,7 @@ mapdl.slashsolu()
 mapdl.f(6, "FX", "", "", 16, 10)
 mapdl.f(6, "FY", 150, "", 16, 10)
 
-# start solve for 2nd load case
+# Start solve for 2nd load case
 mapdl.solve()
 # exists solution processor for case 2
 mapdl.finish()
@@ -444,8 +444,8 @@ bend_stress2 = mapdl.get("BEND_STRESS2", "PLNSOL", 0, "MAX")
 mapdl.show("close")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = [0.00500, 0.00500]
@@ -482,8 +482,8 @@ RESULTS FOR CASE {lc+1:1d}:
 
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 # Exit MAPDL session

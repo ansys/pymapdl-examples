@@ -88,7 +88,7 @@ mapdl.finish()
 # Set the ANSYS version
 mapdl.com("ANSYS MEDIA REL. 2022R2 (05/13/2022) REF. VERIF. MANUAL: REL. 2022R2")
 
-# Run the /VERIFY command for VM299
+# Run the '/VERIFY' command for VM299
 mapdl.run("/VERIFY,VM299")
 
 # Set the title of the analysis
@@ -111,7 +111,7 @@ VOL = LX * LY * LZ
 SURF = 2 * (LX * LY + LY * LZ + LX * LZ)
 MFP = 4 * VOL / SURF
 
-# set parameters for MATERIAL PROPERTIES
+# Set parameters for MATERIAL PROPERTIES
 C0 = 343
 RHO = 1.21
 ROOMD = MFP * C0 / 3
@@ -291,8 +291,8 @@ for i in range(len(target_ref)):
 label = np.array([5, 10, 15, 20, 25])
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 message = f"""
 ------------------- VM299 RESULTS COMPARISON ---------------------
@@ -313,11 +313,11 @@ message = f"""
 print(message)
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -36,10 +36,10 @@ Reference:
  - S. H. Crandall, N. C. Dahl, *An Introduction to the Mechanics of Solids*,
    McGraw-Hill Book Co., Inc., New York, NY, 1959, pg. 234, problem 5.31.
 
-Analysis Type(s):
+Analysis type(s):
  - Static analysis (``ANTYPE = 0``)
 
-Element Type(s):
+Element type(s):
  - 3-D Spar (or Truss) Elements (``LINK180``)
 
 .. figure:: ../_static/vm11_setup_1.png

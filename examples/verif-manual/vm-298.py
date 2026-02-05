@@ -134,10 +134,9 @@ mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit
 # ANSYS MEDIA REL. 2025R1 (11/08/2024) REF. VERIF. MANUAL: REL. 2025R1
 mapdl.title("VM298,PSD ANALYSIS OF 40-STORY BUILDING UNDER WIND LOAD EXCITATION")
 
-"""
-Parameter definition
---------------------
-"""
+#############################################################################
+# Parameter definition
+# --------------------
 
 
 _N = 40  # NUMBER OF STORIES
@@ -162,7 +161,7 @@ _C1 = 7.7  # CONSTANT TERM
 _PI = math.pi  # PI, CIRCULAR CONSTANT
 
 ###############################################################################
-# Preprocessing: Model 40-story building using 1-D spring-damper system and point mass elements
+# Preprocessing: model 40-story building using 1-D spring-damper system and point mass elements
 # ---------------------------------------------------------------------------------------------
 
 mapdl.prep7(mute=True)

@@ -85,7 +85,7 @@ Analytical equations:
 
 from ansys.mapdl.core import launch_mapdl
 
-# Start mapdl and clear it.
+# Start MAPDL and clear it.
 mapdl = launch_mapdl()
 mapdl.clear()
 

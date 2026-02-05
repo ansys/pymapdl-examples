@@ -34,10 +34,10 @@ Reference:
  - S. H. Crandall, N. C. Dahl, *An Introduction to the Mechanics of Solids*,
    McGraw-Hill Book Co., Inc., New York, NY, 1959, pg. 294, ex. 7.2.
 
-Analysis Type(s):
+Analysis type(s):
  - Static analysis (``ANTYPE = 0``)
 
-Element Type(s):
+Element type(s):
  - 3-D 2 Node Beam (``BEAM188``)
 
 .. figure:: ../_static/vm10_setup_1.png

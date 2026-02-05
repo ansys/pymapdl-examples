@@ -196,8 +196,8 @@ print(mapdl.klist())
 
 
 ###############################################################################
-# Distance between nodes.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Distance between nodes
+# ~~~~~~~~~~~~~~~~~~~~~~
 # Using already created method for nodes to get the distance between them and
 # print out an output. The nodes have got next coordinates:
 #

@@ -82,11 +82,11 @@ throughout the structure.
 
 .. code:: python
 
-   # starting MAPDL as a service and importing an external model
+   # Starting MAPDL as a service and importing an external model
    from ansys.mapdl.core import launch_mapdl
    from ansys.mapdl.core.examples.downloads import download_tech_demo_data
    
-   # start MAPDL as a service
+   # Start MAPDL as a service
    mapdl = launch_mapdl(loglevel="WARNING", print_com=True)
    print(mapdl)
 
@@ -127,7 +127,7 @@ Starting MAPDL as a service and importing an external model
 
 .. jupyter-execute::
 
-    # starting MAPDL as a service and importing an external model
+    # Starting MAPDL as a service and importing an external model
     from ansys.mapdl.core import launch_mapdl
     from ansys.mapdl.core.examples.downloads import download_tech_demo_data
 

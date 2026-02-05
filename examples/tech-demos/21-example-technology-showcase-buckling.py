@@ -83,14 +83,14 @@ r = 344 * ts  # Radius of cylinder (mm)
 L = 431.8 + 2 * (19 - 9.5)  # Length of cylinder (mm)
 pext = 0.24  # Differential external pressure (MPa)
 
-# start MAPDL as a service
+# Start MAPDL as a service
 mapdl = launch_mapdl()
 print(mapdl)
 
 mapdl.filname("buckling")  # change filename
 # mapdl.nerr(nmerr=200, nmabt=10000, abort=-1, ifkey=0, num=0)
 
-# enter preprocessor
+# Enter preprocessor
 mapdl.prep7()
 
 # define material properties for 2024-T3 Alluminum alloy

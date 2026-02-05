@@ -189,8 +189,8 @@ strss_b = mapdl.get("STRSS_B", "ELEM", 1, "ETAB", "STRS_BEN")
 strss_t = mapdl.get("STRSS_T", "ELEM", 1, "ETAB", "STRS_SHR")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_val = [-2.648, 6366, -3183]
@@ -215,13 +215,13 @@ print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Clears the database without restarting.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Clears the database without restarting
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.run("/CLEAR,NOSTART")
 
 ###############################################################################

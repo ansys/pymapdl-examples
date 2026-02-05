@@ -59,10 +59,10 @@ deformation, and the sliding contact between the stent and the artery wall.
 
 .. code:: ipython3
 
-   # starting MAPDL as a service and importing an external model
+   # Starting MAPDL as a service and importing an external model
    from ansys.mapdl.core import launch_mapdl
    
-   # start MAPDL as a service
+   # Start MAPDL as a service
    mapdl = launch_mapdl()
    print(mapdl)
 
@@ -257,7 +257,7 @@ We, then, apply the static analysis.
 
 .. code:: ipython3
 
-   # enter solution processor and define analysis settings
+   # Enter solution processor and define analysis settings
    mapdl.run("/solu")
    mapdl.antype(antype="0")
    mapdl.nlgeom(key="on")

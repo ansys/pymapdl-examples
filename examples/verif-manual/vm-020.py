@@ -189,8 +189,8 @@ strs_hop = mapdl.get("STRS_HOP", "NODE", 1, "S", 2)
 strs_ax = mapdl.get("STRS_AX", "NODE", 1, "S", 1)
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_stress = [15000, 29749]
@@ -212,11 +212,11 @@ print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()
