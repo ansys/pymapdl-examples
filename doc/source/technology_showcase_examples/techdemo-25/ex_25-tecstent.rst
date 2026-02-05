@@ -38,11 +38,11 @@ other blockages:
 
 .. figure:: images/gtecstent1.png
     :align: center
-    :alt: Effect of stent placement in increasing blood flowCourtesy of Lakeview Center
+    :alt: Effect of stent placement in increasing blood flow courtesy of Lakeview Center
     :figclass: align-center
     
     **Figure 25.1: Effect of stent placement in increasing blood flow**
-    Courtesy of `LakeviewCenter <http://www.elakeviewcenter.org>`_
+    Courtesy of `Lakeview Center <http://www.elakeviewcenter.org>`_
 The success of stenting depends largely on how the stent and the artery interact
 mechanically. In both the stent-design process and in pre-clinical patient-specific
 evaluations, computer simulation using finite element analysis (FEA) has become an
