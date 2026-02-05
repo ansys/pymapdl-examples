@@ -41,12 +41,12 @@ Analysis type(s):
  - Static analysis ``ANTYPE=0``
 
 Element type(s):
- - 4-Node Finite Strain Shell Elements (SHELL181)
- - 8-Node Finite Strain Shell Elements (SHELL281)
+ - 4-node finite strain shell elements (SHELL181)
+ - 8-node finite strain shell elements (SHELL281)
 
 .. image:: ../_static/vm6_setup.png
    :width: 400
-   :alt: VM6 Pinched Cylinder Problem Sketch
+   :alt: VM6 pinched cylinder problem sketch
 
 Material properties
  - :math:`E = 10.5 \cdot 10^6 psi`
@@ -348,10 +348,10 @@ post_processing()
 
 def plot_nodal_disp():
     mapdl.post_processing.plot_nodal_displacement(
-        title="Nodal Displacements",
+        title="Nodal displacements",
         component="Y",
         cpos="zx",
-        scalar_bar_args={"title": "Nodal Displacements", "vertical": True},
+        scalar_bar_args={"title": "Nodal displacements", "vertical": True},
         show_node_numbering=True,
         show_axes=True,
         show_edges=True,

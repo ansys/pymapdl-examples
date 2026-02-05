@@ -19,7 +19,7 @@ The following topics are available:
 
 
 This example is inspired from the model and analysis defined in Chapter 20 of
-the Mechanical APDL Technology Showcase Manual.
+the Mechanical APDL technology showcase manual.
 
 20.1. Introduction
 ------------------
@@ -35,7 +35,7 @@ the Mechanical APDL Technology Showcase Manual.
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The original FE model is given in the Ansys Mechanical APDL Technology
-Showcase Manual. The ``pcb_mesh_file.cdb`` contains a FE model of a single
+showcase manual. The ``pcb_mesh_file.cdb`` contains a FE model of a single
 circuit board. The model is meshed with SOLID186, SHELL181 and BEAM188 elements.
 All components of the PCB model is assigned with linear elastic isotropic materials.
 Bonded and flexible surface-to-surface contact pairs are used to define the contact

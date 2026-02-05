@@ -327,7 +327,7 @@ modified experimental data:
 
 .. figure:: graphics/gtec_calvalhyper_fig7.gif
     :align: center
-    :alt: Parameters Fit to Experimental Data to About 100 Percent Strain
+    :alt: Parameters fit to experimental data to about 100 percent strain
     :figclass: align-center
     
     **Figure 15.7: Parameters fit to experimental data to about 100 percent strain**
@@ -343,7 +343,7 @@ test suite to strains of about 200 percent, as shown in the following comparison
 
 .. figure:: graphics/gtec_calvalhyper_fig8.gif
     :align: center
-    :alt: Comparison of the Data and Fits Showing Predictions Outside the Range of Fitted Data
+    :alt: Comparison of the data and fits showing predictions outside the range of fitted data
     :figclass: align-center
     
     **Figure 15.8: Comparison of the data and fits showing predictions outside the range of fitted data**
@@ -392,7 +392,7 @@ vs. theta data:
 
 .. figure:: graphics/gtec_calvalhyper_fig10.gif
     :align: center
-    :alt: Comparison of Tension-Torsion Experiment to the Five-Parameter Mooney-Rivlin Model
+    :alt: Comparison of tension-torsion experiment to the five-parameter Mooney-Rivlin model
     :figclass: align-center
     
     **Figure 15.10: Comparison of tension-torsion experiment to the five-parameter Mooney-Rivlin model**

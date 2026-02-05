@@ -26,8 +26,8 @@ The following topics are available:
 *  `1.10. Input files`_
 
 You can also perform this example analysis entirely in the Ansys
-Mechanical Application. For more information, see Brake-Squeal Analysis in the 
-Workbench Technology Showcase: Example Problems.
+Mechanical Application. For more information, see brake-squeal analysis in the 
+Workbench technology showcase: example problems.
 
 1.1. Introduction
 -----------------
@@ -38,12 +38,12 @@ squeal.
 
 Two common theories describe brake-squeal phenomena:
 
-* *Stick-Slip Theory* -- The self-excited
+* *Stick-slip theory* -- The self-excited
   vibration of a brake system occurs when the static coefficient of friction is
   greater than the sliding coefficient of friction. Variable friction forces
   introduce energy into the system which is not properly dissipated during the
   squealing event, resulting in large vibrations.
-* *Mode-Coupling Theory* -- When two similar
+* *Mode-coupling theory* -- When two similar
   characteristic modes couple with each other, instability is introduced to the
   braking system. This instability is caused primarily by improperly selected
   geometric parameters.
@@ -64,7 +64,7 @@ Brake noise is generally categorized as follows:
   presence of unstable modes suggests that the geometry parameters and material properties
   of the braking system should be modified.
 
-For more information, see Brake-Squeal (Prestressed Modal) Analysis  in the *Structural Analysis Guide*.
+For more information, see brake-squeal (prestressed modal) analysis  in the *structural analysis guide*.
 
 1.2. Problem description
 ------------------------
@@ -78,10 +78,10 @@ stability of the model.
 
 .. figure:: images/gtecbrakesqueal_fig1.gif
     :align: center
-    :alt: Brake Disc-Pad Assembly
+    :alt: Brake disc-pad assembly
     :figclass: align-center
         
-    **Figure 1.1: Brake Disc-Pad Assembly**
+    **Figure 1.1: Brake disc-pad assembly**
 
 
 
@@ -256,11 +256,10 @@ directions except axial (along the Z-axis).
 
 .. figure:: images/gtecbrakesqueal_fig5.gif
     :align: center
-    :alt: Boundary conditions (Displacement Constraints and Pressure Loading)
+    :alt: Boundary conditions (displacement constraints and pressure loading)
     :figclass: align-center
 
-    **Figure 1.2: Boundary conditions (Displacement Constraints and Pressure Loading)**
-
+    **Figure 1.2: Boundary conditions (displacement constraints and pressure loading)**
 
 1.6. Analysis and solution controls
 -----------------------------------
@@ -351,7 +350,7 @@ The following input shows the solution steps involved in this method:
 
 
 **Figure 1.3: Mode shape for unstable mode (Mode 21).**
-Obtained from the  `1.6.1. Linear Non-prestressed Modal Analysis`_ .
+Obtained from the  `1.6.1. Linear non-prestressed modal analysis`_ .
 
 
 
@@ -688,7 +687,7 @@ Following is the process for solving a brake-squeal problem using this method:
 
 The unstable mode predictions for the brake disc-pad assembly using all three methods
 were very close due to the relatively small prestress load. 
-The  `1.6.1. Linear Non-prestressed Modal Analysis`_ predicted
+The  `1.6.1. linear non-prestressed modal analysis`_ predicted
 unstable modes at 6474 Hz, while the other two solution methods predicted unstable modes
 at 6470 Hz.
 
@@ -855,7 +854,7 @@ other and couple as the coefficient of friction increases:
    fig.update_layout(
        template='simple_white',
        xaxis_title='<b>Friction coefficient</b>',
-       yaxis_title='<b>Imaginary Eigenvalue (Hz)</b>',
+       yaxis_title='<b>Imaginary eigenvalue (Hz)</b>',
        title='<b>Effect of friction coefficient on Mode coupling</b>',
        title_x=0.5,
        legend_title='Modes',
@@ -877,7 +876,7 @@ use for a brake-squeal problem:
 **Table 1.3: Analysis comparison**
 
 +-----------------------------------+----------------------------------------------------------+----------------------------------------------+
-| Analysis Method                   | Benefits                                                 | Costs                                        |
+| Analysis method                   | Benefits                                                 | Costs                                        |
 +===================================+==========================================================+==============================================+
 | Linear non-prestressed modal      | * Fast run time.                                         | * Accuracy.                                  |
 |                                   | * No convergence issues.                                 | * Does not include prestress effects         |
@@ -906,7 +905,7 @@ The following table provides guidelines for selecting the optimal eigensolver
 | UNSYM         | * Accuracy, as it uses the full unsymmetric stiffness matrix to solve the problem | * Long run time when many modes are extracted                                                                                                                |
 +---------------+-----------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-For further information, see Brake-Squeal (Prestressed Modal) Analysis in the *Structural Analysis Guide*.
+For further information, see Brake-Squeal (prestressed modal) Analysis in the *structural analysis guide*.
 
 1.9. References
 ---------------

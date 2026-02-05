@@ -5,7 +5,7 @@
 Technology showcases
 ====================
 
-The following examples initially come from the `APDL Technology Showcase Manual <mapdl_tech_show_>`_. 
+The following examples initially come from the `APDL technology showcase manual <mapdl_tech_show_>`_. 
 They initially were MAPDL files. 
 They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
 

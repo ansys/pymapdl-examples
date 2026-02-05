@@ -23,7 +23,7 @@ The following topics are available:
 *  `8. Input files`_
 
 This example is inspired from the model and analysis defined in Chapter 62
-of the `Mechanical APDL Technology Showcase Manual <mapdl_tech_show_>`_.
+of the `Mechanical APDL technology showcase manual <mapdl_tech_show_>`_.
 
 
 1. Introduction

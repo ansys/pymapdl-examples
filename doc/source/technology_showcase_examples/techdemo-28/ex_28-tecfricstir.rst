@@ -27,7 +27,7 @@ illustrates the FSW simulation method.
 
 The following features and capabilities are highlighted:
 
-* Direct Structural-thermal analysis using coupled-field solid elements
+* Direct structural-thermal analysis using coupled-field solid elements
 * Plastic heat generation in coupled-field elements
 * Frictional heat generation using contact elements
 * Surface-projection-based contact   method
@@ -49,7 +49,7 @@ The following topics are available:
 
 You can also perform this example analysis entirely in the Ansys Mechanical
 Application. For more information, see Friction Stir Welding (FSW) Simulation
-in the Workbench Technology Showcase: Example Problems.
+in the Workbench Technology Showcase: example problems.
 
 28.1. Introduction
 ------------------
@@ -204,8 +204,8 @@ phase ( `28.5.3. Loading`_) of the FSW process.
 
 Modeling is a two-part task, as described in these topics:
 
-*  `28.3.1. Workpiece and Tool Modeling`_
-*  `28.3.2. Contact Modeling`_
+*  `28.3.1. Workpiece and tool modeling`_
+*  `28.3.2. Contact modeling`_
 
 28.3.1. Workpiece and tool modeling
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -411,7 +411,7 @@ the temperature subsequently decreases below the bonding value.
     # for welding, 'C
     mapdl.real(6)
     mapdl.cmsel("s", "tn.cnt")
-    mapdl.nplot(title='Example of Contact Nodes', background='white')
+    mapdl.nplot(title='Example of contact nodes', background='white')
     mapdl.esurf()
     mapdl.type(7)
     mapdl.real(6)
@@ -543,19 +543,19 @@ The following contact settings are used for the ``CONTA174`` elements:
 
 .. code:: python
 
-    # * Define Rigid Surface Constraint on tool top surface
+    # * Define rigid surface constraint on tool top surface
     mapdl.et(2, "TARGE170")
     mapdl.keyopt(2, 2, 1)  # User defined boundary condition on rigid
     # target nodes
 
     mapdl.et(3, "CONTA174")
-    mapdl.keyopt(3, 1, 1)  # To include Temp DOF
+    mapdl.keyopt(3, 1, 1)  # To include temp DOF
     mapdl.keyopt(3, 2, 2)  # To include MPC contact algorithm
     mapdl.keyopt(3, 4, 2)  # For a rigid surface constraint
     mapdl.keyopt(3, 12, 5)  # To set the behavior of contact surface as a
     # bonded (always)
 
-    mapdl.vsel("u", "volume", "", 1, 2)  # Selecting Tool volume
+    mapdl.vsel("u", "volume", "", 1, 2)  # Selecting tool volume
     mapdl.allsel("below", "volume")
     mapdl.nsel("r", "loc", "z", h)  # Selecting nodes on the tool top surface
     mapdl.type(3)
@@ -742,8 +742,8 @@ The following code setup the material properties:
 This section describes the thermal and mechanical boundary conditions imposed
 on the FSW model:
 
-*  `28.5.1. Thermal Boundary conditions`_
-*  `28.5.2. Mechanical Boundary conditions`_
+*  `28.5.1. Thermal boundary conditions`_
+*  `28.5.2. Mechanical boundary conditions`_
 *  `28.5.3. Loading`_
 
 28.5.1. Thermal boundary conditions
@@ -835,7 +835,7 @@ Temperature boundary conditions are not imposed anywhere on the model.
     mapdl.sf("all", "conv", 30, 25)
     mapdl.allsel("all")
 
-    # Constraining all DOFs at pilot node except the Temp DOF
+    # Constraining all DOFs at pilot node except the temp DOF
     mapdl.d(1, "all")
     mapdl.ddele(1, "temp")
     mapdl.allsel("all")
@@ -871,7 +871,7 @@ X-direction (``UX``) in :red-text:`red`, Y-direction (``UY``) in :green-text:`gr
    
 .. code:: python 
     
-    # Mechanical Boundary conditions
+    # Mechanical boundary conditions
     # 20% ends of the each plate is constraint
     mapdl.nsel("s", "loc", "x", -0.8*w, -w)
     mapdl.nsel("a", "loc", "x", 0.8*w, w)
@@ -913,7 +913,7 @@ The following table shows the details for each load step.
 **Table 28.3: Load steps**
 
 +-----------+------------------+----------------------------------------------------------------------------+---------------------------------------+
-| Load step | Time period (sec)| Loadings on pilot node                                                     | Boundary Condition                    |
+| Load step | Time period (sec)| Loadings on pilot node                                                     | Boundary condition                    |
 +===========+==================+============================================================================+=======================================+
 | 1         | 1                | Displacement boundary condition                                            | ``UZ`` = -7.95E-07 m                  |
 +-----------+------------------+----------------------------------------------------------------------------+---------------------------------------+
@@ -1171,7 +1171,7 @@ of the melting temperature:
    
    fig = go.Figure(
        [
-           go.Scatter(x=df['max temp'], y=df['time'], name='Maximum Temperature', 
+           go.Scatter(x=df['max temp'], y=df['time'], name='Maximum temperature', 
                        mode='markers+lines',
                        marker=dict(color='blue', size=10),
                        line=dict(color='blue', width=3),
@@ -1238,7 +1238,7 @@ the workpiece along the transverse distance (perpendicular to the weld line):
        template='simple_white',
        xaxis_title='<b>Transverse distance (m)</b>',
        yaxis_title='<b>Temperature (C)</b>',
-       #title='<b>Temperature Distribution on the Top Surface of Workpiece at Various Locations</b>',
+       #title='<b>Temperature distribution on the top surface of workpiece at various locations</b>',
        title_x=0.5,
        #legend_title='Locations',
        hovermode='x',
@@ -1264,7 +1264,7 @@ temperature occurs at those locations:
 **Table 28.5: Locations on weld line**
 
 +------------------+-------------------------------------------+---------------------------------------+
-|  Location Number | Distance on the weld line in y direction  | Time when maximum temperature occurs  |
+|  Location number | Distance on the weld line in y direction  | Time when maximum temperature occurs  |
 +==================+===========================================+=======================================+
 |                1 | 0.016 m                                   | 15.25 Sec                             |
 +------------------+-------------------------------------------+---------------------------------------+
@@ -1368,7 +1368,7 @@ temperature at various locations on the weld line:
        template='simple_white',
        xaxis_title='<b>Time (Sec)</b>',
        yaxis_title='<b>Temperature (C)</b>',
-       title='<b>Temperature Variation with Time on Various Joint Locations</b>',
+       title='<b>Temperature variation with time on various joint locations</b>',
        title_x=0.5,
        legend_title='Locations',
        hovermode='x',
@@ -1465,7 +1465,7 @@ workpiece with time:
        template='simple_white',
        xaxis_title='<b>Time (Sec)</b>',
        yaxis_title='<b>Total frictional heat generation rate (W)</b>',
-       title='<b>Total Frictional Heat Rate Variation with Time</b>',
+       title='<b>Total frictional heat rate variation with time</b>',
        title_x=0.5,
        #legend_title='Locations',
        hovermode='x',
@@ -1509,7 +1509,7 @@ option.
         mapdl.smult("frri", "fri", "are1") 
         mapdl.ssum()  # Summing up the Frictional heat rate
 
-        # Total Frictional heat rate on
+        # Total frictional heat rate on
         # workpiece at a particular time
         frhi = mapdl.get('frhi', 'ssum',, 'item', 'frri') 
         fht(i) = frhi 
@@ -1565,8 +1565,8 @@ figure shows the plot of the total plastic heat-generation rate with time.
    fig.update_layout(
        template='simple_white',
        xaxis_title='<b>Time (Sec)</b>',
-       yaxis_title='<b>Total Plastic Heat Generation Rate (W)</b>',
-       title='<b>Total Plastic Heat Rate Variation with Time</b>',
+       yaxis_title='<b>Total plastic heat generation rate (W)</b>',
+       title='<b>Total plastic heat rate variation with time</b>',
        title_x=0.5,
        legend_title='Locations',
        hovermode='x',
@@ -1600,13 +1600,13 @@ figure shows the plot of the total plastic heat-generation rate with time.
         # each element, PHEAT
         mapdl.etable("pi", "nmisc", 5) 
 
-        # Multiplying Pl. heat rate per unit
+        # Multiplying plastic heat rate per unit
         # volume with the volume of
         # corresponding element
         mapdl.smult("psi", "pi", "vlm1")  
         
-        mapdl.ssum()  # Summing up the Plastic heat rate
-        # Total Plastic heat rate on workpiece
+        mapdl.ssum()  # Summing up the plastic heat rate
+        # Total plastic heat rate on workpiece
         # at a particular time
         ppi = mapdl.get('ppi','ssum',,'item','psi')  
         

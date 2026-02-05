@@ -14,14 +14,14 @@ external pressure to show how to find the nonlinear buckling loads, achieve
 convergence at the post-buckling stage, and interpret the results.
 
 This example is inspired from the model and analysis defined in Chapter 21
-of the Mechanical APDL Technology Showcase Manual.
+of the Mechanical APDL technology showcase manual.
 
 
 Setting up model
 ----------------
 
-The original FE model is given in the Ansys Mechanical APDL Technology
-Showcase Manual. The .cdb contains a FE model of a ring-stiffened cylinder.
+The original FE model is given in the Ansys Mechanical APDL technology
+showcase manual. The .cdb contains a FE model of a ring-stiffened cylinder.
 
 A circular cylinder made of bare 2024-T3 aluminum alloy is stiffened inside
 with five Z-section rings. Its ends are closed with thick aluminum bulkheads.
@@ -1516,15 +1516,15 @@ Postprocess buckling analysis in POST26
     mapdl.show("png")
     mapdl.xrange(0.01)
     mapdl.yrange(0.24)
-    mapdl.axlab("X", "Axial Shortening")
-    mapdl.axlab("Y", "Applied Pressure ")
+    mapdl.axlab("X", "Axial shortening")
+    mapdl.axlab("Y", "Applied pressure ")
     mapdl.plvar(12)
     mapdl.show("close")
     mapdl.xvar(3)
     mapdl.show("png")
     mapdl.xrange(0.002)
     mapdl.yrange(1)
-    mapdl.axlab("X", "Axial Shortening")
+    mapdl.axlab("X", "Axial shortening")
     mapdl.axlab("Y", "Time")
     mapdl.plvar(1)
     mapdl.show("png")
@@ -1541,8 +1541,8 @@ Postprocess buckling analysis in POST26
     mapdl.show("png")
     mapdl.xrange(4)
     mapdl.yrange(0.24)
-    mapdl.axlab("X", "Radial Displacement")
-    mapdl.axlab("Y", "Applied Pressure")
+    mapdl.axlab("X", "Radial displacement")
+    mapdl.axlab("Y", "Applied pressure")
     mapdl.plvar(12)
     mapdl.show("png")
     mapdl.show("close")

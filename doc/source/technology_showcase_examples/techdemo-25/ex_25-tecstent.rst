@@ -24,7 +24,7 @@ The following topics are available:
 *  `25.7. Input files`_
 
 This example is inspired from the model and analysis defined in Chapter 25 of the `Mechanical
-APDL Technology Showcase Manual <mapdl_tech_show_>`_.
+APDL technology showcase manual <mapdl_tech_show_>`_.
 
 25.1. Introduction
 ------------------
@@ -38,12 +38,11 @@ other blockages:
 
 .. figure:: images/gtecstent1.png
     :align: center
-    :alt: Effect of Stent Placement in Increasing Blood FlowCourtesy of Lakeview Center
+    :alt: Effect of stent placement in increasing blood flowCourtesy of Lakeview Center
     :figclass: align-center
     
-    **Figure 25.1: Effect of Stent Placement in Increasing Blood Flow**
-    Courtesy of `LakeviewCenter <http://www.elakeviewcenter.org>`
-
+    **Figure 25.1: Effect of stent placement in increasing blood flow**
+    Courtesy of `LakeviewCenter <http://www.elakeviewcenter.org>`_
 The success of stenting depends largely on how the stent and the artery interact
 mechanically. In both the stent-design process and in pre-clinical patient-specific
 evaluations, computer simulation using finite element analysis (FEA) has become an
@@ -75,7 +74,7 @@ First, we define the material properties.
 
 .. code:: ipython3
 
-   # define 316L Stainless steel
+   # define 316L stainless steel
    mapdl.prep7()
    mapdl.mptemp()
    mapdl.mptemp(sloc="1", t1="0")
@@ -133,7 +132,7 @@ We define the Solid185 element type to mesh both the artery and plaque.
    mapdl.et(itype="9", ename="SOLID185")
    mapdl.keyopt(
        itype="9", knum="6", value="1")  # Use mixed u-P formulation to avoid locking
-   mapdl.keyopt(itype="9", knum="2", value="3")  # Use Simplified Enhanced Strain method
+   mapdl.keyopt(itype="9", knum="2", value="3")  # Use simplified enhanced strain method
 
    # for plaque
    mapdl.et(itype="16", ename="SOLID185")
@@ -145,7 +144,7 @@ We define the settings to model the stent, the artery and the plaque.
 We use force-distributed boundary constraints on 2 sides of artery wall to allow
 for radial expansion of tissue without rigid body motion.
 
-Settings for MPC Surface-based, force-distributed contact on proximal plane
+Settings for MPC surface-based, force-distributed contact on proximal plane
 parallel to x-y plane
 
 .. code:: ipython3
@@ -266,7 +265,7 @@ We, then, apply the static analysis.
 25.3.2. Loads
 ^^^^^^^^^^^^^
 
-We apply the Load Step 1:
+We apply the load step 1:
 Balloon angioplasty of the artery to expand it past the
 radius of the stent - IGNORE STENT
 
@@ -291,7 +290,7 @@ radius of the stent - IGNORE STENT
    mapdl.save()
 
 
-We then apply the Load Step 2: Reactivate contact between stent and plaque.
+We then apply the load step 2: Reactivate contact between stent and plaque.
 
 .. code:: ipython3
 
@@ -303,7 +302,7 @@ We then apply the Load Step 2: Reactivate contact between stent and plaque.
    mapdl.solve()
 
 
-We apply the Load Step 3.
+We apply the load step 3.
 
 .. code:: ipython3
 
@@ -311,7 +310,7 @@ We apply the Load Step 3.
    mapdl.solve()
 
 
-We apply the Load Step 4: Apply blood pressure (13.3 kPa) load to
+We apply the load step 4: Apply blood pressure (13.3 kPa) load to
 inner wall of plaque and allow the stent to act as a scaffold.
 
 .. code:: ipython3
