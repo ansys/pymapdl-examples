@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,7 +22,7 @@
 
 r""".. _ref_vm25:
 
-Stresses in a Long Cylinder
+Stresses in a long cylinder
 ---------------------------
 Problem description:
  - A long thick-walled cylinder is initially subjected to an internal pressure p.
@@ -39,7 +39,7 @@ Reference:
    pg. 213, problem 1 and pg. 213, article 42.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-D 8-Node Structural Solid Elements (PLANE183)
@@ -62,7 +62,7 @@ Loading:
  - :math:`p = 30,000 psi`
  - :math:`\Omega = 1000 rad/sec`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The axial length is arbitrarily selected. Elements are oriented such that surface stresses
    may be obtained at the inner and outer cylinder surfaces.
    POST1 is used to display linearized stresses through the thickness of the cylinder when it is
@@ -250,8 +250,8 @@ mapdl.plsect("S", "X", -1)  # Display the SX stresses in a sectional plot
 mapdl.prsect(-1)  # Print linearized stresses
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = 0.0078666
@@ -305,8 +305,8 @@ print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
@@ -378,8 +378,8 @@ rst_x_c2 = mapdl.get("RST_X_C2", "NODE", XI_NODE, "S", "X")
 tst_x_c2 = mapdl.get("TST_X_C2", "NODE", XI_NODE, "S", "Z")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_strss = [0, 4753]
@@ -417,11 +417,11 @@ data = [
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -9,13 +9,13 @@ The Technology Showcases and the Verification Manual examples for
 
 .. === VERIFICATION MANUAL ===
 
-Verification Manual
+Verification manual
 ===================
 
 These examples present how to use PyMAPDL in an academic modeling context. 
 They ensure the PyMAPDL accuracy.
 
-Summary of the exposed Verification Manual Examples
+Summary of the exposed verification manual examples
 ---------------------------------------------------
 
 .. include:: ./verif-manual/index.rst
@@ -25,7 +25,7 @@ Summary of the exposed Verification Manual Examples
 
 .. === TECHNOLOGY SHOWCASES ===
 
-Technology Showcases
+Technology showcases
 ====================
 
 
@@ -35,7 +35,7 @@ The problems demonstrate how to use PyMAPDL to effectively and accurately
 solve interdisciplinary problems from a variety of industries and engineering
 fields.
 
-Summary of the exposed Technology Showcases
+Summary of the exposed technology showcases
 -------------------------------------------
 
 The exposed files are more complex examples than the ones presented in the `APDL

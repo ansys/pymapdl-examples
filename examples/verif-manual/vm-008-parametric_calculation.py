@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -196,8 +196,8 @@ print(mapdl.klist())
 
 
 ###############################################################################
-# Distance between nodes.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Distance between nodes
+# ~~~~~~~~~~~~~~~~~~~~~~
 # Using already created method for nodes to get the distance between them and
 # print out an output. The nodes have got next coordinates:
 #
@@ -254,5 +254,6 @@ df2 = pd.DataFrame(main_columns, index=row_names).round(2)
 df2.head()
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -31,7 +31,7 @@ Created on Fri Sep  2 14:24:13 2022
 
 Buckling and post-buckling analysis of a ring-stiffened
 cylinder using nonlinear stabilization
-======================================================
+=======================================================
 
 This examples shows how to use PyMAPDL to import an existing FE model and to
 perform a nonlinear buckling and postbuckling analysis using nonlinear
@@ -83,14 +83,14 @@ r = 344 * ts  # Radius of cylinder (mm)
 L = 431.8 + 2 * (19 - 9.5)  # Length of cylinder (mm)
 pext = 0.24  # Differential external pressure (MPa)
 
-# start MAPDL as a service
+# Start MAPDL as a service
 mapdl = launch_mapdl()
 print(mapdl)
 
 mapdl.filname("buckling")  # change filename
 # mapdl.nerr(nmerr=200, nmabt=10000, abort=-1, ifkey=0, num=0)
 
-# enter preprocessor
+# Enter preprocessor
 mapdl.prep7()
 
 # define material properties for 2024-T3 Alluminum alloy
@@ -139,7 +139,7 @@ mapdl.cmsel("all")
 
 ###############################################################################
 # Define static prestress analysis
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Displacement boundary conditions are defined to prevent the six rigid body
 # motions. A total of six displacements are therefore applied to three nodes
 # located on the top plate at 0, 90, and 270 degrees; the nodes are restricted
@@ -230,7 +230,7 @@ print("End static prestress analysis")
 # %%
 ###############################################################################
 # Run linear buckling analysis
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # This preliminary analysis predicts the theoretical buckling pressure of the
 # ideal linear elastic structure (perfect cylinder) and the buckled mode shapes
 # used in the next step to generate the imperfections.
@@ -266,7 +266,7 @@ print("End linear buckling analysis")
 # %%
 ###############################################################################
 # Generate imperfections
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~
 # If a structure is perfectly symmetric, nonsymmetric buckling does not occur
 # numerically, and a nonlinear buckling analysis fails because
 # nonsymmetric buckling responses cannot be triggered. In this problem,
@@ -293,7 +293,7 @@ print("Finish adding imperfections")
 # %%
 ###############################################################################
 # Run nonlinear static analysis on geometry with imperfections
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # The nonlinear buckling analysis is a static analysis performed after adding
 # imperfections with large deflection active (NLGEOM,ON), extended to a point
 # where the stiffened cylinder can reach its limit load.
@@ -323,7 +323,7 @@ print("End nonlinear static analysis on imperfect geometry")
 # %%
 ###############################################################################
 # Post-buckling analysis
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~
 # An unconverged solution of the nonlinear static analysis could mean that
 # buckling has occurred. In this example, the change in time (or load)
 # increment, and displacement value, occurs between substeps 10 and 11,
@@ -351,7 +351,7 @@ print("End of post-buckling analysis run")
 # %%
 ###############################################################################
 # Postprocess buckling analysis in POST1
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #
 
 print("Begin POST1 postprocessing of post-buckling analysis")
@@ -429,7 +429,7 @@ print("End POST26 postprocessing of post-buckling analysis")
 # %%
 ###############################################################################
 # Exit MAPDL
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~
 # Exit MAPDL instance
 
 mapdl.exit()
