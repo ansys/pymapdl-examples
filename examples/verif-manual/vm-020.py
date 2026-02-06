@@ -22,7 +22,7 @@
 
 r""".. _ref_vm20:
 
-Cylindrical Membrane Under Pressure
+Cylindrical membrane under pressure
 -----------------------------------
 Problem description:
  - A long cylindrical membrane container of diameter d and wall thickness t is subjected to a
@@ -35,7 +35,7 @@ Reference:
    pg. 121, article 25.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 4-Node Finite Strain Shell Elements (SHELL181)
@@ -55,7 +55,7 @@ Geometric properties:
 Loading:
  - :math:`p = 500 psi`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - An arbitrary axial length is selected. Since the problem is axisymmetric, only a one element
    sector is needed. A small angle :math:`\theta` = 10° is used for approximating the circular
    boundary with a straight-sided element. Nodal coupling is used at the boundaries. An axial
@@ -189,8 +189,8 @@ strs_hop = mapdl.get("STRS_HOP", "NODE", 1, "S", 2)
 strs_ax = mapdl.get("STRS_AX", "NODE", 1, "S", 1)
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_stress = [15000, 29749]
@@ -212,11 +212,11 @@ print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

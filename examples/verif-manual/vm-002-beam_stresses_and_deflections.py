@@ -40,7 +40,7 @@ Reference:
 
 Analysis type(s):
 
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
 
@@ -85,7 +85,7 @@ Analytical equations:
 
 from ansys.mapdl.core import launch_mapdl
 
-# Start mapdl and clear it.
+# Start MAPDL and clear it.
 mapdl = launch_mapdl()
 mapdl.clear()
 
@@ -258,5 +258,6 @@ print(output)
 
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

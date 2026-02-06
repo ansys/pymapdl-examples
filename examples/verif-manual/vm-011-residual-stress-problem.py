@@ -22,8 +22,8 @@
 
 r""".. _ref_vm11_example:
 
-Residual Stress Problem
-----------------------------
+Residual stress problem
+-----------------------
 Problem description:
  - A chain hoist is attached to the ceiling through three tie rods as shown below.
    The tie rods are made of cold-rolled steel with yield strength :math:`\sigma_{yp}`
@@ -36,10 +36,10 @@ Reference:
  - S. H. Crandall, N. C. Dahl, *An Introduction to the Mechanics of Solids*,
    McGraw-Hill Book Co., Inc., New York, NY, 1959, pg. 234, problem 5.31.
 
-Analysis Type(s):
- - Static Analysis (``ANTYPE = 0``)
+Analysis type(s):
+ - Static analysis (``ANTYPE = 0``)
 
-Element Type(s):
+Element type(s):
  - 3-D Spar (or Truss) Elements (``LINK180``)
 
 .. figure:: ../_static/vm11_setup_1.png
@@ -71,7 +71,7 @@ Loading:
  - :math:`F_1 = 51,961.5\,lb`
  - :math:`F_2 = 81,961.5\,lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Automatic load stepping (:meth: Mapl.autots <ansys.mapdl.core.Mapdl.autots>,ON)
    is used to obtain the nonlinear plastic solution (load steps 2 and 3).
 
@@ -193,5 +193,6 @@ print(message)
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

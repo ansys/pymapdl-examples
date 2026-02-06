@@ -22,7 +22,7 @@
 
 r""".. _ref_vm5_example:
 
-Laterally Loaded Tapered Support Structure
+Laterally loaded tapered support structure
 ------------------------------------------
 Problem description:
  - A cantilever beam of thickness :math:`t` and length :math:`l`
@@ -37,7 +37,7 @@ Reference:
    pg. 342, problem 7.18.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-D 4-Node Structural Solid Elements (PLANE182)
@@ -77,11 +77,11 @@ Notes:
 
 from ansys.mapdl.core import launch_mapdl
 
-# start mapdl and clear it
+# Start MAPDL and clear it
 mapdl = launch_mapdl()
 mapdl.clear()  # optional as MAPDL just started
 
-# enter verification example mode and the pre-processing routine
+# Enter verification example mode and the pre-processing routine
 mapdl.verify()
 mapdl.prep7()
 
@@ -240,5 +240,6 @@ print(results_183)
 
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -135,8 +135,8 @@ col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["MAX PRINSTRS psi", "MAX SH STRS psi"]
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 print(pandas.DataFrame(data, row_headers, col_headers))
 
@@ -212,8 +212,8 @@ col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["MAX PRINSTRS psi", "MAX SH STRS psi"]
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 print(pandas.DataFrame(data, row_headers, col_headers))
 
@@ -221,5 +221,6 @@ mapdl.finish()
 mapdl.starlist("vm12", "vrt")
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()
