@@ -227,7 +227,7 @@ mapdl.post_processing.plot_nodal_displacement(
 )
 
 print("End static prestress analysis")
-#%%
+# %%
 ###############################################################################
 # Run linear buckling analysis
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -263,7 +263,7 @@ mapdl.post_processing.plot_nodal_displacement(
 )
 
 print("End linear buckling analysis")
-#%%
+# %%
 ###############################################################################
 # Generate imperfections
 # ~~~~~~~~~~~~~~~~~~~~~~
@@ -290,7 +290,7 @@ for i in range(1, 11):
 mapdl.finish()
 
 print("Finish adding imperfections")
-#%%
+# %%
 ###############################################################################
 # Run nonlinear static analysis on geometry with imperfections
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -320,7 +320,7 @@ mapdl.finish()
 
 print("End nonlinear static analysis on imperfect geometry")
 
-#%%
+# %%
 ###############################################################################
 # Post-buckling analysis
 # ~~~~~~~~~~~~~~~~~~~~~~
@@ -348,7 +348,7 @@ mapdl.finish()
 
 print("End of post-buckling analysis run")
 
-#%%
+# %%
 ###############################################################################
 # Postprocess buckling analysis in POST1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -363,7 +363,7 @@ mapdl.post_processing.plot_nodal_displacement(
 mapdl.post_processing.plot_nodal_eqv_stress(savefig="nodal_stress_post_buckling.png")
 mapdl.finish()
 print("End POST1 postprocessing of post-buckling analysis")
-#%%
+# %%
 ###############################################################################
 # Postprocess buckling analysis in POST26
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,7 +426,7 @@ mapdl.finish()
 
 print("End POST26 postprocessing of post-buckling analysis")
 
-#%%
+# %%
 ###############################################################################
 # Exit MAPDL
 # ~~~~~~~~~~
