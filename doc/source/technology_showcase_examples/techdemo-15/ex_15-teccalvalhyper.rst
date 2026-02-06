@@ -22,7 +22,7 @@ The following topics are available:
 
 You can also perform this example analysis entirely in the Ansys
 Mechanical Application. For more information, see 
-*Calibrating and Validating a Hyperelastic Constitutive Model in the Workbench Technology Showcase: Example Problems*.
+*Calibrating and validating a hyperelastic constitutive model in the workbench technology showcase: example problems*.
 
 15.1. Introduction
 ------------------
@@ -59,8 +59,8 @@ validate the predictions for the model.
 
 Material properties for the calibration and validation experiments follow:
 
-*  `15.3.1. Calibration Experiments`_
-*  `15.3.2. Validation Experiment`_
+*  `15.3.1. Calibration experiments`_
+*  `15.3.2. Validation experiment`_
 
 15.3.1. Calibration experiments
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -210,14 +210,14 @@ model are:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Following is a mesh developed to simulate the torsion experiment to validate the
-fitted constitutive model parameters obtained in  `15.4.1. Calibrating Parameters`_: 
+fitted constitutive model parameters obtained in  `15.4.1. Calibrating parameters`_: 
 
 .. figure:: graphics/gtec_calvalhyper_fig5.gif
     :align: center
-    :alt: Tension-Torsion Test Specimen Mesh
+    :alt: Tension-torsion test specimen mesh
     :figclass: align-center
     
-    **Figure 15.5: Tension-Torsion Test Specimen Mesh**
+    **Figure 15.5: Tension-torsion test specimen mesh**
 
 The mesh consists of 1,332 SOLID186 elements using the
 default formulation (a mixed-displacement pressure formulation with reduced
@@ -258,7 +258,7 @@ to fit the three-, five-, and nine-parameter Mooney-Rivlin models results in the
 following parameters, fit to the entire range of experimental data:
 
 +----------------+-------------------+------------------+------------------+
-|                | Three-Parameter   | Five-Parameter   | Nine-Parameter   |
+|                | Three-parameter   | Five-parameter   | Nine-parameter   |
 +================+===================+==================+==================+
 | :math:`C_{10}` | 1.8785            | 1.4546           | 1.7095           |
 +----------------+-------------------+------------------+------------------+
@@ -285,10 +285,10 @@ The following figure is a comparison of the models to the experimental data:
 
 .. figure:: graphics/gtec_calvalhyper_fig6.gif
     :align: center
-    :alt: Comparison of the Data and Fits Over the Entire Range of Data
+    :alt: Comparison of the data and fits over the entire range of data
     :figclass: align-center
     
-    **Figure 15.6: Comparison of the Data and Fits Over the Entire Range of Data**
+    **Figure 15.6: Comparison of the data and fits over the entire range of data**
 
 Thus far, it is obvious that none of the models provide a suitable fit to the
 entire range of experimental data. The reason is that the least-squares fitting
@@ -299,7 +299,7 @@ If the experimental data range is limited to about 100 percent strain, however,
 the fitted parameters shown in the following table are obtained:
 
 +----------------+-------------------+------------------+------------------+
-|                | Three-Parameter   | Five-Parameter   | Nine-Parameter   |
+|                | Three-parameter   | Five-parameter   | Nine-parameter   |
 +================+===================+==================+==================+
 | :math:`C_{10}` | 1.6540            | 1.7874           | 1.8904           |
 +----------------+-------------------+------------------+------------------+
@@ -327,10 +327,10 @@ modified experimental data:
 
 .. figure:: graphics/gtec_calvalhyper_fig7.gif
     :align: center
-    :alt: Parameters Fit to Experimental Data to About 100 Percent Strain
+    :alt: Parameters fit to experimental data to about 100 percent strain
     :figclass: align-center
     
-    **Figure 15.7: Parameters Fit to Experimental Data to About 100 Percent Strain**
+    **Figure 15.7: Parameters fit to experimental data to about 100 percent strain**
 
 For the equibiaxial and planar experiments, any of the three models might be
 acceptable; however, the comparison with the uniaxial data might indicate that
@@ -343,10 +343,10 @@ test suite to strains of about 200 percent, as shown in the following comparison
 
 .. figure:: graphics/gtec_calvalhyper_fig8.gif
     :align: center
-    :alt: Comparison of the Data and Fits Showing Predictions Outside the Range of Fitted Data
+    :alt: Comparison of the data and fits showing predictions outside the range of fitted data
     :figclass: align-center
     
-    **Figure 15.8: Comparison of the Data and Fits Showing Predictions Outside the Range of Fitted Data**
+    **Figure 15.8: Comparison of the data and fits showing predictions outside the range of fitted data**
 
 Beyond 100 percent strain, it becomes apparent that some of the predictions
 quickly deteriorate. In all three comparisons, the nine-parameter model quickly
@@ -377,10 +377,10 @@ specimen.
 
 .. figure:: graphics/gtec_calvalhyper_fig9.gif
     :align: center
-    :alt: Strain-Energy Density Contours of the Tension-Torsion Test
+    :alt: Strain-energy density contours of the tension-torsion test
     :figclass: align-center
     
-    **Figure 15.9: Strain-Energy Density Contours of the Tension-Torsion Test**
+    **Figure 15.9: Strain-energy density contours of the tension-torsion test**
 
 With the exception of the clamp regions, the deformation shows a uniform pattern
 in the gage region along the axis of twisting. Perpendicular to the axis of twisting
@@ -392,10 +392,10 @@ vs. theta data:
 
 .. figure:: graphics/gtec_calvalhyper_fig10.gif
     :align: center
-    :alt: Comparison of Tension-Torsion Experiment to the Five-Parameter Mooney-Rivlin Model
+    :alt: Comparison of tension-torsion experiment to the five-parameter Mooney-Rivlin model
     :figclass: align-center
     
-    **Figure 15.10: Comparison of Tension-Torsion Experiment to the Five-Parameter Mooney-Rivlin Model**
+    **Figure 15.10: Comparison of tension-torsion experiment to the five-parameter Mooney-Rivlin model**
 
 After a seemingly anomalous first data point, the error between the simulation and
 experiment is in the range of 2 to 4 percent. Throughout the entire simulation, the
@@ -427,7 +427,7 @@ recommendations:
 The following references were consulted when creating this example problem:
 
 1. ASTM International. (2006). (http://www.astm.org/Standards/D1043.htm).
-*Standard Test Method for Stiffness Properties of Plastics as a Function of Temperature by Means of a Torsion Test*.
+*Standard test Method for Stiffness Properties of Plastics as a Function of Temperature by Means of a Torsion Test*.
 West Conshohocken.
 2. ASTM International. (2006). [ASTM Standard D412](http://www.astm.org/Standards/D412.htm).
 *Standard Test Methods for Vulcanized Rubber and Thermoplastic Elastomers-Tension*. 

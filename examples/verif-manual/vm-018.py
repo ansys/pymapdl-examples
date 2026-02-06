@@ -22,7 +22,7 @@
 
 r""".. _ref_vm18:
 
-Out-of-Plane Bending of a Curved Bar
+Out-of-plane bending of a curved bar
 ------------------------------------
 Problem description:
  - A portion of a horizontal circular ring, built-in at A, is loaded by a vertical (Z)
@@ -36,7 +36,7 @@ Reference:
    pg. 412, eq. 241.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - Elastic Curved Pipe Element (PIPE18)
@@ -64,7 +64,7 @@ Geometric properties:
 Loading:
  - :math:`F = 50 lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Node 10 is arbitrarily located on the radius of curvature side of the element to define the
    plane of the elbow when PIPE18 elements are used. The wall thickness is set to half the diameter
    for a solid bar. Since the section has no hole in the middle, ovalization cannot occur and
@@ -189,8 +189,8 @@ strss_b = mapdl.get("STRSS_B", "ELEM", 1, "ETAB", "STRS_BEN")
 strss_t = mapdl.get("STRSS_T", "ELEM", 1, "ETAB", "STRS_SHR")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_val = [-2.648, 6366, -3183]
@@ -215,13 +215,13 @@ print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Clears the database without restarting.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Clears the database without restarting
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.run("/CLEAR,NOSTART")
 
 ###############################################################################
@@ -335,8 +335,8 @@ shear_sxy = mapdl.get("SHEAR", "PLNSOL", 0, "MIN")
 mapdl.show("close")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_val = [-2.648, 6366, -3183]
@@ -359,11 +359,11 @@ print(title)
 print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

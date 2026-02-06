@@ -22,7 +22,7 @@
 
 r""".. _ref_vm15:
 
-Bending of a Circular Plate Using Axisymmetric Shell Elements
+Bending of a circular plate using axisymmetric shell elements
 -------------------------------------------------------------
 Problem description:
  - A flat circular plate of radius r and thickness t is subject to
@@ -40,7 +40,7 @@ Reference:
    pg. 96,97, and 103.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-Node Finite Strain Axisymmetric Shell (SHELL208)
@@ -61,7 +61,7 @@ Loading:
  - :math:`P = 6.0 psi`
  - :math:`F = 7,539.82 lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The stiffness matrix formed in the first load step is automatically reused
    in the second load step. A new stiffness matrix is automatically formed in
    the third load step because of changed boundary constraints. The mesh density
@@ -173,7 +173,7 @@ mapdl.d(1, "UX", "", "", "", "ROTZ")  # Fix UX and ROTZ for node 1
 mapdl.d(11, "ALL")  # Fix all degrees of freedom for node 11
 mapdl.sfe("ALL", 1, "PRES", "", 6)  # Surface Pressure load = 6 PSI on all elements
 
-# start solve for 1st load case
+# Start solve for 1st load case
 mapdl.solve()
 
 # Apply boundary conditions and loads for Load Case 2
@@ -183,7 +183,7 @@ mapdl.sfe(
     "ALL", 1, "PRES", "", 0
 )  # apply elemental surface pressure load of magnitude "0"
 
-# start solve for 2nd load case
+# Start solve for 2nd load case
 mapdl.solve()
 
 # Apply boundary conditions and loads for Load Case 3
@@ -192,7 +192,7 @@ mapdl.ddele(11, "ROTZ")  # Delete clamped boundary condition constraint
 mapdl.f(1, "FY")  # apply nodal force of magnitude "0"
 mapdl.sfe("ALL", 1, "PRES", "", 1.5)  # elemental surface pressure load = 1.5 PSI
 
-# start solve for 3rd load case
+# Start solve for 3rd load case
 mapdl.solve()
 
 # exists solution processor
@@ -268,8 +268,8 @@ mapdl.etable("STRS", "S", "X")
 strss_c3 = mapdl.get("STRSS_C3", "ELEM", 1, "ETAB", "STRS")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_def = [-0.08736, -0.08736, -0.08904]
@@ -305,11 +305,11 @@ RESULTS FOR CASE {lc+1:1d}:
 
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

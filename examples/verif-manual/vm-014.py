@@ -22,7 +22,7 @@
 
 r""".. _ref_vm14:
 
-Large Deflection Eccentric Compression of Slender Column
+Large deflection eccentric compression of slender column
 --------------------------------------------------------
 Problem description:
  - Find the deflection :math:`\delta` at the middle and the maximum tensile and compressive stresses
@@ -61,7 +61,7 @@ Geometric properties:
 Loading:
  - :math:`F = 4000 lb`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Only one-half of the structure is modeled because of symmetry.
    The boundary conditions for the equivalent half model become fixed-free.
    Large deflection is needed since the stiffness of the structure and the
@@ -169,7 +169,7 @@ mapdl.nlgeom("ON")
 mapdl.cnvtol("F", "", 1e-4)
 mapdl.cnvtol("M", "", 1e-4)
 
-mapdl.solve()  # starts a solution
+mapdl.solve()  # Starts a solution
 mapdl.finish()  # exists solution processor
 
 ###############################################################################
@@ -210,17 +210,17 @@ col_headers = ["TARGET", "Mechanical APDL", "RATIO"]
 row_headers = ["DEFLECTION (in)", "STRSS_TENS (psi)", "STRSS_COMP (psi)"]
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 print(pandas.DataFrame(data, row_headers, col_headers))
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

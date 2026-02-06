@@ -22,7 +22,7 @@
 
 r""".. _ref_vm298:
 
-PSD Analysis of 40-Story Building Under Wind Load Excitation
+PSD analysis of 40-Story building under wind load excitation
 ------------------------------------------------------------
 Problem description:
  - A 40-story building is modeled using spring-damper (``COMBIN14``) and point mass elements
@@ -85,7 +85,7 @@ Notes:
    :width: 400
    :alt: VM298 Partly Correlated Wind Excitation PSD Spectrum (Davenport Spectrum)
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The 40-story building is modeled using 1-D spring-damper system with one end fixed
    at its foundation. The motion of the tall building is allowed along the wind direction only.
 
@@ -134,10 +134,9 @@ mapdl = launch_mapdl(loglevel="WARNING", print_com=True, remove_temp_dir_on_exit
 # ANSYS MEDIA REL. 2025R1 (11/08/2024) REF. VERIF. MANUAL: REL. 2025R1
 mapdl.title("VM298,PSD ANALYSIS OF 40-STORY BUILDING UNDER WIND LOAD EXCITATION")
 
-"""
-Parameter definition
---------------------
-"""
+#############################################################################
+# Parameter definition
+# --------------------
 
 
 _N = 40  # NUMBER OF STORIES
@@ -162,7 +161,7 @@ _C1 = 7.7  # CONSTANT TERM
 _PI = math.pi  # PI, CIRCULAR CONSTANT
 
 ###############################################################################
-# Preprocessing: Model 40-story building using 1-D spring-damper system and point mass elements
+# Preprocessing: model 40-story building using 1-D spring-damper system and point mass elements
 # ---------------------------------------------------------------------------------------------
 
 mapdl.prep7(mute=True)

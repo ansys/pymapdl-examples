@@ -36,7 +36,7 @@ Reference:
    pg. 30, problem 9.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
@@ -73,11 +73,11 @@ Notes:
 
 from ansys.mapdl.core import launch_mapdl
 
-# start mapdl and clear it
+# Start MAPDL and clear it
 mapdl = launch_mapdl()
 mapdl.clear()  # optional as MAPDL just started
 
-# enter verification example mode and the pre-processing routine
+# Enter verification example mode and the pre-processing routine
 mapdl.verify()
 mapdl.prep7()
 
@@ -206,5 +206,6 @@ print(message)
 
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()
