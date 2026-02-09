@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,7 +22,7 @@
 
 r""".. _ref_VM-NR1677-01-1:
 
-Nuclear Regulatory Commission Piping Benchmarks
+Nuclear regulatory commission piping benchmarks
 -----------------------------------------------
 Problem description:
  - The example problem contains Mechanical APDL solutions to
@@ -92,7 +92,7 @@ from tabulate import tabulate
 mapdl = launch_mapdl(loglevel="WARNING", print_com=True)
 
 """
-Preprocessing: Modeling of NRC Piping Benchmark Problems using ``PIPE289`` and ``ELBOW290`` elements
+Preprocessing: modeling of NRC piping benchmark problems using ``PIPE289`` and ``ELBOW290`` elements
 -----------------------------------------------------------------------------------------------------
 
 """
@@ -309,8 +309,8 @@ for set, time_freq, load_step, substep, cumulative in freq_list:
 mapdl.finish()
 
 ###############################################################################
-# Response Spectrum Analysis
-# --------------------------
+# Response spectrum analysis
+# ---------------------------
 # Perform spectrum analysis using the frequencies obtained from the modal analysis.
 # The response spectrum analysis will be performed for a single point excitation
 # response spectrum. The damping ratio is set to a constant value for all modes.
@@ -391,8 +391,8 @@ mapdl.solve()
 mapdl.finish()
 
 ###############################################################################
-# Postprocessing: Extracting results from the spectrum analysis
-# ----------------------------------------------------------------------
+# Postprocessing: extracting results from the spectrum analysis
+# -------------------------------------------------------------
 # Extract maximum nodal displacements and rotations from the spectrum solution.
 # The results will be stored in the MAPDL database and can be accessed using
 # the `starstatus` command. The nodal displacements and rotations are obtained
@@ -464,12 +464,11 @@ reaction_force = mapdl.prrsol()
 mapdl.finish()
 
 ###############################################################################
-# Verify the results
-# ------------------
-
-###############################################################################
-# Frequencies Obtained from Modal Solution
-# =======================
+# Results comparison
+# ==================
+#
+# Frequencies obtained from modal solution
+# ----------------------------------------
 #
 # The results obtained from the modal solution are compared against target values.
 # The target values are defined based on the reference results from the NRC publication.
@@ -499,8 +498,8 @@ headers = ["Mode", "Target", "Mechanical APDL", "Ratio"]
 
 # Print table
 print(
-    f"""------------------- VM-NR1677-01-1-a.1 RESULTS COMPARISON ---------------------  
-{tabulate(data_freq, headers=headers, tablefmt="grid")}  
+    f"""------------------- VM-NR1677-01-1-a.1 RESULTS COMPARISON ---------------------
+{tabulate(data_freq, headers=headers, tablefmt="grid")}
 """
 )
 
@@ -543,14 +542,14 @@ headers = ["Result Node", "Target", "Mechanical APDL", "Ratio"]
 
 # Print table
 print(
-    f"""  
-{tabulate(data_freq, headers=headers, tablefmt="grid")}  
+    f"""
+{tabulate(data_freq, headers=headers, tablefmt="grid")}
 """
 )
 
 ###############################################################################
 # Element forces and moments obtained from spectrum solution for specific elements
-# =======================
+# --------------------------------------------------------------------------------
 #
 
 # For Node# 12:
@@ -627,7 +626,7 @@ for node, element in zip([12, 14], ["Pipe289", "Elbow290"]):
 
 ###############################################################################
 # Reaction forces
-# =======================
+# ---------------
 #
 print("\n\nReaction forces")
 print("===============")
@@ -638,6 +637,7 @@ values = reaction_force.to_list()
 print(tabulate(values, headers=headers))
 
 ################################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ==========
 
 mapdl.exit()

@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,7 +22,7 @@
 
 r""".. _ref_vm10_example:
 
-Bending of a Tee-Shaped Beam
+Bending of a tee-shaped beam
 ----------------------------
 Problem description:
  - Find the maximum tensile :math:`\sigma_{\mathrm{(B,Bot)}}` and compressive
@@ -34,10 +34,10 @@ Reference:
  - S. H. Crandall, N. C. Dahl, *An Introduction to the Mechanics of Solids*,
    McGraw-Hill Book Co., Inc., New York, NY, 1959, pg. 294, ex. 7.2.
 
-Analysis Type(s):
- - Static Analysis (``ANTYPE = 0``)
+Analysis type(s):
+ - Static analysis (``ANTYPE = 0``)
 
-Element Type(s):
+Element type(s):
  - 3-D 2 Node Beam (``BEAM188``)
 
 .. figure:: ../_static/vm10_setup_1.png
@@ -64,7 +64,7 @@ Loading:
    :width: 400
    :alt: VM10 Problem Sketch
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - A length :math:`(l = 100 in)` is arbitrarily selected since the bending moment is constant.
    A `T-section` beam is modeled using flange width :math:`(6b)`,
    flange thickness :math:`(\frac{h}{2})`, overall depth :math:`(2h + \frac{h}{2})`, and
@@ -301,5 +301,6 @@ df2 = pd.DataFrame(main_columns, index=row_names).round(1)
 df2.head()
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,7 +22,7 @@
 
 r""".. _ref_vm21:
 
-Tie Rod with Lateral Loading
+Tie rod with lateral loading
 ----------------------------
 Problem description:
  - A tie rod is subjected to the action of a tensile force F and a uniform lateral load p.
@@ -56,7 +56,7 @@ Loading:
  - :math:`F = 21,972.6 lb`
  - :math:`p = 1.79253 lb/in`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - Due to symmetry, only one-half of the beam is modeled. The full load is applied for each
    iteration. The first solution represents the unstiffened case. The second solution represents
    the stiffened case.
@@ -294,8 +294,8 @@ mapdl.store()
 m_mx_c1 = mapdl.get("M_MX_C1", "VARI", 2, "EXTREM", "VMAX")
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 # Set target values
 target_res = [-0.19945, 0.0032352, -4580.1]
@@ -342,11 +342,11 @@ print(pd.DataFrame(np.transpose(data), row_headers, col_headers))
 
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

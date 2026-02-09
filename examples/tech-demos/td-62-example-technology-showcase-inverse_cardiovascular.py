@@ -1,6 +1,6 @@
 # %matplotlib inline
 
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -99,7 +99,7 @@ mapdl.eplot(background="w")
 
 mapdl.finish()
 
-# Analysis and Solution Controls
+# Analysis and solution controls
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Enter solution processor and specify solution controls.
 

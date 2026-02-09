@@ -4,7 +4,7 @@ PyMAPDL Examples
 This repository holds examples for PyMAPDL.
 
 
-Code Style
+Code style
 ----------
 Code style can be checked by running:
 

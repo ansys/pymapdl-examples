@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -42,12 +42,12 @@ Analysis type(s):
 
 Element type(s):
  - Plastic Straight Pipe Element (PIPE288)
- - 4-Node Finite Strain Shell (SHELL181)
- - 3-D Structural Solid Elements (SOLID185)
+ - 4-node finite strain shell (SHELL181)
+ - 3d structural solid elements (SOLID185)
 
 .. image:: ../_static/vm7_setup_2.png
    :width: 400
-   :alt: VM7 Finite Element Models
+   :alt: VM7 finite element models
 
 Material properties
  - :math:`E_{\mathrm{s}} = 26875000\,psi`
@@ -58,7 +58,7 @@ Material properties
 
 .. image:: ../_static/vm7_setup_1.png
    :width: 300
-   :alt: VM7 Material Model
+   :alt: VM7 material model
 
 Geometric properties:
  - :math:`l = 10\,in`
@@ -66,13 +66,13 @@ Geometric properties:
  - :math:`A_{\mathrm{a}} = 12\,in^2`
 
 Loading:
- - 1st Load Step: :math:`\delta = 0.032\,in`
- - 2nd Load Step: :math:`\delta = 0.050\,in`
- - 3rd Load Step: :math:`\delta = 0.100\,in`
+ - 1st load step: :math:`\delta = 0.032\,in`
+ - 2nd load step: :math:`\delta = 0.050\,in`
+ - 3rd load step: :math:`\delta = 0.100\,in`
 
 .. image:: ../_static/vm7_setup.png
    :width: 300
-   :alt: VM7 Problem Sketch
+   :alt: VM7 problem sketch
 
 Analysis assumptions and modeling notes:
  - The following tube dimensions, which provide the desired cross-sectional
@@ -84,8 +84,8 @@ Analysis assumptions and modeling notes:
  - The problem can be solved in three ways:
 
    * using ``PIPE288`` - the plastic straight pipe element
-   * using ``SOLID185`` - the 3-D structural solid element
-   * using ``SHELL181`` - the 4-Node Finite Strain Shell
+   * using ``SOLID185`` - the 3d structural solid element
+   * using ``SHELL181`` - the 4-node finite strain shell
 
  - In the SOLID185 and SHELL181 cases, since the problem is axisymmetric,
    only a one element :math:`\theta` -sector is modeled. A small angle :math:`\theta = 6°`
@@ -176,7 +176,7 @@ print(mapdl.etlist())
 # * Yield strength of aluminum is: :math:`\sigma_{\mathrm{(yp)a}} = 55000\,psi`,
 # * Poisson's ratio is: :math:`\nu = 0.3`
 
-# Steel material model.
+# Steel material model
 # Define Young's moulus and Poisson ratio for steel.
 mapdl.mp("EX", 1, 26.875e6)
 mapdl.mp("PRXY", 1, 0.3)
@@ -186,7 +186,7 @@ mapdl.tb("BKIN", 1, 1)
 mapdl.tbtemp(0)
 mapdl.tbdata(1, 86000, 0)
 
-# Aluminum material model.
+# Aluminum material model
 # Define Young's moulus and Poisson ratio for aluminum.
 mapdl.mp("EX", 2, 11e6)
 mapdl.mp("PRXY", 2, 0.3)
@@ -447,13 +447,13 @@ def solution(deflect):
 
 
 # Run each load step to reproduce needed deflection subsequently.
-# Load Step 1
+# Load step 1
 solution(deflect=defl_ls1)
 
-# Load Step 2
+# Load step 2
 solution(deflect=defl_ls2)
 
-# Load Step 3
+# Load step 3
 solution(deflect=defl_ls3)
 mapdl.finish(mute=True)
 
@@ -632,5 +632,6 @@ df.style.set_caption("Results Comparison",).set_table_styles(
 )
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

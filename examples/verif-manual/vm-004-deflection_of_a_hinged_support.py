@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -38,7 +38,7 @@ Reference:
    pg. 10, problem 2.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 3-D Spar (or Truss) Elements (LINK180)
@@ -85,11 +85,11 @@ from math import cos, pi, sin
 
 from ansys.mapdl.core import launch_mapdl
 
-# start mapdl and clear it
+# Start MAPDL and clear it
 mapdl = launch_mapdl()
 mapdl.clear()  # optional as MAPDL just started
 
-# enter verification example mode and the pre-processing routine
+# Enter verification example mode and the pre-processing routine
 mapdl.verify()
 mapdl.prep7()
 
@@ -221,5 +221,6 @@ Displacement [in]     -0.12          {displacement:.2f}     {abs(displacement) /
 print(results)
 
 ###############################################################################
-# Stop MAPDL.
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

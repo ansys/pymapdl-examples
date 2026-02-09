@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,8 +22,8 @@
 
 r""".. _ref_vm13:
 
-Cylindrical Shell Under Pressure
----------------------------------
+Cylindrical shell under pressure
+--------------------------------
 Problem description:
  - A long cylindrical pressure vessel of mean diameter d and wall thickness t has closed
    ends and is subjected to an internal pressure P. Determine the axial stress
@@ -37,7 +37,7 @@ Reference:
  - UGURAL AND FENSTER, ADV. STRENGTH AND APPL. ELAS., 1981.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - 2-Node Finite Strain Axisymmetric Shell (SHELL208)
@@ -57,7 +57,7 @@ Geometric properties:
 Loading:
  - :math:`P = 500 psi`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - An arbitrary axial length of 10 inches is selected.
    Nodal coupling is used in the radial direction. An axial
    force of 5654866.8 lb (:math:`(Pπd^2)/4`) is applied to
@@ -181,8 +181,8 @@ stress_z = mapdl.get("STRSS_Z", "ELEM", 1, "ETAB", "STRS_Z")
 Target_values = np.array([15000, 29749])
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 results = f"""
 ------------------- VM13 RESULTS COMPARISON ---------------------
@@ -194,11 +194,11 @@ Stress, Z (psi)  {Target_values[1]:.5f}    {stress_z:.5f}       {abs(stress_z/Ta
 print(results)
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()
