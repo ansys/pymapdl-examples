@@ -16,49 +16,47 @@ env:
   DPF_START_SERVER: False
   MAIN_PYTHON_VERSION: '3.12'
   MAPDL_PACKAGE: ghcr.io/ansys/mapdl
-  MAPDL_IMAGE_VERSION_DOCS_BUILD: v24.2-ubuntu
+  MAPDL_IMAGE_VERSION_DOCS_BUILD: v25.2-ubuntu-amd
   ON_CI: True
   PYANSYS_OFF_SCREEN: True
-  RESET_EXAMPLES_CACHE: 0
-  RESET_DOC_BUILD_CACHE: 0
-  USE_CACHE: False
   PYMAPDL_GRPC_TRANSPORT: 'insecure'
   DPF_DEFAULT_GRPC_MODE: 'insecure'
-
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  pull-requests: write
-  packages: read
+permissions: {}
 
 jobs:
 
-  code-style:
-    name: "Code style"
+  actions-security:
+    name: "Action security checks"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: ansys/actions/check-actions-security@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip tox
-      - name: Test with tox
-        run: tox -e style
+          generate-summary: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auditing-level: 'high'
+          trust-ansys-actions: true
+
+  code-style:
+    name: "Code style checks"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Run PyAnsys code style checks"
+        uses: ansys/actions/code-style@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
 
 
   doc-style:
-    name: "Documentation Style Check"
+    name: "Documentation style check"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: "PyAnsys documentation style checks"
-        uses: ansys/actions/doc-style@v10
+        uses: ansys/actions/doc-style@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -66,9 +64,11 @@ jobs:
     name: "Documentation building"
     needs: [code-style, doc-style]
     timeout-minutes: 60
+    permissions:
+      contents: read
     outputs:
       PYMAPDL_VERSION: ${{ steps.version.outputs.PYMAPDL_VERSION }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     env:
       PYMAPDL_PORT: 21000  # default won't work on GitHub runners
       PYMAPDL_DB_PORT: 21001  # default won't work on GitHub runners
@@ -77,10 +77,17 @@ jobs:
 
     steps:
       - name: "Install Git and checkout project"
-        uses: actions/checkout@v4
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        with:
+          persist-credentials: false
+
+      - name: "Setup Python without cache"
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c #v6.0.0
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
       - name: "Login in Github Container registry"
-        uses: docker/login-action@v3.6.0
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -101,19 +108,12 @@ jobs:
 
       - name: "DPF Server Activation"
         run: |
-          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${{ env.DPF_PORT }}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${{ env.DPF_PORT }}.") &
+          $(docker pull ghcr.io/ansys/dpf-core:22.2dev && docker run -d --name dpfserver -p ${DPF_PORT}:50052 ghcr.io/ansys/dpf-core:22.2dev && echo "DPF Server active on port ${DPF_PORT}.") &
 
       - name: "Install OS packages"
         run: |
           sudo apt-get update
-          sudo apt install zip pandoc libgl1-mesa-glx xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
-
-      - name: "Set up Python using cache"
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          cache: 'pip'
-          cache-dependency-path: 'requirements/requirements_doc.txt'
+          sudo apt install zip pandoc libgl1 xvfb texlive-latex-extra latexmk graphviz texlive-xetex libgomp1
 
       - name: "Install Python requirements"
         run: |
@@ -130,31 +130,13 @@ jobs:
           echo "PYMAPDL_VERSION=$(python -c 'from ansys.mapdl.core import __version__; print(__version__)')" >> $GITHUB_OUTPUT
           echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
 
-      - name: "Cache Verification Manual examples"
-        uses: actions/cache@v4
-        if: env.USE_CACHE == true
-        with:
-          path: doc/source/verif-manual
-          key: Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}-${{ github.sha }}
-          restore-keys: |
-            Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}
-
-      - name: "Cache docs build directory"
-        uses: actions/cache@v4
-        if: env.USE_CACHE == true
-        with:
-          path: doc/_build
-          key: doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}-${{ github.sha }}
-          restore-keys: |
-            doc-build-v${{ env.RESET_DOC_BUILD_CACHE }}-${{ env.PYMAPDL_VERSION }}
-
       - name: "Waiting for the services to be up"
         timeout-minutes: 15
         run: |
           .ci/waiting_services.sh
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@v10
+        uses: ansys/actions/doc-build@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         env:
           LIBGL_ALWAYS_SOFTWARE: 1
           PYANSYS_VISUALIZER_HTML_BACKEND: true
@@ -164,18 +146,7 @@ jobs:
           checkout: false
           skip-install: true
           sphinxopts: -j auto
-          use-python-cache: False
           check-links: False
-
-      - name: "Deploy"
-        if: contains(github.ref, 'refs/heads/main')
-        uses: JamesIves/github-pages-deploy-action@v4.7.3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages
-          folder: doc/_build/html
-          clean: true
-          single-commit: true
 
       - name: "Display Docker files structures"
         if: always()
@@ -194,54 +165,29 @@ jobs:
         run: |
           .ci/collect_mapdl_logs.sh
 
-      - name: "Tar logs"
-        if: always()
-        run: |
-          cp -f doc/_build/latex/*.log ./logs-build-docs/
-          cp log.txt ./logs-build-docs/
-          tar cvzf ./logs-build-docs.tgz ./logs-build-docs
-
-      - name: "Upload logs to GitHub"
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: logs-build-docs.tgz
-          path: ./logs-build-docs.tgz
-
       - name: "Display MAPDL Logs"
         if: always()
-        run: cat log.txt
+        run: cat logs-build-docs/* || echo "No logs collected."
 
-      - name: "List main files"
+      - name: "Stop MAPDL service"
         if: always()
         run: |
-          if compgen -G 'doc/_build/latex/*.log' > /dev/null ;then for f in doc/_build/latex/*.log; do echo "::group:: Output latex log file $f" && cat $f && echo "::endgroup::" ; done; fi
-          if compgen -G './logs-build-docs/*.err' > /dev/null ;then for f in ./logs-build-docs/*.err; do echo "::group:: Error file $f" && cat $f && echo "::endgroup::" ; done; fi
-          if compgen -G './logs-build-docs/*.log' > /dev/null ;then for f in ./logs-build-docs/*.log; do echo "::group:: Log file $f" && cat $f && echo "::endgroup::" ; done; fi
-          if compgen -G './logs-build-docs/*.out' > /dev/null ;then for f in ./logs-build-docs/*.out; do echo "::group:: Output file $f" && cat $f && echo "::endgroup::" ; done; fi
+          echo "Stopping MAPDL services"
+          pymapdl stop --all
 
-  release:
-    if: github.event_name == 'refs/heads/main' && !contains(github.ref, 'refs/tags')
-    needs: [doc-build]
+
+  upload-docs:
+    name: "Upload documentation"
+    if: github.ref == 'refs/heads/main' && !contains(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: [doc-build]
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/download-artifact@v5
-
-      - name: Display structure of downloaded files
-        run: ls -R
-
-      - name: Zip HTML documentation
-        uses: vimtor/action-zip@v1.2
+      - name: "Deploy documentation to GitHub Pages"
+        uses: ansys/actions/doc-deploy-dev@c2fa7c93f6883114e0e643599431b33d29f0b13f #v10.1.4
         with:
-          files: documentation-html
-          dest: documentation-html.zip
-
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        with:
-          generate_release_notes: true
-          files: |
-            ./documentation-html.zip
-            ./documentation-pdf/*.pdf
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}

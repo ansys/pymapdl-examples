@@ -275,7 +275,7 @@ SPL_3 = 10 * (math.log10(x3))
 SPL_4 = 10 * (math.log10(x4))
 SPL_5 = 10 * (math.log10(x5))
 
-# Fill the target tesult values in array
+# Fill the target result values in array
 target_ref = np.array([80.0, 79.0, 77.5, 76.0, 74.5])
 
 # Fill the simulated result values in array
