@@ -1,0 +1,1988 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Friction Stir Welding (FSW) simulation &#8212; PyMAPDL Examples</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=e7fb764e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'technology_showcase_examples/techdemo-28/ex_28-tecfricstir';</script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Inverse-solving analysis of a cardiovascular structure" href="../techdemo-62/ex_62-techinverse.html" />
+    <link rel="prev" title="Cardiovascular stent simulation" href="../techdemo-25/ex_25-tecstent.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyMAPDL Examples - Home"/>
+    <img src="../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyMAPDL Examples - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-1/ex_01-tecbrakesqueal.html">Brake squeal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-15/ex_15-teccalvalhyper.html">Calibrating and validating a hyperelastic constitutive model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-20/ex_20-tecPCB.html">Dynamic simulation of a printed circuit board assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-21/ex_21-tecbuckling.html">Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-25/ex_25-tecstent.html">Cardiovascular stent simulation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Friction Stir Welding (FSW) simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-62/ex_62-techinverse.html">Inverse-solving analysis of a cardiovascular structure</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/" class="nav-link">PyMAPDL</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/version/stable/examples/" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">Technology showcases</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Friction Stir Welding (FSW) simulation</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="friction-stir-welding-fsw-simulation">
+<span id="tech-demo-28"></span><span id="sphx-glr-ex-28-tecfricstir-py"></span><h1>Friction Stir Welding (FSW) simulation<a class="headerlink" href="#friction-stir-welding-fsw-simulation" title="Link to this heading">#</a></h1>
+<p>This example problem shows how to simulate the friction stir welding (FSW)
+process. Several characteristics of FSW are presented, including
+tool-workpiece surface interaction, heat generation due to friction, and
+plastic deformation. A nonlinear direct coupled-field analysis is performed, as
+thermal and mechanical behaviors are mutually dependent and coupled together
+during the FSW process.</p>
+<p>Because it is often difficult to find a full set of engineering data to
+simulate the FSW process, the problem emphasizes the simulation rather than the
+numerical results. A simplified version of the model created by Zhu and Chao
+illustrates the FSW simulation method.</p>
+<p>The following features and capabilities are highlighted:</p>
+<ul class="simple">
+<li><p>Direct structural-thermal analysis using coupled-field solid elements</p></li>
+<li><p>Plastic heat generation in coupled-field elements</p></li>
+<li><p>Frictional heat generation using contact elements</p></li>
+<li><p>Surface-projection-based contact   method</p></li>
+<li><p>Contact elements with bonding capability</p></li>
+</ul>
+<p>The following topics are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction">28.1. Introduction</a></p></li>
+<li><p><a class="reference internal" href="#problem-description">28.2. Problem description</a></p></li>
+<li><p><a class="reference internal" href="#modeling">28.3. Modeling</a></p></li>
+<li><p><a class="reference internal" href="#material-properties">28.4. Material properties</a></p></li>
+<li><p><a class="reference internal" href="#boundary-conditions-and-loading">28.5. Boundary conditions and loading</a></p></li>
+<li><p><a class="reference internal" href="#analysis-and-solution-controls">28.6. Analysis and solution controls</a></p></li>
+<li><p><a class="reference internal" href="#results-and-discussion">28.7. Results and discussion</a></p></li>
+<li><p><a class="reference internal" href="#exit-mapdl">28.8. Exit MAPDL</a></p></li>
+<li><p><a class="reference internal" href="#recommendations">28.9. Recommendations</a></p></li>
+<li><p><a class="reference internal" href="#references">28.10. References</a></p></li>
+<li><p><a class="reference internal" href="#input-files">28.11. Input files</a></p></li>
+</ul>
+<p>You can also perform this example analysis entirely in the Ansys Mechanical
+Application. For more information, see Friction Stir Welding (FSW) Simulation
+in the Workbench Technology Showcase: example problems.</p>
+<section id="introduction">
+<h2>28.1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Friction Stir Welding (FSW) is a solid-state welding technique that involves
+the joining of metals without filler materials. A cylindrical rotating tool
+plunges into a rigidly clamped workpiece and moves along the joint to be
+welded. As the tool translates along the joint, heat is generated by friction
+between the tool shoulder and the workpiece. Additional heat is generated by
+plastic deformation of the workpiece material.
+The generated heat results in thermal softening of the workpiece material.
+The translation of the tool causes the softened workpiece material to flow
+from the front to the back of the tool where it consolidates.
+As cooling occurs, a solid continuous joint between the two plates is formed.
+No melting occurs during the process, and the resulting
+temperature remains below the solidus temperature of the metals being joined.
+FSW offers many advantages over conventional welding techniques, and has been
+successfully applied in the aerospace, automobile, and shipbuilding industries.</p>
+<p>Thermal and mechanical behaviors are mutually dependent during the FSW process.
+Because the temperature field affects stress distribution, this example uses a
+fully thermomechanically coupled model.
+The model consists of a coupled-field solid element with structural and thermal
+degrees of freedom. The model has two rectangular steel plates and a cylindrical
+tool. All necessary mechanical and thermal
+<a class="reference internal" href="#boundary-conditions-and-loading">28.5. Boundary conditions and loading</a> are applied on the model. The
+simulation occurs over three load steps, representing the <a class="reference internal" href="#loading">28.5.3. Loading</a> of
+the process.</p>
+<p>The temperature rises at the contact interface due to frictional contact
+between the tool and workpiece. FSW generally occurs when the temperature at
+the weld line region reaches 70 to 90 percent of the melting temperature of the
+workpiece material. The temperature obtained around the weld line region in
+this example falls within the range reported by Zhu and Chao <a class="reference internal" href="#zhu2004" id="id1"><span>[Zhu2004]</span></a> and
+Prasanna and Rao <a class="reference internal" href="#prasanna2010" id="id2"><span>[Prasanna2010]</span></a>, while the maximum resulting temperature is
+well below the melting temperature of the workpiece.</p>
+<p>The calculated frictional heat generation and plastic heat generation show that
+the friction between the tool shoulder and workpiece is responsible for
+generating most of the heat. A bonding temperature is specified at the contact
+interface of the plates to model the welding behind the tool. When the
+temperature at the contact surface exceeds this bonding temperature, the
+contact is changed to bonded.</p>
+</section>
+<section id="problem-description">
+<h2>28.2. Problem description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h2>
+<p><strong>The Zhu and Chao thermomechanical model</strong></p>
+<p>The model used in this example is a simplified version of the thermomechanical
+model developed by Zhu and Chao for FSW with 304L stainless steel <a class="reference internal" href="#zhu2004" id="id3"><span>[Zhu2004]</span></a>.
+Zhu and Chao presented nonlinear thermal and thermomechanical simulations using
+the finite element analysis code <cite>WELDSIM</cite>. They initially formulated a
+heat-transfer problem using a moving heat source, and later used the transient
+temperature outputs from the thermal analysis to determine residual stresses in
+the welded plates via a 3-D elastoplastic thermomechanical simulation.</p>
+<p>A direct coupled-field analysis is performed on a reduced-scale version of the
+Zhu and Chao model <a class="reference internal" href="#zhu2004" id="id4"><span>[Zhu2004]</span></a>. Also, rather than using a moving heat source as
+in the reference model, a rotating and moving tool is used for a more realistic
+simulation.</p>
+<p>The tool pin is ignored. The heat generated at the pin represents approximately
+two percent of the total heat and is therefore negligible.</p>
+<p>The simulation welds two 304L stainless steel plates (workpiece) with a
+cylindrical shape tool, as shown in the following figure:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Mapdl
+-----
+PyMAPDL Version:     0.72.dev0
+Interface:           grpc
+Product:             Ansys Mechanical Enterprise
+MAPDL Version:       24.2
+Running on:          localhost
+                     (127.0.0.1)
+</pre></div>
+</div>
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>GLUE VOLUMES
+      INPUT VOLUMES =     3    4    5    6
+      INPUT VOLUMES WILL BE DELETED IF POSSIBLE
+      OUTPUT VOLUMES =     3    7    8    9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_2_0.png" src="../../_images/ex_28-tecfricstir_2_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.1: 3-D model of workpiece and tool</strong></p>
+<p>The FSW process generally requires a tool made of a harder material than the
+workpiece material being welded. In the past, FSW was used for soft workpiece
+materials such as aluminium. With the development of tools made from
+super-abrasive materials such as polycrystalline cubic boron nitride (PCBN),
+FSW has become possible with high-temperature materials such as stainless
+steel. A cylindrical PCBN tool is modeled in this case.</p>
+<p>The workpiece sides parallel to the weld line are constrained in all the
+directions to simulate the clamping ends. The bottom side of the workpiece is
+constrained in the perpendicular (z) direction to simulate support at the
+bottom. Heat losses are considered on all the surfaces of the model. All
+<a class="reference internal" href="#boundary-conditions-and-loading">28.5. Boundary conditions and loading</a> are symmetric across the weld
+centerline.</p>
+<p>The simulation is performed in three load steps, each representing a respective
+phase ( <a class="reference internal" href="#loading">28.5.3. Loading</a>) of the FSW process.</p>
+</section>
+<section id="modeling">
+<h2>28.3. Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
+<p>Modeling is a two-part task, as described in these topics:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#workpiece-and-tool-modeling">28.3.1. Workpiece and tool modeling</a></p></li>
+<li><p><a class="reference internal" href="#contact-modeling">28.3.2. Contact modeling</a></p></li>
+</ul>
+<section id="workpiece-and-tool-modeling">
+<h3>28.3.1. Workpiece and tool modeling<a class="headerlink" href="#workpiece-and-tool-modeling" title="Link to this heading">#</a></h3>
+<p>Two rectangular shaped plates (similar to those used in the reference model)
+are used as the workpiece. Dimensions have been reduced to decrease the
+simulation time.</p>
+<p>The plate size is 3 x 1.25 x 0.125 in (76.2 x 31.75 x 3.18 mm). The tool
+shoulder diameter is 0.6 in (15.24 mm).</p>
+<p>Plate thickness remains the same as that of the reference model, but the plate
+length and width are reduced. The plate width is reduced because the regions
+away from the weld line are not significantly affected by the welding process,
+and this example focuses primarily on the heat generation and temperature rise
+in the region nearest the weld line.</p>
+<p>The height of the tool is equal to the shoulder diameter. Both the workpiece
+(steel plates) and the tool are modeled using coupled-field element
+<code class="docutils literal notranslate"><span class="pre">SOLID226</span></code> with the structural-thermal option (<code class="docutils literal notranslate"><span class="pre">KEYOPT(1)=</span> <span class="pre">11</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_path = &#39;_static/tse28_setup.png&#39;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_mapdl</span>
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<span class="c1"># ***** Problem parameters ********</span>
+<span class="n">l</span> <span class="o">=</span> <span class="mf">76.2e-03</span>     <span class="c1"># Length of each plate,m</span>
+<span class="n">w</span> <span class="o">=</span> <span class="mf">31.75e-03</span>    <span class="c1"># Width of each plate,m</span>
+<span class="n">t</span> <span class="o">=</span> <span class="mf">3.18e-03</span>     <span class="c1"># Thickness of each plate,m</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="mf">7.62e-03</span>    <span class="c1"># Shoulder radius of tool,m</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">15.24e-03</span>    <span class="c1"># Height of tool, m</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="n">r1</span>          <span class="c1"># Starting location of tool on weldline</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="n">l</span><span class="o">-</span><span class="n">l1</span>
+<span class="n">tcc1</span> <span class="o">=</span> <span class="mf">2e06</span>      <span class="c1"># Thermal contact conductance b/w plates,W/m^2&#39;C</span>
+<span class="n">tcc2</span> <span class="o">=</span> <span class="mi">10</span>        <span class="c1"># Thermal contact conductance b/w tool &amp;</span>
+<span class="c1"># workpiece,W/m^2&#39;C</span>
+<span class="n">fwgt</span> <span class="o">=</span> <span class="mf">0.95</span>      <span class="c1"># weight factor for distribution of heat b/w tool</span>
+<span class="c1"># &amp; workpiece</span>
+<span class="n">fplw</span> <span class="o">=</span> <span class="mf">0.8</span>       <span class="c1"># Fraction of plastic work converted to heat</span>
+<span class="n">uz1</span> <span class="o">=</span> <span class="n">t</span><span class="o">/</span><span class="mi">4000</span>     <span class="c1"># Depth of penetration,m</span>
+<span class="n">nr1</span> <span class="o">=</span> <span class="mf">3.141593</span><span class="o">*</span><span class="mi">11</span>  <span class="c1"># No. of rotations in second load step</span>
+<span class="n">nr2</span> <span class="o">=</span> <span class="mf">3.141593</span><span class="o">*</span><span class="mi">45</span>  <span class="c1"># No. of rotations in third load step</span>
+<span class="n">uy1</span> <span class="o">=</span> <span class="mf">60.96e-03</span>  <span class="c1"># Travelling distance along weld line</span>
+<span class="n">tsz</span> <span class="o">=</span> <span class="mf">0.01</span>       <span class="c1"># Time step size</span>
+
+<span class="c1"># ==========================================================</span>
+<span class="c1"># * Geometry</span>
+<span class="c1"># ==========================================================</span>
+<span class="c1"># * Node for pilot node</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">n</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="c1"># * Workpiece geometry (two rectangular plates)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">block</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">block</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span>
+<span class="c1"># * Tool geometry</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vglue</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A hexahedral mesh with dropped midside nodes is used because the presence of
+midside nodes (or quadratic interpolation functions) can lead to oscillations
+in the thermal solution, leading to nonphysical temperature distribution. A
+hexahedral mesh is used instead of a tetrahedral mesh to avoid mesh-orientation
+dependency. For more accurate results, a finer mesh is used in the weld-line
+region. The following figure shows the 3-D meshed model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==========================================================</span>
+<span class="c1"># * Meshing</span>
+<span class="c1"># ==========================================================</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;SOLID226&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>  <span class="c1"># Coupled-field solid element,KEYOPT(1) is</span>
+<span class="c1"># set to 11 for a structural-thermal analysis</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lesize</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lesize</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="s2">&quot;1/5&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lesize</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">44</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lesize</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mshmid</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># midside nodes dropped</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsweep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsweep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esize</span><span class="p">(</span><span class="mf">0.0015</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsweep</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_3_0.png" src="../../_images/ex_28-tecfricstir_3_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.2: 3-D meshed model of workpiece and tool</strong></p>
+</section>
+<section id="contact-modeling">
+<h3>28.3.2. Contact modeling<a class="headerlink" href="#contact-modeling" title="Link to this heading">#</a></h3>
+<p>Contact is modeled as follows for the FSW simulation:</p>
+<ul class="simple">
+<li><p>Contact pair between the plates</p></li>
+<li><p>Contact pair between tool and workpiece</p></li>
+<li><p>Rigid surface constraint</p></li>
+</ul>
+<section id="contact-pair-between-the-plates">
+<h4>28.3.2.1. Contact pair between the plates<a class="headerlink" href="#contact-pair-between-the-plates" title="Link to this heading">#</a></h4>
+<p>During the simulation, the surfaces to be joined come into contact. A standard
+surface-to-surface contact pair using <code class="docutils literal notranslate"><span class="pre">TARGE170</span></code> and <code class="docutils literal notranslate"><span class="pre">CONTA174</span></code>, as shown
+in the following figure:</p>
+<figure class="align-center" id="id8">
+<img alt="Contact pair between plates" src="../../_images/gtecfricstir_fig3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text"><strong>Figure 28.3: Contact pair between plates</strong></span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The surface-projection-based contact method (<code class="docutils literal notranslate"><span class="pre">KEYOPT(4)</span> <span class="pre">=</span> <span class="pre">3</span></code> for contact
+elements) is defined at the contact interface. The surface-projection-based
+contact method is well suited to highly nonlinear problems that include
+geometrical, material, and contact nonlinearities.</p>
+<p>The problem simulates welding using the bonding capability of contact
+elements. To achieve continuous bonding and simulate a perfect thermal contact
+between the plates, a high thermal contact conductance (TCC) of 2 ⋅ 10E6 W/m2
+°C is specified. (A small TCC value yields an imperfect contact and a
+temperature discontinuity across the interface.) The conductance is specified
+as a real constant for <code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> elements.</p>
+<p>The maximum temperature ranges from 70 to 90 percent of the melting temperature
+of the workpiece material. Welding occurs after the temperature of the material
+around the contacting surfaces exceeds the bonding temperature (approximately
+70 percent of the workpiece melting temperature). In this case, 1000 °C is
+considered to be the bonding temperature based on the reference results. The
+bonding temperature is specified using the real constant <code class="docutils literal notranslate"><span class="pre">TBND</span></code> for
+<code class="docutils literal notranslate"><span class="pre">CONTA174</span></code>. When the temperature at the contact surface for closed contact
+exceeds the bonding temperature, the contact type changes to bonded. The
+contact status remains bonded for the remainder of the simulation, even though
+the temperature subsequently decreases below the bonding value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># * Define contact pair between two plates</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;TARGE170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;CONTA174&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Displacement &amp; temp DOF</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># To include surface projection based method</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">asel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsla</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#mapdl.nplot()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;tn.cnt&quot;</span><span class="p">,</span> <span class="s2">&quot;node&quot;</span><span class="p">)</span>  <span class="c1"># Creating component on weld side of plate1</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">asel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsla</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1">#mapdl.nplot()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;tn.tgt&quot;</span><span class="p">,</span> <span class="s2">&quot;node&quot;</span><span class="p">)</span>  <span class="c1"># Creating component on weld side of plate2</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmodif</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="n">tcc1</span><span class="p">)</span>  <span class="c1"># A real constant TCC, thermal contact</span>
+<span class="c1"># conductance coeffi. b/w the plates, W/m^2&#39;C</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmodif</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># A real constant TBND,Bonding temperature</span>
+<span class="c1"># for welding, &#39;C</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;tn.cnt&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nplot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Example of contact nodes&#39;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esurf</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;tn.tgt&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esurf</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="contact-pair-between-tool-and-workpiece">
+<h4>28.3.2.2. Contact pair between tool and workpiece<a class="headerlink" href="#contact-pair-between-tool-and-workpiece" title="Link to this heading">#</a></h4>
+<p>The tool plunges into the work piece, rotates, and moves along the weld line.
+Because the frictional contact between the tool and workpiece is primarily
+responsible for heat generation, a standard surface-to-surface contact pair is
+defined between the tool and workpiece. The <code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> element is used to
+model the contact surface on the top surface of the workpiece, and the
+<code class="docutils literal notranslate"><span class="pre">TARGE170</span></code> element is used for the tool, as shown in this figure:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_4_0.png" src="../../_images/ex_28-tecfricstir_4_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.4: Contact pair between tool and workpiece.</strong>
+<code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> in <span class="blue-text">blue</span>, and <code class="docutils literal notranslate"><span class="pre">TARGE170</span></code> in <span class="red-text">red</span>.</p>
+<p>Two real constants are specified to model friction-induced heat generation.
+The fraction of frictional dissipated energy converted into heat is modeled
+first; the <code class="docutils literal notranslate"><span class="pre">FHTG</span></code> real constant is set to 1 to convert all frictional
+dissipated energy into heat. The factor for the distribution of heat between
+contact and target surfaces is defined next; the <code class="docutils literal notranslate"><span class="pre">FWGT</span></code> real constant is set
+to 0.95, so that 95 percent of the heat generated from the friction flows into
+the workpiece and only five percent flows into the tool.</p>
+<p>A low TCC value (10 W/m2 °C) is specified for this contact pair because most of
+the heat generated transfers to the workpiece. Some additional heat is also
+generated by plastic deformation of the workpiece material. Because the
+workpiece material softens and the value of friction coefficient drops as the
+temperature increases, a variable coefficient of friction (0.4 to 0.2) is
+defined (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.tb(&quot;FRIC&quot;)</span></code> with
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.tbtemp()</span></code> and
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.tbdata()</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># * Define contact pair between tool &amp; workpiece</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;TARGE170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;CONTA174&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Displacement &amp; temp DOF</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># Close gap/reduce penetration with auto cnof</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Exclude both initial penetration or gap</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Contact stiffness update each iteration</span>
+<span class="c1"># based</span>
+
+<span class="c1"># Bottom &amp; lateral(all except top) surfaces of tool for target</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;below&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tb</span><span class="p">(</span><span class="s2">&quot;fric&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># Definition of friction co efficient at</span>
+<span class="c1"># different temp</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbtemp</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>  <span class="c1"># friction co-efficient at temp 25</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbtemp</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>  <span class="c1"># friction co-efficient at temp 200</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbtemp</span><span class="p">(</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">)</span>  <span class="c1"># friction co-efficient at temp 400</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbtemp</span><span class="p">(</span><span class="mi">600</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># friction co-efficient at temp 600</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbtemp</span><span class="p">(</span><span class="mi">800</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># friction co-efficient at temp 800</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbtemp</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># friction co-efficient at temp 1000</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmodif</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mf">500e6</span><span class="p">)</span>  <span class="c1"># Max.friction stress</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmodif</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="n">tcc2</span><span class="p">)</span>  <span class="c1"># Thermal contact conductance b/w tool and</span>
+<span class="c1"># workpiece, 10 W/m^2&#39;C</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmodif</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># A real constant FHTG,the fraction of</span>
+<span class="c1"># frictional dissipated energy converted</span>
+<span class="c1"># into heat</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmodif</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="n">fwgt</span><span class="p">)</span>  <span class="c1"># A real constant FWGT, weight factor for</span>
+<span class="c1"># the distribution of heat between the</span>
+<span class="c1"># contact and target surfaces, 0.95</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esln</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esurf</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="rigid-surface-constraint">
+<h4>28.3.2.3. Rigid surface constraint<a class="headerlink" href="#rigid-surface-constraint" title="Link to this heading">#</a></h4>
+<p>The workpiece remains fixed in all stages of the simulation. The tool rotates
+and moves along the weld line. A pilot node is created at the center of the top
+surface of the tool in order to apply the rotation and translation on the tool.
+The motion of the pilot node controls the motion of the entire tool. A rigid
+surface constraint is defined between the pilot node (<code class="docutils literal notranslate"><span class="pre">TARGE170</span></code>) and the
+nodes of the top surface of the tool (<code class="docutils literal notranslate"><span class="pre">CONTA174</span></code>). A multipoint constraint
+(MPC) algorithm with contact surface behavior defined as bonded always is used
+to constrain the contact nodes to the rigid body motion defined by the pilot
+node.</p>
+<p>The following contact settings are used for the <code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> elements:</p>
+<ul class="simple">
+<li><p>To include MPC contact algorithm: <code class="docutils literal notranslate"><span class="pre">KEYOPT(2)</span> <span class="pre">=</span> <span class="pre">2</span></code></p></li>
+<li><p>For a rigid surface constraint: <code class="docutils literal notranslate"><span class="pre">KEYOPT(4)</span> <span class="pre">=</span> <span class="pre">2</span></code></p></li>
+<li><p>To set the behavior of contact surface as bonded (always): <code class="docutils literal notranslate"><span class="pre">KEYOPT(12)</span> <span class="pre">=</span> <span class="pre">5</span></code></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># * Define rigid surface constraint on tool top surface</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;TARGE170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># User defined boundary condition on rigid</span>
+<span class="c1"># target nodes</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;CONTA174&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># To include temp DOF</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># To include MPC contact algorithm</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># For a rigid surface constraint</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># To set the behavior of contact surface as a</span>
+<span class="c1"># bonded (always)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Selecting tool volume</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;below&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>  <span class="c1"># Selecting nodes on the tool top surface</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esln</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esurf</span><span class="p">()</span>  <span class="c1"># Create contact elements</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># * Define pilot node at the top of the tool</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;node&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tshap</span><span class="p">(</span><span class="s2">&quot;pilo&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">e</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Create target element on pilot node</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+
+<span class="c1"># Top surfaces of plates nodes for contact</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;below&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esln</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esurf</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[82, 87, 110]
+</pre></div>
+</div>
+<img alt="../../_images/ex_28-tecfricstir_5_1.png" src="../../_images/ex_28-tecfricstir_5_1.png" />
+</div>
+</div>
+<p><strong>Figure 28.5: Rigid surface constrained.</strong>
+Pilot node or master with applied boundary conditions and the constrained
+top surface of the tool (<span class="blue-text">blue</span>).**</p>
+</section>
+</section>
+</section>
+<section id="material-properties">
+<h2>28.4. Material properties<a class="headerlink" href="#material-properties" title="Link to this heading">#</a></h2>
+<p>Accurate temperature calculation is critical to the FSW process because the
+stresses and strains developed in the weld are temperature-dependent. Thermal
+properties of the 304L steel plates such as thermal conductivity, specific
+heat, and density are temperature-dependent. Mechanical properties of the
+plates such as Young’s modulus and the coefficient of thermal expansion are
+considered to be constant due to the limitations of data available in the
+literature.</p>
+<p>It is assumed that the plastic deformation of the material uses the Von Misses
+yield criterion, as well as the associated flow rule and the work-hardening
+rule. Therefore, a bilinear isotropic hardening model (<code class="docutils literal notranslate"><span class="pre">TB,PLASTIC,,,,BISO</span></code>)
+is selected.</p>
+<p>The following table shows the material properties of the workpiece:</p>
+<p><strong>Table 28.1: Workpiece material properties</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Property</strong></p></th>
+<th class="head"><p><strong>Value</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="2"><p>Linear properties</p></td>
+</tr>
+<tr class="row-odd"><td><p>Young’s modulus</p></td>
+<td><p>193 GPa</p></td>
+</tr>
+<tr class="row-even"><td><p>Poisson’s ratio</p></td>
+<td><p>0.3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Coefficient of thermal expansion</p></td>
+<td><p>18.7 µm/m °C</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Bilinear isotropic hardening constants (``TB,PLASTIC,,,,BISO``)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>Yield stress</p></td>
+<td><p>290 MPa</p></td>
+</tr>
+<tr class="row-even"><td><p>Tangent modulus</p></td>
+<td><p>2.8 GPa</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Temperature-dependent material properties</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>Temperature (°C)</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>Thermal conductivity (W/m °C)</p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-even"><td><p>Specific heat (J/Kg °C)</p></td>
+<td><p>500</p></td>
+</tr>
+<tr class="row-odd"><td><p>Density (Kg/m3)</p></td>
+<td><p>7894</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.tbdata()</span></code>
+defines the yield stress and tangent modulus.</p>
+<p>The fraction of the plastic work dissipated as heat during FSW is about 80
+percent. Therefore, the fraction of plastic work converted to heat
+(Taylor-Quinney coefficient) is set to 0.8 (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.mp(&quot;QRATE&quot;)</span></code>) for the calculation of plastic heat generation in
+the workpiece material.</p>
+<p>To weld a high-temperature material such as 304L stainless steel, a tool
+composed of hard material is required. Tools made from super-abrasive materials
+such as PCBN are suitable for such processes, and so a cylindrical PCBN tool is
+used here. The material properties of the PCBN tool are obtained from the
+references: <a class="reference internal" href="#ozel2008" id="id5"><span>[Ozel2008]</span></a> and <a class="reference internal" href="#mishra2007" id="id6"><span>[Mishra2007]</span></a>.</p>
+<p>The following table shows the material properties of the PCBN tool:</p>
+<p><strong>Table 28.2: Material properties of the PCBN tool</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Young modulus</p></td>
+<td><p>680 GPa</p></td>
+</tr>
+<tr class="row-odd"><td><p>Poisson’s ratio</p></td>
+<td><p>0.22</p></td>
+</tr>
+<tr class="row-even"><td><p>Thermal conductivity</p></td>
+<td><p>100 W/m °C</p></td>
+</tr>
+<tr class="row-odd"><td><p>Specific heat</p></td>
+<td><p>750 J/Kg °C</p></td>
+</tr>
+<tr class="row-even"><td><p>Density</p></td>
+<td><p>4280 Kg/m3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following code setup the material properties:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==========================================================</span>
+<span class="c1"># * Material properties</span>
+<span class="c1"># ==========================================================</span>
+<span class="c1"># * Material properties for 304l stainless steel Plates</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;ex&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">193e9</span><span class="p">)</span>  <span class="c1"># Elastic modulus (N/m^2)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;nuxy&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># Poisson&#39;s ratio</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;alpx&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.875e-5</span><span class="p">)</span>  <span class="c1"># Coefficient of thermal expansion, µm/m&#39;c</span>
+<span class="c1"># Fraction of plastic work converted to heat, 80%</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;qrate&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fplw</span><span class="p">)</span>
+
+<span class="c1"># *BISO material model</span>
+<span class="n">EX</span> <span class="o">=</span> <span class="mf">193e9</span>
+<span class="n">ET</span> <span class="o">=</span> <span class="mf">2.8e9</span>
+<span class="n">EP</span> <span class="o">=</span> <span class="n">EX</span><span class="o">*</span><span class="n">ET</span><span class="o">/</span><span class="p">(</span><span class="n">EX</span><span class="o">-</span><span class="n">ET</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tb</span><span class="p">(</span><span class="s2">&quot;plas&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;biso&quot;</span><span class="p">)</span>  <span class="c1"># Bilinear isotropic material</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">290e6</span><span class="p">,</span> <span class="n">EP</span><span class="p">)</span>  <span class="c1"># Yield stress &amp; plastic tangent modulus</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mptemp</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mpdata</span><span class="p">(</span><span class="s2">&quot;kxx&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># therm cond.(W/m&#39;C)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mpdata</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">540</span><span class="p">,</span> <span class="mi">560</span><span class="p">,</span> <span class="mi">590</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="mi">610</span><span class="p">)</span>  <span class="c1"># spec heat(J/kg&#39;C)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mpdata</span><span class="p">(</span><span class="s2">&quot;dens&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7894</span><span class="p">,</span> <span class="mi">7744</span><span class="p">,</span> <span class="mi">7631</span><span class="p">,</span> <span class="mi">7518</span><span class="p">,</span> <span class="mi">7406</span><span class="p">,</span> <span class="mi">7406</span><span class="p">)</span>  <span class="c1"># kg/m^3</span>
+
+<span class="c1"># * Material properties for PCBN tool</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;ex&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">680e9</span><span class="p">)</span>  <span class="c1"># Elastic modulus (N/m^2)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;nuxy&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.22</span><span class="p">)</span>  <span class="c1"># Poisson&#39;s ratio</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;kxx&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Thermal conductivity(W/m&#39;C)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">750</span><span class="p">)</span>  <span class="c1"># Specific heat(J/kg&#39;C)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;dens&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4280</span><span class="p">)</span>  <span class="c1"># Density,kg/m^3</span>
+</pre></div>
+</div>
+</section>
+<section id="boundary-conditions-and-loading">
+<h2>28.5. Boundary conditions and loading<a class="headerlink" href="#boundary-conditions-and-loading" title="Link to this heading">#</a></h2>
+<p>This section describes the thermal and mechanical boundary conditions imposed
+on the FSW model:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#thermal-boundary-conditions">28.5.1. Thermal boundary conditions</a></p></li>
+<li><p><a class="reference internal" href="#mechanical-boundary-conditions">28.5.2. Mechanical boundary conditions</a></p></li>
+<li><p><a class="reference internal" href="#loading">28.5.3. Loading</a></p></li>
+</ul>
+<section id="thermal-boundary-conditions">
+<h3>28.5.1. Thermal boundary conditions<a class="headerlink" href="#thermal-boundary-conditions" title="Link to this heading">#</a></h3>
+<p>The frictional and plastic heat generated during the FSW process propagates
+rapidly into remote regions of the plates. On the top and side surfaces of the
+workpiece, convection and radiation account for heat loss to the
+ambient. Conduction losses also occur from the bottom surface of the workpiece
+to the backing plate.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_6_0.png" src="../../_images/ex_28-tecfricstir_6_0.png" />
+<img alt="../../_images/ex_28-tecfricstir_6_1.png" src="../../_images/ex_28-tecfricstir_6_1.png" />
+</div>
+</div>
+<p><strong>Figure 28.6: Thermal boundary conditions.</strong>
+Convection loads (<span class="red-text">red</span>) and conduction loads (<span class="yellow-text">yellow</span>)</p>
+<p>Available data suggest that the value of the convection coefficient lies
+between 10 and 30 W/m2 °C for the workpiece surfaces, except for the bottom
+surface. The value of the convection coefficient is 30 W/m2°C for workpiece and
+tool.
+This coefficient affects the output temperature. A lower coefficient
+increases the output temperature of the model. A high overall heat-transfer
+coefficient (about 10 times the convective coefficient) of 300 W/m2 °C is
+assumed for the conductive heat loss through the bottom surface of the
+workpiece. As a result, the bottom surface of the workpiece is also treated as
+a convection surface for modeling conduction losses. Because the percentage of
+heat lost due to radiation is low, radiation heat losses are ignored. An
+initial temperature of 25 °C is applied on the model.
+Temperature boundary conditions are not imposed anywhere on the model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial boundary conditions.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tref</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>  <span class="c1"># Reference temperature 25&#39;C</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">ic</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>  <span class="c1"># Initial condition at nodes,temp 25&#39;C</span>
+
+
+<span class="c1"># Thermal boundary conditions</span>
+<span class="c1"># Convection heat loss from the workpiece surfaces</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Selecting the workpiece</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;below&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">w</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">l1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">l2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;conv&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># Convection (high)heat loss from the workpiece bottom</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;conv&quot;</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># Convection heat loss from the tool surfaces</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Selecting the tool</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;below&quot;</span><span class="p">,</span> <span class="s2">&quot;volume&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">csys</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;conv&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># Constraining all DOFs at pilot node except the temp DOF</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">ddele</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;temp&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="mechanical-boundary-conditions">
+<h3>28.5.2. Mechanical boundary conditions<a class="headerlink" href="#mechanical-boundary-conditions" title="Link to this heading">#</a></h3>
+<p>The workpiece is fixed by clamping each plate. The clamped portions of the
+plates are constrained in all directions. To simulate support at the bottom of
+the plates, all bottom nodes of the workpiece are constrained in the
+perpendicular direction (z direction).</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[82, 87, 110]
+</pre></div>
+</div>
+<img alt="../../_images/ex_28-tecfricstir_7_1.png" src="../../_images/ex_28-tecfricstir_7_1.png" />
+</div>
+</div>
+<p><strong>Figure 28.7: Mechanical boundary conditions:</strong>
+X-direction (<code class="docutils literal notranslate"><span class="pre">UX</span></code>) in <span class="red-text">red</span>, Y-direction (<code class="docutils literal notranslate"><span class="pre">UY</span></code>) in <span class="green-text">green</span>, and Z-direction (<code class="docutils literal notranslate"><span class="pre">UZ</span></code>) in <span class="blue-text">blue</span>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mechanical boundary conditions</span>
+<span class="c1"># 20% ends of the each plate is constraint</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.8</span><span class="o">*</span><span class="n">w</span><span class="p">,</span> <span class="o">-</span><span class="n">w</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="mf">0.8</span><span class="o">*</span><span class="n">w</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;uz&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Displacement constraint in x-direction</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;uy&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Displacement constraint in y-direction</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;ux&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># Displacement constraint in z-direction</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># Bottom of workpiece is constraint in z-direction</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;uz&quot;</span><span class="p">)</span>  <span class="c1"># Displacement constraint in z-direction</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="loading">
+<h3>28.5.3. Loading<a class="headerlink" href="#loading" title="Link to this heading">#</a></h3>
+<p>The FSW process consists of three primary phases:</p>
+<ol class="arabic simple">
+<li><p><strong>Plunge</strong> – The tool plunges slowly into the workpiece</p></li>
+<li><p><strong>Dwell</strong> – Friction between the rotating tool and workpiece generates heat
+at the initial tool position until the workpiece temperature reaches the
+value required for the welding.</p></li>
+<li><p><strong>Traverse (or Traveling)</strong> – The rotating tool moves along the weld line.</p></li>
+</ol>
+<p>During the traverse phase, the temperature at the weld line region rises, but
+the maximum temperature values do not surpass the melting temperature of the
+workpiece material. As the temperature drops, a solid continuous joint appears
+between the two plates.</p>
+<p>For illustrative purposes, each phase of the FSW process is considered a separate
+load step. A rigid surface constraint is already defined for applying loading on the
+tool.</p>
+<p>The following table shows the details for each load step.</p>
+<p><strong>Table 28.3: Load steps</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Load step</p></th>
+<th class="head"><p>Time period (sec)</p></th>
+<th class="head"><p>Loadings on pilot node</p></th>
+<th class="head"><p>Boundary condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>Displacement boundary condition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UZ</span></code> = -7.95E-07 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>5.5</p></td>
+<td><p>Rotational boundary condition</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROTZ</span></code> = 60 RPM</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>22.5</p></td>
+<td><p>Displacement and rotational boundary conditions together on the pilot node</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ROTZ</span></code> = 60 RPM <code class="docutils literal notranslate"><span class="pre">UY</span></code> = 60.96E-3 m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The tool plunges into the workpiece at a very shallow depth, then rotates to
+generate heat. The depth and rotating speeds are the critical parameters for
+the weld temperatures. The parameters are determined based on the experimental
+data of Zhu and Chao <a class="reference internal" href="#zhu2004" id="id7"><span>[Zhu2004]</span></a>. The tool travels from one end of the welding
+line to the other at a speed of 2.7 mm/s.</p>
+</section>
+</section>
+<section id="analysis-and-solution-controls">
+<h2>28.6. Analysis and solution controls<a class="headerlink" href="#analysis-and-solution-controls" title="Link to this heading">#</a></h2>
+<p>A nonlinear transient analysis is performed in three load steps using
+structural-thermal options of <code class="docutils literal notranslate"><span class="pre">SOLID226</span></code> and
+<code class="docutils literal notranslate"><span class="pre">CONTA174</span></code>.</p>
+<p>FSW simulation includes factors such as nonlinearity, contact, friction, large
+plastic deformation, structural-thermal coupling, and different loadings at
+each load step. The solution settings applied consider all of these factors.</p>
+<p>The first load step in the solution process converges within a few substeps,
+but the second and third load steps converge only after applying the proper
+solution settings shown in the following table:</p>
+<p><strong>Table 28.4: Solution settings</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Solution setting</p></th>
+<th class="head"><p>Description of setting and comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.antype(4)</span></code></p></td>
+<td><p>Transient analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.lnsrch(&quot;ON&quot;)</span></code></p></td>
+<td><p>For contact problems,this option is useful for enhancing convergence.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cutcontrol(&quot;PLSLIMIT&quot;,</span> <span class="pre">0.15)</span></code></p></td>
+<td><p>Controls the time-step cutback during a nonlinear solution and specifies the maximum equivalent plastic strain allowed within a time-step. If the calculated value exceeds the specified value, the program performs a cutback (bisection). <code class="docutils literal notranslate"><span class="pre">PLSLIMIT</span></code> is set at 15 percent (from the default five percent) because solution-control support is not available.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nlgeom(&quot;ON&quot;)</span></code></p></td>
+<td><p>Includes large-deflection effects or large strain effects, according to the element type.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nropt(&quot;UNSYM&quot;)</span></code></p></td>
+<td><p>Recommended for contact elements with high friction coefficients.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.timint(&quot;OFF&quot;,</span> <span class="pre">&quot;STRUC&quot;)</span></code></p></td>
+<td><p>To speed up convergence in a coupled-field transient analysis, the structural dynamic effects are turned off. These structural effects are not important in the modeling of heat generation due to friction; however,the thermal dynamic effects are considered here.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.kbc(0)</span></code></p></td>
+<td><p>The loads applied to intermediate substeps within the load step are ramped because the structural dynamic effects are set to off.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>To allow for a faster solution, automatic time-stepping is activated
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.autots(&quot;on&quot;)</span></code>). The initial time
+step size (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.deltim()</span></code>) is set to
+0.1, and the minimum time step is set to 0.001. The maximum time step is set as
+0.2 in load steps 2 and 3. A higher maximum time-step size may result in an
+unconverged solution.</p>
+<p>The time step values are determined based on mesh or element size. For
+stability, no time-step limitation exists for the implicit integration
+algorithm. Because this problem is inherently nonlinear and an accurate
+solution is necessary, a disturbance must not propagate to more than one
+element in a time step; therefore, an upper limit on the time step size is
+required. It is important to choose a time step size that does not violate the
+subsequent criterion (minimum element size, maximum thermal conductivity over
+the whole model, minimum density, and minimum specific heat).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">solu</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># Transient analysis</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lnsrch</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cutcontrol</span><span class="p">(</span><span class="s1">&#39;plslimit&#39;</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">kbc</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Ramped loading within a load step</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nlgeom</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>  <span class="c1"># Turn on large deformation effects</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">timint</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">,</span> <span class="s2">&quot;struc&quot;</span><span class="p">)</span>  <span class="c1"># Structural dynamic effects are turned off.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nropt</span><span class="p">(</span><span class="s1">&#39;unsym&#39;</span><span class="p">)</span>
+
+<span class="c1">## Solving</span>
+<span class="c1"># Load step1</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;uz&quot;</span><span class="p">,</span> <span class="o">-</span><span class="n">uz1</span><span class="p">)</span>  <span class="c1"># Tool plunges into the workpiece</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1"># Load step2</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mf">6.5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;rotz&quot;</span><span class="p">,</span> <span class="n">nr1</span><span class="p">)</span>  <span class="c1"># Rotation of tool, 60rpm</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">deltim</span><span class="p">(</span><span class="n">tsz</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1"># Load step3</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mi">29</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;rotz&quot;</span><span class="p">,</span> <span class="n">nr2</span><span class="p">)</span>  <span class="c1"># Rotation of tool,60rpm</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;uy&quot;</span><span class="p">,</span> <span class="n">uy1</span><span class="p">)</span>  <span class="c1"># Displacement of tool along weldline</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">deltim</span><span class="p">(</span><span class="n">tsz</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="results-and-discussion">
+<h2>28.7. Results and discussion<a class="headerlink" href="#results-and-discussion" title="Link to this heading">#</a></h2>
+<p>The following results topics for the FSW simulation are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#deformation-and-stresses">28.7.1. Deformation and stresses</a></p></li>
+<li><p><a class="reference internal" href="#temperature-results">28.7.2. Temperature results</a></p></li>
+<li><p><a class="reference internal" href="#welding-results">28.7.3. Welding results</a></p></li>
+<li><p><a class="reference internal" href="#heat-generation">28.7.4. Heat generation</a></p></li>
+</ul>
+<section id="deformation-and-stresses">
+<h3>28.7.1. Deformation and stresses<a class="headerlink" href="#deformation-and-stresses" title="Link to this heading">#</a></h3>
+<p>It is important to observe the change in various quantities around the weld
+line during the FSW process. The following figure shows the deflection of the
+workpiece due to plunging of the tool in the first load step:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_8_0.png" src="../../_images/ex_28-tecfricstir_8_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.9: Deflection at workpiece after load step 1</strong></p>
+<p>The deflection causes high stresses to develop on the workpiece beneath the
+tool, as shown in this figure:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_9_0.png" src="../../_images/ex_28-tecfricstir_9_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.10: Von Mises stress after load step 1</strong></p>
+<p>Following load step 1, the temperature remains unchanged (25 °C), as shown in
+this figure:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_10_0.png" src="../../_images/ex_28-tecfricstir_10_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.11: Temperature after load step 1</strong></p>
+<p>As the tool begins to rotate at this location, the frictional stresses develop
+and increase rapidly. The following two figures show the increment in contact
+frictional stresses from load step 1 to load step 2:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_11_0.png" src="../../_images/ex_28-tecfricstir_11_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.12: Frictional stress after load step 1</strong></p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_12_0.png" src="../../_images/ex_28-tecfricstir_12_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.13: Frictional stress after load step 2</strong></p>
+<p>All frictional dissipated energy is converted into heat during load step 2. The
+heat is generated at the tool-workpiece interface. Most of the heat is
+transferred to the workpiece (FWGT is specified to 0.95). As a result, the
+temperature of the workpiece increases rapidly compared to that of the tool.</p>
+</section>
+<section id="temperature-results">
+<h3>28.7.2. Temperature results<a class="headerlink" href="#temperature-results" title="Link to this heading">#</a></h3>
+<p>The following two figures shows the temperature rise due to heat generation in the
+second and third load steps:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_13_0.png" src="../../_images/ex_28-tecfricstir_13_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.14: Temperature after load step 2</strong></p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_14_0.png" src="../../_images/ex_28-tecfricstir_14_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.15: Temperature after load step 3</strong></p>
+<p>The maximum temperature on the workpiece occurs beneath the tool during the
+last two load steps. Heat generation is due to the mechanical loads. No
+external heat sources are used. As the temperature increases, the material
+softens and the coefficient of friction decreases. A temperature-dependent
+coefficient of friction (0.4 to 0.2) helps to prevent the maximum temperature
+from exceeding the material melting point.</p>
+<p>The observed temperature rise in the model shows that heat generation during
+the second and third load steps is due to friction between the tool shoulder
+and workpiece, as well as plastic deformation of the workpiece material.</p>
+<p>The melting temperature of 304L stainless steel is 1450 °C. As shown in the
+following figure, the maximum temperature range at the weld line region on the
+workpiece beneath the tool is well below the melting temperature of the
+workpiece material during the second and third load steps, but above 70 percent
+of the melting temperature:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="docutils container">
+</div>
+</div>
+</div>
+<p><strong>Figure 28.16: Maximum temperature (on workpiece beneath the tool) variation with time</strong></p>
+<p>The two plates can be welded together within this temperature range.</p>
+<p>The following figure shows the temperature distributions on the top surface of
+the workpiece along the transverse distance (perpendicular to the weld line):</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="docutils container">
+</div>
+</div>
+</div>
+<p><strong>Figure 28.17: Temperature distribution on the top surface of workpiece at various locations</strong></p>
+<p>As shown in the following figure and table, the temperature plots indicate the
+temperature distribution at various locations on the weld line when the maximum
+temperature occurs at those locations:</p>
+<figure class="align-center" id="id9">
+<img alt="Various locations on the workpiece" src="../../_images/gtecfricstir_fig17.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text"><strong>Figure 28.18: Various locations on the workpiece</strong></span><a class="headerlink" href="#id9" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Table 28.5: Locations on weld line</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Location number</p></th>
+<th class="head"><p>Distance on the weld line in y direction</p></th>
+<th class="head"><p>Time when maximum temperature occurs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0.016 m</p></td>
+<td><p>15.25 Sec</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0.027 m</p></td>
+<td><p>19.2 Sec</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0.040 m</p></td>
+<td><p>24 Sec</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following figure shows the temperature distribution in the thickness direction
+at location 1:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_17_0.png" src="../../_images/ex_28-tecfricstir_17_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.19: Temperature distribution in thickness direction at location 1</strong></p>
+<p>As expected, the highest temperature caused by heat generation appears around
+the weld line region. By comparing the above temperature results with the
+reference results, it can be determined that the temperatures obtained at the
+weld line are well below the melting temperature of the workpiece material, but
+still sufficient for friction stir welding.</p>
+<p>The following table and figure show the time-history response of the
+temperature at various locations on the weld line:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Location number</p></th>
+<th class="head"><p>Distance on the weld line</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>0.018 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>0.023 m</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>0.027 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>0.032 m</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>0.035 m</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>0.039 m</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="docutils container">
+</div>
+</div>
+</div>
+<p><strong>Figure 28.20: Temperature variation with time on various joint locations</strong></p>
+</section>
+<section id="welding-results">
+<h3>28.7.3. Welding results<a class="headerlink" href="#welding-results" title="Link to this heading">#</a></h3>
+<p>A bonding temperature of 1000 °C is already defined for the welding simulation
+at the interface of the plates. The contact status at this interface after the last
+load step is shown in the following figure:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_19_0.png" src="../../_images/ex_28-tecfricstir_19_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.21: Contact status at interface with bonding temperature 1000 °C</strong>
+Elements can be in near-contact (<span class="blue-text">blue</span>), sliding (<span class="green-text">green</span>) or sticking (<span class="red-text">red</span>) states.</p>
+<p>The sticking portion of the interface shows the bonding or welding region of
+the plates. If the bonding temperature was assumed to be 900 °C, then the
+welding region would increase, as shown in this figure:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_28-tecfricstir_20_0.png" src="../../_images/ex_28-tecfricstir_20_0.png" />
+</div>
+</div>
+<p><strong>Figure 28.22: Contact status at interface with bonding temperature 900 °C</strong>
+Elements can be in near-contact (<span class="blue-text">blue</span>), sliding (<span class="green-text">green</span>) or sticking (<span class="red-text">red</span>) states.</p>
+</section>
+<section id="heat-generation">
+<h3>28.7.4. Heat generation<a class="headerlink" href="#heat-generation" title="Link to this heading">#</a></h3>
+<p>Friction and plastic deformation generate heat. A calculation of frictional and
+plastic heat generation is performed. The generation of heat due to friction
+begins in the second load step.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> element’s <code class="docutils literal notranslate"><span class="pre">FDDIS</span></code> (<code class="docutils literal notranslate"><span class="pre">SMISC</span> <span class="pre">item</span></code>) output option is used to
+calculate frictional heat generation on the workpiece. This option gives the
+frictional energy dissipation per unit area for an element. After multiplying
+this value with the corresponding element area, the friction heat-generation
+rate for an element is calculated. By summing the values from each <code class="docutils literal notranslate"><span class="pre">CONTA174</span></code>
+element of the workpiece, the total frictional heat generation rate is
+calculated for a given time.</p>
+<p>It is possible to calculate the total frictional heat-generation rate at each
+time-step (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.etable</span></code>). The
+following figure shows the plot of total frictional heat generation rate on the
+workpiece with time:</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="docutils container">
+</div>
+</div>
+</div>
+<p><strong>Figure 28.23: Total frictional heat rate variation with time</strong></p>
+<p>The plot indicates that the frictional heat starts from the second load step
+(after 1 second).</p>
+<p>The element contact area can be calculated using the
+<code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> element <code class="docutils literal notranslate"><span class="pre">CAREA</span></code> (<code class="docutils literal notranslate"><span class="pre">NMISC,</span> <span class="pre">58</span></code>) output
+option.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;last&quot;</span><span class="p">)</span>
+<span class="n">nst</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="s2">&quot;nst&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span> <span class="s2">&quot;nset&quot;</span><span class="p">)</span>  <span class="c1"># To get number of data sets on result file</span>
+
+<span class="c1"># Total frictional heat rate</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;real&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;ename&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">174</span><span class="p">)</span>  <span class="c1"># Selecting the contact elements on Workpiece</span>
+<span class="n">fht</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nst</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nst</span><span class="p">):</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># Frictional energy dissipation per unit</span>
+    <span class="c1"># area for an element, FDDIS</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">etable</span><span class="p">(</span><span class="s2">&quot;fri&quot;</span><span class="p">,</span> <span class="s2">&quot;smisc&quot;</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">etable</span><span class="p">(</span><span class="s2">&quot;are1&quot;</span><span class="p">,</span> <span class="s2">&quot;nmisc&quot;</span><span class="p">,</span> <span class="mi">58</span><span class="p">)</span>  <span class="c1"># Area of each contact element</span>
+
+    <span class="c1"># Multiplying frictional energy dissipation</span>
+    <span class="c1"># per unit area with the area of</span>
+    <span class="c1"># corresponding element</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">smult</span><span class="p">(</span><span class="s2">&quot;frri&quot;</span><span class="p">,</span> <span class="s2">&quot;fri&quot;</span><span class="p">,</span> <span class="s2">&quot;are1&quot;</span><span class="p">)</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">ssum</span><span class="p">()</span>  <span class="c1"># Summing up the Frictional heat rate</span>
+
+    <span class="c1"># Total frictional heat rate on</span>
+    <span class="c1"># workpiece at a particular time</span>
+    <span class="n">frhi</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;frhi&#39;</span><span class="p">,</span> <span class="s1">&#39;ssum&#39;</span><span class="p">,,</span> <span class="s1">&#39;item&#39;</span><span class="p">,</span> <span class="s1">&#39;frri&#39;</span><span class="p">)</span>
+    <span class="n">fht</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">frhi</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">parsav</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post26</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;fsw&quot;</span><span class="p">,</span> <span class="s2">&quot;rst&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">numvar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solu</span><span class="p">(</span><span class="mi">191</span><span class="p">,</span> <span class="s2">&quot;ncmit&quot;</span><span class="p">)</span>  <span class="c1"># Solution summary data per substep to be</span>
+<span class="c1"># stored for cumulative no. of iterations.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="s2">&quot;merge&quot;</span><span class="p">)</span>  <span class="c1"># Merge data from results file</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">filldata</span><span class="p">(</span><span class="mi">191</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">realvar</span><span class="p">(</span><span class="mi">191</span><span class="p">,</span> <span class="mi">191</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">parres</span><span class="p">(</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;fsw&quot;</span><span class="p">,</span> <span class="s2">&quot;parm&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vput</span><span class="p">(</span><span class="s2">&quot;fht&quot;</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;fric_heat&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plvar</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>  <span class="c1"># Plot of frictional heat rate against time</span>
+</pre></div>
+</div>
+<p>A similar calculation is performed to check the heat generation from plastic
+deformation on the workpiece. The <code class="docutils literal notranslate"><span class="pre">SOLID226</span></code> element’s output option
+<code class="docutils literal notranslate"><span class="pre">PHEAT</span></code> (<code class="docutils literal notranslate"><span class="pre">NMISC,</span> <span class="pre">5</span></code>) gives the plastic heat generation rate per unit
+volume. After multiplying this value with the corresponding element volume,
+the plastic heat generation rate for an element is calculated. By summing the
+values from each element (<code class="docutils literal notranslate"><span class="pre">SOLID226</span></code>) of the workpiece, the total plastic
+heat generation rate is calculated for a particular time.</p>
+<p>It is possible to calculate the total frictional heat generation rate at each
+time-step (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.etable</span></code>). The following
+figure shows the plot of the total plastic heat-generation rate with time.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<div class="docutils container">
+</div>
+</div>
+</div>
+<p><strong>Figure 28.24: Total plastic heat rate variation with time</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;last&quot;</span><span class="p">)</span>
+<span class="n">nst</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nst&quot;</span><span class="p">,</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span> <span class="s2">&quot;nset&quot;</span><span class="p">)</span>  <span class="c1"># To get number of data sets on result file</span>
+
+<span class="c1"># Total plastic heat rate</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;mat&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Selecting the coupled elements on workpiece</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">etable</span><span class="p">(</span><span class="s2">&quot;vlm1&quot;</span><span class="p">,</span> <span class="s2">&quot;volu&quot;</span><span class="p">)</span>  <span class="c1"># Volume of the each element</span>
+<span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nst</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nst</span><span class="p">):</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="c1"># Plastic heat rate per unit volume on</span>
+    <span class="c1"># each element, PHEAT</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">etable</span><span class="p">(</span><span class="s2">&quot;pi&quot;</span><span class="p">,</span> <span class="s2">&quot;nmisc&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Multiplying plastic heat rate per unit</span>
+    <span class="c1"># volume with the volume of</span>
+    <span class="c1"># corresponding element</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">smult</span><span class="p">(</span><span class="s2">&quot;psi&quot;</span><span class="p">,</span> <span class="s2">&quot;pi&quot;</span><span class="p">,</span> <span class="s2">&quot;vlm1&quot;</span><span class="p">)</span>
+
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">ssum</span><span class="p">()</span>  <span class="c1"># Summing up the plastic heat rate</span>
+    <span class="c1"># Total plastic heat rate on workpiece</span>
+    <span class="c1"># at a particular time</span>
+    <span class="n">ppi</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ppi&#39;</span><span class="p">,</span><span class="s1">&#39;ssum&#39;</span><span class="p">,,</span><span class="s1">&#39;item&#39;</span><span class="p">,</span><span class="s1">&#39;psi&#39;</span><span class="p">)</span>
+
+    <span class="n">pha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ppi</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">parsav</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post26</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;fsw&quot;</span><span class="p">,</span> <span class="s2">&quot;rst&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">numvar</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># solution summary data per substep to be</span>
+<span class="c1"># stored for cumulative no. of iterations.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solu</span><span class="p">(</span><span class="mi">191</span><span class="p">,</span> <span class="s2">&quot;ncmit&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="s2">&quot;merge&quot;</span><span class="p">)</span>  <span class="c1"># Merge data from results file</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">filldata</span><span class="p">(</span><span class="mi">191</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">realvar</span><span class="p">(</span><span class="mi">191</span><span class="p">,</span> <span class="mi">191</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">parres</span><span class="p">(</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;fsw&quot;</span><span class="p">,</span> <span class="s2">&quot;parm&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vput</span><span class="p">(</span><span class="s2">&quot;pha&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;pheat_nmisc&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plvar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Plot of Plastic heat rate against time</span>
+</pre></div>
+</div>
+<p><strong>Figure 28.23</strong> and <strong>Figure 28.24</strong>
+show that friction is responsible for generating most of the heat needed, while the
+contribution of heat due to plastic deformation is less significant. Because the
+tool-penetration is shallow and the tool pin is ignored, the plastic heat is small
+compared to frictional heat.</p>
+</section>
+</section>
+<section id="exit-mapdl">
+<h2>28.8. Exit MAPDL<a class="headerlink" href="#exit-mapdl" title="Link to this heading">#</a></h2>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="recommendations">
+<h2>28.9. Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading">#</a></h2>
+<p>To perform a similar FSW analysis, consider the following hints and
+recommendations:</p>
+<ul class="simple">
+<li><p>FSW is a coupled-field (structural-thermal) process. The temperature field
+affects the stress distribution during the entire process. Also, heat generated
+in structural deformation affects the temperature field. The direct method of
+coupling is recommended for such processes. This method involves just one
+analysis that uses a coupled-field element containing all necessary degrees of
+freedom. Direct coupling is advantageous when the coupled-field interaction
+involves strongly coupled physics or is highly nonlinear.</p></li>
+<li><p>A nonlinear transient analysis is preferable for simulations where the
+objective is to study the transient temperature and transient heat
+transfer.</p></li>
+<li><p>The dynamic effects of different physics should be controlled. In this
+problem, for example, the dynamic effects of the structural degrees of freedom
+are disabled as they are unimportant.</p></li>
+<li><p>Separating the solution process into three load steps helps you to understand
+the physics and solve the problem.</p></li>
+<li><p>The contact between the two plates must be nearly perfect to maintain
+temperature continuity. For a perfect thermal contact, specify a high thermal
+contact conductance (TCC) coefficient between workpiece plates. A high
+coefficient results in temperature continuity across the interface.</p></li>
+<li><p>Because the problem is nonlinear, proper solution settings are required. Set
+the following analysis controls to the appropriate values to achieve the
+converged solution: <code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.lnsrch()</span></code>,
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cutcontrol()</span></code>,
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.kbc()</span></code>,
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.neqit()</span></code>,
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nropt()</span></code>,
+and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.autots()</span></code>.</p></li>
+<li><p>Convergence at the second and third load steps is difficult to achieve. The
+depth of penetration of the tool on the workpiece (<code class="docutils literal notranslate"><span class="pre">UZ</span></code>), rotational speed of the
+tool (<code class="docutils literal notranslate"><span class="pre">ROTZ</span></code>), and time-step size play crucial roles in the convergence of the
+second load step. Use a very small time-step size if the rotational speed is
+higher than 60 RPM.</p></li>
+<li><p>A symmetric mesh (about the joint line) is preferred to capture the exact
+outputs and their effects on the workpiece. A hex mesh with dropped midside
+nodes is recommended for the workpiece as well as the tool.
+This approach helps to maintain symmetry and prevent the temperature
+from reaching negative values during the simulation.</p></li>
+<li><p>A minimum of two element layers is required in the thickness direction. A fine
+sweep mesh near the weld line yields more accurate results; however, too fine a
+mesh increases computational time. A fine mesh is unnecessary on the tool side.
+To minimize computational time, the tool can be considered to be rigid with no
+temperature degrees of freedom.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>28.10. References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>The following papers are cited in this example problem:</p>
+<div role="list" class="citation-list">
+<div class="citation" id="zhu2004" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zhu2004<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id4">3</a>,<a role="doc-backlink" href="#id7">4</a>)</span>
+<p>Zhu, X. K. &amp; Chao, Y. J. (2004). Numerical simulation of transient
+temperature and residual stresses in friction stir welding of 304L stainless
+steel. <em>Journal of Materials Processing Technology</em>. 146(2),
+263-272.</p>
+</div>
+<div class="citation" id="prasanna2010" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">Prasanna2010</a><span class="fn-bracket">]</span></span>
+<p>Prasanna, P., Rao, B. S., &amp; Rao, G. K. (2010). Finite element modeling for
+maximum temperature in friction stir welding and its validation.
+<em>Journal of Advanced Manufacturing Technology</em>. 51,
+925-933.</p>
+</div>
+<div class="citation" id="ozel2008" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">Ozel2008</a><span class="fn-bracket">]</span></span>
+<p>Ozel, T., Karpat, Y., &amp; Srivastava, A. (2008). Hard turning with variable
+micro-geometry PcBN tools. <em>CIRP Annals - Manufacturing
+Technology</em>. 57, 73-76.</p>
+</div>
+<div class="citation" id="mishra2007" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">Mishra2007</a><span class="fn-bracket">]</span></span>
+<p>Mishra, R. S. (2007). <em>Friction Stir Welding and
+Processing</em>. Ed. R. S. Mishra and M. W. Mahoney. Materials Park,
+OH: ASM International.</p>
+</div>
+</div>
+</section>
+<section id="input-files">
+<h2>28.11. Input files<a class="headerlink" href="#input-files" title="Link to this heading">#</a></h2>
+<p>The following files were used in this problem:</p>
+<ul class="simple">
+<li><p><a class="reference download external" download="" href="https://github.com/ansys/example-data/blob/master/tech_demos/td-28/fsw.cdb"><code class="xref download docutils literal notranslate"><span class="pre">fsw.cdb</span></code></a> – Common database file containing the FSW model information</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://storage.ansys.com/doclinks/techdemos.html?code=td-28-DLU-N2a">Download the zipped td-28 file set for this problem</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more information, see <a class="reference external" href="https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html">Obtaining the input files</a>.</p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">28.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">28.2. Problem description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">28.3. Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workpiece-and-tool-modeling">28.3.1. Workpiece and tool modeling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-modeling">28.3.2. Contact modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-pair-between-the-plates">28.3.2.1. Contact pair between the plates</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-pair-between-tool-and-workpiece">28.3.2.2. Contact pair between tool and workpiece</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rigid-surface-constraint">28.3.2.3. Rigid surface constraint</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-properties">28.4. Material properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-loading">28.5. Boundary conditions and loading</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#thermal-boundary-conditions">28.5.1. Thermal boundary conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mechanical-boundary-conditions">28.5.2. Mechanical boundary conditions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loading">28.5.3. Loading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-solution-controls">28.6. Analysis and solution controls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-discussion">28.7. Results and discussion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deformation-and-stresses">28.7.1. Deformation and stresses</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-results">28.7.2. Temperature results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#welding-results">28.7.3. Welding results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heat-generation">28.7.4. Heat generation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-mapdl">28.8. Exit MAPDL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendations">28.9. Recommendations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">28.10. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-files">28.11. Input files</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pymapdl-examples/edit/main/doc/source/technology_showcase_examples/techdemo-28/ex_28-tecfricstir.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/technology_showcase_examples/techdemo-28/ex_28-tecfricstir.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

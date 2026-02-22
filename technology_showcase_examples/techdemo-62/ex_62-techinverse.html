@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Inverse-solving analysis of a cardiovascular structure &#8212; PyMAPDL Examples</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=e7fb764e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'technology_showcase_examples/techdemo-62/ex_62-techinverse';</script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contribute" href="../../contributing/index.html" />
+    <link rel="prev" title="Friction Stir Welding (FSW) simulation" href="../techdemo-28/ex_28-tecfricstir.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyMAPDL Examples - Home"/>
+    <img src="../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyMAPDL Examples - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-1/ex_01-tecbrakesqueal.html">Brake squeal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-15/ex_15-teccalvalhyper.html">Calibrating and validating a hyperelastic constitutive model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-20/ex_20-tecPCB.html">Dynamic simulation of a printed circuit board assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-21/ex_21-tecbuckling.html">Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-25/ex_25-tecstent.html">Cardiovascular stent simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-28/ex_28-tecfricstir.html">Friction Stir Welding (FSW) simulation</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Inverse-solving analysis of a cardiovascular structure</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/" class="nav-link">PyMAPDL</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/version/stable/examples/" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">Technology showcases</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Inverse-solving analysis of a cardiovascular structure</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="inverse-solving-analysis-of-a-cardiovascular-structure">
+<span id="tech-demo-62"></span><span id="sphx-glr-ex-62-techinverse-rst"></span><h1>Inverse-solving analysis of a cardiovascular structure<a class="headerlink" href="#inverse-solving-analysis-of-a-cardiovascular-structure" title="Link to this heading">#</a></h1>
+<p>This example problem demonstrates the capabilities and advantages
+of using a nonlinear static analysis with inverse solving to
+investigate the biomechanics of a cardiovascular system.</p>
+<p>The following topics are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction">1. Introduction</a></p></li>
+<li><p><a class="reference internal" href="#setting-up-the-model">2. Setting up the model</a></p></li>
+<li><p><a class="reference internal" href="#analysis">3. Analysis</a></p></li>
+<li><p><a class="reference internal" href="#results">4. Results</a></p></li>
+<li><p><a class="reference internal" href="#exit-mapdl">5. Exit MAPDL</a></p></li>
+<li><p><a class="reference internal" href="#recommendations">6. Recommendations</a></p></li>
+<li><p><a class="reference internal" href="#references">7. References</a></p></li>
+<li><p><a class="reference internal" href="#input-files">8. Input files</a></p></li>
+</ul>
+<p>This example is inspired from the model and analysis defined in Chapter 62
+of the <a class="reference external" href="https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v222/en/wb_wbtec/wb_wbtec.html">Mechanical APDL technology showcase manual</a>.</p>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Finite element models of cardiovascular system components (such as the heart
+valve or blood vessels) are based on in vivo organ geometries obtained from
+3D imaging systems such as computed tomography (CT) or magnetic resonance imaging (MRI).</p>
+<p>Although medical imaging techniques offer accurate in vivo visualization of 3D
+patient-specific geometries, the geometries are under a loaded state
+(for example, in the presence of blood pressure) and lack in vivo stress/strain
+field information. Therefore, a nonlinear analysis performed directly on the
+geometry to simulate additional loading leads to inaccurate results.</p>
+<p>In such cases, an inverse-solving analysis uses input geometry consisting of
+images where the models are already in a deformed shape under applied loads.
+The material properties and applied loads are known. The analysis can then
+determine the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The organ geometries at zero-pressure state (zero-pressure configuration)</p></li>
+<li><p>The stress and strain fields on the in vivo organ geometries (the input geometries)</p></li>
+<li><p>The behavior and response of the organ geometries when increasing the
+loading and taking accounting for prestressed effects</p></li>
+</ul>
+</div></blockquote>
+<section id="problem-description">
+<h3>1.1. Problem description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h3>
+<p>A mouse-specific 3D geometry of the aortic lumen containing four side branches
+is considered:</p>
+<figure class="align-center">
+<img alt="3D geometry of the abdominal aorta of a mouse" src="../../_images/glr_tse_aorta1.png" />
+</figure>
+<p>The model represents an approximated geometry of the abdominal aorta of a mouse,
+based on the reference.[1] The geometry is considered at end-diastolic pressure (80 mm Hg).
+The purpose of the analysis is to solve for end-systolic pressure (120 mm Hg).</p>
+<p>This figure shows the inner diameter of the model at various approximate locations:</p>
+<figure class="align-center">
+<img alt="Dimensions of each branch in the abdominal aorta model" src="../../_images/glr_tse_aorta2.png" />
+</figure>
+<p>The wall thickness is assumed to be 20 percent of the local radius, so it varies
+throughout the structure.</p>
+</section>
+<section id="starting-mapdl-as-a-service">
+<h3>1.2. Starting MAPDL as a service<a class="headerlink" href="#starting-mapdl-as-a-service" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="c1"># Starting MAPDL as a service and importing an external model</span>
+  <span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_mapdl</span>
+  <span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core.examples.downloads</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_tech_demo_data</span>
+
+  <span class="c1"># Start MAPDL as a service</span>
+  <span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">loglevel</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="n">print_com</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">mapdl</span><span class="p">)</span>
+
+<span class="o">..</span> <span class="n">code</span><span class="o">-</span><span class="n">block</span><span class="p">::</span> <span class="n">none</span>
+
+   <span class="n">Mapdl</span>
+   <span class="o">-----</span>
+   <span class="n">PyMAPDL</span> <span class="n">Version</span><span class="p">:</span>     <span class="mf">0.70.2</span>
+   <span class="n">Interface</span><span class="p">:</span>           <span class="n">grpc</span>
+   <span class="n">Product</span><span class="p">:</span>             <span class="n">Ansys</span> <span class="n">Mechanical</span> <span class="n">Enterprise</span>
+   <span class="n">MAPDL</span> <span class="n">Version</span><span class="p">:</span>       <span class="mf">25.1</span>
+   <span class="n">Running</span> <span class="n">on</span><span class="p">:</span>          <span class="n">localhost</span>
+                        <span class="p">(</span><span class="mf">127.0.0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setting-up-the-model">
+<h2>2. Setting up the model<a class="headerlink" href="#setting-up-the-model" title="Link to this heading">#</a></h2>
+<p>The model is meshed mostly with the higher-order hexahedral SOLID186
+elements (about 99.4 percent of the total mesh), as shown in
+the following figure. However, it also has relatively a small number
+of tetrahedral SOLID187 elements (about 0.6 percent of the total mesh).</p>
+<figure class="align-center">
+<img alt="Mesh of the abdominal aorta model" src="../../_images/glr_tse_aorta3.png" />
+</figure>
+<p>The mesh consists of 62123 elements with 4 elements to represent the wall
+thickness and at least 52 elements (or more) in the circumferential
+direction at most locations. Mixed u-P element formulation is enabled (KEYOPT(6) = 1).</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Starting MAPDL as a service and importing an external model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_mapdl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core.examples.downloads</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_tech_demo_data</span>
+
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">()</span>
+
+<span class="c1"># Download the CDB file of aortic lumen.</span>
+<span class="n">aorta_mesh_file</span> <span class="o">=</span> <span class="n">download_tech_demo_data</span><span class="p">(</span>
+    <span class="s2">&quot;td-62&quot;</span><span class="p">,</span> <span class="s2">&quot;inverse_analysis_cardiovascular_structure.cdb&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Entering the PREP7 processor in MAPDL instance.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<span class="c1"># Reads a CDB file of solid model and database information into the database.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cdread</span><span class="p">(</span><span class="s2">&quot;comb&quot;</span><span class="p">,</span> <span class="n">fname</span> <span class="o">=</span> <span class="n">aorta_mesh_file</span><span class="p">)</span>
+
+<span class="c1"># Selects all entities with a single command.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># Element plot of the Abdominal Aorta Model</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eplot</span><span class="p">(</span><span class="n">background</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">theme</span><span class="o">=</span><span class="n">mytheme</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">jupyter_backend</span><span class="o">=</span><span class="s1">&#39;html&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exits from a pre-processor.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># Exists MAPDL instance.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_62-techinverse_1_0.png" src="../../_images/ex_62-techinverse_1_0.png" />
+</div>
+</div>
+<section id="material-properties">
+<h3>2.1. Material properties<a class="headerlink" href="#material-properties" title="Link to this heading">#</a></h3>
+<p>A Mooney-Rivlin hyperelastic material model with the following constants [4] is
+used to model the abdominal aorta:</p>
+<figure class="align-center">
+<img alt="Aorta tissue material properties" src="../../_images/glr_tse_aorta4.png" />
+</figure>
+</section>
+<section id="boundary-conditions-and-loading">
+<h3>2.2. Boundary conditions and loading<a class="headerlink" href="#boundary-conditions-and-loading" title="Link to this heading">#</a></h3>
+<p>The free radial boundary conditions are applied at each end cross-section in the model:</p>
+<figure class="align-center">
+<img alt="Boundary Conditions on the Abdominal Aorta Model" src="../../_images/glr_tse_aorta5.png" />
+</figure>
+<p>Local cylindrical coordinate systems are created at each end cross-section. The nodes
+in each end cross-section are constrained in all degrees of freedom except for the
+respective local radial direction.</p>
+<p>A uniformly-distributed pressure load is applied on the inner surfaces of the model.</p>
+<figure class="align-center">
+<img alt="Loading on the Abdominal Aorta Model" src="../../_images/glr_tse_aorta6.png" />
+</figure>
+<p>Because the input geometry is considered at end-diastolic pressure, a pressure load of
+80 mm Hg (1.0666e-02 MPa) is applied on the inner surfaces of the model in the first
+load step (inverse-solving). The pressure is increased to 120 mm Hg (1.5999e-02 MPa)
+in the second load step (forward-solving).</p>
+</section>
+</section>
+<section id="analysis">
+<h2>3. Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
+<p>The analysis for this problem is performed in two load steps:</p>
+<section id="load-step-1-inverse-solving">
+<h3>3.1. Load step 1 (inverse-solving)<a class="headerlink" href="#load-step-1-inverse-solving" title="Link to this heading">#</a></h3>
+<p>Load step 1 (inverse-solving) - A nonlinear static analysis with inverse solving (INVOPT,ON)
+is performed on the input geometry of the model (at end-diastolic pressure (80 mm Hg)) to
+determine the zero-pressure geometry of the model and to obtain the stress/strain results
+on the input geometry.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enter solution processor and specify solution controls.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">slashsolu</span><span class="p">()</span>
+<span class="c1"># Define the analysis type as static.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Turn on large deflection effects.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nlgeom</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+<span class="c1"># Define &quot;Sparse&quot; solver option.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eqslv</span><span class="p">(</span><span class="s2">&quot;sparse&quot;</span><span class="p">,</span> <span class="n">keepfile</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cntr</span><span class="p">(</span><span class="s2">&quot;print&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>          <span class="c1"># Print convergence control information</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dmpoption</span><span class="p">(</span><span class="s2">&quot;emat&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">)</span>   <span class="c1"># Don&#39;t combine emat file for DANSYS</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dmpoption</span><span class="p">(</span><span class="s2">&quot;esav&quot;</span><span class="p">,</span> <span class="s2">&quot;no&quot;</span><span class="p">)</span>   <span class="c1"># Don&#39;t combine esav file for DANSYS</span>
+
+<span class="c1"># Turn on &quot;inverse-solving&quot; option for Initial Steps.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;invopt,on&quot;</span><span class="p">)</span>
+
+<span class="c1"># Controls file writing for multiframe restarts.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nldiag</span><span class="p">(</span><span class="s2">&quot;cont&quot;</span><span class="p">,</span> <span class="s2">&quot;iter&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rescontrol</span><span class="p">(</span><span class="s2">&quot;define&quot;</span><span class="p">,</span> <span class="s2">&quot;last&quot;</span><span class="p">,</span> <span class="s2">&quot;last&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;dele&quot;</span><span class="p">)</span>
+
+<span class="c1"># Specify surface &quot;pressures&quot; loads.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;ename&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">153</span><span class="p">,</span> <span class="mi">156</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;_CM968PRES&quot;</span><span class="p">,</span> <span class="s2">&quot;pres&quot;</span><span class="p">,</span> <span class="s2">&quot;%_loadvari968 %&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nopr</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">gopr</span><span class="p">()</span>
+
+<span class="c1"># Turned on automatic time stepping.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">autots</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+
+<span class="c1"># Specifies the number of substeps to be taken this load step.</span>
+<span class="c1"># Note: Please be aware that the number of substeps is decreased to reduce the computational effort.</span>
+<span class="c1">#mapdl.nsubst(nsbstp=&#39;10&#39;, nsbmx=&#39;1000&#39;, nsbmn=&#39;5&#39;, carry=&quot;OFF&quot;)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="n">nsbstp</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">nsbmx</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">nsbmn</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">carry</span><span class="o">=</span><span class="s2">&quot;OFF&quot;</span><span class="p">)</span>
+
+<span class="c1"># Sets the time for a first load step.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Controls the solution data written to the database.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;erase&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;nsol&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;rsol&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;eangl&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;etmp&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;veng&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;strs&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;epel&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;eppl&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;cont&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># Solve the load step 1 (inverse-solving).</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="load-step-2-forward-solving">
+<h3>3.2. Load step 2 (forward-solving)<a class="headerlink" href="#load-step-2-forward-solving" title="Link to this heading">#</a></h3>
+<p>After an inverse-solving load step, the solver generally allows an analysis to continue
+as forward-solving in a new load step. You can modify existing loads or apply new loads
+in the forward-solving step. For more information, see <a class="reference external" href="https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23strinvsolvrevertfwd">Reverting to forward solving and
+continuing the analysis as a new load step in the Structural Analysis Guide</a>.</p>
+<p>Load step 2 (forward-solving) - To solve the model for end-systolic pressure (120 mm Hg),
+the solution continues using forward solving (INVOPT,OFF). The pressure load is increased
+from 80 mm Hg to 120 mm Hg. Continuing the solution as a new load step following the
+inverse-solving load step eliminates a step in the simulation, allowing for a more
+efficient analysis.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solution Control for the load step 2 (forward-solving).</span>
+
+<span class="c1"># Turned on automatic time stepping.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">autots</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+
+<span class="c1"># Specifies the number of substeps to be taken this load step.</span>
+<span class="c1"># Note: Please be aware that the number of substeps is decreased to reduce the computational effort.</span>
+<span class="c1">#mapdl.nsubst(nsbstp=&#39;10&#39;, nsbmx=&#39;1000&#39;, nsbmn=&#39;5&#39;, carry=&quot;OFF&quot;)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="n">nsbstp</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">nsbmx</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">nsbmn</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">carry</span><span class="o">=</span><span class="s2">&quot;OFF&quot;</span><span class="p">)</span>
+
+<span class="c1"># Sets the time for the second load step.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Turn off &quot;inverse-solving&quot; option for the second steps.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;invopt,off&quot;</span><span class="p">)</span>
+
+<span class="c1"># Controls the solution data written to the database.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;erase&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;nsol&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;rsol&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;eangl&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;etmp&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;veng&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;strs&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;epel&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;eppl&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;cont&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># Solve the load step 2 (forward-solving).</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+<span class="c1"># Exits from a solution processor.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="results">
+<h2>4. Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<p>The results of the analysis are obtained in two load steps:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enter post-processor to compute results quantities.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+
+<span class="c1"># Settings for reverse video plot</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Defines the type of graphics display. Activate &quot;Power&quot; graphics.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">graphics</span><span class="p">(</span><span class="s2">&quot;power&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="id1">
+<h3>4.1. Load step 1 (inverse-solving)<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>The deformed shape of the abdominal aorta model after the first load step
+is the zero-pressure geometry:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defines the data set to be read from the results file.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lstep</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;png&quot;</span><span class="p">,</span><span class="s2">&quot;rev&quot;</span><span class="p">)</span>
+
+<span class="c1"># Total Deformation (USUM) After Inverse Solving (First Load Step)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plnsol</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_usum_first_loadstep&quot;</span><span class="p">,</span> <span class="s2">&quot;plnsol&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<img alt="Total Deformation (USUM) After Inverse Solving (First Load Step)" src="../../_images/inverse_analysis_cardiovascular_structure000.png" />
+</figure>
+<p>In addition to the zero-pressure geometry, the inverse-solving load step also
+gives the stress/strain results of the input geometry at end-diastolic pressure (80 mm Hg):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Maximum Principal Stress After Inverse Solving (First Load Step)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plnsol</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_s1_first_loadstep&quot;</span><span class="p">,</span> <span class="s2">&quot;plnsol&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+
+<span class="c1"># Maximum Principal Strain After Inverse Solving (First Load Step)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plnsol</span><span class="p">(</span><span class="s2">&quot;epel&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_epel1_first_loadstep&quot;</span><span class="p">,</span> <span class="s2">&quot;plnsol&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;close&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<img alt="Maximum Principal Stress After Inverse Solving (First Load Step)" src="../../_images/inverse_analysis_cardiovascular_structure001.png" />
+</figure>
+<figure class="align-center">
+<img alt="Maximum Principal Stress After Inverse Solving (First Load Step)" src="../../_images/inverse_analysis_cardiovascular_structure002.png" />
+</figure>
+</section>
+<section id="id2">
+<h3>4.2. Load step 2 (forward-solving)<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>In the second load step, the analysis is continued via forward solving (INVOPT,OFF)
+and the pressure load is increased until it reaches end-systolic pressure (120 mm Hg):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Defines the data set to be read from the results file.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">lstep</span> <span class="o">=</span> <span class="s1">&#39;last&#39;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;png&quot;</span><span class="p">,</span><span class="s2">&quot;rev&quot;</span><span class="p">)</span>
+
+<span class="c1"># Total Deformation (USUM) After Forward Solving (Second Load Step)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plnsol</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_usum_second_loadstep&quot;</span><span class="p">,</span> <span class="s2">&quot;plnsol&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+
+<span class="c1"># Maximum Principal Stress After Forward Solving (Second Load Step)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plnsol</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_s1_second_loadstep&quot;</span><span class="p">,</span> <span class="s2">&quot;plnsol&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+
+<span class="c1"># Maximum Principal Strain Plot of the Abdominal Aorta Model at End-Systolic Pressure (120 mm Hg)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plnsol</span><span class="p">(</span><span class="s2">&quot;epel&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;max_epel1_second_loadstep&quot;</span><span class="p">,</span> <span class="s2">&quot;plnsol&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;close&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<img alt="Total deformation (USUM) after forward solving (second load step)" src="../../_images/inverse_analysis_cardiovascular_structure003.png" />
+</figure>
+<figure class="align-center">
+<img alt="Maximum principal stress after forward solving (second load step)" src="../../_images/inverse_analysis_cardiovascular_structure004.png" />
+</figure>
+<figure class="align-center">
+<img alt="Maximum principal strain plot of the abdominal aorta model at end-systolic pressure (120 mm Hg)" src="../../_images/inverse_analysis_cardiovascular_structure005.png" />
+</figure>
+<p>For comparison purposes only, the following figure shows one of the cross-sections in the proximal abdominal
+aorta at zero-pressure, end-diastolic pressure, and end-systolic pressure conditions:</p>
+<figure class="align-center">
+<img alt="Deformation of cross-section at the proximal abdominal aorta location for various pressure conditions" src="../../_images/glr_tse_aorta7.png" />
+</figure>
+<p>The input geometry is considered at end-diastolic pressure (80 mm Hg), the deformed geometry
+after the first load step (inverse solving) is at zero-pressure, and the deformed geometry after
+the second load step is at end-systolic pressure (120 mm Hg). The outer diameters of the cross-section
+in deformed states are approximately calculated by creating a local cylindrical coordinate system
+at the approximate center of the deformed cross-section.</p>
+<p>When using the inverse-solving method to account for the input geometry at end-diastolic pressure (80 mm Hg)
+and prestress effects, the actual maximum total deformation is much lower.</p>
+</section>
+</section>
+<section id="exit-mapdl">
+<h2>5. Exit MAPDL<a class="headerlink" href="#exit-mapdl" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="recommendations">
+<h2>6. Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading">#</a></h2>
+<p>When performing a similar type of analysis using inverse-solving, consider the following:</p>
+<ul>
+<li><p>Use a structured mesh with a sufficient number of element layers in the thickness direction.</p>
+<p>Doing so captures results more accurately, as a free mesh may give lesser-quality tetrahedral
+and/or pyramid elements, leading to spurious high-stress concentrations at some locations.</p>
+</li>
+<li><p>Perform a loop test to verify the results of an inverse-solving analysis.</p>
+<p>An inverse-solving analysis followed by a forward-solving analysis, or vice versa,
+is known as a loop test, as it should always result in the same geometry with the same solution.</p>
+</li>
+<li><p>Use a reversed sign to apply displacement type loading in the inverse-solving load step.</p>
+<p>For more information, see <a class="reference external" href="https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v252/en/ans_str/strnonlininversesol.html%23sect2_zjl_jbv_1rb">Applying Loads in an inverse-solving Analysis in the Structural Analysis Guide</a>.</p>
+</li>
+</ul>
+</section>
+<section id="references">
+<h2>7. References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>The following reference works are cited in, or were consulted when creating, this example problem:</p>
+<ul class="simple">
+<li><p>Bols, J., Degroote, J., Trachet, B., Verhegghe, B., Segers, P., &amp; Vierendeels, J. (2013).
+A computational method to assess the in vivo stresses and unloaded configuration of
+patient-specific blood vessels. Journal of Computational and Applied Mathematics. 246: 10-17.</p></li>
+<li><p>Trachet, B., Renard, M., DeSantis, G., Staelens, S., DeBacker, J., Antiga, L., Loeys,
+B., &amp; Segers, P. (2011). An integrated framework to quantitatively link mouse-specific
+hemodynamics to aneurysm formation in angiotensin II-infused ApoE -/- mice. Annals of
+Biomedical Engineering. 39: 2430-2444.</p></li>
+<li><p>Trachet, B., Bols, J., Degroote, J., Verhegghe, B., Stergiopulos, N., Vierendeels, J., &amp;
+Segers, P. (2015). An animal-specific FSI model of the abdominal aorta in anesthetized
+mice. Annals of Biomedical Engineering. 43: 1298-1309.</p></li>
+<li><p>Prendergast, P.J., Lally, C., Daly, S., Reid, A. J., Lee, T. C., Quinn, D., &amp; Dolan,
+F. (2003). Analysis of prolapse in cardiovascular stents: a constitutive equation for
+vascular tissue and finite-element modelling. Journal of Biomechanical Engineering. 125(5): 692-699.</p></li>
+</ul>
+</section>
+<section id="input-files">
+<h2>8. Input files<a class="headerlink" href="#input-files" title="Link to this heading">#</a></h2>
+<p>The following files were used in this problem:</p>
+<ul class="simple">
+<li><p><strong>Inverse_Analysis_Cardiovascular_Structure.dat</strong> – Input file for this example problem.</p></li>
+<li><p><strong>Comparison_Case.dat</strong> – Input file for the comparison case.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://storage.ansys.com/doclinks/techdemos.html?code=td-62-DLU-N2a">Download the zipped td-62 file set for this problem</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more information, see <a class="reference external" href="https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html">Obtaining the input files</a>.</p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">1.1. Problem description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-mapdl-as-a-service">1.2. Starting MAPDL as a service</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-model">2. Setting up the model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#material-properties">2.1. Material properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-loading">2.2. Boundary conditions and loading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">3. Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-step-1-inverse-solving">3.1. Load step 1 (inverse-solving)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-step-2-forward-solving">3.2. Load step 2 (forward-solving)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">4. Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">4.1. Load step 1 (inverse-solving)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">4.2. Load step 2 (forward-solving)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-mapdl">5. Exit MAPDL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendations">6. Recommendations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">7. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-files">8. Input files</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pymapdl-examples/edit/main/doc/source/technology_showcase_examples/techdemo-62/ex_62-techinverse.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/technology_showcase_examples/techdemo-62/ex_62-techinverse.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

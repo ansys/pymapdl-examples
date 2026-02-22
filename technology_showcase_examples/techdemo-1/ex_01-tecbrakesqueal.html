@@ -1,0 +1,1684 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Brake squeal analysis &#8212; PyMAPDL Examples</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=e7fb764e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'technology_showcase_examples/techdemo-1/ex_01-tecbrakesqueal';</script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Calibrating and validating a hyperelastic constitutive model" href="../techdemo-15/ex_15-teccalvalhyper.html" />
+    <link rel="prev" title="Technology showcases" href="../index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyMAPDL Examples - Home"/>
+    <img src="../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyMAPDL Examples - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brake squeal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-15/ex_15-teccalvalhyper.html">Calibrating and validating a hyperelastic constitutive model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-20/ex_20-tecPCB.html">Dynamic simulation of a printed circuit board assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-21/ex_21-tecbuckling.html">Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-25/ex_25-tecstent.html">Cardiovascular stent simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-28/ex_28-tecfricstir.html">Friction Stir Welding (FSW) simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-62/ex_62-techinverse.html">Inverse-solving analysis of a cardiovascular structure</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/" class="nav-link">PyMAPDL</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/version/stable/examples/" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">Technology showcases</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Brake squeal analysis</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="brake-squeal-analysis">
+<span id="tech-demo-01"></span><span id="sphx-glr-ex-01-tecbrakesqueal-py"></span><h1>Brake squeal analysis<a class="headerlink" href="#brake-squeal-analysis" title="Link to this heading">#</a></h1>
+<p>This example analysis shows how to solve a brake-squeal problem.
+<a class="reference internal" href="#analysis-and-solution-controls">1.6. Analysis and solution controls</a> are highlighted: linear non-prestressed
+modal, partial nonlinear perturbed modal, and full nonlinear perturbed
+modal.
+The problem demonstrates sliding frictional contact and uses complex
+eigensolvers to predict unstable modes.</p>
+<p>The following topics are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction">1.1. Introduction</a></p></li>
+<li><p><a class="reference internal" href="#problem-description">1.2. Problem description</a></p></li>
+<li><p><a class="reference internal" href="#modeling">1.3. Modeling</a></p></li>
+<li><p><a class="reference internal" href="#material-properties">1.4. Material properties</a></p></li>
+<li><p><a class="reference internal" href="#boundary-conditions-and-loading">1.5. Boundary conditions and loading</a></p></li>
+<li><p><a class="reference internal" href="#analysis-and-solution-controls">1.6. Analysis and solution controls</a></p></li>
+<li><p><a class="reference internal" href="#results-and-discussion">1.7. Results and discussion</a></p></li>
+<li><p><a class="reference internal" href="#recommendations">1.8. Recommendations</a></p></li>
+<li><p><a class="reference internal" href="#references">1.9. References</a></p></li>
+<li><p><a class="reference internal" href="#input-files">1.10. Input files</a></p></li>
+</ul>
+<p>You can also perform this example analysis entirely in the Ansys
+Mechanical Application. For more information, see brake-squeal analysis in the
+Workbench technology showcase: example problems.</p>
+<section id="introduction">
+<h2>1.1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Eliminating brake noise is a classic challenge in the automotive industry. Brake discs
+develop large and sustained friction-induced oscillations, simple referred to as brake
+squeal.</p>
+<p>Two common theories describe brake-squeal phenomena:</p>
+<ul class="simple">
+<li><p><em>Stick-slip theory</em> – The self-excited
+vibration of a brake system occurs when the static coefficient of friction is
+greater than the sliding coefficient of friction. Variable friction forces
+introduce energy into the system which is not properly dissipated during the
+squealing event, resulting in large vibrations.</p></li>
+<li><p><em>Mode-coupling theory</em> – When two similar
+characteristic modes couple with each other, instability is introduced to the
+braking system. This instability is caused primarily by improperly selected
+geometric parameters.
+Both theories attribute brake squeal to variable friction forces at the disc-pad
+interface.</p></li>
+</ul>
+<p>Brake noise is generally categorized as follows:</p>
+<ul class="simple">
+<li><p>Low-frequency noise – An example of a low-frequency noise is the
+“groaning” noise which occurs in the frequency range between 100 and
+1000 Hz. Any noise having a frequency above 1000 Hz is considered a
+squeal.</p></li>
+<li><p>Low-frequency squeal – A result of mode coupling occurring between the
+out-of-plane modes of the rotor and the bending modes of the brake pad.</p></li>
+<li><p>High-frequency squeal – A result of mode coupling occurring between the
+in-plane modes of the rotor.
+Low- and high-frequency squealing can be determined via complex eigensolvers. The
+presence of unstable modes suggests that the geometry parameters and material properties
+of the braking system should be modified.</p></li>
+</ul>
+<p>For more information, see brake-squeal (prestressed modal) analysis  in the <em>structural analysis guide</em>.</p>
+</section>
+<section id="problem-description">
+<h2>1.2. Problem description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h2>
+<p>The following model is a simple brake disc-pad assembly. The disc has a thickness of
+10 mm and the brake pads have a thickness of 15 mm. The inner diameter of the disc is
+250 mm and outer diameter is of 350 mm. A pre-stressed modal analysis is performed on
+this model using various methods to determine the unstable modes. A parametric study is
+then performed to examine the effect of the friction coefficient on the dynamic
+stability of the model.</p>
+<figure class="align-center" id="id1">
+<img alt="Brake disc-pad assembly" src="../../_images/gtecbrakesqueal_fig1.gif" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text"><strong>Figure 1.1: Brake disc-pad assembly</strong></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="modeling">
+<h2>1.3. Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
+<p>The following modeling topics are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#understanding-the-advantages-of-contact-element-technology">1.3.1. Understanding the advantages of contact element technology</a></p></li>
+<li><p><a class="reference internal" href="#modeling-contact-pairs">1.3.2. Modeling contact pairs</a></p></li>
+<li><p><a class="reference internal" href="#generating-internal-sliding-motion">1.3.3. Generating internal sliding motion</a></p></li>
+<li><p><a class="reference internal" href="#meshing-the-brake-disc-pad-model">1.3.4. Meshing the brake disc-pad model</a></p></li>
+</ul>
+<section id="understanding-the-advantages-of-contact-element-technology">
+<h3>1.3.1. Understanding the advantages of contact element technology<a class="headerlink" href="#understanding-the-advantages-of-contact-element-technology" title="Link to this heading">#</a></h3>
+<p>Brake-squeal problems typically require manual calculations of the unsymmetric
+terms arising from sources such as frictional sliding, and then inputting the
+unsymmetric terms using special elements (such as
+<code class="docutils literal notranslate"><span class="pre">MATRIX27</span></code>). It is a tedious process requiring a matched mesh
+at the disc-pad interface along with assumptions related to the amount of area in
+contact and sliding.</p>
+<p>3-D contact elements (<code class="docutils literal notranslate"><span class="pre">CONTA17x</span></code>) offer a more efficient alternative by modeling
+surface-to-surface contact at the pad-disc interface. With contact
+surface-to-surface contact elements, a matched mesh is unnecessary at the
+contact-target surface, and there is no need to calculate the unsymmetric
+terms.</p>
+<p>Contact surface-to-surface elements offer many controls for defining contact
+pairs, such as the type of contact surface, algorithm, contact stiffness, and
+gap/initial penetration effect.</p>
+</section>
+<section id="modeling-contact-pairs">
+<h3>1.3.2. Modeling contact pairs<a class="headerlink" href="#modeling-contact-pairs" title="Link to this heading">#</a></h3>
+<p>Frictional surface-to-surface contact pairs with a 0.3 coefficient of friction are
+used to define contact between the brake pads and disc to simulate frictional
+sliding contact occurring at the pad-disc interface. Bonded surface-to-surface
+contact pairs are used to define the contact for other components which will be
+always in contact throughout the braking operation.</p>
+<p>The augmented Lagrange algorithm is used for the frictional contact pairs, as the
+pressure and frictional stresses are augmented during equilibrium iterations in such
+a way that the penetration is reduced gradually. The augmented Lagrange algorithm
+also requires fewer computational resources than the standard Lagrange multiplier
+algorithm, which normally requires additional iterations to ensure that the contact
+compatibility is satisfied exactly. The augmented Lagrange is well suited for
+modeling general frictional contact, such as the contact between the brake pad and
+disc defined in this example.</p>
+<p>An internal multipoint constraint (MPC) contact algorithm is used for bonded
+contact because it ties contact and target surface together efficiently for
+solid-solid assembly. The MPC algorithm builds equations internally based on the
+contact kinematics and does not require the degrees of freedom of the contact
+surface nodes, reducing the wave front size of the equation solver. A contact
+detection point is made on the Gauss point for frictional contact pairs, and on the
+nodal point (normal-to-target surface) for MPC bonded contact pairs.</p>
+</section>
+<section id="generating-internal-sliding-motion">
+<h3>1.3.3. Generating internal sliding motion<a class="headerlink" href="#generating-internal-sliding-motion" title="Link to this heading">#</a></h3>
+<p>The <code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cmrotate()</span></code>
+command defines constant rotational velocities on
+the contact/target nodes to generate internal sliding motion. The specified
+rotational velocity is used only to determine the sliding direction and has no
+effect on the final solution. The element component used should include only the
+contact or the target elements that are on the brake disc/rotor. In this example,
+the target elements are defined on the disc surface and the contact elements are
+defined on the pad surface. The target elements attached to the disc surface are
+grouped to form a component named E_ROTOR which is then later specified on the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cmrotate()</span></code>
+command to generate a sliding frictional force.</p>
+</section>
+<section id="meshing-the-brake-disc-pad-model">
+<h3>1.3.4. Meshing the brake disc-pad model<a class="headerlink" href="#meshing-the-brake-disc-pad-model" title="Link to this heading">#</a></h3>
+<p>The sweep method is used to generate a hexahedral dominant mesh of the brake
+system assembly. Brake discs, pads and all other associated components are meshed
+with 20-node structural solid <code class="docutils literal notranslate"><span class="pre">SOLID186</span></code> elements with
+uniform reduced-integration element technology. The edge sizing tool is used to
+obtains a refined mesh at the pad-disc interface to improve the solution accuracy.
+For problems with a large unsymmetric coefficient, a finer mesh should be used at
+the pad-disc interface to accurately predict the unstable modes.
+<code class="docutils literal notranslate"><span class="pre">CONTA174</span></code> (3-D 8 node surface to surface contact)
+elements are used to define the contact surface and
+<code class="docutils literal notranslate"><span class="pre">TARGE170</span></code> (3-D target segment) elements are used to
+define the target surface. The brake disc-pad assembly is meshed with total of 60351
+nodes and 11473 elements.</p>
+<p>Start this example by launching MAPDL and loading the model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_path = &#39;_static/tse1_setup.png&#39;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span>
+<span class="n">pyvista</span><span class="o">.</span><span class="n">set_plot_theme</span><span class="p">(</span><span class="s1">&#39;document&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_mapdl</span><span class="p">,</span> <span class="n">Mapdl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core.examples.downloads</span><span class="w"> </span><span class="kn">import</span> <span class="n">download_tech_demo_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core.examples.examples</span><span class="w"> </span><span class="kn">import</span> <span class="n">ansys_colormap</span>
+
+<span class="n">cdb_path</span> <span class="o">=</span> <span class="n">download_tech_demo_data</span><span class="p">(</span><span class="s2">&quot;td-1&quot;</span><span class="p">,</span> <span class="s2">&quot;disc_pad_model.cdb&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <span class="n">case</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize MAPDL with a fresh disc pad model&quot;&quot;&quot;</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">verify</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">shpp</span><span class="p">(</span><span class="s2">&quot;OFF&quot;</span><span class="p">,</span> <span class="n">value2</span><span class="o">=</span><span class="s2">&quot;NOWARN&quot;</span><span class="p">)</span>  <span class="c1"># disable element shape checking</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">cdread</span><span class="p">(</span><span class="s2">&quot;COMB&quot;</span><span class="p">,</span> <span class="n">cdb_path</span><span class="p">)</span>  <span class="c1"># Read disc_pad_model.cdb file</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+
+
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">nproc</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+
+<span class="n">start</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <span class="s1">&#39;linear_non_prestressed&#39;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;linear_non_prestressed, Solving brake squeal problem using linear non pre-stressed modal solve&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eplot</span><span class="p">(</span>
+    <span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_axes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;w&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_1_0.png" src="../../_images/ex_01-tecbrakesqueal_1_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="material-properties">
+<h2>1.4. Material properties<a class="headerlink" href="#material-properties" title="Link to this heading">#</a></h2>
+<p>Linear elastic isotropic materials are assigned to all the components of the braking
+system.</p>
+<p><strong>Table 1.1: Material properties</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Material properties</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Young’s Modulus (Nm-2)</p></td>
+<td><p>2.0 E+11 Pa</p></td>
+</tr>
+<tr class="row-odd"><td><p>Density</p></td>
+<td><p>7800 Kg/m3</p></td>
+</tr>
+<tr class="row-even"><td><p>Poisson’s Ratio</p></td>
+<td><p>0.3</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="boundary-conditions-and-loading">
+<h2>1.5. Boundary conditions and loading<a class="headerlink" href="#boundary-conditions-and-loading" title="Link to this heading">#</a></h2>
+<p>The inner diameter of the cylinder hub and bolt holes is constrained in all
+directions.
+Small pressure loading is applied on both ends of the pad to establish
+contact with the brake disc and to include prestress effects. The displacement on the
+brake pad surfaces where the pressure loading is applied is constrained in all
+directions except axial (along the Z-axis).</p>
+<figure class="align-center" id="id2">
+<img alt="Boundary conditions (displacement constraints and pressure loading)" src="../../_images/gtecbrakesqueal_fig5.gif" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text"><strong>Figure 1.2: Boundary conditions (displacement constraints and pressure loading)</strong></span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="analysis-and-solution-controls">
+<h2>1.6. Analysis and solution controls<a class="headerlink" href="#analysis-and-solution-controls" title="Link to this heading">#</a></h2>
+<p>The analysis settings and solution controls differ depending upon the method used
+to solve a brake-squeal problem. This section describes three possible
+methods:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a></p></li>
+<li><p><a class="reference internal" href="#partial-nonlinear-perturbed-modal-analysis">1.6.2. Partial nonlinear perturbed modal analysis</a></p></li>
+<li><p><a class="reference internal" href="#full-nonlinear-perturbed-modal-analysis">1.6.3. Full nonlinear perturbed modal analysis</a></p></li>
+</ul>
+<section id="linear-non-prestressed-modal-analysis">
+<h3>1.6.1. Linear non-prestressed modal analysis<a class="headerlink" href="#linear-non-prestressed-modal-analysis" title="Link to this heading">#</a></h3>
+<p>A linear
+non-prestressed modal analysis is effective when the stress-stiffening
+effects are not critical.
+This method requires less run time than the other two methods, as
+Newton-Raphson iterations are not required. The contact-stiffness matrix
+is based on the initial contact status.</p>
+<p>Following is the process for solving a brake-squeal problem using this method:</p>
+<ol class="arabic">
+<li><p>Perform a linear partial-element analysis with no prestress effects.</p></li>
+<li><p>Generate the unsymmetric stiffness matrix
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nropt(&quot;UNSYM&quot;)</span></code>).</p></li>
+<li><p>Generate sliding frictional force (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cmrotate()</span></code>).</p></li>
+<li><p>Perform a complex modal analysis using the QRDAMP or UNSYM eigensolver.</p>
+<p>When using the QRDAMP solver, you can reuse the symmetric
+eigensolution from the previous load steps
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.qrdopt()</span></code>), effective when performing a friction-
+sensitive/parametric analysis, as it saves time by not recalculating the
+real symmetric modes after the first solve operation.</p>
+</li>
+<li><p>Expand the modes and postprocess the results from <cite>jobname.rST</cite>.</p>
+<p>For this analysis, the UNSYM solver is selected to solve the problem.
+(Guidelines for selecting the eigensolver for brake-squeal problems appear
+in  <a class="reference internal" href="#recommendations">1.8. Recommendations</a>.)</p>
+</li>
+</ol>
+<p>The frequencies obtained from the modal solution have real and imaginary parts due
+the presence of an unsymmetric stiffness matrix. The imaginary frequency reflects
+the damped frequency, and the real frequency indicates whether the mode is stable or
+not. A real eigenfrequency with a positive value indicates an unstable mode.</p>
+<p>The following input shows the solution steps involved in this method:</p>
+<p><strong>Modal solution</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/SOLU&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nropt</span><span class="p">(</span><span class="s2">&quot;UNSYM&quot;</span><span class="p">)</span>  <span class="c1"># To generate non symmetric</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;C1_R&quot;</span><span class="p">)</span>  <span class="c1"># Select the target elements of the disc</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C2_R&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;E_ROTOR&quot;</span><span class="p">,</span> <span class="s2">&quot;ELEM&quot;</span><span class="p">)</span>  <span class="c1"># Form a component named E_ROTOR with the selected target elements</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmrotate</span><span class="p">(</span><span class="s2">&quot;E_ROTOR&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Rotate the selected element along global Z using CMROTATE command</span>
+
+<span class="c1"># Perform modal solve, use UNSYM to extract 30 modes, and expand those</span>
+<span class="c1"># modes.</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">modal_analysis</span><span class="p">(</span><span class="s2">&quot;UNSYM&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">mxpand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">modes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">modes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">))</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+
+<span class="c1"># Plot the mode shape for mode 21</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <span class="s2">&quot;NORM&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="n">ansys_colormap</span><span class="p">(),</span>
+    <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span>
+    <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Displacement&quot;</span><span class="p">,</span> <span class="s2">&quot;vertical&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_2_0.png" src="../../_images/ex_01-tecbrakesqueal_2_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.3: Mode shape for unstable mode (Mode 21).</strong>
+Obtained from the  <a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a> .</p>
+</section>
+<section id="partial-nonlinear-perturbed-modal-analysis">
+<h3>1.6.2. Partial nonlinear perturbed modal analysis<a class="headerlink" href="#partial-nonlinear-perturbed-modal-analysis" title="Link to this heading">#</a></h3>
+<p>Use a partial nonlinear perturbed modal analysis when stress-stiffening affects
+the final modal solution. The initial contact conditions are established, and a
+prestressed matrix is generated at the end of the first static solution.</p>
+<p>Following is the process for solving a brake-squeal problem using this method:</p>
+<ol class="arabic">
+<li><p>Perform a nonlinear, large-deflection static analysis
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nlgeom(&quot;ON&quot;)</span></code>).</p>
+<p>Use the unsymmetric Newton-Raphson method
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nropt(&quot;UNSYM&quot;)</span></code>). Specify the restart control points needed
+for the linear perturbation analysis (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.rescontrol()</span></code>)</p>
+<p>Create components for use in the next step.</p>
+<p>The static solution with external loading establishes the initial contact
+condition and generates a prestressed matrix.</p>
+</li>
+<li><p>Restart the previous static solution from the desired load step and
+substep, and perform the first phase of the perturbation analysis while
+preserving the <strong>.ldhi</strong>, <strong>.rnnn</strong> and <strong>.rst</strong> files (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.antype(&quot;STATIC&quot;,</span> <span class="pre">&quot;RESTART&quot;,</span> <span class="pre">&quot;&quot;,</span> <span class="pre">&quot;&quot;,</span> <span class="pre">&quot;PERTURB&quot;)</span></code>).</p>
+<p>Initiate a modal linear perturbation analysis
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.perturb(&quot;MODAL&quot;)</span></code>).</p>
+<p>Generate forced frictional sliding contact (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cmrotate()</span></code>),
+specifying the component names created in the previous step.</p>
+<p>The contact stiffness matrix is based only on the contact status at the
+restart point.</p>
+<p>Regenerate the element stiffness matrix at the end of the first phase of
+the linear perturbation solution (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.solve(&quot;ELFORM&quot;)</span></code>).</p>
+</li>
+<li><p>Obtain the linear perturbation modal solution using the QRDAMP or UNSYM
+eigensolver (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.modopt()</span></code>).</p>
+<p>When using the QRDAMP solver, you can reuse the symmetric
+eigensolution from the previous load steps
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.qrdopt()</span></code>), effective when performing a
+friction-sensitive/parametric analysis, as it saves time by not
+recalculating the real symmetric modes after the first solve
+operation.</p>
+</li>
+<li><p>Expand the modes and postprocess the results (from the <cite>jobname.rstp</cite> file).</p></li>
+</ol>
+<p>The following inputs show the solution steps involved with this method:</p>
+<p><strong>Static solution</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <span class="s2">&quot;partial_prestressed&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;partial_prestressed, Solving brake squeal problem using partial pre-stressed modal solve&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/SOLU&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;STATIC&quot;</span><span class="p">)</span>  <span class="c1"># Perform static solve</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># Write all element and nodal solution results for each sub steps</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nropt</span><span class="p">(</span><span class="s2">&quot;UNSYM&quot;</span><span class="p">)</span>  <span class="c1"># Specify unsymmetric Newton-Raphson option to solve the problem</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rescontrol</span><span class="p">(</span><span class="s2">&quot;DEFINE&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Control restart files</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nlgeom</span><span class="p">(</span><span class="s2">&quot;ON&quot;</span><span class="p">)</span>  <span class="c1"># Activate large deflection</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">autots</span><span class="p">(</span><span class="s2">&quot;ON&quot;</span><span class="p">)</span>  <span class="c1"># Auto time stepping turned on</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># End time = 1.0 sec</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TYPE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">124</span><span class="p">)</span>  <span class="c1"># Select element type 124</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsle</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># Select nodes attached to the element</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <span class="s2">&quot;%_LOADVARI4059%&quot;</span><span class="p">)</span>  <span class="c1"># Apply surface pressure on the selected nodes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TYPE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">125</span><span class="p">)</span>  <span class="c1"># Select element type 125</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsle</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># Select nodes attached to the element</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <span class="s2">&quot;%_LOADVARI4061%&quot;</span><span class="p">)</span>  <span class="c1"># Apply surface pressure on the selected nodes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;C1_R&quot;</span><span class="p">)</span>  <span class="c1"># Select target elements of the disc</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C2_R&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;E_ROTOR&quot;</span><span class="p">,</span> <span class="s2">&quot;ELEM&quot;</span><span class="p">)</span>  <span class="c1"># Form a component named E_ROTOR</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>  <span class="c1"># Solve with prestress</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Post processing to show partial results.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># select contact elements attached to the brake pad</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;last&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_element_values</span><span class="p">(</span>
+    <span class="s2">&quot;CONT&quot;</span><span class="p">,</span> <span class="s2">&quot;STAT&quot;</span><span class="p">,</span> <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Contact status&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_element_values</span><span class="p">(</span>
+    <span class="s2">&quot;CONT&quot;</span><span class="p">,</span> <span class="s2">&quot;SLIDE&quot;</span><span class="p">,</span> <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Contact sliding distance&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id3">
+<img alt="Contact sliding distance" src="../../_images/cont_slide.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text"><strong>Figure 1.4: Contact sliding distance</strong></span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Perturbed modal solution</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restart from last load step and sub step of previous</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/SOLU&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="s2">&quot;restart&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;perturb&quot;</span><span class="p">)</span>
+
+<span class="c1"># static solution to perform perturbation analysis</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">perturb</span><span class="p">(</span><span class="s2">&quot;modal&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>  <span class="c1"># Perform perturbation modal solve</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmrotate</span><span class="p">(</span><span class="s2">&quot;E_ROTOR&quot;</span><span class="p">,</span> <span class="n">rotatz</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;elform&quot;</span><span class="p">)</span>  <span class="c1"># Regenerate the element matrices</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">modopt</span><span class="p">(</span><span class="s2">&quot;unsym&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># Use UNSYM eigen solver and extract 30 modes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mxpand</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>  <span class="c1"># Expand 30 modes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Post processing to show results.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;rstp&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Total displacement</span><span class="se">\n</span><span class="s2"> Substep 21&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Total displacement</span><span class="se">\n</span><span class="s2"> Substep 22&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_3_0.png" src="../../_images/ex_01-tecbrakesqueal_3_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.5: Mode shape for unstable mode (Mode 21).</strong>
+Obtained from the  <a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a> .</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_4_0.png" src="../../_images/ex_01-tecbrakesqueal_4_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.6: Mode shape for unstable mode (Mode 21).</strong>
+Obtained from the  <a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a> .</p>
+</section>
+<section id="full-nonlinear-perturbed-modal-analysis">
+<h3>1.6.3. Full nonlinear perturbed modal analysis<a class="headerlink" href="#full-nonlinear-perturbed-modal-analysis" title="Link to this heading">#</a></h3>
+<p>A full nonlinear perturbed modal analysis is the most accurate method for modeling
+the brake-squeal problem. This method uses Newton-Raphson iterations for <em>both</em> of the static solutions.</p>
+<p>Following is the process for solving a brake-squeal problem using this method:</p>
+<ol class="arabic">
+<li><p>Perform a nonlinear, large-deflection static analysis
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nlgeom(&quot;ON&quot;)</span></code>).
+Use the unsymmetric Newton-Raphson method (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.nropt(&quot;UNSYM&quot;)</span></code>).
+Specify the restart control points needed for the linear perturbation analysis
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.rescontrol()</span></code>).</p></li>
+<li><p>Perform a full second static analysis. Generate sliding contact
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.cmrotate()</span></code>) to form an unsymmetric stiffness matrix.</p></li>
+<li><p>After obtaining the second static solution, postprocess the contact results.
+Determine the status (that is, whether the elements are sliding, and the sliding distance, if any).</p></li>
+<li><p>Restart the previous static solution from the desired load step and substep, and perform the first
+phase of the perturbation analysis while preserving the <strong>.ldhi</strong>, <strong>.rnnn</strong> and
+<strong>.rst</strong> files (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.antype(&quot;STATIC&quot;,</span> <span class="pre">&quot;RESTART&quot;,,,</span> <span class="pre">&quot;PERTURB&quot;)</span></code>).</p>
+<p>Initiate a modal linear perturbation analysis
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.perturb(&quot;MODAL&quot;)</span></code>).</p>
+<p>Regenerate the element stiffness matrix at the end of the first phase of
+the linear perturbation solution (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.solve(&quot;ELFORM&quot;)</span></code>).</p>
+</li>
+<li><p>Obtain the linear perturbation modal solution using the QRDAMP or UNSYM eigensolver
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.modopt()</span></code>).</p></li>
+<li><p>Expand the modes and postprocess the results (from the <cite>jobname.rstp</cite> file).
+The following inputs show the solution steps involved with this method:</p></li>
+</ol>
+<p><strong>First static solution</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">start</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <span class="s1">&#39;full_non_linear&#39;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/SOLU&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;STATIC&quot;</span><span class="p">)</span>  <span class="c1"># Perform static solve</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># Write all element and nodal solution results for each substep</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nropt</span><span class="p">(</span><span class="s2">&quot;UNSYM&quot;</span><span class="p">)</span>  <span class="c1"># Specify unsymmetric Newton-Raphson option to solve the problem</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rescontrol</span><span class="p">(</span><span class="s2">&quot;DEFINE&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Control restart files</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nlgeom</span><span class="p">(</span><span class="s2">&quot;ON&quot;</span><span class="p">)</span>  <span class="c1"># Activate large deflection</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">autots</span><span class="p">(</span><span class="s2">&quot;ON&quot;</span><span class="p">)</span>  <span class="c1"># Auto time stepping turned on</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># End time = 1.0 sec</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TYPE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">124</span><span class="p">)</span>  <span class="c1"># Select element type 124</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsle</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># Select nodes attached to the element</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <span class="s2">&quot;%_LOADVARI4059%&quot;</span><span class="p">)</span>  <span class="c1"># Apply surface pressure on the selected nodes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;TYPE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">125</span><span class="p">)</span>  <span class="c1"># Select element type 125</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsle</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># Select nodes attached to the element</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <span class="s2">&quot;%_LOADVARI4061%&quot;</span><span class="p">)</span>  <span class="c1"># Apply surface pressure on the selected nodes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;C1_R&quot;</span><span class="p">)</span>  <span class="c1"># Select the target elements of the disc</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;C2_R&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;E_ROTOR&quot;</span><span class="p">,</span> <span class="s2">&quot;ELEM&quot;</span><span class="p">)</span>  <span class="c1"># Form a component named E_ROTOR with the selected target ELEMENTS</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>  <span class="c1"># Solve with prestress loading</span>
+</pre></div>
+</div>
+<p><strong>Second static solution</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">cmrotate</span><span class="p">(</span><span class="s2">&quot;E_ROTOR&quot;</span><span class="p">,</span> <span class="n">rotatz</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># End time = 2.0sec</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>  <span class="c1"># Perform full solve</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Plotting partial results</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;last&quot;</span><span class="p">)</span>
+
+<span class="c1"># select contact elements attached to the brake pad</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_element_values</span><span class="p">(</span>
+    <span class="s2">&quot;CONT&quot;</span><span class="p">,</span> <span class="s2">&quot;STAT&quot;</span><span class="p">,</span> <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Contact status&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_element_values</span><span class="p">(</span>
+    <span class="s2">&quot;CONT&quot;</span><span class="p">,</span> <span class="s2">&quot;SLIDE&quot;</span><span class="p">,</span> <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Contact sliding distance&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Perturbed modal solution</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/SOLU&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;STATIC&quot;</span><span class="p">,</span> <span class="s2">&quot;RESTART&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;PERTURB&quot;</span><span class="p">)</span>  <span class="c1"># Restart from last load step and sub step</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">perturb</span><span class="p">(</span><span class="s2">&quot;MODAL&quot;</span><span class="p">)</span>  <span class="c1"># Perform linear perturbation modal solve</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="s2">&quot;ELFORM&quot;</span><span class="p">)</span>  <span class="c1"># Regenerate the element stiffness matrix</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">outres</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">modopt</span><span class="p">(</span><span class="s2">&quot;UNSYM&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># Use UNSYM eigensolver and extract 30 modes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mxpand</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>  <span class="c1"># Expand 30 modes</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>  <span class="c1"># Solve linear perturbation modal solve</span>
+</pre></div>
+</div>
+<p><strong>Plotting results</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;RSTP&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="p">)</span>
+
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Total displacement</span><span class="se">\n</span><span class="s2"> Substep 21&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post_processing</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <span class="n">scalar_bar_args</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Total displacement</span><span class="se">\n</span><span class="s2"> Substep 22&quot;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_5_0.png" src="../../_images/ex_01-tecbrakesqueal_5_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.7: Mode shape for unstable mode (Mode 21).</strong></p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_6_0.png" src="../../_images/ex_01-tecbrakesqueal_6_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.8: Mode shape for unstable mode (Mode 21).</strong></p>
+</section>
+</section>
+<section id="results-and-discussion">
+<h2>1.7. Results and discussion<a class="headerlink" href="#results-and-discussion" title="Link to this heading">#</a></h2>
+<p>The unstable mode predictions for the brake disc-pad assembly using all three methods
+were very close due to the relatively small prestress load.
+The  <a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. linear non-prestressed modal analysis</a> predicted
+unstable modes at 6474 Hz, while the other two solution methods predicted unstable modes
+at 6470 Hz.</p>
+<p>The mode shape plots for the unstable modes suggest that the bending mode of the pads
+and disc have similar characteristics. These bending modes couple due to friction, and
+produce a squealing noise.</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_7_0.png" src="../../_images/ex_01-tecbrakesqueal_7_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.9: Mode shape for unstable mode (Mode 21).</strong>
+Obtained from the  <a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a> .</p>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_01-tecbrakesqueal_8_0.png" src="../../_images/ex_01-tecbrakesqueal_8_0.png" />
+</div>
+</div>
+<p><strong>Figure 1.10: Mode shape for unstable mode (Mode 22).</strong>
+Obtained from the  <a class="reference internal" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a> .</p>
+<p><strong>Table 1.2: Solution output</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head" colspan="2"><p>Linear non-prestressed modal</p></th>
+<th class="head" colspan="2"><p>Partial nonlinear perturbed modal</p></th>
+<th class="head" colspan="2"><p>Full nonlinear perturbed modal</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Mode</strong></p></td>
+<td><p><strong>Imaginary</strong></p></td>
+<td><p><strong>Real</strong></p></td>
+<td><p><strong>Imaginary</strong></p></td>
+<td><p><strong>Real</strong></p></td>
+<td><p><strong>Imaginary</strong></p></td>
+<td><p><strong>Real</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p>1.00</p></td>
+<td><p>775.91</p></td>
+<td><p>0.00</p></td>
+<td><p>775.73</p></td>
+<td><p>0.00</p></td>
+<td><p>775.73</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>2.00</p></td>
+<td><p>863.54</p></td>
+<td><p>0.00</p></td>
+<td><p>863.45</p></td>
+<td><p>0.00</p></td>
+<td><p>863.45</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.00</p></td>
+<td><p>1097.18</p></td>
+<td><p>0.00</p></td>
+<td><p>1097.03</p></td>
+<td><p>0.00</p></td>
+<td><p>1097.03</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>4.00</p></td>
+<td><p>1311.54</p></td>
+<td><p>0.00</p></td>
+<td><p>1311.06</p></td>
+<td><p>0.00</p></td>
+<td><p>1311.06</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.00</p></td>
+<td><p>1328.73</p></td>
+<td><p>0.00</p></td>
+<td><p>1328.07</p></td>
+<td><p>0.00</p></td>
+<td><p>1328.07</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>6.00</p></td>
+<td><p>1600.95</p></td>
+<td><p>0.00</p></td>
+<td><p>1600.66</p></td>
+<td><p>0.00</p></td>
+<td><p>1600.66</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>7.00</p></td>
+<td><p>1616.15</p></td>
+<td><p>0.00</p></td>
+<td><p>1615.87</p></td>
+<td><p>0.00</p></td>
+<td><p>1615.87</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>8.00</p></td>
+<td><p>1910.50</p></td>
+<td><p>0.00</p></td>
+<td><p>1910.50</p></td>
+<td><p>0.00</p></td>
+<td><p>1910.50</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>9.00</p></td>
+<td><p>2070.73</p></td>
+<td><p>0.00</p></td>
+<td><p>2070.44</p></td>
+<td><p>0.00</p></td>
+<td><p>2070.44</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>10.00</p></td>
+<td><p>2081.26</p></td>
+<td><p>0.00</p></td>
+<td><p>2080.98</p></td>
+<td><p>0.00</p></td>
+<td><p>2080.98</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>11.00</p></td>
+<td><p>2676.71</p></td>
+<td><p>0.00</p></td>
+<td><p>2675.23</p></td>
+<td><p>0.00</p></td>
+<td><p>2675.23</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>12.00</p></td>
+<td><p>2724.05</p></td>
+<td><p>0.00</p></td>
+<td><p>2722.61</p></td>
+<td><p>0.00</p></td>
+<td><p>2722.61</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>13.00</p></td>
+<td><p>3373.96</p></td>
+<td><p>0.00</p></td>
+<td><p>3373.32</p></td>
+<td><p>0.00</p></td>
+<td><p>3373.32</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>14.00</p></td>
+<td><p>4141.64</p></td>
+<td><p>0.00</p></td>
+<td><p>4141.45</p></td>
+<td><p>0.00</p></td>
+<td><p>4141.45</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>15.00</p></td>
+<td><p>4145.16</p></td>
+<td><p>0.00</p></td>
+<td><p>4145.04</p></td>
+<td><p>0.00</p></td>
+<td><p>4145.04</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>16.00</p></td>
+<td><p>4433.91</p></td>
+<td><p>0.00</p></td>
+<td><p>4431.08</p></td>
+<td><p>0.00</p></td>
+<td><p>4431.08</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>17.00</p></td>
+<td><p>4486.50</p></td>
+<td><p>0.00</p></td>
+<td><p>4484.00</p></td>
+<td><p>0.00</p></td>
+<td><p>4484.00</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>18.00</p></td>
+<td><p>4668.51</p></td>
+<td><p>0.00</p></td>
+<td><p>4667.62</p></td>
+<td><p>0.00</p></td>
+<td><p>4667.62</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>19.00</p></td>
+<td><p>4767.54</p></td>
+<td><p>0.00</p></td>
+<td><p>4766.95</p></td>
+<td><p>0.00</p></td>
+<td><p>4766.95</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>20.00</p></td>
+<td><p>5241.61</p></td>
+<td><p>0.00</p></td>
+<td><p>5241.38</p></td>
+<td><p>0.00</p></td>
+<td><p>5241.38</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>21.00</p></td>
+<td><p>6474.25</p></td>
+<td><p>21.61</p></td>
+<td><p>6470.24</p></td>
+<td><p>21.90</p></td>
+<td><p>6470.24</p></td>
+<td><p>21.90</p></td>
+</tr>
+<tr class="row-even"><td><p>22.00</p></td>
+<td><p>6474.25</p></td>
+<td><p>-21.61</p></td>
+<td><p>6470.24</p></td>
+<td><p>-21.90</p></td>
+<td><p>6470.24</p></td>
+<td><p>-21.90</p></td>
+</tr>
+<tr class="row-odd"><td><p>23.00</p></td>
+<td><p>6763.36</p></td>
+<td><p>0.00</p></td>
+<td><p>6763.19</p></td>
+<td><p>0.00</p></td>
+<td><p>6763.19</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>24.00</p></td>
+<td><p>6765.62</p></td>
+<td><p>0.00</p></td>
+<td><p>6765.51</p></td>
+<td><p>0.00</p></td>
+<td><p>6765.51</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>25.00</p></td>
+<td><p>6920.64</p></td>
+<td><p>0.00</p></td>
+<td><p>6919.64</p></td>
+<td><p>0.00</p></td>
+<td><p>6919.64</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>26.00</p></td>
+<td><p>6929.25</p></td>
+<td><p>0.00</p></td>
+<td><p>6929.19</p></td>
+<td><p>0.00</p></td>
+<td><p>6929.19</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>27.00</p></td>
+<td><p>7069.69</p></td>
+<td><p>0.00</p></td>
+<td><p>7066.72</p></td>
+<td><p>0.00</p></td>
+<td><p>7066.72</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>28.00</p></td>
+<td><p>7243.80</p></td>
+<td><p>0.00</p></td>
+<td><p>7242.71</p></td>
+<td><p>0.00</p></td>
+<td><p>7242.71</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-odd"><td><p>29.00</p></td>
+<td><p>8498.41</p></td>
+<td><p>0.00</p></td>
+<td><p>8493.08</p></td>
+<td><p>0.00</p></td>
+<td><p>8493.08</p></td>
+<td><p>0.00</p></td>
+</tr>
+<tr class="row-even"><td><p>30.00</p></td>
+<td><p>8623.76</p></td>
+<td><p>0.00</p></td>
+<td><p>8616.68</p></td>
+<td><p>0.00</p></td>
+<td><p>8616.68</p></td>
+<td><p>0.00</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="determining-the-modal-behavior-of-individual-components">
+<h3>1.7.1. Determining the modal behavior of individual components<a class="headerlink" href="#determining-the-modal-behavior-of-individual-components" title="Link to this heading">#</a></h3>
+<p>It is important to determine the modal behavior of individual components (disc and
+pads) when predicting brake-squeal noise. A modal analysis performed on the free pad
+and free disc model gives insight into potential coupling modes. The natural
+frequency and mode shapes of brake pads and disc can also be used to define the type
+of squeal noise that may occur in a braking system. Bending modes of pads and disc
+are more significant than twisting modes because they eventually couple to produce
+squeal noise.</p>
+<p>An examination of the results obtained from the modal analysis of a free disc and
+pad shows that the second bending mode of the pad and ninth bending mode of the disc
+can couple to create dynamic instability in the system. These pad and disc bending
+modes can couple to produce an intermediate lock, resulting in a squeal noise at a
+frequency close to 6470 Hz.</p>
+</section>
+<section id="parametric-study-with-increasing-friction-coefficient">
+<h3>1.7.2. Parametric study with increasing friction coefficient<a class="headerlink" href="#parametric-study-with-increasing-friction-coefficient" title="Link to this heading">#</a></h3>
+<p>A parametric study was performed on the brake disc model using a linear
+non-prestressed modal solution with an increasing coefficient of friction. QRDAMP
+eigensolver is used to perform the parametric studies by reusing the symmetric real
+modes (<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.qrdopt(&quot;ON&quot;)</span></code>) obtained in the first load
+step.</p>
+<p>The following plot suggests that modes with similar characteristics approach each
+other and couple as the coefficient of friction increases:</p>
+<div class="jupyter_cell docutils container" id="table-1">
+<div class="cell_output docutils container">
+<div class="docutils container">
+</div>
+</div>
+</div>
+<p><strong>Figure 1.11: Effect of friction coefficient on unstable modes</strong></p>
+</section>
+</section>
+<section id="recommendations">
+<h2>1.8. Recommendations<a class="headerlink" href="#recommendations" title="Link to this heading">#</a></h2>
+<p>The following table provides guidelines for selecting the optimal analysis method to
+use for a brake-squeal problem:</p>
+<p><strong>Table 1.3: Analysis comparison</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Analysis method</p></th>
+<th class="head"><p>Benefits</p></th>
+<th class="head"><p>Costs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linear non-prestressed modal</p></td>
+<td><ul class="simple">
+<li><p>Fast run time.</p></li>
+<li><p>No convergence issues.</p></li>
+<li><p>Good method for performing parametric studies</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Accuracy.</p></li>
+<li><p>Does not include prestress effects</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Partial nonlinear perturbed modal</p></td>
+<td><ul class="simple">
+<li><p>No convergence issues.</p></li>
+<li><p>Includes prestress effects</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Accuracy</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>Full nonlinear perturbed modal</p></td>
+<td><ul class="simple">
+<li><p>Accurate.</p></li>
+<li><p>Includes prestress effects</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Longer run time.</p></li>
+<li><p>Convergence issues</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The following table provides guidelines for selecting the optimal eigensolver
+(<code class="xref py py-meth docutils literal notranslate"><span class="pre">Mapdl.modopt()</span></code>) for obtaining the brake-squeal solution:</p>
+<p><strong>Table 1.4: Solver comparison</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Eigensolver</p></th>
+<th class="head"><p>Benefits</p></th>
+<th class="head"><p>Costs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>QRDAMP</p></td>
+<td><ul class="simple">
+<li><p>Fast run time.</p></li>
+<li><p>An excellent solver for performing parametric studies</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Accuracy, as it approximates the unsymmetric stiffness matrix.</p></li>
+<li><p>Not recommended when the number of elements contributing to unsymmetric stiffness matrix exceeds 10 percent of the total number of elements in the model.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>UNSYM</p></td>
+<td><ul class="simple">
+<li><p>Accuracy, as it uses the full unsymmetric stiffness matrix to solve the problem</p></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li><p>Long run time when many modes are extracted</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For further information, see Brake-Squeal (prestressed modal) Analysis in the <em>structural analysis guide</em>.</p>
+</section>
+<section id="references">
+<h2>1.9. References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p>The following works were consulted when creating this example problem:</p>
+<ol class="arabic simple">
+<li><p>Triches, M. Jr., Gerges, S. N. Y., &amp; Jordon, R. (2004). Reduction of
+squeal noise from disc brake systems using constrained layer damping.
+<em>Journal of the Brazilian Society of Mechanical Sciences and
+Engineering.</em> 26, 340-343.</p></li>
+<li><p>Allgaier, R., Gaul, L., Keiper, W., &amp; Willner, K. (1999). Mode lock-in and
+friction modeling. <em>Computational Methods in Contact
+Mechanics</em>. 4, 35-47.</p></li>
+<li><p>Schroth, R., Hoffmann, N., Swift, R. (2004, January). Mechanism of brake
+squeal from theory to experimentally measured mode coupling. In
+<em>Proceedings of the twenty second International Modal Analysis
+Conference (IMAC XXII).</em></p></li>
+</ol>
+</section>
+<section id="input-files">
+<h2>1.10. Input files<a class="headerlink" href="#input-files" title="Link to this heading">#</a></h2>
+<p>The following input files were used for this problem:</p>
+<ul class="simple">
+<li><p><strong>linear_non_prestressed.html</strong> – Linear non-prestressed modal solve input file.
+<a class="reference download external" download="" href="https://github.com/ansys/example-data/blob/master/tech_demos/td-1/linear_non_prestressed.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">linear_non_prestressed.py</span></code></a>.</p></li>
+<li><p><strong>partial_prestressed.html</strong> – Partial prestressed modal solve input file.
+<a class="reference download external" download="" href="https://github.com/ansys/example-data/blob/master/tech_demos/td-1/partial_prestressed.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">partial_prestressed.py</span></code></a>.</p></li>
+<li><p><strong>full_non_linear.html</strong> – Full nonlinear prestressed modal solve input file.
+<a class="reference download external" download="" href="https://github.com/ansys/example-data/blob/master/tech_demos/td-1/full_non_linear.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">full_non_linear.py</span></code></a>.</p></li>
+<li><p><strong>linear_non_prestressed_par.html</strong> – Parametric studies with increasing coefficient of friction.
+<a class="reference download external" download="" href="https://github.com/ansys/example-data/blob/master/tech_demos/td-1/linear_non_prestressed_par.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">linear_non_prestressed_par.py</span></code></a>.</p></li>
+<li><p><strong>disc_pad_model.cdb</strong> – Common database file used for the linear non-prestressed modal analysis, the partial prestressed modal analysis,
+and the full nonlinear prestressed modal analysis (called by the <strong>linear_non_prestressed.dat</strong>, <strong>partial_prestressed.dat</strong>,
+<strong>full_non_linear.html</strong> and <strong>linear_non_prestressed_par.html</strong> files, respectively).
+<a class="reference download external" download="" href="https://github.com/ansys/example-data/blob/master/tech_demos/td-1/disc_pad_model.cdb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">file:</span> <span class="pre">disc_pad_model.cdb</span></code></a>.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://storage.ansys.com/doclinks/techdemos.html?code=td-1-DLU-N2a">Download the zipped td-1 file set for this problem</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more information, see <a class="reference external" href="https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html">Obtaining the input files</a>.</p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">1.2. Problem description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">1.3. Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-advantages-of-contact-element-technology">1.3.1. Understanding the advantages of contact element technology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-contact-pairs">1.3.2. Modeling contact pairs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-internal-sliding-motion">1.3.3. Generating internal sliding motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meshing-the-brake-disc-pad-model">1.3.4. Meshing the brake disc-pad model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#material-properties">1.4. Material properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions-and-loading">1.5. Boundary conditions and loading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-and-solution-controls">1.6. Analysis and solution controls</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-non-prestressed-modal-analysis">1.6.1. Linear non-prestressed modal analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partial-nonlinear-perturbed-modal-analysis">1.6.2. Partial nonlinear perturbed modal analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-nonlinear-perturbed-modal-analysis">1.6.3. Full nonlinear perturbed modal analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-discussion">1.7. Results and discussion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-the-modal-behavior-of-individual-components">1.7.1. Determining the modal behavior of individual components</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-study-with-increasing-friction-coefficient">1.7.2. Parametric study with increasing friction coefficient</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recommendations">1.8. Recommendations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">1.9. References</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-files">1.10. Input files</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pymapdl-examples/edit/main/doc/source/technology_showcase_examples/techdemo-1/ex_01-tecbrakesqueal.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/technology_showcase_examples/techdemo-1/ex_01-tecbrakesqueal.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

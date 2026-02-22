@@ -1,0 +1,1322 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>PSD analysis of 40-Story building under wind load excitation &#8212; PyMAPDL Examples</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../_static/documentation_options.js?v=e7fb764e"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'verif-manual/vm-298';</script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sound diffusion in a flat room" href="vm-299.html" />
+    <link rel="prev" title="One dimensional Terzaghi’s consolidation problem with permeability as function of depth" href="vm-295.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyMAPDL Examples - Home"/>
+    <img src="../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyMAPDL Examples - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../technology_showcase_examples/index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../technology_showcase_examples/index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="vm-001-statically_indeterminate_reaction_force_analysis.html">Statically indeterminate reaction force analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-002-beam_stresses_and_deflections.html">Beam stresses and deflections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-003-thermally_loaded_support_structure.html">Thermally loaded support structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-004-deflection_of_a_hinged_support.html">Deflection of a hinged support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-005-laterally_loaded_tapered_support_structure.html">Laterally loaded tapered support structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-006-pinched_cylinder.html">Pinched cylinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-007-plastic_compression_of_a_pipe_assembly.html">Plastic compression of a pipe assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-008-parametric_calculation.html">Parametric calculation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-009-large_lateral_deflection_of_unequal_stiffness_springs.html">Large lateral deflection of unequal stiffness springs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-010-bending_of_a_t-shaped_beam.html">Bending of a tee-shaped beam</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-011-residual-stress-problem.html">Residual stress problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-012-combined-bending-and-torsion.html">Combined bending and torsion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-013.html">Cylindrical shell under pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-014.html">Large deflection eccentric compression of slender column</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-015.html">Bending of a circular plate using axisymmetric shell elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-016.html">Bending of a solid beam (plane elements)</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="vm-018.html">Out-of-plane bending of a curved bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-020.html">Cylindrical membrane under pressure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-021.html">Tie rod with lateral loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-025.html">Stresses in a long cylinder</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-291.html">Force on the boundary of a semi-infinite body (Boussinesq problem)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-295.html">One dimensional Terzaghi’s consolidation problem with permeability as function of depth</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">PSD analysis of 40-Story building under wind load excitation</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="vm-299.html">Sound diffusion in a flat room</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vm-nr1677-01-1a.html">Nuclear regulatory commission piping benchmarks</a></li>
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/" class="nav-link">PyMAPDL</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/version/stable/examples/" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Verification manual</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">PSD analysis of 40-Story building under wind load excitation</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-verif-manual-vm-298-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="psd-analysis-of-40-story-building-under-wind-load-excitation">
+<span id="ref-vm298"></span><span id="sphx-glr-verif-manual-vm-298-py"></span><h1>PSD analysis of 40-Story building under wind load excitation<a class="headerlink" href="#psd-analysis-of-40-story-building-under-wind-load-excitation" title="Link to this heading">#</a></h1>
+<dl class="simple">
+<dt>Problem description:</dt><dd><ul class="simple">
+<li><p>A 40-story building is modeled using spring-damper (<code class="docutils literal notranslate"><span class="pre">COMBIN14</span></code>) and point mass elements
+(<code class="docutils literal notranslate"><span class="pre">MASS21</span></code>). The stiffness represents the linear elastic massless column and the mass of
+each floor is concentrated at the floor level, as shown in Figure: Finite Element
+Representation of 40-Story Building Using Spring-Mass Damper System.</p></li>
+<li><p>The wind load excitation is applied at discrete floor levels along the wind motion.
+Because natural strong winds are turbulent in nature with randomly fluctuating wind
+velocities, a probabilistic approach like Power Spectral Density (PSD) analysis is
+the most suitable approach to analyze such structures. This analysis is performed to
+calculate the response PSD of the 40th floor.</p></li>
+</ul>
+</dd>
+<dt>Reference:</dt><dd><ul class="simple">
+<li><p>Yang, J.N., Lin, Y.K., “Along-Wind Motion of Multistorey Building”,
+ASCE Publications, April 1981.</p></li>
+</ul>
+</dd>
+<dt>Analysis type(s):</dt><dd><ul class="simple">
+<li><p>Modal Analysis <code class="docutils literal notranslate"><span class="pre">ANTYPE=2</span></code></p></li>
+<li><p>PSD Analysis <code class="docutils literal notranslate"><span class="pre">ANTYPE=8</span></code></p></li>
+</ul>
+</dd>
+<dt>Element type(s):</dt><dd><ul class="simple">
+<li><p>Spring-Damper Element (<code class="docutils literal notranslate"><span class="pre">COMBIN14</span></code>)</p></li>
+<li><p>Structural Point Mass Element (<code class="docutils literal notranslate"><span class="pre">MASS21</span></code>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Material properties:</dt><dd><ul class="simple">
+<li><p>Floor mass, <span class="math notranslate nohighlight">\(m = 1.29 \times 10^6 kg\)</span></p></li>
+<li><p>Column stiffness, <span class="math notranslate nohighlight">\(K = 1 \cdot 10^9 N/m\)</span></p></li>
+<li><p>Damping coefficient, <span class="math notranslate nohighlight">\(\beta = 2.155 \times 10^4 N/m/sec\)</span></p></li>
+</ul>
+</dd>
+<dt>Geometric properties:</dt><dd><ul class="simple">
+<li><p>Number of stories, <span class="math notranslate nohighlight">\(N = 40\)</span></p></li>
+<li><p>Story height, <span class="math notranslate nohighlight">\(h = 4 m\)</span></p></li>
+</ul>
+</dd>
+<dt>Loading (Aerodynamics Properties):</dt><dd><ul class="simple">
+<li><p>Wind load tributary area, <span class="math notranslate nohighlight">\(A_w = 192 m^2\)</span></p></li>
+<li><p>Gradient height, <span class="math notranslate nohighlight">\(Z_g = 300 m\)</span></p></li>
+<li><p>Gradient wind velocity, <span class="math notranslate nohighlight">\(U_g = 44.69 m/sec\)</span></p></li>
+<li><p>Reference mean wind velocity at 10 m height, <span class="math notranslate nohighlight">\(U_r = 11.46 m/sec\)</span></p></li>
+<li><p>Drag coefficient, <span class="math notranslate nohighlight">\(C_d = 1.2\)</span></p></li>
+<li><p>Air density, <span class="math notranslate nohighlight">\(\rho = 1.23 kg/m^3\)</span></p></li>
+<li><p>Ground surface drag coefficient, <span class="math notranslate nohighlight">\(K_o = 0.03\)</span></p></li>
+<li><p>Exponent for the mean-wind-profile power law, <span class="math notranslate nohighlight">\(\alpha = 0.4\)</span></p></li>
+<li><p>Constant term, <span class="math notranslate nohighlight">\(C_1 = 7.7\)</span></p></li>
+</ul>
+</dd>
+<dt>Notes:</dt><dd><ul class="simple">
+<li><p>Partly correlated wind excitation PSD spectrum (Davenport spectrum) is
+applied at each floor. For illustration, see Figure:
+Partly Correlated Wind Excitation PSD Spectrum (Davenport Spectrum).</p></li>
+</ul>
+</dd>
+</dl>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/vm298_setup2.png"><img alt="VM298 Partly Correlated Wind Excitation PSD Spectrum (Davenport Spectrum)" src="../_images/vm298_setup2.png" style="width: 400px;" />
+</a>
+</figure>
+<dl class="simple">
+<dt>Analysis assumptions and modeling notes:</dt><dd><ul class="simple">
+<li><p>The 40-story building is modeled using 1-D spring-damper system with one end fixed
+at its foundation. The motion of the tall building is allowed along the wind direction only.</p></li>
+<li><p>The damping in the structure is based on material beta damping using <code class="docutils literal notranslate"><span class="pre">MP,BETD</span></code>.</p></li>
+<li><p>The modal analysis is performed using the Lanczos eigensolver. Only the first frequency
+is used in the subsequent PSD analysis.</p></li>
+<li><p>The PSD analysis loading consists of partly correlated wind excitation PSD applied
+at each of the floors. The different wind spectrum curves are calculated as APDL array
+parameters and input with <code class="docutils literal notranslate"><span class="pre">PSDVAL</span></code> and <code class="docutils literal notranslate"><span class="pre">COVAL</span></code>. In this example, the displacement response PSD
+at the top floor is calculated and compared with the reference curve. Using this calculated
+response PSD, the standard deviation is calculated and compared with the reference value.</p></li>
+</ul>
+</dd>
+<dt>Postprocessing:</dt><dd><ul class="simple">
+<li><p>Displacement response at the top floor (40th floor) is calculated.</p></li>
+<li><p>The response PSD is computed and plotted.</p></li>
+<li><p>The standard deviation of the response PSD is calculated.</p></li>
+</ul>
+</dd>
+<dt>Reference results:</dt><dd><ul class="simple">
+<li><p>Modal frequency of first mode, <span class="math notranslate nohighlight">\(\omega_1 = 1.02 rad/sec\)</span></p></li>
+<li><p>Standard deviation of response PSD at the top floor, <span class="math notranslate nohighlight">\(\sigma_{X40} = 4.65\cdot 10^{-2} m\)</span></p></li>
+</ul>
+</dd>
+<dt>Additional Notes:</dt><dd><ul class="simple">
+<li><p>The model uses COMBIN14 elements for spring-damper representation and MASS21 elements
+for point mass representation.</p></li>
+<li><p>The wind load is applied as a power spectral density (PSD) analysis.</p></li>
+<li><p>The results are visualized using plots of the response PSD and displacement.</p></li>
+<li><p>The model is verified against the reference values provided in the literature.</p></li>
+<li><p>The results are consistent with the expected behavior of a 40-story building under
+wind load excitation.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># sphinx_gallery_thumbnail_path = &#39;_static/vm298_setup.png&#39;</span>
+
+<span class="s2">&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_mapdl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">loglevel</span><span class="o">=</span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="n">print_com</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_temp_dir_on_exit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># ANSYS MEDIA REL. 2025R1 (11/08/2024) REF. VERIF. MANUAL: REL. 2025R1</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;VM298,PSD ANALYSIS OF 40-STORY BUILDING UNDER WIND LOAD EXCITATION&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>TITLE=
+ VM298,PSD ANALYSIS OF 40-STORY BUILDING UNDER WIND LOAD EXCITATION
+</pre></div>
+</div>
+</section>
+<section id="parameter-definition">
+<h1>Parameter definition<a class="headerlink" href="#parameter-definition" title="Link to this heading">#</a></h1>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a> <span class="o">=</span> <span class="mi">40</span>  <span class="c1"># NUMBER OF STORIES</span>
+<a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_H</span></a> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># M, STORY HEIGHT</span>
+<a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_HT</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_H</span></a>  <span class="c1"># M, TOTAL HEIGHT</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_MASS</span></a> <span class="o">=</span> <span class="mf">1.29e6</span>  <span class="c1"># KG, LUMPED MASS AT FLOOR LEVEL</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_K</span></a> <span class="o">=</span> <span class="mf">1e9</span>  <span class="c1"># N/M, ELASTIC STIFFNESS BETWEEN FLOORS</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_BETA</span></a> <span class="o">=</span> <span class="mf">2.155e4</span>  <span class="c1"># N/M/SEC, DAMPING COEFFICIENT BETWEEN FLOORS</span>
+
+<span class="c1"># Aerodynamic parameters of wind excitation</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Aw</span></a> <span class="o">=</span> <span class="mi">192</span>  <span class="c1"># M^2, WIND LOAD TRIBUTARY AREA</span>
+<a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Zg</span></a> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># M, GRADIENT HEIGHT</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ug</span></a> <span class="o">=</span> <span class="mf">44.69</span>  <span class="c1"># M/SEC, GRADIENT WIND VELOCITY</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ur</span></a> <span class="o">=</span> <span class="mf">11.46</span>  <span class="c1"># M/SEC, REFERENCE MEAN WIND VELOCITY AT 10 M HEIGHT</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Cd</span></a> <span class="o">=</span> <span class="mf">1.2</span>  <span class="c1"># DRAG COEFFICIENT</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_RHO</span></a> <span class="o">=</span> <span class="mf">1.23</span>  <span class="c1"># KG/M^3, AIR DENSITY</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_KO</span></a> <span class="o">=</span> <span class="mf">0.03</span>  <span class="c1"># GROUND SURFACE DRAG COEFFICIENT</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_ALPHA</span></a> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># EXPONENT FOR THE MEAN-WIND-PROFILE POWER LAW</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_C1</span></a> <span class="o">=</span> <span class="mf">7.7</span>  <span class="c1"># CONSTANT TERM</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">math</span><span class="o">.</span><span class="n">pi</span></a>  <span class="c1"># PI, CIRCULAR CONSTANT</span>
+</pre></div>
+</div>
+</section>
+<section id="preprocessing-model-40-story-building-using-1-d-spring-damper-system-and-point-mass-elements">
+<h1>Preprocessing: model 40-story building using 1-D spring-damper system and point mass elements<a class="headerlink" href="#preprocessing-model-40-story-building-using-1-d-spring-damper-system-and-point-mass-elements" title="Link to this heading">#</a></h1>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">(</span><span class="n">mute</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Add nodes along x-axis for spring-damper elements</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a> <span class="o">+</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">n</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_H</span></a> <span class="o">*</span> <span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Spring-damper elements</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_K</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_BETA</span></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Add nodes for mass elements</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">e</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Add point mass elements</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_MASS</span></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">maxnod</span></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;MAXNOD&quot;</span><span class="p">,</span> <span class="s2">&quot;NODE&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;NUM&quot;</span><span class="p">,</span> <span class="s2">&quot;MAX&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add point mass elements at each floor</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">maxnod</span></a> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">e</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">)</span>
+
+<span class="c1"># Add node components</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;NODE_BASE&quot;</span><span class="p">,</span> <span class="s2">&quot;NODE&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;INVE&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="s2">&quot;NODE_FLOOR&quot;</span><span class="p">,</span> <span class="s2">&quot;NODE&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add boundary conditions</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;NODE_BASE&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cmsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;NODE_FLOOR&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;UY&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;UZ&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display element plot</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eplot</span><span class="p">()</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_vm-298_001.png" srcset="../_images/sphx_glr_vm-298_001.png" alt="vm 298" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>[82, 87, 110]
+
+***** ROUTINE COMPLETED *****  CP =         0.000
+</pre></div>
+</div>
+</section>
+<section id="modal-analysis">
+<h1>Modal analysis<a class="headerlink" href="#modal-analysis" title="Link to this heading">#</a></h1>
+<p>Perform modal analysis to obtain the first mode frequency
+and prepare for the PSD analysis.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">NMODES</span></a> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">slashsolu</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;MODAL&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">modopt</span><span class="p">(</span><span class="s2">&quot;LANB&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">NMODES</span></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mxpand</span><span class="p">()</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+
+<span class="c1"># Circular frequency of first mode</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_1</span></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;FREQ_1&quot;</span><span class="p">,</span> <span class="s2">&quot;MODE&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;FREQ&quot;</span><span class="p">)</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_1</span></a> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_1</span></a>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;freq:&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">freq_1</span></a><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;omg:&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_1</span></a><span class="p">)</span>
+
+<span class="c1"># Define frequency parameters</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a> <span class="o">=</span> <span class="mi">120</span>  <span class="c1"># Wind load spectrum input</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_BEGIN</span></a> <span class="o">=</span> <span class="mf">1e-03</span>  <span class="c1"># Beginning of frequency range in rad/sec</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_END</span></a> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a><span class="p">)</span>  <span class="c1"># End of frequency range in rad/sec</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_INC</span></a> <span class="o">=</span> <span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_END</span></a> <span class="o">-</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_BEGIN</span></a><span class="p">)</span> <span class="o">/</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a>  <span class="c1"># Frequency increment in rad/sec</span>
+
+<span class="c1"># Frequency table (Hz)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dim</span><span class="p">(</span><span class="s2">&quot;FREQ_ARRAY&quot;</span><span class="p">,</span> <span class="s2">&quot;ARRAY&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vfill</span><span class="p">(</span><span class="s2">&quot;FREQ_ARRAY&quot;</span><span class="p">,</span> <span class="s2">&quot;RAMP&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_BEGIN</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_INC</span></a><span class="p">)</span>
+<span class="n">FREQ_ARRAY</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;FREQ_ARRAY&quot;</span><span class="p">]</span>
+
+<span class="c1"># Circular frequency table in rad/s</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_BEG</span></a> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_BEGIN</span></a>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_INC</span></a> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_INC</span></a>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dim</span><span class="p">(</span><span class="s2">&quot;OMG_ARRAY&quot;</span><span class="p">,</span> <span class="s2">&quot;ARRAY&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vfill</span><span class="p">(</span><span class="s2">&quot;OMG_ARRAY&quot;</span><span class="p">,</span> <span class="s2">&quot;RAMP&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_BEG</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_INC</span></a><span class="p">)</span>
+<span class="n">OMG_ARRAY</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;OMG_ARRAY&quot;</span><span class="p">]</span>
+
+<span class="c1"># Table of direct and cospectral input PSD wind spectrum values (Davenport)</span>
+<span class="c1"># Create a 2D array for direct input PSD wind spectrum values</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dim</span><span class="p">(</span><span class="s2">&quot;COPHIFF&quot;</span><span class="p">,</span> <span class="s2">&quot;ARRAY&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vfill</span><span class="p">(</span><span class="s2">&quot;COPHIFF&quot;</span><span class="p">,</span> <span class="s2">&quot;DATA&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+<span class="n">COPHIFF</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;COPHIFF&quot;</span><span class="p">]</span>
+
+<span class="c1"># Compute the direct and cospectral input PSD wind spectrum values</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">start_time</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+
+<span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a><span class="p">):</span>
+    <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_uj</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ug</span></a> <span class="o">*</span> <span class="p">((</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_H</span></a><span class="p">)</span> <span class="o">/</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Zg</span></a><span class="p">)</span> <span class="o">**</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_ALPHA</span></a>
+    <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_vj</span></a> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_RHO</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Aw</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Cd</span></a> <span class="o">*</span> <span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_uj</span></a><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a><span class="p">):</span>
+        <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_uk</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ug</span></a> <span class="o">*</span> <span class="p">((</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_H</span></a><span class="p">)</span> <span class="o">/</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">Zg</span></a><span class="p">)</span> <span class="o">**</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_ALPHA</span></a>
+        <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_vk</span></a> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_RHO</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Aw</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Cd</span></a> <span class="o">*</span> <span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_uk</span></a><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+        <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">COEFV</span></a> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_vj</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_vk</span></a><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_KO</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ur</span></a><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">COEFU</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_uj</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_uk</span></a>
+        <span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a><span class="p">):</span>
+            <span class="n">OMG</span> <span class="o">=</span> <span class="n">OMG_ARRAY</span><span class="p">[</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># OMG_ARRAY[i] is a list with one element</span>
+            <span class="n">TERM1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">600</span> <span class="o">*</span> <span class="n">OMG</span> <span class="o">/</span> <span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ur</span></a><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="n">TERM1</span> <span class="o">=</span> <span class="n">TERM1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">TERM1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mi">4</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+            <span class="n">EXPO</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_C1</span></a> <span class="o">*</span> <span class="n">OMG</span> <span class="o">*</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">-</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">))</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_H</span></a><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_Ur</span></a><span class="p">)</span>
+            <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">exp_term</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/math.html#math.exp" title="math.exp" class="sphx-glr-backref-module-math sphx-glr-backref-type-py-function"><span class="n">math</span><span class="o">.</span><span class="n">exp</span></a><span class="p">(</span><span class="n">EXPO</span><span class="p">)</span>
+            <span class="n">con</span> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">COEFV</span></a> <span class="o">*</span> <span class="n">TERM1</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">exp_term</span></a> <span class="o">/</span> <span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">COEFU</span></a> <span class="o">*</span> <span class="n">OMG</span><span class="p">)</span>
+            <span class="n">COPHIFF</span><span class="p">[</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]</span> <span class="o">=</span> <span class="n">con</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">end_time</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elapsed_time</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">end_time</span></a> <span class="o">-</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">start_time</span></a>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elapsed time: </span><span class="si">{</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elapsed_time</span></a><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>freq: 0.171855292
+omg: 1.0797986456554574
+Elapsed time: 0.19164061546325684 seconds
+</pre></div>
+</div>
+</section>
+<section id="psd-analysis">
+<h1>PSD analysis<a class="headerlink" href="#psd-analysis" title="Link to this heading">#</a></h1>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">slashsolu</span><span class="p">()</span>
+<span class="c1"># Perform spectrum analysis</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;SPECTRUM&quot;</span><span class="p">)</span>
+<span class="c1"># Power Spectral Density analysis</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">spopt</span><span class="p">(</span><span class="s2">&quot;PSD&quot;</span><span class="p">)</span>
+
+<span class="c1"># Conversion factor from 2-sided input PSD in m^2/rad/s to 1-sided input PSD in m^2/Hz.</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_FACT</span></a> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_PI</span></a>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">start_time</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+
+<span class="k">with</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">non_interactive</span><span class="p">:</span>
+    <span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a><span class="p">):</span>
+        <span class="c1"># SET PSD UNIT FOR WIND FORCE</span>
+        <span class="n">mapdl</span><span class="o">.</span><span class="n">psdunit</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <span class="s2">&quot;FORC&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_N</span></a><span class="p">):</span>
+            <span class="k">for</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">FREQ_PTS</span></a><span class="p">):</span>
+                <span class="n">mapdl</span><span class="o">.</span><span class="n">psdfrq</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">,</span> <span class="n">FREQ_ARRAY</span><span class="p">[</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">if</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">==</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">:</span>
+                    <span class="n">mapdl</span><span class="o">.</span><span class="n">psdval</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <span class="n">COPHIFF</span><span class="p">[</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_FACT</span></a><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">mapdl</span><span class="o">.</span><span class="n">coval</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">,</span> <span class="n">COPHIFF</span><span class="p">[</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">k</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a><span class="p">]</span> <span class="o">*</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_FACT</span></a><span class="p">)</span>
+        <span class="k">if</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">==</span> <span class="mi">40</span><span class="p">:</span>
+            <span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;PNG&quot;</span><span class="p">,</span> <span class="s2">&quot;REV&quot;</span><span class="p">)</span>
+            <span class="n">mapdl</span><span class="o">.</span><span class="n">plopts</span><span class="p">(</span><span class="s2">&quot;DATE&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># DISPLAY APPLIED WIND EXCITATION PSD SPECTRUM</span>
+            <span class="n">mapdl</span><span class="o">.</span><span class="n">psdgraph</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="k">if</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;PNG&quot;</span><span class="p">,</span> <span class="s2">&quot;REV&quot;</span><span class="p">)</span>
+            <span class="n">mapdl</span><span class="o">.</span><span class="n">plopts</span><span class="p">(</span><span class="s2">&quot;DATE&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">mapdl</span><span class="o">.</span><span class="n">psdgraph</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="c1"># DELETE PREVIOUS WIND SPECTRUM LOAD</span>
+        <span class="n">mapdl</span><span class="o">.</span><span class="n">fdele</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <span class="s2">&quot;FX&quot;</span><span class="p">)</span>
+        <span class="c1"># APPLY WIND LOAD ALONG X-DIRECTION</span>
+        <span class="n">mapdl</span><span class="o">.</span><span class="n">f</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;FX&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="c1"># PERFORM THE PARTICIPATION FACTOR CALCULATION</span>
+        <span class="n">mapdl</span><span class="o">.</span><span class="n">pfact</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">j</span></a><span class="p">,</span> <span class="s2">&quot;NODE&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">screenshot</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;CLOSE&quot;</span><span class="p">)</span>
+
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">end_time</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/time.html#time.time" title="time.time" class="sphx-glr-backref-module-time sphx-glr-backref-type-py-function"><span class="n">time</span><span class="o">.</span><span class="n">time</span></a><span class="p">()</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elapsed_time</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">end_time</span></a> <span class="o">-</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">start_time</span></a>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Elapsed time: </span><span class="si">{</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">elapsed_time</span></a><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+
+<span class="c1"># DELETE PREVIOUS NODAL WIND FORCE</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">fdele</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s2">&quot;FX&quot;</span><span class="p">)</span>
+<span class="c1"># DISPLACEMENT RESPONSE (RELATIVE BY DEFAULT)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">psdres</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;DISP&quot;</span><span class="p">)</span>
+<span class="c1"># PSD MODE COMBINATION (USE DEFAULT TOLERANCE)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">psdcom</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_vm-298_002.png" srcset="../_images/sphx_glr_vm-298_002.png" alt="vm 298" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Elapsed time: 11.984654903411865 seconds
+
+COMBINE MODES USING THE PSD METHOD
+  WHOSE SIGNIFICANCE LEVEL EXCEEDS THE THRESHOLD OF  0.10000E-03
+     1 MODES ARE SELECTED FOR COMBINATION.
+</pre></div>
+</div>
+<section id="solve-the-psd-analysis">
+<h2>Solve the PSD analysis<a class="headerlink" href="#solve-the-psd-analysis" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>FINISH SOLUTION PROCESSING
+
+
+ ***** ROUTINE COMPLETED *****  CP =         0.000
+</pre></div>
+</div>
+</section>
+</section>
+<section id="post-processing">
+<h1>Post-processing<a class="headerlink" href="#post-processing" title="Link to this heading">#</a></h1>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Post-processing in POST1</span>
+<span class="c1"># ~~~~~~~~~~~~~~~~~~~~~~~~</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;NODE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="mi">41</span><span class="p">)</span>
+<span class="c1"># Reactivates suppressed printout</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">gopr</span><span class="p">()</span>
+
+<span class="c1"># 1-sigma displacement solution</span>
+<span class="n">prnsol_u</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">prnsol</span><span class="p">(</span><span class="s2">&quot;U&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1-SIGMA DISPLACEMENT SOLUTION:&quot;</span><span class="p">,</span> <span class="n">prnsol_u</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1-SIGMA DISPLACEMENT SOLUTION: PRINT U    NODAL SOLUTION PER NODE
+   *****MAPDL VERIFICATION RUN ONLY*****
+     DO NOT USE RESULTS FOR PRODUCTION
+
+  ***** POST1 NODAL DEGREE OF FREEDOM LISTING *****
+
+  LOAD STEP=     3  SUBSTEP=     1
+   FREQ=    0.0000      LOAD CASE=   0
+
+  THE FOLLOWING DEGREE OF FREEDOM RESULTS ARE IN THE NODAL COORDINATE SYSTEMS
+
+    NODE       UX           UY           UZ           USUM
+      41  0.40312E-001  0.0000       0.0000      0.40312E-001
+
+ MAXIMUM ABSOLUTE VALUES
+ NODE           0             0             0             0
+ VALUE   0.40312E-001  0.0000       0.0000      0.40312E-001
+
+EXIT THE MAPDL POST1 DATABASE PROCESSOR
+
+
+ ***** ROUTINE COMPLETED *****  CP =         0.000
+</pre></div>
+</div>
+<section id="post-processing-in-post26-time-history-postprocessing">
+<h2>Post-processing in POST26 (time-history postprocessing)<a class="headerlink" href="#post-processing-in-post26-time-history-postprocessing" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post26</span><span class="p">()</span>
+
+<span class="c1"># USER-DEFINED FREQUENCY 6.36E-03 HZ (0.04 RAD/SEC)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;PSD&quot;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s2">&quot;6.36E-03&quot;</span><span class="p">)</span>
+<span class="c1"># STORE DISPLACEMENT UX OF 40TH FLOOR</span>
+<span class="n">N41_UX</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">nsol</span><span class="p">(</span><span class="n">nvar</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">=</span><span class="s2">&quot;41&quot;</span><span class="p">,</span> <span class="n">item</span><span class="o">=</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+<span class="c1"># STORE RESPONSE PSD IN M2/HZ (ONE-SIDED)</span>
+<span class="n">PSD_UX_HZ</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">rpsd</span><span class="p">(</span><span class="n">ir</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">ia</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">itype</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">datum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;RPSD_UX_HZ&quot;</span><span class="p">)</span>
+
+<span class="c1"># GET THE CIRCULAR FREQUENCY AS A VARIABLE (AS ON REFERENCE PLOT FIG.2)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vget</span><span class="p">(</span><span class="n">par</span><span class="o">=</span><span class="s2">&quot;FREQ&quot;</span><span class="p">,</span> <span class="n">ir</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;factr&quot;</span><span class="p">]</span> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_FACT</span></a> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">fact</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">vfact</span><span class="p">(</span><span class="s2">&quot;factr&quot;</span><span class="p">)</span>
+
+<span class="c1"># mapdl.voper(parr=&#39;OMEGA&#39;, par1=&#39;FREQ&#39;, oper=&#39;MAX&#39;, par2=&#39;FREQ&#39;)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">voper</span><span class="p">(</span><span class="s2">&quot;OMEGA&quot;</span><span class="p">,</span> <span class="s2">&quot;FREQ&quot;</span><span class="p">,</span> <span class="s2">&quot;MAX&quot;</span><span class="p">,</span> <span class="s2">&quot;FREQ&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vput</span><span class="p">(</span><span class="n">par</span><span class="o">=</span><span class="s2">&quot;OMEGA&quot;</span><span class="p">,</span> <span class="n">ir</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;OMEGA&quot;</span><span class="p">)</span>
+
+<span class="c1"># GET THE RPSD 2-SIDED IN M2/RAD/S (AS ON REFERENCE PLOT FIG.2)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vget</span><span class="p">(</span><span class="n">par</span><span class="o">=</span><span class="s2">&quot;RPSD_UX_HZ&quot;</span><span class="p">,</span> <span class="n">ir</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inv_fact&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_FACT</span></a>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vfact</span><span class="p">(</span><span class="n">factr</span><span class="o">=</span><span class="s2">&quot;inv_fact&quot;</span><span class="p">)</span>
+
+<span class="c1"># voper(parr=&#39;&#39;, par1=&#39;&#39;, oper=&#39;&#39;, par2=&#39;&#39;, con1=&#39;&#39;, con2=&#39;&#39;, **kwargs)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">voper</span><span class="p">(</span><span class="n">parr</span><span class="o">=</span><span class="s2">&quot;RPSD_UX&quot;</span><span class="p">,</span> <span class="n">par1</span><span class="o">=</span><span class="s2">&quot;RPSD_UX_HZ&quot;</span><span class="p">,</span> <span class="n">oper</span><span class="o">=</span><span class="s2">&quot;MAX&quot;</span><span class="p">,</span> <span class="n">par2</span><span class="o">=</span><span class="s2">&quot;RPSD_UX_HZ&quot;</span><span class="p">)</span>
+
+<span class="c1"># vput(par=&#39;&#39;, ir=&#39;&#39;, tstrt=&#39;&#39;, kcplx=&#39;&#39;, name=&#39;&#39;, **kwargs)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vput</span><span class="p">(</span><span class="n">par</span><span class="o">=</span><span class="s2">&quot;RPSD_UX&quot;</span><span class="p">,</span> <span class="n">ir</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;RPSD_UX&quot;</span><span class="p">)</span>
+
+<span class="c1"># PLOT RPSD LIN-LOG (AS ON REFERENCE PLOT FIG.2)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;PNG&quot;</span><span class="p">,</span> <span class="s2">&quot;REV&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">axlab</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;FREQUENCY, [RAD/SEC]&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">axlab</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;RPSD OF TOP FLOOR,[M**2.SEC/RAD]&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">yrange</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="s2">&quot;1e-5&quot;</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="s2">&quot;1e-1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">gropt</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;LOGY&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;ON&quot;</span><span class="p">)</span>
+
+<span class="c1"># Specifies the X variable to be displayed</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">xvar</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">)</span>
+
+<span class="c1"># The frequency distribution of the displacement response PSD at the top floor X_40</span>
+<span class="c1"># is shown in the following figure. It is typical of wind response of tall structures.</span>
+<span class="c1"># The first peak occurring around 0.04 rad/sec is due to the maximum of the wind spectrum</span>
+<span class="c1"># (quasi-static response). The second peak occurring around 1.08 rad/sec coincides with</span>
+<span class="c1"># the first natural frequency of the building (dynamic response).</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plvar</span><span class="p">(</span><span class="n">nvar1</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">screenshot</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;CLOSE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_vm-298_003.png" srcset="../_images/sphx_glr_vm-298_003.png" alt="vm 298" class = "sphx-glr-single-img"/><p>Post-process PSD response plot using Matplotlib</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ndim</span></a> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mapdl</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;RPSD_UX&quot;</span><span class="p">])</span>
+
+<span class="c1"># store MAPDL results to python variables</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dim</span><span class="p">(</span><span class="s2">&quot;frequencies&quot;</span><span class="p">,</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ndim</span></a><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">frequencies</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">vget</span><span class="p">(</span><span class="s2">&quot;frequencies(1)&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># store MAPDL results to python variables</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">dim</span><span class="p">(</span><span class="s2">&quot;response&quot;</span><span class="p">,</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ndim</span></a><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">vget</span><span class="p">(</span><span class="s2">&quot;response(1)&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># use Matplotlib to create graph</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="c1"># plt.xscale(&quot;log&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;FREQUENCY, [RAD/SEC]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;RPSD OF TOP FLOOR,[M**2.SEC/RAD]&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_vm-298_004.png" srcset="../_images/sphx_glr_vm-298_004.png" alt="vm 298" class = "sphx-glr-single-img"/><p>The above figure is plotted using lin-log scale to match Figure 2 in the reference.
+To better show the general shape of the response PSD, it is plotted using a log-log
+scale in the figure below.</p>
+<p>Both plots are not the default response PSD (1-sided with m^2/Hz units). APDL operations
+are done on the results to obtain the 2-sided response PSD expressed in m^2/rad/s as is
+presented in the reference article.</p>
+<p>Post-process PSD response using Matplotlib - Log-Log Scale</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># PLOT RPSD LOG-LOG</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;PNG&quot;</span><span class="p">,</span> <span class="s2">&quot;REV&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">axlab</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;FREQUENCY, [RAD/SEC]&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">axlab</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="s2">&quot;RPSD OF TOP FLOOR,[M**2.SEC/RAD]&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">xrange</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="s2">&quot;1E-2&quot;</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">gropt</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;LOGX&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;ON&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">plvar</span><span class="p">(</span><span class="n">nvar1</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">screenshot</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;CLOSE&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_vm-298_005.png" srcset="../_images/sphx_glr_vm-298_005.png" alt="vm 298" class = "sphx-glr-single-img"/><p>Use Matplotlib to create graph</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;FREQUENCY, [RAD/SEC]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;RPSD OF TOP FLOOR,[M**2.SEC/RAD]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../_images/sphx_glr_vm-298_006.png" srcset="../_images/sphx_glr_vm-298_006.png" alt="vm 298" class = "sphx-glr-single-img"/><p>Compute the standard deviation of the response PSD</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1-SIGMA DISPLACEMENT SOLUTION FROM POST26 (RPSD INTEGRATION)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">int1</span><span class="p">(</span><span class="n">ir</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">iy</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">ix</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+
+<span class="c1"># VARIANCE</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">d_variance</span></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+    <span class="n">par</span><span class="o">=</span><span class="s2">&quot;D_VARIANCE&quot;</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="s2">&quot;VARI&quot;</span><span class="p">,</span> <span class="n">entnum</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">item1</span><span class="o">=</span><span class="s2">&quot;EXTREME&quot;</span><span class="p">,</span> <span class="n">it1num</span><span class="o">=</span><span class="s2">&quot;VLAST&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># STANDARD DEVIATION</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rms_value</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/math.html#math.sqrt" title="math.sqrt" class="sphx-glr-backref-module-math sphx-glr-backref-type-py-function"><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span></a><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">d_variance</span></a><span class="p">)</span>
+
+<span class="c1"># REFERENCE STANDARD DEVIATION VALUE, SigmaX40 = 4.65E-2 M</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rms_value=</span><span class="si">{</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rms_value</span></a><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>rms_value=0.04
+
+***** ROUTINE COMPLETED *****  CP =         0.000
+</pre></div>
+</div>
+</section>
+<section id="verify-the-results">
+<h2>Verify the results<a class="headerlink" href="#verify-the-results" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="c1"># Set target values</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target_freq</span></a> <span class="o">=</span> <span class="mf">1.02</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target_rms</span></a> <span class="o">=</span> <span class="mf">0.0465</span>
+
+<span class="c1"># Fill result values</span>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sim_freq_res</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">OMG_1</span></a>
+<a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sim_rms_res</span></a> <span class="o">=</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rms_value</span></a>
+
+
+<span class="c1"># Using the computed displacement response PSD, the standard deviation is computed</span>
+<span class="c1"># by integration and square root operations. It matches the 1-sigma displacement</span>
+<span class="c1"># obtained directly in POST1 at load step 3 - substep 1. It is compared with the</span>
+<span class="c1"># reference in the table below.</span>
+
+<a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">headers</span></a> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Units&quot;</span><span class="p">,</span> <span class="s2">&quot;TARGET&quot;</span><span class="p">,</span> <span class="s2">&quot;Mechanical APDL&quot;</span><span class="p">,</span> <span class="s2">&quot;RATIO&quot;</span><span class="p">]</span>
+<a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data_freq</span></a> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span>
+        <span class="s2">&quot;FREQ (rad/sec)&quot;</span><span class="p">,</span>
+        <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target_freq</span></a><span class="p">,</span>
+        <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sim_freq_res</span></a><span class="p">,</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sim_freq_res</span></a><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target_freq</span></a><span class="p">),</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+<a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data_rms</span></a> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;RMS Value (m)&quot;</span><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target_rms</span></a><span class="p">,</span> <a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sim_rms_res</span></a><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sim_rms_res</span></a><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><a href="https://docs.python.org/dev/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">target_rms</span></a><span class="p">)]</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">------------------- VM298 RESULTS COMPARISON ---------------------</span>
+<span class="s2">MODAL FREQUENCY</span>
+
+<span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data_freq</span></a><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">headers</span></a><span class="o">=</span><a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">headers</span></a><span class="p">)</span><span class="si">}</span>
+
+<span class="s2">STANDARD DEVIATION OF RESPONSE PSD</span>
+
+<span class="si">{</span><span class="n">tabulate</span><span class="p">(</span><a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data_rms</span></a><span class="p">,</span><span class="w"> </span><a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">headers</span></a><span class="o">=</span><a href="https://docs.python.org/dev/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">headers</span></a><span class="p">)</span><span class="si">}</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>------------------- VM298 RESULTS COMPARISON ---------------------
+MODAL FREQUENCY
+
+Units             TARGET    Mechanical APDL    RATIO
+--------------  --------  -----------------  -------
+FREQ (rad/sec)      1.02             1.0798  1.05863
+
+STANDARD DEVIATION OF RESPONSE PSD
+
+Units            TARGET    Mechanical APDL     RATIO
+-------------  --------  -----------------  --------
+RMS Value (m)    0.0465          0.0404041  0.868906
+</pre></div>
+</div>
+<p>Stop MAPDL.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+<span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;&#39;
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 19.231 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-verif-manual-vm-298-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/511ec66cd918dbbd7bc6708d0fba51e7/vm-298.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">vm-298.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/524a44dce40b351a795d0ec55c58fdf6/vm-298.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">vm-298.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/f4a9e24ca613b70779705d3bdcb3085b/vm-298.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">vm-298.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">PSD analysis of 40-Story building under wind load excitation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-definition">Parameter definition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-model-40-story-building-using-1-d-spring-damper-system-and-point-mass-elements">Preprocessing: model 40-story building using 1-D spring-damper system and point mass elements</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modal-analysis">Modal analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#psd-analysis">PSD analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solve-the-psd-analysis">Solve the PSD analysis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing">Post-processing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processing-in-post26-time-history-postprocessing">Post-processing in POST26 (time-history postprocessing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-the-results">Verify the results</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pymapdl-examples/edit/main/doc/source/verif-manual/vm-298.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../_sources/verif-manual/vm-298.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

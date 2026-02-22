@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cardiovascular stent simulation &#8212; PyMAPDL Examples</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=e7fb764e"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'technology_showcase_examples/techdemo-25/ex_25-tecstent';</script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Friction Stir Welding (FSW) simulation" href="../techdemo-28/ex_28-tecfricstir.html" />
+    <link rel="prev" title="Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization" href="../techdemo-21/ex_21-tecbuckling.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.1.dev0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys_logo_transparent_black.png" class="logo__image only-light" alt="PyMAPDL Examples - Home"/>
+    <img src="../../_static/pyansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="PyMAPDL Examples - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="PyMAPDL Examples home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../verif-manual/index.html">
+    Verification manual
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../index.html">
+    Technology showcases
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contributing/index.html">
+    Contribute
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl-examples/discussions" title="Support" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">Support</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-1/ex_01-tecbrakesqueal.html">Brake squeal analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-15/ex_15-teccalvalhyper.html">Calibrating and validating a hyperelastic constitutive model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-20/ex_20-tecPCB.html">Dynamic simulation of a printed circuit board assembly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-21/ex_21-tecbuckling.html">Buckling and post-buckling analysis of a ring-stiffened cylinder using nonlinear stabilization</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cardiovascular stent simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-28/ex_28-tecfricstir.html">Friction Stir Welding (FSW) simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techdemo-62/ex_62-techinverse.html">Inverse-solving analysis of a cardiovascular structure</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/" class="nav-link">PyMAPDL</a>
+    </li>
+       
+    <li class="breadcrumb-item">
+      <a href="https://mapdl.docs.pyansys.com/version/stable/examples/" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">Technology showcases</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Cardiovascular stent simulation</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="cardiovascular-stent-simulation">
+<span id="tech-demo-25"></span><span id="sphx-glr-ex-25-tecstent-rst"></span><h1>Cardiovascular stent simulation<a class="headerlink" href="#cardiovascular-stent-simulation" title="Link to this heading">#</a></h1>
+<p>This example problem shows how to simulate stent-artery interaction during and after stent
+placement in an occluded artery.
+The analysis exposes advanced modeling techniques using PyMAPDL such as:
+* Contact
+* Element birth and death
+* Mixed u-P formulation
+* Nonlinear stabilization</p>
+<p>The following topics are available:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction">25.1. Introduction</a></p></li>
+<li><p><a class="reference internal" href="#setting-up-the-model">25.2. Setting up the model</a></p></li>
+<li><p><a class="reference internal" href="#analysis">25.3. Analysis</a></p></li>
+<li><p><a class="reference internal" href="#solution-of-the-model">25.4. Solution of the model</a></p></li>
+<li><p><a class="reference internal" href="#results">25.5. Results</a></p></li>
+<li><p><a class="reference internal" href="#exit-mapdl">25.6. Exit MAPDL</a></p></li>
+<li><p><a class="reference internal" href="#input-files">25.7. Input files</a></p></li>
+</ul>
+<p>This example is inspired from the model and analysis defined in Chapter 25 of the <a class="reference external" href="https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v222/en/wb_wbtec/wb_wbtec.html">Mechanical
+APDL technology showcase manual</a>.</p>
+<section id="introduction">
+<h2>25.1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<section id="problem-description">
+<h3>25.1.1. Problem description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h3>
+<p>A bare metal stent is an effective device for opening atherosclerotic arteries and
+other blockages:</p>
+<figure class="align-center" id="id1">
+<img alt="Effect of stent placement in increasing blood flow courtesy of Lakeview Center" src="../../_images/gtecstent1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text"><strong>Figure 25.1: Effect of stent placement in increasing blood flow</strong>
+Courtesy of <a class="reference external" href="http://www.elakeviewcenter.org">Lakeview Center</a></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The success of stenting depends largely on how the stent and the artery interact
+mechanically. In both the stent-design process and in pre-clinical patient-specific
+evaluations, computer simulation using finite element analysis (FEA) has become an
+accepted tool for studying stent-artery interaction.</p>
+<p>A viable stent-artery finite element model must properly reflect the nonlinear nature
+of the phenomenon, such as the biological tissue properties, large arterial wall
+deformation, and the sliding contact between the stent and the artery wall.</p>
+</section>
+<section id="starting-mapdl-as-a-service">
+<h3>25.1.2. Starting MAPDL as a service<a class="headerlink" href="#starting-mapdl-as-a-service" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Starting MAPDL as a service and importing an external model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.mapdl.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch_mapdl</span>
+
+<span class="c1"># Start MAPDL as a service</span>
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mapdl</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="setting-up-the-model">
+<h2>25.2. Setting up the model<a class="headerlink" href="#setting-up-the-model" title="Link to this heading">#</a></h2>
+<p>First, we define the material properties.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define 316L stainless steel</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mptemp</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mptemp</span><span class="p">(</span><span class="n">sloc</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mpdata</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;EX&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="s2">&quot;200e3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mpdata</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;PRXY&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="s2">&quot;0.3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mptemp</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mptemp</span><span class="p">(</span><span class="n">sloc</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mpdata</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;DENS&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="s2">&quot;8000e-9&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Then, we can define the elements.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for straight line segments</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;beam189&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sectype</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s2">&quot;beam&quot;</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;csolid&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">secdata</span><span class="p">(</span><span class="n">val1</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="c1"># for arcs</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;beam189&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sectype</span><span class="p">(</span><span class="n">secid</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="s2">&quot;beam&quot;</span><span class="p">,</span> <span class="n">subtype</span><span class="o">=</span><span class="s2">&quot;csolid&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">secdata</span><span class="p">(</span><span class="n">val1</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We define the 5-parameter Mooney-Rivlin hyperelastic artery material
+model.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c10</span> <span class="o">=</span> <span class="mf">18.90e-3</span>
+<span class="n">c01</span> <span class="o">=</span> <span class="mf">2.75e-3</span>
+<span class="n">c20</span> <span class="o">=</span> <span class="mf">590.43e-3</span>
+<span class="n">c11</span> <span class="o">=</span> <span class="mf">857.2e-3</span>
+<span class="n">nu1</span> <span class="o">=</span> <span class="mf">0.49</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nu1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">c10</span> <span class="o">+</span> <span class="n">c01</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tb</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;hyper&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">npts</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">tbopt</span><span class="o">=</span><span class="s2">&quot;mooney&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">tbdata</span><span class="p">(</span><span class="n">stloc</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="s2">&quot;c10&quot;</span><span class="p">,</span> <span class="n">c2</span><span class="o">=</span><span class="s2">&quot;c01&quot;</span><span class="p">,</span> <span class="n">c3</span><span class="o">=</span><span class="s2">&quot;c20&quot;</span><span class="p">,</span> <span class="n">c4</span><span class="o">=</span><span class="s2">&quot;c11&quot;</span><span class="p">,</span> <span class="n">c6</span><span class="o">=</span><span class="s2">&quot;dd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We define the linear elastic material model for stiff calcified plaque.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;EX&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="s2">&quot;.00219e3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;NUXY&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="s2">&quot;0.49&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We define the Solid185 element type to mesh both the artery and plaque.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for artery</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;SOLID185&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span>
+    <span class="n">itype</span><span class="o">=</span><span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>  <span class="c1"># Use mixed u-P formulation to avoid locking</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>  <span class="c1"># Use simplified enhanced strain method</span>
+
+<span class="c1"># for plaque</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;16&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;SOLID185&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;16&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>  <span class="c1"># Use B-bar</span>
+</pre></div>
+</div>
+<p>We define the settings to model the stent, the artery and the plaque.</p>
+<p>We use force-distributed boundary constraints on 2 sides of artery wall to allow
+for radial expansion of tissue without rigid body motion.</p>
+<p>Settings for MPC surface-based, force-distributed contact on proximal plane
+parallel to x-y plane</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;174&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;111111&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;174&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;111111&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Settings for standard contact between stent and inner plaque wall contact
+surface</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;MU&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;EMIS&quot;</span><span class="p">,</span> <span class="n">mat</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="s2">&quot;7.88860905221e-31&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;177&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="n">r3</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">r4</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">r5</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmore</span><span class="p">(</span><span class="n">r9</span><span class="o">=</span><span class="s2">&quot;1.0E20&quot;</span><span class="p">,</span> <span class="n">r10</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="p">,</span> <span class="n">r11</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmore</span><span class="p">(</span><span class="n">r7</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="p">,</span> <span class="n">r8</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">r9</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">r10</span><span class="o">=</span><span class="s2">&quot;0.05&quot;</span><span class="p">,</span> <span class="n">r11</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">r12</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rmore</span><span class="p">(</span><span class="n">r7</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">r8</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">r9</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span> <span class="n">r10</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Settings for MPC based, force-distributed constraint on proximal stent nodes</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;7&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;7&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;13&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;175&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;13&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;13&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;13&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;111111&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Settings for MPC based, force-distributed constraint on distal stent
+nodes.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">mat</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;8&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">nset</span><span class="o">=</span><span class="s2">&quot;8&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;14&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;170&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;15&quot;</span><span class="p">,</span> <span class="n">ename</span><span class="o">=</span><span class="s2">&quot;175&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;15&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;12&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;5&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;15&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;15&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;14&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">keyopt</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;14&quot;</span><span class="p">,</span> <span class="n">knum</span><span class="o">=</span><span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;111111&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">type</span><span class="p">(</span><span class="n">itype</span><span class="o">=</span><span class="s2">&quot;14&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once all the setups are ready, we read the geometry file.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">cdread</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s2">&quot;db&quot;</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s2">&quot;stent&quot;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="s2">&quot;cdb&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">(</span><span class="n">labt</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="analysis">
+<h2>25.3. Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
+<section id="static-analysis">
+<h3>25.3.1. Static analysis<a class="headerlink" href="#static-analysis" title="Link to this heading">#</a></h3>
+<p>We, then, apply the static analysis.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Enter solution processor and define analysis settings</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;/solu&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="n">antype</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nlgeom</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="loads">
+<h3>25.3.2. Loads<a class="headerlink" href="#loads" title="Link to this heading">#</a></h3>
+<p>We apply the load step 1:
+Balloon angioplasty of the artery to expand it past the
+radius of the stent - IGNORE STENT</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="n">nsbstp</span><span class="o">=</span><span class="s2">&quot;20&quot;</span><span class="p">,</span> <span class="n">nsbmx</span><span class="o">=</span><span class="s2">&quot;20&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nropt</span><span class="p">(</span><span class="n">option1</span><span class="o">=</span><span class="s2">&quot;full&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cncheck</span><span class="p">(</span><span class="n">option</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esel</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">item</span><span class="o">=</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s2">&quot;11&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cm</span><span class="p">(</span><span class="n">cname</span><span class="o">=</span><span class="s2">&quot;contact2&quot;</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="s2">&quot;elem&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">ekill</span><span class="p">(</span><span class="n">elem</span><span class="o">=</span><span class="s2">&quot;contact2&quot;</span><span class="p">)</span>  <span class="c1"># Kill contact elements in stent-plaque contact</span>
+                              <span class="c1">#pair so that the stent is ignored in the first loadstep</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">item</span><span class="o">=</span><span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s2">&quot;0.01e-3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsel</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">item</span><span class="o">=</span><span class="s2">&quot;loc&quot;</span><span class="p">,</span> <span class="n">comp</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="s2">&quot;0.01e-3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">nlist</span><span class="o">=</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s2">&quot;pres&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;10e-2&quot;</span><span class="p">)</span>  <span class="c1"># Apply 0.1 Pa/mm^2 pressure to inner plaque wall</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nldiag</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;cont&quot;</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;iter&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We then apply the load step 2: Reactivate contact between stent and plaque.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">ealive</span><span class="p">(</span><span class="n">elem</span><span class="o">=</span><span class="s2">&quot;contact2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="n">nsbstp</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="n">nsbmx</span><span class="o">=</span><span class="s2">&quot;2&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We apply the load step 3.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="n">nsbstp</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">nsbmx</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">nsbmn</span><span class="o">=</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We apply the load step 4: Apply blood pressure (13.3 kPa) load to
+inner wall of plaque and allow the stent to act as a scaffold.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">nsubst</span><span class="p">(</span><span class="n">nsbstp</span><span class="o">=</span><span class="s2">&quot;300&quot;</span><span class="p">,</span> <span class="n">nsbmx</span><span class="o">=</span><span class="s2">&quot;3000&quot;</span><span class="p">,</span> <span class="n">nsbmn</span><span class="o">=</span><span class="s2">&quot;30&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">nlist</span><span class="o">=</span><span class="s2">&quot;load&quot;</span><span class="p">,</span> <span class="n">lab</span><span class="o">=</span><span class="s2">&quot;pres&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;13.3e-3&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Finally, we apply stabilization with energy option.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">stabilize</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">&quot;const&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="solution-of-the-model">
+<h2>25.4. Solution of the model<a class="headerlink" href="#solution-of-the-model" title="Link to this heading">#</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">finish</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="results">
+<h2>25.5. Results<a class="headerlink" href="#results" title="Link to this heading">#</a></h2>
+<p>This section illustrates the use of PyDPF-Core to post-process the results.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dpf</span><span class="w"> </span><span class="kn">import</span> <span class="n">core</span> <span class="k">as</span> <span class="n">dpf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ansys.dpf.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">operators</span> <span class="k">as</span> <span class="n">ops</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span>
+</pre></div>
+</div>
+<section id="mesh-of-the-model">
+<h3>25.5.1. Mesh of the model<a class="headerlink" href="#mesh-of-the-model" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading the result file</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">mapdl</span><span class="o">.</span><span class="n">result_file</span><span class="p">)</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">DataSources</span><span class="p">(</span><span class="n">mapdl</span><span class="o">.</span><span class="n">result_file</span><span class="p">)</span>
+
+<span class="n">mesh</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">meshed_region</span>
+<span class="n">mesh</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+</div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_25-tecstent_1_0.png" src="../../_images/ex_25-tecstent_1_0.png" />
+</div>
+</div>
+</section>
+<section id="computed-displacements-of-the-model">
+<h3>25.5.2. Computed displacements of the model<a class="headerlink" href="#computed-displacements-of-the-model" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collecting the computed displacement</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">displacement</span><span class="p">(</span><span class="n">time_scoping</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">deform_by</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_25-tecstent_2_0.png" src="../../_images/ex_25-tecstent_2_0.png" />
+</div>
+</div>
+</section>
+<section id="von-mises-stress">
+<h3>25.5.3. Von Mises stress<a class="headerlink" href="#von-mises-stress" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collecting the computed stress</span>
+<span class="n">s_op</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">stress</span><span class="p">(</span><span class="n">time_scoping</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">s_op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">requested_location</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dpf</span><span class="o">.</span><span class="n">locations</span><span class="o">.</span><span class="n">nodal</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">s_op</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="c1"># Calculating Von Mises stress</span>
+<span class="n">s_VM</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">invariant</span><span class="o">.</span><span class="n">von_mises_eqv_fc</span><span class="p">(</span><span class="n">fields_container</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+<span class="n">s_VM_plot</span> <span class="o">=</span> <span class="n">s_VM</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+
+<span class="n">s_VM_plot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">deform_by</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_25-tecstent_3_0.png" src="../../_images/ex_25-tecstent_3_0.png" />
+</div>
+</div>
+</section>
+<section id="computed-displacements-of-the-stent">
+<h3>25.5.4. Computed displacements of the stent<a class="headerlink" href="#computed-displacements-of-the-stent" title="Link to this heading">#</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating the mesh associated to the stent</span>
+<span class="n">esco</span> <span class="o">=</span> <span class="n">mesh</span><span class="o">.</span><span class="n">named_selection</span><span class="p">(</span><span class="s2">&quot;STENT&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">esco</span><span class="p">)</span>
+
+<span class="c1"># Transposing elemental location to nodal one</span>
+<span class="n">op</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">scoping</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+<span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">mesh_scoping</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">esco</span><span class="p">)</span>
+<span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">meshed_region</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inclusive</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">nsco</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nsco</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collecting the computed displacements of the stent</span>
+<span class="n">u_stent</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">displacement</span><span class="p">(</span><span class="n">mesh_scoping</span><span class="o">=</span><span class="n">nsco</span><span class="p">,</span> <span class="n">time_scoping</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">u_stent</span> <span class="o">=</span> <span class="n">u_stent</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">fields_container</span><span class="p">()</span>
+
+<span class="c1"># Linking the stent mesh to the global one</span>
+<span class="n">op</span> <span class="o">=</span> <span class="n">dpf</span><span class="o">.</span><span class="n">operators</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">from_scoping</span><span class="p">()</span> <span class="c1"># operator instantiation</span>
+<span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">scoping</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">nsco</span><span class="p">)</span>
+<span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">inclusive</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">op</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">mesh</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">mesh</span><span class="p">)</span>
+<span class="n">mesh_sco</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">u_stent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">meshed_region</span> <span class="o">=</span> <span class="n">mesh_sco</span>
+
+<span class="c1"># Plotting the meshes</span>
+<span class="n">mesh</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Mesh of the model&#39;</span><span class="p">,</span> <span class="p">)</span>
+<span class="n">mesh_sco</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Mesh of the stent&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_25-tecstent_4_0.png" src="../../_images/ex_25-tecstent_4_0.png" />
+</div>
+</div>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u_stent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">deformed_by</span><span class="o">=</span><span class="n">u_stent</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="jupyter_cell docutils container">
+<div class="cell_output docutils container">
+<img alt="../../_images/ex_25-tecstent_5_0.png" src="../../_images/ex_25-tecstent_5_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="exit-mapdl">
+<h2>25.6. Exit MAPDL<a class="headerlink" href="#exit-mapdl" title="Link to this heading">#</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="input-files">
+<h2>25.7. Input files<a class="headerlink" href="#input-files" title="Link to this heading">#</a></h2>
+<p>The following files were used in this problem:</p>
+<ul class="simple">
+<li><p><strong>stent.dat</strong> – Input file for the cardiovascular stent
+problem.</p></li>
+<li><p><strong>stent.cdb</strong> – The common database file containing the model
+information for this problem (called by <strong>stent.dat</strong>).</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference external" href="https://storage.ansys.com/doclinks/techdemos.html?code=td-25-DLU-N2a">Download the zipped td-25 file set for this problem</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For more information, see <a class="reference external" href="https://ansyshelp.ansys.com/Views/Secured/corp/v212/en/ans_tec/tecintro.html">Obtaining the input files</a>.</p>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">25.1. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">25.1.1. Problem description</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-mapdl-as-a-service">25.1.2. Starting MAPDL as a service</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-the-model">25.2. Setting up the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">25.3. Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#static-analysis">25.3.1. Static analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loads">25.3.2. Loads</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-of-the-model">25.4. Solution of the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">25.5. Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mesh-of-the-model">25.5.1. Mesh of the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computed-displacements-of-the-model">25.5.2. Computed displacements of the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#von-mises-stress">25.5.3. Von Mises stress</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computed-displacements-of-the-stent">25.5.4. Computed displacements of the stent</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-mapdl">25.6. Exit MAPDL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-files">25.7. Input files</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/pymapdl-examples/edit/main/doc/source/technology_showcase_examples/techdemo-25/ex_25-tecstent.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/technology_showcase_examples/techdemo-25/ex_25-tecstent.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('""');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
