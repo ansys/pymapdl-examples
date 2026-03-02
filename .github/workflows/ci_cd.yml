@@ -22,6 +22,9 @@ env:
   RESET_EXAMPLES_CACHE: 0
   RESET_DOC_BUILD_CACHE: 0
   USE_CACHE: False
+  PYMAPDL_GRPC_TRANSPORT: 'insecure'
+  DPF_DEFAULT_GRPC_MODE: 'insecure'
+
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -88,6 +91,7 @@ jobs:
         env:
           LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
           MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
+          MAPDL_PACKAGE: ${{ env.MAPDL_PACKAGE }}
           DISTRIBUTED_MODE: "dmp"
         run: |
           export INSTANCE_NAME=MAPDL_0

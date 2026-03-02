@@ -1,4 +1,4 @@
-# Copyright (C) 2022 - 2025 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2022 - 2026 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,7 +22,7 @@
 
 r""".. _ref_vm291:
 
-Force on the Boundary of a Semi-Infinite Body (Boussinesq Problem)
+Force on the boundary of a semi-infinite body (Boussinesq problem)
 ------------------------------------------------------------------
 Problem description:
  - A point force is applied at the origin of a half-space 2D axisymmetric solid modeled with
@@ -34,7 +34,7 @@ Reference:
    MCGRAW-HILL,NEW YORK, PP 398-402, 1970.
 
 Analysis type(s):
- - Static Analysis ``ANTYPE=0``
+ - Static analysis ``ANTYPE=0``
 
 Element type(s):
  - Structural Infinite Solid (INFIN257)
@@ -66,7 +66,7 @@ Geometric properties:
 Loading:
  - Point Load :math:`= 1.0`
 
-Analysis Assumptions and Modeling Notes:
+Analysis assumptions and modeling notes:
  - The problem is solved for two cases:
    - Case 1: Using PLANE182 and INFIN257 elements
    - Case 2: Using PLANE183 and INFIN257 elements
@@ -332,8 +332,8 @@ for i in range(len(value_ana2)):
     value_ratio2.append(a)
 
 ###############################################################################
-# Verify the results.
-# ~~~~~~~~~~~~~~~~~~~
+# Verify the results
+# ~~~~~~~~~~~~~~~~~~
 
 results = f"""
 --------------------------VM291 RESULTS COMPARISON--------------------------
@@ -370,13 +370,13 @@ for i in range(len(value2)):
     print(message)
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Clears the database without restarting.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Clears the database without restarting
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 mapdl.run("/CLEAR,NOSTART")
 # redirects output to the default system output file
@@ -607,11 +607,11 @@ uya4 = mapdl.get("UYA4", "NODE", 37, "U", "Y")
 # MADPL UY AT NODE(0,4,0)
 upa4 = mapdl.get("UPA4", "NODE", 47, "U", "Y")
 
-# assign labels for nodes
+# Assign labels for nodes
 label1 = np.array(["NODE10", "NODE23", "NODE37"])
 label2 = np.array(["NODE19", "NODE33", "NODE47"])
 
-# create results arrays for printout
+# Create results arrays for printout
 value1 = np.array([uy2, uy3, uy4])
 value_ana1 = np.array([uya2, uya3, uya4])
 value_ratio1 = []
@@ -619,7 +619,7 @@ for i in range(len(value_ana1)):
     a = value1[i] / value_ana1[i]
     value_ratio1.append(a)
 
-# create results arrays for printout
+# Create results arrays for printout
 value2 = np.array([up2, up3, up4])
 value_ana2 = np.array([upa2, upa3, upa4])
 value_ratio2 = []
@@ -666,11 +666,11 @@ message = f"""
 print(message)
 
 ###############################################################################
-# Finish the post-processing processor.
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Finish the post-processing processor
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 mapdl.finish()
 
 ###############################################################################
-# Stop MAPDL.
-# ~~~~~~~~~~~
+# Stop MAPDL
+# ~~~~~~~~~~
 mapdl.exit()

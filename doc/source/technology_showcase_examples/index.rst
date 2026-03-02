@@ -2,10 +2,10 @@
 .. _sphx_glr_technology_showcase_examples:
 
 ====================
-Technology Showcases
+Technology showcases
 ====================
 
-The following examples initially come from the `APDL Technology Showcase Manual <mapdl_tech_show_>`_. 
+The following examples initially come from the `APDL technology showcase manual <mapdl_tech_show_>`_. 
 They initially were MAPDL files. 
 They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-core`` library.
 
@@ -22,7 +22,7 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
 .. only:: html
 
   .. image:: ./images/thumb/sphx_glr_tse-001-brake_squeal_thumb.png
-    :alt: Brake Squeal Analysis
+    :alt: Brake squeal analysis
 
   :ref:`sphx_glr_ex_01-tecbrakesqueal.py`
 
@@ -112,7 +112,7 @@ They have been reproduced in Python files using PyMAPDL with the ``ansys-mapdl-c
 .. only:: html
 
   .. image:: ./images/thumb/sphx_glr_tse-028-fricstir_thumb.png
-    :alt: Friction Stir Welding (FSW) Simulation
+    :alt: Friction Stir Welding (FSW) simulation
 
   :ref:`sphx_glr_ex_28-tecfricstir.py`
 

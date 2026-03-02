@@ -1,2 +1,2 @@
 #PyMAPDL dependencies and documentation requirements
-git+https://github.com/ansys/pymapdl.git#egg=ansys-mapdl-core[graphics,doc]
+ansys-mapdl-core[graphics,doc] @ git+https://github.com/ansys/pymapdl.git

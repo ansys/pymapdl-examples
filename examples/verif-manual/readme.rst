@@ -1,7 +1,7 @@
 .. _ref_vm_examples:
 
 ===================
-Verification Manual
+Verification manual
 ===================
 This section demonstrates a range of Mechanical APDL elements and capabilities
 in straightforward problems which have “classical” or readily-obtainable

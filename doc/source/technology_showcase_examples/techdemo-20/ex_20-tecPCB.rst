@@ -19,12 +19,12 @@ The following topics are available:
 
 
 This example is inspired from the model and analysis defined in Chapter 20 of
-the Mechanical APDL Technology Showcase Manual.
+the Mechanical APDL technology showcase manual.
 
 20.1. Introduction
 ------------------
 
-20.1.1. Additional Packages Used
+20.1.1. Additional packages used
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * `Matplotlib <https://matplotlib.org>`_ is used for plotting purposes.
@@ -35,7 +35,7 @@ the Mechanical APDL Technology Showcase Manual.
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The original FE model is given in the Ansys Mechanical APDL Technology
-Showcase Manual. The ``pcb_mesh_file.cdb`` contains a FE model of a single
+showcase manual. The ``pcb_mesh_file.cdb`` contains a FE model of a single
 circuit board. The model is meshed with SOLID186, SHELL181 and BEAM188 elements.
 All components of the PCB model is assigned with linear elastic isotropic materials.
 Bonded and flexible surface-to-surface contact pairs are used to define the contact
@@ -54,7 +54,7 @@ between the IC packages and the circuit board.
     from ansys.mapdl.core import launch_mapdl
     from ansys.mapdl.core.examples.downloads import download_tech_demo_data
 
-    # start MAPDL as a service
+    # Start MAPDL as a service
     mapdl = launch_mapdl()
     print(mapdl)
 
@@ -78,7 +78,7 @@ between the IC packages and the circuit board.
     # download the cdb file
     pcb_mesh_file = download_tech_demo_data("td-20", "pcb_mesh_file.cdb")
 
-    # enter preprocessor and read in cdb
+    # Enter preprocessor and read in cdb
     mapdl.prep7()
     mapdl.cdread("COMB", pcb_mesh_file)
     mapdl.allsel()
@@ -182,7 +182,7 @@ number of nodes is recommended (suggestion: 300 modes).
 .. code-block:: default
 
 
-    # enter solution processor and define analysis settings
+    # Enter solution processor and define analysis settings
     mapdl.slashsolu()
     mapdl.antype("modal")
     # set number of modes to extract
@@ -2008,7 +2008,7 @@ It is recommended to use `DPF Post <dpf_post_docs_>`_.
 
  .. code-block:: none
 
-    Modal Analysis Solution object.
+    Modal analysis solution object.
 
 
     Data Sources
