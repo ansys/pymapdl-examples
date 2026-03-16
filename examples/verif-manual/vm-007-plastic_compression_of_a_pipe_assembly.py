@@ -438,6 +438,7 @@ mapdl.finish(mute=True)
 # Start solution procedure.
 mapdl.slashsolu()
 
+
 # Define solution function.
 def solution(deflect):
     mapdl.nsel("R", "LOC", "Z", 10)
@@ -583,7 +584,9 @@ index_names = ["Element Type", "Load Step"]
 row_indexing = pd.MultiIndex.from_tuples(row_tuple)
 df = pd.DataFrame(main_columns, index=row_indexing)
 
-df.style.set_caption("Results Comparison",).set_table_styles(
+df.style.set_caption(
+    "Results Comparison",
+).set_table_styles(
     [
         {
             "selector": "th.col_heading",
