@@ -12,6 +12,7 @@ on:
       - main
 
 env:
+  DOCUMENTATION_CNAME: "examples.mapdl.docs.pyansys.com"
   DPF_PORT: 21002
   DPF_START_SERVER: False
   MAIN_PYTHON_VERSION: '3.12'
@@ -93,18 +94,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: "Pull, launch, and validate MAPDL service"
-        id: start_mapdl
-        env:
-          LICENSE_SERVER: ${{ secrets.LICENSE_SERVER }}
-          MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
-          MAPDL_PACKAGE: ${{ env.MAPDL_PACKAGE }}
-          DISTRIBUTED_MODE: "dmp"
-        run: |
-          export INSTANCE_NAME=MAPDL_0
-          .ci/start_mapdl.sh & export DOCKER_PID=$!
-          echo "Launching MAPDL service at PID: $DOCKER_PID"
-          echo "DOCKER_PID=$(echo $DOCKER_PID)" >> $GITHUB_OUTPUT
+      - name: "Launch MAPDL instance using action"
+        uses: ansys/pymapdl/.github/actions/launch-mapdl-docker@2ef63699da5758448b6bbf9333bb6ad779b2b24b # v0.72.1
+        with:
+          mapdl-image: ${{ env.MAPDL_PACKAGE }}:${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
+          license-server: ${{ secrets.LICENSE_SERVER }}
+          pymapdl-port: ${{ env.PYMAPDL_PORT }}
 
       - name: "DPF Server Activation"
         run: |
@@ -130,11 +125,6 @@ jobs:
           echo "PYMAPDL_VERSION=$(python -c 'from ansys.mapdl.core import __version__; print(__version__)')" >> $GITHUB_OUTPUT
           echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
 
-      - name: "Waiting for the services to be up"
-        timeout-minutes: 15
-        run: |
-          .ci/waiting_services.sh
-
       - name: "Run Ansys documentation building action"
         uses: ansys/actions/doc-build@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         env:
@@ -147,27 +137,6 @@ jobs:
           skip-install: true
           sphinxopts: -j auto
           check-links: False
-
-      - name: "Display Docker files structures"
-        if: always()
-        env:
-          MAPDL_INSTANCE: MAPDL_0
-          LOG_NAMES: logs-build-docs
-        run: |
-          .ci/display_logs.sh
-
-      - name: "Collect MAPDL logs on failure"
-        if: always()
-        env:
-          MAPDL_VERSION: ${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
-          MAPDL_INSTANCE: MAPDL_0
-          LOG_NAMES: logs-build-docs
-        run: |
-          .ci/collect_mapdl_logs.sh
-
-      - name: "Display MAPDL Logs"
-        if: always()
-        run: cat logs-build-docs/* || echo "No logs collected."
 
       - name: "Stop MAPDL service"
         if: always()
