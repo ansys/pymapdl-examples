@@ -131,7 +131,7 @@ jobs:
           echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
 
       - name: "Cache Verification Manual examples"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         if: env.USE_CACHE == true
         with:
           path: doc/source/verif-manual
@@ -140,7 +140,7 @@ jobs:
             Examples-v${{ env.RESET_EXAMPLES_CACHE }}-${{ steps.version.outputs.PYMAPDL_VERSION }}
 
       - name: "Cache docs build directory"
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         if: env.USE_CACHE == true
         with:
           path: doc/_build
