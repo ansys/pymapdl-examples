@@ -67,6 +67,7 @@ jobs:
     timeout-minutes: 60
     permissions:
       contents: read
+      packages: read
     outputs:
       PYMAPDL_VERSION: ${{ steps.version.outputs.PYMAPDL_VERSION }}
     runs-on: ubuntu-latest
@@ -143,7 +144,6 @@ jobs:
         run: |
           echo "Stopping MAPDL services"
           pymapdl stop --all
-
 
   upload-docs:
     name: "Upload documentation"
