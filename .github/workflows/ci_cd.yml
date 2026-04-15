@@ -35,7 +35,7 @@ jobs:
     name: "Action security checks"
     runs-on: ubuntu-latest
     steps:
-      - uses: ansys/actions/check-actions-security@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
+      - uses: ansys/actions/check-actions-security@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
         with:
           generate-summary: true
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Run PyAnsys code style checks"
-        uses: ansys/actions/code-style@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
+        uses: ansys/actions/code-style@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
 
 
   doc-style:
@@ -57,7 +57,7 @@ jobs:
       contents: read
     steps:
       - name: "PyAnsys documentation style checks"
-        uses: ansys/actions/doc-style@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
+        uses: ansys/actions/doc-style@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -127,7 +127,7 @@ jobs:
           echo "PyMAPDL version is: $(python -c "from ansys.mapdl.core import __version__; print(__version__)")"
 
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
+        uses: ansys/actions/doc-build@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
         env:
           LIBGL_ALWAYS_SOFTWARE: 1
           PYANSYS_VISUALIZER_HTML_BACKEND: true
@@ -154,7 +154,7 @@ jobs:
     needs: [doc-build]
     steps:
       - name: "Deploy documentation to GitHub Pages"
-        uses: ansys/actions/doc-deploy-dev@c2fa7c93f6883114e0e643599431b33d29f0b13f #v10.1.4
+        uses: ansys/actions/doc-deploy-dev@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 #v10.2.12
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
