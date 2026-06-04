@@ -2,7 +2,11 @@
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS    = -j auto
+ifdef GITHUB_ACTIONS
+SPHINXOPTS    ?= -j 1
+else
+SPHINXOPTS    ?= -j auto
+endif
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
