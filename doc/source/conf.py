@@ -102,7 +102,6 @@ sphinx_gallery_conf = {
     "image_scrapers": (DynamicScraper(), "matplotlib"),
     "ignore_pattern": "flycheck*",
     "thumbnail_size": (350, 350),
-    "parallel": False,
 }
 
 suppress_warnings = ["config.cache"]
