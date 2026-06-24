@@ -96,7 +96,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Launch MAPDL instance using action"
-        uses: ansys/pymapdl/.github/actions/launch-mapdl-docker@2ef63699da5758448b6bbf9333bb6ad779b2b24b # v0.72.1
+        uses: ansys/pymapdl/.github/actions/launch-mapdl-docker@2fc565353ce16f0c56ffbbb0c32078c3d8bb1fc6 # v0.73.1
         with:
           mapdl-image: ${{ env.MAPDL_PACKAGE }}:${{ env.MAPDL_IMAGE_VERSION_DOCS_BUILD }}
           license-server: ${{ secrets.LICENSE_SERVER }}
